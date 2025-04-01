@@ -1,0 +1,40 @@
+/*-- scss:defaults --*/
+
+// Tipografía moderna (Roboto o similar)
+$font-family-sans-serif: "Roboto", "Segoe UI", "Helvetica Neue", Arial, sans-serif !default;
+
+// Tamaños de fuente más pequeños
+$presentation-font-size-root: 30px !default; // tamaño base
+$presentation-font-smaller: 0.8 !default;
+
+$presentation-h1-font-size: 2.2em !default;
+$presentation-h2-font-size: 1.4em !default;
+$presentation-h3-font-size: 1.1em !default;
+$presentation-h4-font-size: 1em !default;
+
+// Otros ajustes visuales opcionales
+$body-bg: #ffffff !default;
+$body-color: #333333 !default;
+$link-color: #007bff !default;
+
+// Líneas de títulos más limpias
+$presentation-heading-font-weight: 500 !default;
+$presentation-heading-letter-spacing: normal !default;
+
+/*-- scss:rules --*/
+
+.reveal .slide {
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+.reveal .slide h1,
+.reveal .slide h2,
+.reveal .slide h3,
+.reveal .slide h4 {
+  font-weight: 500;
+}
+
+.reveal code {
+  font-size: 0.85em;
+}

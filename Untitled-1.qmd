@@ -1,0 +1,318 @@
+---
+title: "📊 Regresión Lineal y Regularización con Ridge y Lasso"
+subtitle: "🔍 Un análisis con el dataset 🏘️ Boston Housing"
+author: "👨‍🏫 Jorge Iván Romero Gelvez"
+institute: "🏛️ Universidad Jorge Tadeo Lozano"
+date: "📅 Abril 2025"
+format: 
+  revealjs: 
+    theme: [default, custom.scss]
+    slide-number: true
+    highlight-style: dracula
+    code-line-numbers: true
+    code-annotations: hover
+    mermaid:
+      theme: default
+    transition: fade
+    chalkboard: true
+    logo: Utadeo70-fondoblanco.png
+    toc: true
+    toc-title: "Contenido"
+    toc-depth: 1
+    incremental: true
+    scrollable: true
+execute: 
+  warning: false
+  message: false
+  echo: true
+  freeze: false
+jupyter: python3
+---
+# Introducción
+
+## 💡 ¿Qué significa la frase?
+
+> **“Un buen modelo no solo ajusta bien los datos, sino que también generaliza.”**
+
+![](1_bt-E2YcPafjiPbZFDMMmNQ.jpeg){alt="Gráfico ilustrando generalización en modelos"fig-align="center" width="200" style="border-radius: 1rem;"}
+---
+
+## 🔧 Ajustar bien los datos
+
+- 📉 El modelo **aprende patrones** de los datos de entrenamiento  
+- ✅ Tiene bajo error en el conjunto de entrenamiento  
+- ❗ Pero... puede **memorizar** incluso el ruido  
+- ⚠️ Riesgo de **sobreajuste (overfitting)**
+
+---
+
+## Underfitting
+
+### Entreno al modelo con 1 sola raza de perro
+
+![](ch.jpg){alt="Chihuahua" fig-align="center" width="200" style="border-radius: 1rem;"}
+
+- Muestra nueva: ¿Es perro?
+ ![](perro.png){alt="perro" fig-align="center" width="200" style="border-radius: 1rem;"}
+- ❌ **NO lo reconoce**
+- 🔎 La máquina **falla en generalizar** porque no ha visto suficientes ejemplos.
+
+<div style="font-size: 0.9em; color: gray; margin-top: 1em;">
+La máquina fallará en reconocer al perro por falta de suficientes muestras. No puede generalizar el conocimiento.
+</div>
+
+---
+
+## Overfitting
+
+### Entreno al modelo con 10 razas de perro color marrón
+
+![](several.png){alt="varios" fig-align="center" width="200" style="border-radius: 1rem;"}
+
+- Muestra nueva: ¿Es perro?
+ ![](perro.png){alt="perro" fig-align="center" width="200" style="border-radius: 1rem;"}
+- ❌ **NO lo reconoce**
+- ⚠️ El modelo está **demasiado ajustado** a los datos de entrenamiento.
+
+<div style="font-size: 0.9em; color: gray; margin-top: 1em;">
+La máquina fallará en reconocer un perro nuevo porque no tiene estrictamente los mismos valores de las muestras de entrenamiento.
+</div>
+
+## 🌍 Generalizar los datos
+
+- 🧠 El modelo **funciona bien con datos nuevos**  
+- 🔬 Puede **predecir correctamente en el mundo real**  
+- 📊 Tiene buen rendimiento en el **conjunto de prueba**
+- 🎯 Es el verdadero objetivo del aprendizaje automático
+
+---
+
+## 🆚 Comparación: Ajustar vs. Generalizar
+
+|                      | 🔧 **Ajustar bien**        | 🌍 **Generalizar bien**           |
+|----------------------|----------------------------|-----------------------------------|
+| 🎯 Objetivo inicial   | Minimizar error en entrenamiento | Predecir bien datos nuevos         |
+| ⚠️ Riesgo             | Sobreajuste (memoriza)     | Subajuste si es demasiado simple  |
+| 🧰 Herramientas       | Modelos complejos          | Regularización y validación cruzada |
+
+---
+
+## 🛠️ ¿Cómo logramos un buen equilibrio?
+
+- ✅ Usando **validación cruzada**
+- ⚖️ Aplicando **Ridge y Lasso** para controlar la complejidad
+- 🧪 Comparando resultados en entrenamiento y prueba
+
+> 🎓 *El arte del aprendizaje automático es encontrar el punto justo entre sesgo y varianza.*
+
+---
+
+## 📌 RETOMANDO
+- 📚 Modelo base: punto de partida
+- 🧰 Ridge: reduce varianza, estabiliza coeficientes
+- 🧹 Lasso: elimina variables irrelevantes
+- 🔄 Validación cruzada: asegura buen desempeño fuera de muestra
+- 🎯 Objetivo: lograr un modelo que generalice bien
+- 💡 El mejor modelo no es el más complejo, sino el que predice con equilibrio y claridad.
+
+## 🔁 Flujo del modelo: de lo simple a lo robusto
+
+```{mermaid}
+flowchart TD
+    A["📥 Dataset limpio (Boston.csv)"] --> B["📊 Modelo base\nRegresión Lineal"]
+    B --> C{"🔍 ¿Problemas?"}
+    C -- Sobreajuste / multicolinealidad --> D["🧰 Ridge (L2)"]
+    C -- Muchas variables irrelevantes --> E["🧹 Lasso (L1)"]
+    D & E --> F["🧪 Validación Cruzada"]
+    F --> G["📈 Comparar\nR² y RMSE"]
+    G --> H{"🎯 ¿Buen desempeño?"}
+    H -- Sí --> I["✅ Seleccionar modelo final"]
+    H -- No --> J["⚙️ Ajustar hiperparámetros\n🔄 Repetir"]
+
+```
+
+## 🆚 Comparación de Técnicas
+
+| Técnica            | Problema que aborda                                      | Cómo lo resuelve                                                       | Ventajas                                                                 | Limitaciones                                                              |
+|--------------------|----------------------------------------------------------|-------------------------------------------------------------------------|--------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| **Regresión Ridge**| - Multicolinealidad<br>- Sobreajuste                    | Penalización L2 que reduce el tamaño de los coeficientes grandes       | - Reduce varianza<br>- Mantiene todas las variables<br>- Buena generalización | - No elimina variables irrelevantes                                       |
+| **Regresión Lasso**| - Multicolinealidad<br>- Sobreajuste<br>- Alta dimensionalidad | Penalización L1 que puede reducir coeficientes a cero (selección de variables) | - Selección automática de variables<br>- Modelos más interpretables      | - Puede eliminar variables importantes si están correlacionadas           |
+| **Validación cruzada** | - Sobreajuste<br>- Mala generalización del modelo | Divide los datos en subconjuntos para evaluar múltiples veces el modelo | - Estima rendimiento real<br>- Ayuda a elegir hiperparámetros óptimos   | - Mayor costo computacional<br>- Sensible a la forma de dividir los datos |
+
+---
+
+# El dataset
+
+---
+
+## 1️⃣ Descripción del Dataset{.scrollable .smaller}
+
+El conjunto de datos **Boston Housing** contiene información sobre barrios de Boston, recopilada por el U.S. Census.
+
+- Observaciones: 506
+- Variables independientes: 13 características socioeconómicas y urbanas
+- Variable dependiente: `MEDV` (Valor medio de vivienda ocupada por sus dueños, en miles de dólares)
+  
+## 2️⃣ Descripción del Dataset{.scrollable .smaller}
+| Variable | Descripción |
+|----------|-------------|
+| CRIM     | Tasa de criminalidad per cápita por ciudad |
+| ZN       | Proporción de terrenos residenciales (>25,000 pies²) |
+| INDUS    | Proporción de tierra para negocios no minoristas |
+| CHAS     | Frontera con río Charles (1: sí, 0: no) |
+| NOX      | Concentración de óxidos nítricos (contaminación del aire) |
+| RM       | Número promedio de habitaciones por vivienda |
+| AGE      | % de unidades construidas antes de 1940 |
+| DIS      | Distancia a cinco centros de empleo |
+| RAD      | Índice de accesibilidad a autopistas radiales |
+| TAX      | Tasa de impuesto a la propiedad |
+| PTRATIO  | Relación alumno-profesor en cada barrio |
+| B        | Proporción poblacional afrodescendiente (cálculo especial) |
+| LSTAT    | % de población con bajo estatus socioeconómico |
+| MEDV     | Valor medio de la vivienda (en miles de dólares) |
+
+---
+
+
+## Carga del Dataset {.scrollable}
+
+```{python}
+import pandas as pd
+import numpy as np
+
+# Cargar datos desde CMU
+url = "http://lib.stat.cmu.edu/datasets/boston"
+raw_df = pd.read_csv(url, sep="\s+", skiprows=22, header=None)
+data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
+target = raw_df.values[1::2, 2]
+
+columns = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM',
+           'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+X = pd.DataFrame(data, columns=columns)
+y = pd.Series(target, name='MEDV')
+X.head()
+```
+---
+
+# División y Modelo
+
+```{python}
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+model = LinearRegression()
+model.fit(X_train, y_train)
+```
+
+---
+## Evaluación del Modelo
+
+```{python}
+from sklearn.metrics import r2_score, mean_squared_error
+
+y_pred_train = model.predict(X_train)
+y_pred_test = model.predict(X_test)
+
+r2_train = r2_score(y_train, y_pred_train)
+r2_test = r2_score(y_test, y_pred_test)
+mse_train = mean_squared_error(y_train, y_pred_train)
+mse_test = mean_squared_error(y_test, y_pred_test)
+
+r2_train, mse_train, r2_test, mse_test
+```
+
+---
+
+## Análisis Estadístico
+
+```{python}
+import statsmodels.api as sm
+
+X_train_sm = sm.add_constant(X_train)
+ols_model = sm.OLS(y_train, X_train_sm).fit()
+ols_model.summary()
+```
+
+---
+
+# Diccionario de Variables
+
+```{python}
+descripcion_variables = {
+    'CRIM': 'CRIM (Tasa criminalidad per cápita)',
+    'ZN': 'ZN (% terrenos residenciales > 25,000 pies²)',
+    'INDUS': 'INDUS (% tierra para negocios no minoristas)',
+    'CHAS': 'CHAS (Río Charles, 1=sí)',
+    'NOX': 'NOX (Contaminación del aire, NOx)',
+    'RM': 'RM (Habitaciones promedio por casa)',
+    'AGE': 'AGE (% casas construidas antes de 1940)',
+    'DIS': 'DIS (Distancia a centros de empleo)',
+    'RAD': 'RAD (Índice de accesibilidad a autopistas)',
+    'TAX': 'TAX (Tasa de impuesto a la propiedad)',
+    'PTRATIO': 'PTRATIO (Relación estudiantes/profesores)',
+    'B': 'B (Proporción poblacional afrodescendiente)',
+    'LSTAT': 'LSTAT (% población de bajo estatus socioeconómico)'
+}
+```
+
+---
+
+## Gráfico de Coeficientes
+
+```{python}
+import matplotlib.pyplot as plt
+
+coeficientes = pd.Series(model.coef_, index=X.columns)
+coef_desc = coeficientes.rename(index=descripcion_variables)
+
+plt.figure(figsize=(10,6))
+coef_desc.sort_values().plot(kind='barh', color='skyblue')
+plt.title("Importancia de Variables en Regresión Lineal")
+plt.xlabel("Valor del Coeficiente")
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+```
+
+---
+
+## Gráficas de Interpretación (Top 4)
+
+```{python}
+top_vars = coeficientes.abs().sort_values(ascending=False).head(4).index.tolist()
+
+fig, axs = plt.subplots(2, 2, figsize=(14,10))
+axs = axs.flatten()
+
+for i, var in enumerate(top_vars):
+    axs[i].scatter(X_test[var], y_test, label='Real', alpha=0.6)
+    axs[i].scatter(X_test[var], y_pred_test, label='Predicción', alpha=0.6)
+    axs[i].set_xlabel(descripcion_variables[var])
+    axs[i].set_ylabel('MEDV ($1000s)')
+    axs[i].set_title(f"{descripcion_variables[var]} vs MEDV")
+    axs[i].legend()
+    axs[i].grid(True)
+
+plt.suptitle("Variables Más Relevantes vs Precio de Vivienda", fontsize=14)
+plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+plt.show()
+```
+
+---
+
+# Conclusiones
+
+- La regresión lineal logra un buen ajuste inicial.
+- `RM` y `LSTAT` son las variables más influyentes.
+- Los errores son moderados, lo cual sugiere posibilidad de mejorar con regularización.
+- El modelo permite interpretar de manera clara cómo cada variable afecta el precio de la vivienda.
+
+---
+
+# Siguientes Pasos
+
+- Explorar modelos regularizados: Ridge, Lasso
+- Probar transformaciones no lineales
+- Usar validación cruzada para robustez
+- Aplicar el modelo a nuevos conjuntos de datos
