@@ -36,5 +36,24 @@ $presentation-heading-letter-spacing: normal !default;
 }
 
 .reveal code {
-  font-size: 0.85em;
+  font-size: 0.9em;
+}
+.reveal .slide table {
+  font-size: 0.8em; /* Ajusta según necesidad */
+}
+/* 👇 Ajuste para resultados de celdas */
+.reveal .cell-output {
+  font-size: 0.75em;
+  margin-top: 1rem;
+  max-height: 300px;        /* Limita la altura del resultado */
+  overflow-y: auto;         /* Activa scroll vertical si es necesario */
+  overflow-x: auto;         /* Por si hay tablas anchas */
+  padding-right: 0.5rem;    /* Espacio al lado del scroll */
+  border: 1px solid #ddd;   /* Opcional: para que el área se note más */
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.reveal .cell-output table {
+  font-size: 0.75em;
 }

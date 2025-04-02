@@ -389,7 +389,7 @@
       margin-right: 0; 
     }
   </style>
-  <meta name="mermaid-theme" content="default">
+  <meta name="mermaid-theme" content="forest">
   <script src="Untitled-1_files/libs/quarto-diagram/mermaid.min.js"></script>
   <script src="Untitled-1_files/libs/quarto-diagram/mermaid-init.js"></script>
   <link href="Untitled-1_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
@@ -423,7 +423,6 @@
 <ul>
 <li class="fragment"><a href="#/introducción" id="/toc-introducción">Introducción</a></li>
 <li class="fragment"><a href="#/el-dataset" id="/toc-el-dataset">El dataset</a></li>
-<li class="fragment"><a href="#/división-y-modelo" id="/toc-división-y-modelo">División y Modelo</a></li>
 <li class="fragment"><a href="#/diccionario-de-variables" id="/toc-diccionario-de-variables">Diccionario de Variables</a></li>
 <li class="fragment"><a href="#/conclusiones" id="/toc-conclusiones">Conclusiones</a></li>
 <li class="fragment"><a href="#/siguientes-pasos" id="/toc-siguientes-pasos">Siguientes Pasos</a></li>
@@ -459,11 +458,11 @@
 <h3 id="entreno-al-modelo-con-1-sola-raza-de-perro">Entreno al modelo con 1 sola raza de perro</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="ch.jpg" class="quarto-figure quarto-figure-center" style="border-radius: 1rem;" alt="Chihuahua" width="200"></p>
+<p><img data-src="ch.jpg" class="quarto-figure quarto-figure-center" style="border-radius: 1rem;" alt="Chihuahua" height="100"></p>
 </figure>
 </div>
 <ul>
-<li class="fragment">Muestra nueva: ¿Es perro? <img data-src="perro.png" class="quarto-figure quarto-figure-center" style="border-radius: 1rem;" alt="perro" width="200"></li>
+<li class="fragment">Muestra nueva: ¿Es perro? <img data-src="perro.png" class="quarto-figure quarto-figure-center" style="border-radius: 1rem;" alt="perro" height="60"></li>
 <li class="fragment">❌ <strong>NO lo reconoce</strong></li>
 <li class="fragment">🔎 La máquina <strong>falla en generalizar</strong> porque no ha visto suficientes ejemplos.</li>
 </ul>
@@ -476,11 +475,11 @@
 <h3 id="entreno-al-modelo-con-10-razas-de-perro-color-marrón">Entreno al modelo con 10 razas de perro color marrón</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="several.png" class="quarto-figure quarto-figure-center" style="border-radius: 1rem;" alt="varios" width="200"></p>
+<p><img data-src="several.png" class="quarto-figure quarto-figure-center" style="border-radius: 1rem;" alt="varios" data-heiht="100"></p>
 </figure>
 </div>
 <ul>
-<li class="fragment">Muestra nueva: ¿Es perro? <img data-src="perro.png" class="quarto-figure quarto-figure-center" style="border-radius: 1rem;" alt="perro" width="200"></li>
+<li class="fragment">Muestra nueva: ¿Es perro? <img data-src="perro.png" class="quarto-figure quarto-figure-center" style="border-radius: 1rem;" alt="perro" height="60"></li>
 <li class="fragment">❌ <strong>NO lo reconoce</strong></li>
 <li class="fragment">⚠️ El modelo está <strong>demasiado ajustado</strong> a los datos de entrenamiento.</li>
 </ul>
@@ -543,36 +542,25 @@
 <blockquote>
 <p>🎓 <em>El arte del aprendizaje automático es encontrar el punto justo entre sesgo y varianza.</em></p>
 </blockquote>
-</section>
+
+<img data-src="balance.gif" id="fig-surus" class="r-stretch quarto-figure-center"><p class="caption">
+</p></section>
 <section id="retomando" class="slide level2">
 <h2>📌 RETOMANDO</h2>
 <ul>
-<li class="fragment">📚 Modelo base: punto de partida</li>
-<li class="fragment">🧰 Ridge: reduce varianza, estabiliza coeficientes</li>
-<li class="fragment">🧹 Lasso: elimina variables irrelevantes</li>
-<li class="fragment">🔄 Validación cruzada: asegura buen desempeño fuera de muestra</li>
-<li class="fragment">🎯 Objetivo: lograr un modelo que generalice bien</li>
-<li class="fragment">💡 El mejor modelo no es el más complejo, sino el que predice con equilibrio y claridad.</li>
+<li class="fragment">📚 <strong>Modelo base:</strong> punto de partida</li>
+<li class="fragment">🧰 <strong>Ridge:</strong> reduce varianza, estabiliza coeficientes</li>
+<li class="fragment">🧹 <strong>Lasso:</strong> elimina variables irrelevantes</li>
+<li class="fragment">🔄 <strong>Validación cruzada:</strong> asegura buen desempeño fuera de muestra</li>
+<li class="fragment">🎯 <strong>Objetivo:</strong> lograr un modelo que generalice bien</li>
+<li class="fragment">💡 El mejor modelo no es el más complejo, sino el que predice con <strong>equilibrio</strong> y <strong>claridad.</strong></li>
 </ul>
-</section>
-<section id="flujo-del-modelo-de-lo-simple-a-lo-robusto" class="slide level2">
-<h2>🔁 Flujo del modelo: de lo simple a lo robusto</h2>
-<div class="cell" data-reveal="true" data-layout-align="default">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource default number-lines code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href=""></a>flowchart TD</span>
-<span id="cb1-2"><a href=""></a>    A["📥 Dataset limpio (Boston.csv)"] --&gt; B["📊 Modelo base\nRegresión Lineal"]</span>
-<span id="cb1-3"><a href=""></a>    B --&gt; C{"🔍 ¿Problemas?"}</span>
-<span id="cb1-4"><a href=""></a>    C -- Sobreajuste / multicolinealidad --&gt; D["🧰 Ridge (L2)"]</span>
-<span id="cb1-5"><a href=""></a>    C -- Muchas variables irrelevantes --&gt; E["🧹 Lasso (L1)"]</span>
-<span id="cb1-6"><a href=""></a>    D &amp; E --&gt; F["🧪 Validación Cruzada"]</span>
-<span id="cb1-7"><a href=""></a>    F --&gt; G["📈 Comparar\nR² y RMSE"]</span>
-<span id="cb1-8"><a href=""></a>    G --&gt; H{"🎯 ¿Buen desempeño?"}</span>
-<span id="cb1-9"><a href=""></a>    H -- Sí --&gt; I["✅ Seleccionar modelo final"]</span>
-<span id="cb1-10"><a href=""></a>    H -- No --&gt; J["⚙️ Ajustar hiperparámetros\n🔄 Repetir"]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-reveal="true" data-fig-width="6.5%%|" data-layout-align="default">
 <div class="cell-output-display">
 <div>
 <p></p><figure class=""><p></p>
 <div>
-<pre class="mermaid mermaid-js">flowchart TD
+<pre class="mermaid mermaid-js">flowchart LR
     A["📥 Dataset limpio (Boston.csv)"] --&gt; B["📊 Modelo base\nRegresión Lineal"]
     B --&gt; C{"🔍 ¿Problemas?"}
     C -- Sobreajuste / multicolinealidad --&gt; D["🧰 Ridge (L2)"]
@@ -592,6 +580,7 @@
 </section>
 <section id="comparación-de-técnicas" class="slide level2">
 <h2>🆚 Comparación de Técnicas</h2>
+<div class="small">
 <table class="caption-top">
 <colgroup>
 <col style="width: 6%">
@@ -633,6 +622,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 </section>
 <section class="slide level2">
 
@@ -726,22 +716,22 @@
 </section>
 <section id="carga-del-dataset" class="slide level2 scrollable">
 <h2>Carga del Dataset</h2>
-<div id="957a2b09" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb2-2"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb2-3"><a href=""></a></span>
-<span id="cb2-4"><a href=""></a><span class="co"># Cargar datos desde CMU</span></span>
-<span id="cb2-5"><a href=""></a>url <span class="op">=</span> <span class="st">"http://lib.stat.cmu.edu/datasets/boston"</span></span>
-<span id="cb2-6"><a href=""></a>raw_df <span class="op">=</span> pd.read_csv(url, sep<span class="op">=</span><span class="st">"\s+"</span>, skiprows<span class="op">=</span><span class="dv">22</span>, header<span class="op">=</span><span class="va">None</span>)</span>
-<span id="cb2-7"><a href=""></a>data <span class="op">=</span> np.hstack([raw_df.values[::<span class="dv">2</span>, :], raw_df.values[<span class="dv">1</span>::<span class="dv">2</span>, :<span class="dv">2</span>]])</span>
-<span id="cb2-8"><a href=""></a>target <span class="op">=</span> raw_df.values[<span class="dv">1</span>::<span class="dv">2</span>, <span class="dv">2</span>]</span>
-<span id="cb2-9"><a href=""></a></span>
-<span id="cb2-10"><a href=""></a>columns <span class="op">=</span> [<span class="st">'CRIM'</span>, <span class="st">'ZN'</span>, <span class="st">'INDUS'</span>, <span class="st">'CHAS'</span>, <span class="st">'NOX'</span>, <span class="st">'RM'</span>,</span>
-<span id="cb2-11"><a href=""></a>           <span class="st">'AGE'</span>, <span class="st">'DIS'</span>, <span class="st">'RAD'</span>, <span class="st">'TAX'</span>, <span class="st">'PTRATIO'</span>, <span class="st">'B'</span>, <span class="st">'LSTAT'</span>]</span>
-<span id="cb2-12"><a href=""></a>X <span class="op">=</span> pd.DataFrame(data, columns<span class="op">=</span>columns)</span>
-<span id="cb2-13"><a href=""></a>y <span class="op">=</span> pd.Series(target, name<span class="op">=</span><span class="st">'MEDV'</span>)</span>
-<span id="cb2-14"><a href=""></a>X.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
+<div id="17e08bf8" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href=""></a></span>
+<span id="cb1-4"><a href=""></a><span class="co"># Cargar datos desde CMU</span></span>
+<span id="cb1-5"><a href=""></a>url <span class="op">=</span> <span class="st">"http://lib.stat.cmu.edu/datasets/boston"</span></span>
+<span id="cb1-6"><a href=""></a>raw_df <span class="op">=</span> pd.read_csv(url, sep<span class="op">=</span><span class="st">"\s+"</span>, skiprows<span class="op">=</span><span class="dv">22</span>, header<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb1-7"><a href=""></a>data <span class="op">=</span> np.hstack([raw_df.values[::<span class="dv">2</span>, :], raw_df.values[<span class="dv">1</span>::<span class="dv">2</span>, :<span class="dv">2</span>]])</span>
+<span id="cb1-8"><a href=""></a>target <span class="op">=</span> raw_df.values[<span class="dv">1</span>::<span class="dv">2</span>, <span class="dv">2</span>]</span>
+<span id="cb1-9"><a href=""></a></span>
+<span id="cb1-10"><a href=""></a>columns <span class="op">=</span> [<span class="st">'CRIM'</span>, <span class="st">'ZN'</span>, <span class="st">'INDUS'</span>, <span class="st">'CHAS'</span>, <span class="st">'NOX'</span>, <span class="st">'RM'</span>,</span>
+<span id="cb1-11"><a href=""></a>           <span class="st">'AGE'</span>, <span class="st">'DIS'</span>, <span class="st">'RAD'</span>, <span class="st">'TAX'</span>, <span class="st">'PTRATIO'</span>, <span class="st">'B'</span>, <span class="st">'LSTAT'</span>]</span>
+<span id="cb1-12"><a href=""></a>X <span class="op">=</span> pd.DataFrame(data, columns<span class="op">=</span>columns)</span>
+<span id="cb1-13"><a href=""></a>y <span class="op">=</span> pd.Series(target, name<span class="op">=</span><span class="st">'MEDV'</span>)</span>
+<span id="cb1-14"><a href=""></a>X.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -864,39 +854,35 @@
 </div>
 </div>
 </section>
-<section class="slide level2">
-
-</section></section>
-<section>
-<section id="división-y-modelo" class="title-slide slide level1 center">
-<h1>División y Modelo</h1>
-<div id="c820481a" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb3-2"><a href=""></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb3-3"><a href=""></a></span>
-<span id="cb3-4"><a href=""></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb3-5"><a href=""></a>model <span class="op">=</span> LinearRegression()</span>
-<span id="cb3-6"><a href=""></a>model.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="23">
-<style>#sk-container-id-4 {color: black;}#sk-container-id-4 pre{padding: 0;}#sk-container-id-4 div.sk-toggleable {background-color: white;}#sk-container-id-4 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-4 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-4 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-4 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-4 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-4 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-4 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-4 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-4 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-4 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-4 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-4 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-4 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-4 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-4 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-4 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-4 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-4 div.sk-item {position: relative;z-index: 1;}#sk-container-id-4 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-4 div.sk-item::before, #sk-container-id-4 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-4 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-4 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-4 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-4 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-4 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-4 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-4 div.sk-label-container {text-align: center;}#sk-container-id-4 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-4 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-4" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LinearRegression()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox" checked=""><label for="sk-estimator-id-4" class="sk-toggleable__label sk-toggleable__label-arrow">LinearRegression</label><div class="sk-toggleable__content"><pre>LinearRegression()</pre></div></div></div></div></div>
+<section id="división-y-modelo" class="slide level2">
+<h2>División y Modelo</h2>
+<div id="2dd1f936" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb2-2"><a href=""></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb2-3"><a href=""></a></span>
+<span id="cb2-4"><a href=""></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb2-5"><a href=""></a>model <span class="op">=</span> LinearRegression()</span>
+<span id="cb2-6"><a href=""></a>model.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<style>#sk-container-id-1 {color: black;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LinearRegression()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked=""><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">LinearRegression</label><div class="sk-toggleable__content"><pre>LinearRegression()</pre></div></div></div></div></div>
 </div>
 </div>
 </section>
 <section id="evaluación-del-modelo" class="slide level2">
 <h2>Evaluación del Modelo</h2>
-<div id="189f722a" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score, mean_squared_error</span>
-<span id="cb4-2"><a href=""></a></span>
-<span id="cb4-3"><a href=""></a>y_pred_train <span class="op">=</span> model.predict(X_train)</span>
-<span id="cb4-4"><a href=""></a>y_pred_test <span class="op">=</span> model.predict(X_test)</span>
-<span id="cb4-5"><a href=""></a></span>
-<span id="cb4-6"><a href=""></a>r2_train <span class="op">=</span> r2_score(y_train, y_pred_train)</span>
-<span id="cb4-7"><a href=""></a>r2_test <span class="op">=</span> r2_score(y_test, y_pred_test)</span>
-<span id="cb4-8"><a href=""></a>mse_train <span class="op">=</span> mean_squared_error(y_train, y_pred_train)</span>
-<span id="cb4-9"><a href=""></a>mse_test <span class="op">=</span> mean_squared_error(y_test, y_pred_test)</span>
-<span id="cb4-10"><a href=""></a></span>
-<span id="cb4-11"><a href=""></a>r2_train, mse_train, r2_test, mse_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="24">
+<div id="d632ea2f" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score, mean_squared_error</span>
+<span id="cb3-2"><a href=""></a></span>
+<span id="cb3-3"><a href=""></a>y_pred_train <span class="op">=</span> model.predict(X_train)</span>
+<span id="cb3-4"><a href=""></a>y_pred_test <span class="op">=</span> model.predict(X_test)</span>
+<span id="cb3-5"><a href=""></a></span>
+<span id="cb3-6"><a href=""></a>r2_train <span class="op">=</span> r2_score(y_train, y_pred_train)</span>
+<span id="cb3-7"><a href=""></a>r2_test <span class="op">=</span> r2_score(y_test, y_pred_test)</span>
+<span id="cb3-8"><a href=""></a>mse_train <span class="op">=</span> mean_squared_error(y_train, y_pred_train)</span>
+<span id="cb3-9"><a href=""></a>mse_test <span class="op">=</span> mean_squared_error(y_test, y_pred_test)</span>
+<span id="cb3-10"><a href=""></a></span>
+<span id="cb3-11"><a href=""></a>r2_train, mse_train, r2_test, mse_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>(0.7508856358979673,
  21.641412753226312,
  0.6687594935356307,
@@ -906,13 +892,13 @@
 </section>
 <section id="análisis-estadístico" class="slide level2">
 <h2>Análisis Estadístico</h2>
-<div id="79903a58" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
-<span id="cb6-2"><a href=""></a></span>
-<span id="cb6-3"><a href=""></a>X_train_sm <span class="op">=</span> sm.add_constant(X_train)</span>
-<span id="cb6-4"><a href=""></a>ols_model <span class="op">=</span> sm.OLS(y_train, X_train_sm).fit()</span>
-<span id="cb6-5"><a href=""></a>ols_model.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="25">
+<div id="6fd68bec" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb5-2"><a href=""></a></span>
+<span id="cb5-3"><a href=""></a>X_train_sm <span class="op">=</span> sm.add_constant(X_train)</span>
+<span id="cb5-4"><a href=""></a>ols_model <span class="op">=</span> sm.OLS(y_train, X_train_sm).fit()</span>
+<span id="cb5-5"><a href=""></a>ols_model.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
 <table class="simpletable caption-top" data-quarto-postprocess="true">
 <caption>OLS Regression Results</caption>
 <tbody>
@@ -936,13 +922,13 @@
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">Date:</td>
-<td>Tue, 01 Apr 2025</td>
+<td>Wed, 02 Apr 2025</td>
 <td data-quarto-table-cell-role="th">Prob (F-statistic):</td>
 <td>6.21e-109</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">Time:</td>
-<td>17:55:23</td>
+<td>17:18:46</td>
 <td data-quarto-table-cell-role="th">Log-Likelihood:</td>
 <td>-1194.3</td>
 </tr>
@@ -1153,39 +1139,39 @@
 <section>
 <section id="diccionario-de-variables" class="title-slide slide level1 center">
 <h1>Diccionario de Variables</h1>
-<div id="864d88a4" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a>descripcion_variables <span class="op">=</span> {</span>
-<span id="cb7-2"><a href=""></a>    <span class="st">'CRIM'</span>: <span class="st">'CRIM (Tasa criminalidad per cápita)'</span>,</span>
-<span id="cb7-3"><a href=""></a>    <span class="st">'ZN'</span>: <span class="st">'ZN (% terrenos residenciales &gt; 25,000 pies²)'</span>,</span>
-<span id="cb7-4"><a href=""></a>    <span class="st">'INDUS'</span>: <span class="st">'INDUS (% tierra para negocios no minoristas)'</span>,</span>
-<span id="cb7-5"><a href=""></a>    <span class="st">'CHAS'</span>: <span class="st">'CHAS (Río Charles, 1=sí)'</span>,</span>
-<span id="cb7-6"><a href=""></a>    <span class="st">'NOX'</span>: <span class="st">'NOX (Contaminación del aire, NOx)'</span>,</span>
-<span id="cb7-7"><a href=""></a>    <span class="st">'RM'</span>: <span class="st">'RM (Habitaciones promedio por casa)'</span>,</span>
-<span id="cb7-8"><a href=""></a>    <span class="st">'AGE'</span>: <span class="st">'AGE (</span><span class="sc">% c</span><span class="st">asas construidas antes de 1940)'</span>,</span>
-<span id="cb7-9"><a href=""></a>    <span class="st">'DIS'</span>: <span class="st">'DIS (Distancia a centros de empleo)'</span>,</span>
-<span id="cb7-10"><a href=""></a>    <span class="st">'RAD'</span>: <span class="st">'RAD (Índice de accesibilidad a autopistas)'</span>,</span>
-<span id="cb7-11"><a href=""></a>    <span class="st">'TAX'</span>: <span class="st">'TAX (Tasa de impuesto a la propiedad)'</span>,</span>
-<span id="cb7-12"><a href=""></a>    <span class="st">'PTRATIO'</span>: <span class="st">'PTRATIO (Relación estudiantes/profesores)'</span>,</span>
-<span id="cb7-13"><a href=""></a>    <span class="st">'B'</span>: <span class="st">'B (Proporción poblacional afrodescendiente)'</span>,</span>
-<span id="cb7-14"><a href=""></a>    <span class="st">'LSTAT'</span>: <span class="st">'LSTAT (% población de bajo estatus socioeconómico)'</span></span>
-<span id="cb7-15"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="9a4cbe83" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a>descripcion_variables <span class="op">=</span> {</span>
+<span id="cb6-2"><a href=""></a>    <span class="st">'CRIM'</span>: <span class="st">'CRIM (Tasa criminalidad per cápita)'</span>,</span>
+<span id="cb6-3"><a href=""></a>    <span class="st">'ZN'</span>: <span class="st">'ZN (% terrenos residenciales &gt; 25,000 pies²)'</span>,</span>
+<span id="cb6-4"><a href=""></a>    <span class="st">'INDUS'</span>: <span class="st">'INDUS (% tierra para negocios no minoristas)'</span>,</span>
+<span id="cb6-5"><a href=""></a>    <span class="st">'CHAS'</span>: <span class="st">'CHAS (Río Charles, 1=sí)'</span>,</span>
+<span id="cb6-6"><a href=""></a>    <span class="st">'NOX'</span>: <span class="st">'NOX (Contaminación del aire, NOx)'</span>,</span>
+<span id="cb6-7"><a href=""></a>    <span class="st">'RM'</span>: <span class="st">'RM (Habitaciones promedio por casa)'</span>,</span>
+<span id="cb6-8"><a href=""></a>    <span class="st">'AGE'</span>: <span class="st">'AGE (</span><span class="sc">% c</span><span class="st">asas construidas antes de 1940)'</span>,</span>
+<span id="cb6-9"><a href=""></a>    <span class="st">'DIS'</span>: <span class="st">'DIS (Distancia a centros de empleo)'</span>,</span>
+<span id="cb6-10"><a href=""></a>    <span class="st">'RAD'</span>: <span class="st">'RAD (Índice de accesibilidad a autopistas)'</span>,</span>
+<span id="cb6-11"><a href=""></a>    <span class="st">'TAX'</span>: <span class="st">'TAX (Tasa de impuesto a la propiedad)'</span>,</span>
+<span id="cb6-12"><a href=""></a>    <span class="st">'PTRATIO'</span>: <span class="st">'PTRATIO (Relación estudiantes/profesores)'</span>,</span>
+<span id="cb6-13"><a href=""></a>    <span class="st">'B'</span>: <span class="st">'B (Proporción poblacional afrodescendiente)'</span>,</span>
+<span id="cb6-14"><a href=""></a>    <span class="st">'LSTAT'</span>: <span class="st">'LSTAT (% población de bajo estatus socioeconómico)'</span></span>
+<span id="cb6-15"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="gráfico-de-coeficientes" class="slide level2">
 <h2>Gráfico de Coeficientes</h2>
-<div id="85f66c45" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb8-2"><a href=""></a></span>
-<span id="cb8-3"><a href=""></a>coeficientes <span class="op">=</span> pd.Series(model.coef_, index<span class="op">=</span>X.columns)</span>
-<span id="cb8-4"><a href=""></a>coef_desc <span class="op">=</span> coeficientes.rename(index<span class="op">=</span>descripcion_variables)</span>
-<span id="cb8-5"><a href=""></a></span>
-<span id="cb8-6"><a href=""></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">6</span>))</span>
-<span id="cb8-7"><a href=""></a>coef_desc.sort_values().plot(kind<span class="op">=</span><span class="st">'barh'</span>, color<span class="op">=</span><span class="st">'skyblue'</span>)</span>
-<span id="cb8-8"><a href=""></a>plt.title(<span class="st">"Importancia de Variables en Regresión Lineal"</span>)</span>
-<span id="cb8-9"><a href=""></a>plt.xlabel(<span class="st">"Valor del Coeficiente"</span>)</span>
-<span id="cb8-10"><a href=""></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb8-11"><a href=""></a>plt.tight_layout()</span>
-<span id="cb8-12"><a href=""></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="998cf88b" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb7-2"><a href=""></a></span>
+<span id="cb7-3"><a href=""></a>coeficientes <span class="op">=</span> pd.Series(model.coef_, index<span class="op">=</span>X.columns)</span>
+<span id="cb7-4"><a href=""></a>coef_desc <span class="op">=</span> coeficientes.rename(index<span class="op">=</span>descripcion_variables)</span>
+<span id="cb7-5"><a href=""></a></span>
+<span id="cb7-6"><a href=""></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">6</span>))</span>
+<span id="cb7-7"><a href=""></a>coef_desc.sort_values().plot(kind<span class="op">=</span><span class="st">'barh'</span>, color<span class="op">=</span><span class="st">'skyblue'</span>)</span>
+<span id="cb7-8"><a href=""></a>plt.title(<span class="st">"Importancia de Variables en Regresión Lineal"</span>)</span>
+<span id="cb7-9"><a href=""></a>plt.xlabel(<span class="st">"Valor del Coeficiente"</span>)</span>
+<span id="cb7-10"><a href=""></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb7-11"><a href=""></a>plt.tight_layout()</span>
+<span id="cb7-12"><a href=""></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1197,24 +1183,24 @@
 </section>
 <section id="gráficas-de-interpretación-top-4" class="slide level2">
 <h2>Gráficas de Interpretación (Top 4)</h2>
-<div id="e756ed40" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a>top_vars <span class="op">=</span> coeficientes.<span class="bu">abs</span>().sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">4</span>).index.tolist()</span>
-<span id="cb9-2"><a href=""></a></span>
-<span id="cb9-3"><a href=""></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">14</span>,<span class="dv">10</span>))</span>
-<span id="cb9-4"><a href=""></a>axs <span class="op">=</span> axs.flatten()</span>
-<span id="cb9-5"><a href=""></a></span>
-<span id="cb9-6"><a href=""></a><span class="cf">for</span> i, var <span class="kw">in</span> <span class="bu">enumerate</span>(top_vars):</span>
-<span id="cb9-7"><a href=""></a>    axs[i].scatter(X_test[var], y_test, label<span class="op">=</span><span class="st">'Real'</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
-<span id="cb9-8"><a href=""></a>    axs[i].scatter(X_test[var], y_pred_test, label<span class="op">=</span><span class="st">'Predicción'</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
-<span id="cb9-9"><a href=""></a>    axs[i].set_xlabel(descripcion_variables[var])</span>
-<span id="cb9-10"><a href=""></a>    axs[i].set_ylabel(<span class="st">'MEDV ($1000s)'</span>)</span>
-<span id="cb9-11"><a href=""></a>    axs[i].set_title(<span class="ss">f"</span><span class="sc">{</span>descripcion_variables[var]<span class="sc">}</span><span class="ss"> vs MEDV"</span>)</span>
-<span id="cb9-12"><a href=""></a>    axs[i].legend()</span>
-<span id="cb9-13"><a href=""></a>    axs[i].grid(<span class="va">True</span>)</span>
-<span id="cb9-14"><a href=""></a></span>
-<span id="cb9-15"><a href=""></a>plt.suptitle(<span class="st">"Variables Más Relevantes vs Precio de Vivienda"</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb9-16"><a href=""></a>plt.tight_layout(rect<span class="op">=</span>[<span class="dv">0</span>, <span class="fl">0.03</span>, <span class="dv">1</span>, <span class="fl">0.95</span>])</span>
-<span id="cb9-17"><a href=""></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="ff494c7a" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a>top_vars <span class="op">=</span> coeficientes.<span class="bu">abs</span>().sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">4</span>).index.tolist()</span>
+<span id="cb8-2"><a href=""></a></span>
+<span id="cb8-3"><a href=""></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">14</span>,<span class="dv">10</span>))</span>
+<span id="cb8-4"><a href=""></a>axs <span class="op">=</span> axs.flatten()</span>
+<span id="cb8-5"><a href=""></a></span>
+<span id="cb8-6"><a href=""></a><span class="cf">for</span> i, var <span class="kw">in</span> <span class="bu">enumerate</span>(top_vars):</span>
+<span id="cb8-7"><a href=""></a>    axs[i].scatter(X_test[var], y_test, label<span class="op">=</span><span class="st">'Real'</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb8-8"><a href=""></a>    axs[i].scatter(X_test[var], y_pred_test, label<span class="op">=</span><span class="st">'Predicción'</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb8-9"><a href=""></a>    axs[i].set_xlabel(descripcion_variables[var])</span>
+<span id="cb8-10"><a href=""></a>    axs[i].set_ylabel(<span class="st">'MEDV ($1000s)'</span>)</span>
+<span id="cb8-11"><a href=""></a>    axs[i].set_title(<span class="ss">f"</span><span class="sc">{</span>descripcion_variables[var]<span class="sc">}</span><span class="ss"> vs MEDV"</span>)</span>
+<span id="cb8-12"><a href=""></a>    axs[i].legend()</span>
+<span id="cb8-13"><a href=""></a>    axs[i].grid(<span class="va">True</span>)</span>
+<span id="cb8-14"><a href=""></a></span>
+<span id="cb8-15"><a href=""></a>plt.suptitle(<span class="st">"Variables Más Relevantes vs Precio de Vivienda"</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb8-16"><a href=""></a>plt.tight_layout(rect<span class="op">=</span>[<span class="dv">0</span>, <span class="fl">0.03</span>, <span class="dv">1</span>, <span class="fl">0.95</span>])</span>
+<span id="cb8-17"><a href=""></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
