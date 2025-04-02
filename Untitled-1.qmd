@@ -12,7 +12,7 @@ format:
     code-line-numbers: true
     code-annotations: hover
     mermaid:
-      theme: default
+      theme: forest
     transition: fade
     chalkboard: true
     logo: Utadeo70-fondoblanco.png
@@ -50,10 +50,10 @@ jupyter: python3
 
 ### Entreno al modelo con 1 sola raza de perro
 
-![](ch.jpg){alt="Chihuahua" fig-align="center" width="200" style="border-radius: 1rem;"}
+![](ch.jpg){alt="Chihuahua" fig-align="center" height="100" style="border-radius: 1rem;"}
 
 - Muestra nueva: ¿Es perro?
- ![](perro.png){alt="perro" fig-align="center" width="200" style="border-radius: 1rem;"}
+ ![](perro.png){alt="perro" fig-align="center" height="60" style="border-radius: 1rem;"}
 - ❌ **NO lo reconoce**
 - 🔎 La máquina **falla en generalizar** porque no ha visto suficientes ejemplos.
 
@@ -67,10 +67,10 @@ La máquina fallará en reconocer al perro por falta de suficientes muestras. No
 
 ### Entreno al modelo con 10 razas de perro color marrón
 
-![](several.png){alt="varios" fig-align="center" width="200" style="border-radius: 1rem;"}
+![](several.png){alt="varios" fig-align="center" heiht="100" style="border-radius: 1rem;"}
 
 - Muestra nueva: ¿Es perro?
- ![](perro.png){alt="perro" fig-align="center" width="200" style="border-radius: 1rem;"}
+ ![](perro.png){alt="perro" fig-align="center" height="60" style="border-radius: 1rem;"}
 - ❌ **NO lo reconoce**
 - ⚠️ El modelo está **demasiado ajustado** a los datos de entrenamiento.
 
@@ -105,20 +105,22 @@ La máquina fallará en reconocer un perro nuevo porque no tiene estrictamente l
 
 > 🎓 *El arte del aprendizaje automático es encontrar el punto justo entre sesgo y varianza.*
 
+![](balance.gif){#fig-surus}
+
 ---
 
 ## 📌 RETOMANDO
-- 📚 Modelo base: punto de partida
-- 🧰 Ridge: reduce varianza, estabiliza coeficientes
-- 🧹 Lasso: elimina variables irrelevantes
-- 🔄 Validación cruzada: asegura buen desempeño fuera de muestra
-- 🎯 Objetivo: lograr un modelo que generalice bien
-- 💡 El mejor modelo no es el más complejo, sino el que predice con equilibrio y claridad.
-
-## 🔁 Flujo del modelo: de lo simple a lo robusto
+- 📚 **Modelo base:** punto de partida
+- 🧰 **Ridge:** reduce varianza, estabiliza coeficientes
+- 🧹 **Lasso:** elimina variables irrelevantes
+- 🔄 **Validación cruzada:** asegura buen desempeño fuera de muestra
+- 🎯 **Objetivo:** lograr un modelo que generalice bien
+- 💡 El mejor modelo no es el más complejo, sino el que predice con **equilibrio** y **claridad.**
 
 ```{mermaid}
-flowchart TD
+%%| echo: false
+%%| fig-width: 6.5%%| 
+flowchart LR
     A["📥 Dataset limpio (Boston.csv)"] --> B["📊 Modelo base\nRegresión Lineal"]
     B --> C{"🔍 ¿Problemas?"}
     C -- Sobreajuste / multicolinealidad --> D["🧰 Ridge (L2)"]
@@ -132,13 +134,13 @@ flowchart TD
 ```
 
 ## 🆚 Comparación de Técnicas
-
+::: {.small}
 | Técnica            | Problema que aborda                                      | Cómo lo resuelve                                                       | Ventajas                                                                 | Limitaciones                                                              |
 |--------------------|----------------------------------------------------------|-------------------------------------------------------------------------|--------------------------------------------------------------------------|---------------------------------------------------------------------------|
 | **Regresión Ridge**| - Multicolinealidad<br>- Sobreajuste                    | Penalización L2 que reduce el tamaño de los coeficientes grandes       | - Reduce varianza<br>- Mantiene todas las variables<br>- Buena generalización | - No elimina variables irrelevantes                                       |
 | **Regresión Lasso**| - Multicolinealidad<br>- Sobreajuste<br>- Alta dimensionalidad | Penalización L1 que puede reducir coeficientes a cero (selección de variables) | - Selección automática de variables<br>- Modelos más interpretables      | - Puede eliminar variables importantes si están correlacionadas           |
 | **Validación cruzada** | - Sobreajuste<br>- Mala generalización del modelo | Divide los datos en subconjuntos para evaluar múltiples veces el modelo | - Estima rendimiento real<br>- Ayuda a elegir hiperparámetros óptimos   | - Mayor costo computacional<br>- Sensible a la forma de dividir los datos |
-
+:::
 ---
 
 # El dataset
@@ -173,7 +175,6 @@ El conjunto de datos **Boston Housing** contiene información sobre barrios de B
 
 ---
 
-
 ## Carga del Dataset {.scrollable}
 
 ```{python}
@@ -194,7 +195,7 @@ X.head()
 ```
 ---
 
-# División y Modelo
+## División y Modelo
 
 ```{python}
 from sklearn.model_selection import train_test_split
