@@ -336,7 +336,7 @@ El diagnóstico confirma que existe un problema de sobreajuste.
 
 ---
 
-## 🔖 Coeficientes
+## 🔖 Coeficientes 
 
 Los coeficientes indican cuánto influye cada variable en la predicción.
 
