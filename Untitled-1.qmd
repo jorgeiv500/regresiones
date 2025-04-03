@@ -175,145 +175,233 @@ El conjunto de datos **Boston Housing** contiene información sobre barrios de B
 
 ---
 
-## Carga del Dataset {.scrollable}
+## 📚 Librerías necesarias
+
+A continuación cargamos las librerías básicas para análisis de datos (`pandas`, `numpy`), creación y evaluación del modelo de regresión (`scikit-learn`).
+
+```python
+import pandas as pd  # Manipulación de datos
+import numpy as np   # Operaciones matemáticas
+from sklearn.linear_model import LinearRegression  # Modelo Lineal
+from sklearn.metrics import r2_score, mean_squared_error  # Métricas de rendimiento
+import matplotlib.pyplot as plt  # Gráficos
+
+```
+---
+
+## 📥 Carga del Dataset {.scrollable}
+
+Cargamos el dataset  que contiene información socioeconómica sobre viviendas.
 
 ```{python}
 import pandas as pd
 import numpy as np
 
-# Cargar datos desde CMU
+# Cargar los datos desde la URL
 url = "http://lib.stat.cmu.edu/datasets/boston"
 raw_df = pd.read_csv(url, sep="\s+", skiprows=22, header=None)
+
+# Combinar las filas pares e impares en un único arreglo de datos
 data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
 target = raw_df.values[1::2, 2]
 
+# Nombres de columnas
 columns = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM',
-           'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
-X = pd.DataFrame(data, columns=columns)
-y = pd.Series(target, name='MEDV')
-X.head()
+           'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT', 'MEDV']
+
+# Crear el DataFrame final
+boston_df = pd.DataFrame(np.column_stack([data, target]), columns=columns)
+
+# Visualizar las primeras filas
+boston_df.tail()
 ```
 ---
 
-## División y Modelo
+## 🔍 División manual del dataset
+
+Realizamos una división secuencial, tomando el primer 80% para entrenar y el siguiente 20% para probar el modelo.
 
 ```{python}
-from sklearn.model_selection import train_test_split
+n = len(boston_df)
+n_train = int(n * 0.8)
+
+X = boston_df.drop(columns=['MEDV'])
+y = boston_df['MEDV']
+
+X_train = X.iloc[:n_train]
+y_train = y.iloc[:n_train]
+
+X_test = X.iloc[n_train:]
+y_test = y.iloc[n_train:]
+```
+
+---
+
+## 📐 Modelo de Regresión Lineal
+
+El modelo de regresión lineal busca minimizar la función:
+
+$$\hat{y} = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_n x_n$$
+
+```{python}
+import pandas as pd
+import numpy as np
 from sklearn.linear_model import LinearRegression
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-model = LinearRegression()
-model.fit(X_train, y_train)
-```
-
----
-## Evaluación del Modelo
-
-```{python}
 from sklearn.metrics import r2_score, mean_squared_error
+# Modelo para entrenamiento
+model_train = LinearRegression()
+model_train.fit(X_train, y_train)
 
-y_pred_train = model.predict(X_train)
-y_pred_test = model.predict(X_test)
+# Modelo exclusivo para comparación (prueba)
+model_test = LinearRegression()
+model_test.fit(X_test, y_test)
+```
 
+---
+
+# 🔮 Predicciones
+
+Generamos predicciones con ambos modelos.
+
+```{python}
+y_pred_train = model_train.predict(X_train)
+y_pred_test = model_train.predict(X_test)
+```
+
+---
+
+## 📈 Métricas de rendimiento {.scrollable}
+
+Las métricas usadas son:
+
+- **R²** (Coeficiente de determinación):
+
+$$R^2 = 1 - \frac{\sum{(y - \hat{y})^2}}{\sum{(y - \bar{y})^2}}$$
+
+- **RMSE** (Raíz del error cuadrático medio):
+
+$$RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{y}_i)^2}$$
+
+```{python}
 r2_train = r2_score(y_train, y_pred_train)
+rmse_train = np.sqrt(mean_squared_error(y_train, y_pred_train))
+
 r2_test = r2_score(y_test, y_pred_test)
-mse_train = mean_squared_error(y_train, y_pred_train)
-mse_test = mean_squared_error(y_test, y_pred_test)
-
-r2_train, mse_train, r2_test, mse_test
+rmse_test = np.sqrt(mean_squared_error(y_test, y_pred_test))
 ```
 
 ---
 
-## Análisis Estadístico
+## 🖥️ Resultados del modelo
 
 ```{python}
-import statsmodels.api as sm
+resultados = pd.DataFrame({
+    "Conjunto": ["Entrenamiento", "Prueba"],
+    "R²": [r2_train, r2_test],
+    "RMSE": [rmse_train, rmse_test]
+})
 
-X_train_sm = sm.add_constant(X_train)
-ols_model = sm.OLS(y_train, X_train_sm).fit()
-ols_model.summary()
+display(resultados)
+
 ```
+Estos resultados indican un buen desempeño en entrenamiento, pero una caída significativa en la prueba sugiere sobreajuste.
 
 ---
 
-# Diccionario de Variables
+## 📋 Diagnóstico
 
 ```{python}
-descripcion_variables = {
-    'CRIM': 'CRIM (Tasa criminalidad per cápita)',
-    'ZN': 'ZN (% terrenos residenciales > 25,000 pies²)',
-    'INDUS': 'INDUS (% tierra para negocios no minoristas)',
-    'CHAS': 'CHAS (Río Charles, 1=sí)',
-    'NOX': 'NOX (Contaminación del aire, NOx)',
-    'RM': 'RM (Habitaciones promedio por casa)',
-    'AGE': 'AGE (% casas construidas antes de 1940)',
-    'DIS': 'DIS (Distancia a centros de empleo)',
-    'RAD': 'RAD (Índice de accesibilidad a autopistas)',
-    'TAX': 'TAX (Tasa de impuesto a la propiedad)',
-    'PTRATIO': 'PTRATIO (Relación estudiantes/profesores)',
-    'B': 'B (Proporción poblacional afrodescendiente)',
-    'LSTAT': 'LSTAT (% población de bajo estatus socioeconómico)'
-}
+if r2_train > r2_test and abs(r2_train - r2_test) > 0.1:
+    diagnostico = "⚠️ Posible sobreajuste: pierde rendimiento en prueba."
+elif r2_train < 0.5 and r2_test < 0.5:
+    diagnostico = "⚠️ Subajuste: no captura bien patrones."
+else:
+    diagnostico = "✅ Buen ajuste: generaliza bien."
+
+print(diagnostico)
 ```
+
+El diagnóstico confirma que existe un problema de sobreajuste.
 
 ---
 
-## Gráfico de Coeficientes
+## 🔖 Coeficientes (Entrenamiento)
+
+Los coeficientes indican cuánto influye cada variable en la predicción.
 
 ```{python}
+coef_train_df = pd.DataFrame({
+    "Variable": X.columns,
+    "Coeficiente": model_train.coef_
+})
+
+coef_train_df
+```
+
+Observamos que variables como `RM` (habitaciones promedio) tienen fuerte impacto positivo, mientras que `NOX` (contaminación) tiene un impacto negativo significativo.
+
+---
+
+## 🔖 Coeficientes (Prueba)
+
+Coeficientes obtenidos del modelo ajustado exclusivamente con datos de prueba.
+
+```{python}
+coef_test_df = pd.DataFrame({
+    "Variable": X.columns,
+    "Coeficiente": model_test.coef_
+})
+
+coef_test_df
+```
+
+Comparativamente, los coeficientes en prueba muestran fuertes variaciones respecto al modelo de entrenamiento, indicando inestabilidad y la necesidad de regularización.
+
+---
+
+## 📊 Comparación de Coeficientes: Entrenamiento vs Prueba {.scrollable}
+
+```{python}
+#| echo: false
+#| code-overflow: wrap
+
 import matplotlib.pyplot as plt
+import numpy as np
 
-coeficientes = pd.Series(model.coef_, index=X.columns)
-coef_desc = coeficientes.rename(index=descripcion_variables)
+# Datos base
+variables = X.columns
+coef_train = model_train.coef_
+coef_test = model_test.coef_
+coef_diff = np.abs(coef_train - coef_test)
 
-plt.figure(figsize=(10,6))
-coef_desc.sort_values().plot(kind='barh', color='skyblue')
-plt.title("Importancia de Variables en Regresión Lineal")
-plt.xlabel("Valor del Coeficiente")
-plt.grid(True)
+# Crear subplots
+fig, axs = plt.subplots(1, 3, figsize=(18, 6))
+
+# 1️⃣ Coeficientes en entrenamiento y prueba
+axs[0].bar(variables, coef_train, alpha=0.7, label='Entrenamiento')
+axs[0].bar(variables, coef_test, alpha=0.7, label='Prueba')
+axs[0].set_title("Coeficientes por variable")
+axs[0].tick_params(axis='x', rotation=45)
+axs[0].set_ylabel("Valor del coeficiente")
+axs[0].legend()
+
+# 2️⃣ Diferencias absolutas
+axs[1].bar(variables, coef_diff, color='tomato')
+axs[1].set_title("Diferencia absoluta entre coeficientes")
+axs[1].tick_params(axis='x', rotation=45)
+axs[1].set_ylabel("|Entrenamiento - Prueba|")
+
+# 3️⃣ Dispersión
+axs[2].scatter(coef_train, coef_test)
+axs[2].plot([-10, 10], [-10, 10], 'r--')
+axs[2].set_title("Dispersión: Entrenamiento vs Prueba")
+axs[2].set_xlabel("Coef. Entrenamiento")
+axs[2].set_ylabel("Coef. Prueba")
+axs[2].grid(True)
+
+plt.suptitle("🔍 Análisis de Estabilidad del Modelo Lineal", fontsize=16)
 plt.tight_layout()
 plt.show()
 ```
 
----
-
-## Gráficas de Interpretación (Top 4)
-
-```{python}
-top_vars = coeficientes.abs().sort_values(ascending=False).head(4).index.tolist()
-
-fig, axs = plt.subplots(2, 2, figsize=(14,10))
-axs = axs.flatten()
-
-for i, var in enumerate(top_vars):
-    axs[i].scatter(X_test[var], y_test, label='Real', alpha=0.6)
-    axs[i].scatter(X_test[var], y_pred_test, label='Predicción', alpha=0.6)
-    axs[i].set_xlabel(descripcion_variables[var])
-    axs[i].set_ylabel('MEDV ($1000s)')
-    axs[i].set_title(f"{descripcion_variables[var]} vs MEDV")
-    axs[i].legend()
-    axs[i].grid(True)
-
-plt.suptitle("Variables Más Relevantes vs Precio de Vivienda", fontsize=14)
-plt.tight_layout(rect=[0, 0.03, 1, 0.95])
-plt.show()
-```
-
----
-
-# Conclusiones
-
-- La regresión lineal logra un buen ajuste inicial.
-- `RM` y `LSTAT` son las variables más influyentes.
-- Los errores son moderados, lo cual sugiere posibilidad de mejorar con regularización.
-- El modelo permite interpretar de manera clara cómo cada variable afecta el precio de la vivienda.
-
----
-
-# Siguientes Pasos
-
-- Explorar modelos regularizados: Ridge, Lasso
-- Probar transformaciones no lineales
-- Usar validación cruzada para robustez
-- Aplicar el modelo a nuevos conjuntos de datos
+Esta gráfica muestra claramente las discrepancias en los coeficientes entre ambos conjuntos, reforzando el diagnóstico de sobreajuste.

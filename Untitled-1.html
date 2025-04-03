@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="Untitled-1_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Untitled-1_files/libs/clipboard/clipboard.min.js"></script>
 <script src="Untitled-1_files/libs/quarto-html/tabby.min.js"></script>
 <script src="Untitled-1_files/libs/quarto-html/popper.min.js"></script>
 <script src="Untitled-1_files/libs/quarto-html/tippy.umd.min.js"></script>
@@ -8,7 +8,7 @@
 <link href="Untitled-1_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="Untitled-1_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Untitled-1_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.5.55">
+  <meta name="generator" content="quarto-1.3.450">
 
   <meta name="author" content="👨‍🏫 Jorge Iván Romero Gelvez">
   <meta name="dcterms.date" content="2025-01-01">
@@ -32,7 +32,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -43,7 +43,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -224,8 +224,7 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    padding-bottom: 0.5rem;
-    margin-bottom: 0;
+    margin-bottom: 0.5rem;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -394,7 +393,7 @@
   <script src="Untitled-1_files/libs/quarto-diagram/mermaid-init.js"></script>
   <link href="Untitled-1_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
   <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body class="quarto-light">
@@ -423,9 +422,7 @@
 <ul>
 <li class="fragment"><a href="#/introducción" id="/toc-introducción">Introducción</a></li>
 <li class="fragment"><a href="#/el-dataset" id="/toc-el-dataset">El dataset</a></li>
-<li class="fragment"><a href="#/diccionario-de-variables" id="/toc-diccionario-de-variables">Diccionario de Variables</a></li>
-<li class="fragment"><a href="#/conclusiones" id="/toc-conclusiones">Conclusiones</a></li>
-<li class="fragment"><a href="#/siguientes-pasos" id="/toc-siguientes-pasos">Siguientes Pasos</a></li>
+<li class="fragment"><a href="#/predicciones" id="/toc-predicciones">🔮 Predicciones</a></li>
 </ul>
 </nav>
 </section>
@@ -440,7 +437,7 @@
 <p><strong>“Un buen modelo no solo ajusta bien los datos, sino que también generaliza.”</strong></p>
 </blockquote>
 
-<img data-src="1_bt-E2YcPafjiPbZFDMMmNQ.jpeg" class="quarto-figure quarto-figure-center r-stretch" style="border-radius: 1rem;" alt="Gráfico ilustrando generalización en modelos" width="200"></section>
+<img data-src="1_bt-E2YcPafjiPbZFDMMmNQ.jpeg" alt="Gráfico ilustrando generalización en modelos" width="200" class="r-stretch quarto-figure-center"></section>
 <section id="ajustar-bien-los-datos" class="slide level2">
 <h2>🔧 Ajustar bien los datos</h2>
 <ul>
@@ -456,13 +453,13 @@
 <section id="underfitting" class="slide level2">
 <h2>Underfitting</h2>
 <h3 id="entreno-al-modelo-con-1-sola-raza-de-perro">Entreno al modelo con 1 sola raza de perro</h3>
-<div class="quarto-figure quarto-figure-center">
+<div class="quarto-figure quarto-figure-center" style="border-radius: 1rem;">
 <figure>
-<p><img data-src="ch.jpg" class="quarto-figure quarto-figure-center" style="border-radius: 1rem;" alt="Chihuahua" height="100"></p>
+<p><img data-src="ch.jpg" alt="Chihuahua" height="100"></p>
 </figure>
 </div>
 <ul>
-<li class="fragment">Muestra nueva: ¿Es perro? <img data-src="perro.png" class="quarto-figure quarto-figure-center" style="border-radius: 1rem;" alt="perro" height="60"></li>
+<li class="fragment">Muestra nueva: ¿Es perro? <img data-src="perro.png" style="border-radius: 1rem;" alt="perro" data-fig-align="center" height="60"></li>
 <li class="fragment">❌ <strong>NO lo reconoce</strong></li>
 <li class="fragment">🔎 La máquina <strong>falla en generalizar</strong> porque no ha visto suficientes ejemplos.</li>
 </ul>
@@ -473,13 +470,13 @@
 <section id="overfitting" class="slide level2">
 <h2>Overfitting</h2>
 <h3 id="entreno-al-modelo-con-10-razas-de-perro-color-marrón">Entreno al modelo con 10 razas de perro color marrón</h3>
-<div class="quarto-figure quarto-figure-center">
+<div class="quarto-figure quarto-figure-center" style="border-radius: 1rem;">
 <figure>
-<p><img data-src="several.png" class="quarto-figure quarto-figure-center" style="border-radius: 1rem;" alt="varios" data-heiht="100"></p>
+<p><img data-src="several.png" alt="varios" data-heiht="100"></p>
 </figure>
 </div>
 <ul>
-<li class="fragment">Muestra nueva: ¿Es perro? <img data-src="perro.png" class="quarto-figure quarto-figure-center" style="border-radius: 1rem;" alt="perro" height="60"></li>
+<li class="fragment">Muestra nueva: ¿Es perro? <img data-src="perro.png" style="border-radius: 1rem;" alt="perro" data-fig-align="center" height="60"></li>
 <li class="fragment">❌ <strong>NO lo reconoce</strong></li>
 <li class="fragment">⚠️ El modelo está <strong>demasiado ajustado</strong> a los datos de entrenamiento.</li>
 </ul>
@@ -500,7 +497,7 @@
 </section>
 <section id="comparación-ajustar-vs.-generalizar" class="slide level2">
 <h2>🆚 Comparación: Ajustar vs.&nbsp;Generalizar</h2>
-<table class="caption-top">
+<table>
 <colgroup>
 <col style="width: 25%">
 <col style="width: 32%">
@@ -543,8 +540,7 @@
 <p>🎓 <em>El arte del aprendizaje automático es encontrar el punto justo entre sesgo y varianza.</em></p>
 </blockquote>
 
-<img data-src="balance.gif" id="fig-surus" class="r-stretch quarto-figure-center"><p class="caption">
-</p></section>
+<img data-src="balance.gif" id="fig-surus" class="r-stretch"></section>
 <section id="retomando" class="slide level2">
 <h2>📌 RETOMANDO</h2>
 <ul>
@@ -555,10 +551,9 @@
 <li class="fragment">🎯 <strong>Objetivo:</strong> lograr un modelo que generalice bien</li>
 <li class="fragment">💡 El mejor modelo no es el más complejo, sino el que predice con <strong>equilibrio</strong> y <strong>claridad.</strong></li>
 </ul>
-<div class="cell" data-reveal="true" data-fig-width="6.5%%|" data-layout-align="default">
+<div class="cell" data-reveal="true" data-fig-width="6.5%%|">
 <div class="cell-output-display">
 <div>
-<p></p><figure class=""><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart LR
     A["📥 Dataset limpio (Boston.csv)"] --&gt; B["📊 Modelo base\nRegresión Lineal"]
@@ -573,7 +568,6 @@
 
 </pre>
 </div>
-<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -581,7 +575,7 @@
 <section id="comparación-de-técnicas" class="slide level2">
 <h2>🆚 Comparación de Técnicas</h2>
 <div class="small">
-<table class="caption-top">
+<table>
 <colgroup>
 <col style="width: 6%">
 <col style="width: 19%">
@@ -643,7 +637,7 @@
 </section>
 <section id="descripción-del-dataset-1" class="slide level2 scrollable smaller">
 <h2>2️⃣ Descripción del Dataset</h2>
-<table class="caption-top">
+<table>
 <colgroup>
 <col style="width: 43%">
 <col style="width: 56%">
@@ -714,24 +708,40 @@
 </tbody>
 </table>
 </section>
+<section id="librerías-necesarias" class="slide level2">
+<h2>📚 Librerías necesarias</h2>
+<p>A continuación cargamos las librerías básicas para análisis de datos (<code>pandas</code>, <code>numpy</code>), creación y evaluación del modelo de regresión (<code>scikit-learn</code>).</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd  <span class="co"># Manipulación de datos</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> numpy <span class="im">as</span> np   <span class="co"># Operaciones matemáticas</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression  <span class="co"># Modelo Lineal</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score, mean_squared_error  <span class="co"># Métricas de rendimiento</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt  <span class="co"># Gráficos</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 <section id="carga-del-dataset" class="slide level2 scrollable">
-<h2>Carga del Dataset</h2>
-<div id="17e08bf8" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-3"><a href=""></a></span>
-<span id="cb1-4"><a href=""></a><span class="co"># Cargar datos desde CMU</span></span>
-<span id="cb1-5"><a href=""></a>url <span class="op">=</span> <span class="st">"http://lib.stat.cmu.edu/datasets/boston"</span></span>
-<span id="cb1-6"><a href=""></a>raw_df <span class="op">=</span> pd.read_csv(url, sep<span class="op">=</span><span class="st">"\s+"</span>, skiprows<span class="op">=</span><span class="dv">22</span>, header<span class="op">=</span><span class="va">None</span>)</span>
-<span id="cb1-7"><a href=""></a>data <span class="op">=</span> np.hstack([raw_df.values[::<span class="dv">2</span>, :], raw_df.values[<span class="dv">1</span>::<span class="dv">2</span>, :<span class="dv">2</span>]])</span>
-<span id="cb1-8"><a href=""></a>target <span class="op">=</span> raw_df.values[<span class="dv">1</span>::<span class="dv">2</span>, <span class="dv">2</span>]</span>
-<span id="cb1-9"><a href=""></a></span>
-<span id="cb1-10"><a href=""></a>columns <span class="op">=</span> [<span class="st">'CRIM'</span>, <span class="st">'ZN'</span>, <span class="st">'INDUS'</span>, <span class="st">'CHAS'</span>, <span class="st">'NOX'</span>, <span class="st">'RM'</span>,</span>
-<span id="cb1-11"><a href=""></a>           <span class="st">'AGE'</span>, <span class="st">'DIS'</span>, <span class="st">'RAD'</span>, <span class="st">'TAX'</span>, <span class="st">'PTRATIO'</span>, <span class="st">'B'</span>, <span class="st">'LSTAT'</span>]</span>
-<span id="cb1-12"><a href=""></a>X <span class="op">=</span> pd.DataFrame(data, columns<span class="op">=</span>columns)</span>
-<span id="cb1-13"><a href=""></a>y <span class="op">=</span> pd.Series(target, name<span class="op">=</span><span class="st">'MEDV'</span>)</span>
-<span id="cb1-14"><a href=""></a>X.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="1">
+<h2>📥 Carga del Dataset</h2>
+<p>Cargamos el dataset que contiene información socioeconómica sobre viviendas.</p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># Cargar los datos desde la URL</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>url <span class="op">=</span> <span class="st">"http://lib.stat.cmu.edu/datasets/boston"</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>raw_df <span class="op">=</span> pd.read_csv(url, sep<span class="op">=</span><span class="st">"\s+"</span>, skiprows<span class="op">=</span><span class="dv">22</span>, header<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb2-7"><a href="#cb2-7"></a></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co"># Combinar las filas pares e impares en un único arreglo de datos</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>data <span class="op">=</span> np.hstack([raw_df.values[::<span class="dv">2</span>, :], raw_df.values[<span class="dv">1</span>::<span class="dv">2</span>, :<span class="dv">2</span>]])</span>
+<span id="cb2-10"><a href="#cb2-10"></a>target <span class="op">=</span> raw_df.values[<span class="dv">1</span>::<span class="dv">2</span>, <span class="dv">2</span>]</span>
+<span id="cb2-11"><a href="#cb2-11"></a></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="co"># Nombres de columnas</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a>columns <span class="op">=</span> [<span class="st">'CRIM'</span>, <span class="st">'ZN'</span>, <span class="st">'INDUS'</span>, <span class="st">'CHAS'</span>, <span class="st">'NOX'</span>, <span class="st">'RM'</span>,</span>
+<span id="cb2-14"><a href="#cb2-14"></a>           <span class="st">'AGE'</span>, <span class="st">'DIS'</span>, <span class="st">'RAD'</span>, <span class="st">'TAX'</span>, <span class="st">'PTRATIO'</span>, <span class="st">'B'</span>, <span class="st">'LSTAT'</span>, <span class="st">'MEDV'</span>]</span>
+<span id="cb2-15"><a href="#cb2-15"></a></span>
+<span id="cb2-16"><a href="#cb2-16"></a><span class="co"># Crear el DataFrame final</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a>boston_df <span class="op">=</span> pd.DataFrame(np.column_stack([data, target]), columns<span class="op">=</span>columns)</span>
+<span id="cb2-18"><a href="#cb2-18"></a></span>
+<span id="cb2-19"><a href="#cb2-19"></a><span class="co"># Visualizar las primeras filas</span></span>
+<span id="cb2-20"><a href="#cb2-20"></a>boston_df.tail()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="81">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -747,7 +757,7 @@
     }
 </style>
 
-<table class="dataframe caption-top" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header" style="text-align: right;">
 <th data-quarto-table-cell-role="th"></th>
@@ -764,88 +774,758 @@
 <th data-quarto-table-cell-role="th">PTRATIO</th>
 <th data-quarto-table-cell-role="th">B</th>
 <th data-quarto-table-cell-role="th">LSTAT</th>
+<th data-quarto-table-cell-role="th">MEDV</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">501</td>
+<td>0.06263</td>
+<td>0.0</td>
+<td>11.93</td>
+<td>0.0</td>
+<td>0.573</td>
+<td>6.593</td>
+<td>69.1</td>
+<td>2.4786</td>
+<td>1.0</td>
+<td>273.0</td>
+<td>21.0</td>
+<td>391.99</td>
+<td>9.67</td>
+<td>22.4</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">502</td>
+<td>0.04527</td>
+<td>0.0</td>
+<td>11.93</td>
+<td>0.0</td>
+<td>0.573</td>
+<td>6.120</td>
+<td>76.7</td>
+<td>2.2875</td>
+<td>1.0</td>
+<td>273.0</td>
+<td>21.0</td>
+<td>396.90</td>
+<td>9.08</td>
+<td>20.6</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">503</td>
+<td>0.06076</td>
+<td>0.0</td>
+<td>11.93</td>
+<td>0.0</td>
+<td>0.573</td>
+<td>6.976</td>
+<td>91.0</td>
+<td>2.1675</td>
+<td>1.0</td>
+<td>273.0</td>
+<td>21.0</td>
+<td>396.90</td>
+<td>5.64</td>
+<td>23.9</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">504</td>
+<td>0.10959</td>
+<td>0.0</td>
+<td>11.93</td>
+<td>0.0</td>
+<td>0.573</td>
+<td>6.794</td>
+<td>89.3</td>
+<td>2.3889</td>
+<td>1.0</td>
+<td>273.0</td>
+<td>21.0</td>
+<td>393.45</td>
+<td>6.48</td>
+<td>22.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">505</td>
+<td>0.04741</td>
+<td>0.0</td>
+<td>11.93</td>
+<td>0.0</td>
+<td>0.573</td>
+<td>6.030</td>
+<td>80.8</td>
+<td>2.5050</td>
+<td>1.0</td>
+<td>273.0</td>
+<td>21.0</td>
+<td>396.90</td>
+<td>7.88</td>
+<td>11.9</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="división-manual-del-dataset" class="slide level2">
+<h2>🔍 División manual del dataset</h2>
+<p>Realizamos una división secuencial, tomando el primer 80% para entrenar y el siguiente 20% para probar el modelo.</p>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>n <span class="op">=</span> <span class="bu">len</span>(boston_df)</span>
+<span id="cb3-2"><a href="#cb3-2"></a>n_train <span class="op">=</span> <span class="bu">int</span>(n <span class="op">*</span> <span class="fl">0.8</span>)</span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a>X <span class="op">=</span> boston_df.drop(columns<span class="op">=</span>[<span class="st">'MEDV'</span>])</span>
+<span id="cb3-5"><a href="#cb3-5"></a>y <span class="op">=</span> boston_df[<span class="st">'MEDV'</span>]</span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a>X_train <span class="op">=</span> X.iloc[:n_train]</span>
+<span id="cb3-8"><a href="#cb3-8"></a>y_train <span class="op">=</span> y.iloc[:n_train]</span>
+<span id="cb3-9"><a href="#cb3-9"></a></span>
+<span id="cb3-10"><a href="#cb3-10"></a>X_test <span class="op">=</span> X.iloc[n_train:]</span>
+<span id="cb3-11"><a href="#cb3-11"></a>y_test <span class="op">=</span> y.iloc[n_train:]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="modelo-de-regresión-lineal" class="slide level2">
+<h2>📐 Modelo de Regresión Lineal</h2>
+<p>El modelo de regresión lineal busca minimizar la función:</p>
+<p><span class="math display">\[\hat{y} = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_n x_n\]</span></p>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score, mean_squared_error</span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co"># Modelo para entrenamiento</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>model_train <span class="op">=</span> LinearRegression()</span>
+<span id="cb4-7"><a href="#cb4-7"></a>model_train.fit(X_train, y_train)</span>
+<span id="cb4-8"><a href="#cb4-8"></a></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="co"># Modelo exclusivo para comparación (prueba)</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>model_test <span class="op">=</span> LinearRegression()</span>
+<span id="cb4-11"><a href="#cb4-11"></a>model_test.fit(X_test, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="83">
+<style>#sk-container-id-9 {
+  /* Definition of color scheme common for light and dark mode */
+  --sklearn-color-text: #000;
+  --sklearn-color-text-muted: #666;
+  --sklearn-color-line: gray;
+  /* Definition of color scheme for unfitted estimators */
+  --sklearn-color-unfitted-level-0: #fff5e6;
+  --sklearn-color-unfitted-level-1: #f6e4d2;
+  --sklearn-color-unfitted-level-2: #ffe0b3;
+  --sklearn-color-unfitted-level-3: chocolate;
+  /* Definition of color scheme for fitted estimators */
+  --sklearn-color-fitted-level-0: #f0f8ff;
+  --sklearn-color-fitted-level-1: #d4ebff;
+  --sklearn-color-fitted-level-2: #b3dbfd;
+  --sklearn-color-fitted-level-3: cornflowerblue;
+
+  /* Specific color for light theme */
+  --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, white)));
+  --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-icon: #696969;
+
+  @media (prefers-color-scheme: dark) {
+    /* Redefinition of color scheme for dark theme */
+    --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, #111)));
+    --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-icon: #878787;
+  }
+}
+
+#sk-container-id-9 {
+  color: var(--sklearn-color-text);
+}
+
+#sk-container-id-9 pre {
+  padding: 0;
+}
+
+#sk-container-id-9 input.sk-hidden--visually {
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+#sk-container-id-9 div.sk-dashed-wrapped {
+  border: 1px dashed var(--sklearn-color-line);
+  margin: 0 0.4em 0.5em 0.4em;
+  box-sizing: border-box;
+  padding-bottom: 0.4em;
+  background-color: var(--sklearn-color-background);
+}
+
+#sk-container-id-9 div.sk-container {
+  /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
+     but bootstrap.min.css set `[hidden] { display: none !important; }`
+     so we also need the `!important` here to be able to override the
+     default hidden behavior on the sphinx rendered scikit-learn.org.
+     See: https://github.com/scikit-learn/scikit-learn/issues/21755 */
+  display: inline-block !important;
+  position: relative;
+}
+
+#sk-container-id-9 div.sk-text-repr-fallback {
+  display: none;
+}
+
+div.sk-parallel-item,
+div.sk-serial,
+div.sk-item {
+  /* draw centered vertical line to link estimators */
+  background-image: linear-gradient(var(--sklearn-color-text-on-default-background), var(--sklearn-color-text-on-default-background));
+  background-size: 2px 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* Parallel-specific style estimator block */
+
+#sk-container-id-9 div.sk-parallel-item::after {
+  content: "";
+  width: 100%;
+  border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
+  flex-grow: 1;
+}
+
+#sk-container-id-9 div.sk-parallel {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background-color: var(--sklearn-color-background);
+  position: relative;
+}
+
+#sk-container-id-9 div.sk-parallel-item {
+  display: flex;
+  flex-direction: column;
+}
+
+#sk-container-id-9 div.sk-parallel-item:first-child::after {
+  align-self: flex-end;
+  width: 50%;
+}
+
+#sk-container-id-9 div.sk-parallel-item:last-child::after {
+  align-self: flex-start;
+  width: 50%;
+}
+
+#sk-container-id-9 div.sk-parallel-item:only-child::after {
+  width: 0;
+}
+
+/* Serial-specific style estimator block */
+
+#sk-container-id-9 div.sk-serial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--sklearn-color-background);
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+
+/* Toggleable style: style used for estimator/Pipeline/ColumnTransformer box that is
+clickable and can be expanded/collapsed.
+- Pipeline and ColumnTransformer use this feature and define the default style
+- Estimators will overwrite some part of the style using the `sk-estimator` class
+*/
+
+/* Pipeline and ColumnTransformer style (default) */
+
+#sk-container-id-9 div.sk-toggleable {
+  /* Default theme specific background. It is overwritten whether we have a
+  specific estimator or a Pipeline/ColumnTransformer */
+  background-color: var(--sklearn-color-background);
+}
+
+/* Toggleable label */
+#sk-container-id-9 label.sk-toggleable__label {
+  cursor: pointer;
+  display: flex;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 0.5em;
+  box-sizing: border-box;
+  text-align: center;
+  align-items: start;
+  justify-content: space-between;
+  gap: 0.5em;
+}
+
+#sk-container-id-9 label.sk-toggleable__label .caption {
+  font-size: 0.6rem;
+  font-weight: lighter;
+  color: var(--sklearn-color-text-muted);
+}
+
+#sk-container-id-9 label.sk-toggleable__label-arrow:before {
+  /* Arrow on the left of the label */
+  content: "▸";
+  float: left;
+  margin-right: 0.25em;
+  color: var(--sklearn-color-icon);
+}
+
+#sk-container-id-9 label.sk-toggleable__label-arrow:hover:before {
+  color: var(--sklearn-color-text);
+}
+
+/* Toggleable content - dropdown */
+
+#sk-container-id-9 div.sk-toggleable__content {
+  max-height: 0;
+  max-width: 0;
+  overflow: hidden;
+  text-align: left;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-9 div.sk-toggleable__content.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-9 div.sk-toggleable__content pre {
+  margin: 0.2em;
+  border-radius: 0.25em;
+  color: var(--sklearn-color-text);
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-9 div.sk-toggleable__content.fitted pre {
+  /* unfitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-9 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+  /* Expand drop-down */
+  max-height: 200px;
+  max-width: 100%;
+  overflow: auto;
+}
+
+#sk-container-id-9 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+  content: "▾";
+}
+
+/* Pipeline/ColumnTransformer-specific style */
+
+#sk-container-id-9 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-9 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator-specific style */
+
+/* Colorize estimator box */
+#sk-container-id-9 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-9 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+#sk-container-id-9 div.sk-label label.sk-toggleable__label,
+#sk-container-id-9 div.sk-label label {
+  /* The background is the default theme color */
+  color: var(--sklearn-color-text-on-default-background);
+}
+
+/* On hover, darken the color of the background */
+#sk-container-id-9 div.sk-label:hover label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+/* Label box, darken color on hover, fitted */
+#sk-container-id-9 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator label */
+
+#sk-container-id-9 div.sk-label label {
+  font-family: monospace;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 1.2em;
+}
+
+#sk-container-id-9 div.sk-label-container {
+  text-align: center;
+}
+
+/* Estimator-specific */
+#sk-container-id-9 div.sk-estimator {
+  font-family: monospace;
+  border: 1px dotted var(--sklearn-color-border-box);
+  border-radius: 0.25em;
+  box-sizing: border-box;
+  margin-bottom: 0.5em;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-9 div.sk-estimator.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+/* on hover */
+#sk-container-id-9 div.sk-estimator:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-9 div.sk-estimator.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Specification for estimator info (e.g. "i" and "?") */
+
+/* Common style for "i" and "?" */
+
+.sk-estimator-doc-link,
+a:link.sk-estimator-doc-link,
+a:visited.sk-estimator-doc-link {
+  float: right;
+  font-size: smaller;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1em;
+  height: 1em;
+  width: 1em;
+  text-decoration: none !important;
+  margin-left: 0.5em;
+  text-align: center;
+  /* unfitted */
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+  color: var(--sklearn-color-unfitted-level-1);
+}
+
+.sk-estimator-doc-link.fitted,
+a:link.sk-estimator-doc-link.fitted,
+a:visited.sk-estimator-doc-link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+div.sk-estimator:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover,
+div.sk-label-container:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+div.sk-estimator.fitted:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover,
+div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+/* Span, style for the box shown on hovering the info icon */
+.sk-estimator-doc-link span {
+  display: none;
+  z-index: 9999;
+  position: relative;
+  font-weight: normal;
+  right: .2ex;
+  padding: .5ex;
+  margin: .5ex;
+  width: min-content;
+  min-width: 20ex;
+  max-width: 50ex;
+  color: var(--sklearn-color-text);
+  box-shadow: 2pt 2pt 4pt #999;
+  /* unfitted */
+  background: var(--sklearn-color-unfitted-level-0);
+  border: .5pt solid var(--sklearn-color-unfitted-level-3);
+}
+
+.sk-estimator-doc-link.fitted span {
+  /* fitted */
+  background: var(--sklearn-color-fitted-level-0);
+  border: var(--sklearn-color-fitted-level-3);
+}
+
+.sk-estimator-doc-link:hover span {
+  display: block;
+}
+
+/* "?"-specific style due to the `<a>` HTML tag */
+
+#sk-container-id-9 a.estimator_doc_link {
+  float: right;
+  font-size: 1rem;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1rem;
+  height: 1rem;
+  width: 1rem;
+  text-decoration: none;
+  /* unfitted */
+  color: var(--sklearn-color-unfitted-level-1);
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+}
+
+#sk-container-id-9 a.estimator_doc_link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+#sk-container-id-9 a.estimator_doc_link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+#sk-container-id-9 a.estimator_doc_link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+}
+</style><div id="sk-container-id-9" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LinearRegression()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-9" type="checkbox" checked=""><label for="sk-estimator-id-9" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LinearRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.linear_model.LinearRegression.html">?<span>Documentation for LinearRegression</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>LinearRegression()</pre></div> </div></div></div></div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="predicciones" class="title-slide slide level1 center">
+<h1>🔮 Predicciones</h1>
+<p>Generamos predicciones con ambos modelos.</p>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>y_pred_train <span class="op">=</span> model_train.predict(X_train)</span>
+<span id="cb5-2"><a href="#cb5-2"></a>y_pred_test <span class="op">=</span> model_train.predict(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="métricas-de-rendimiento" class="slide level2 scrollable">
+<h2>📈 Métricas de rendimiento</h2>
+<p>Las métricas usadas son:</p>
+<ul>
+<li class="fragment"><strong>R²</strong> (Coeficiente de determinación):</li>
+</ul>
+<p><span class="math display">\[R^2 = 1 - \frac{\sum{(y - \hat{y})^2}}{\sum{(y - \bar{y})^2}}\]</span></p>
+<ul>
+<li class="fragment"><strong>RMSE</strong> (Raíz del error cuadrático medio):</li>
+</ul>
+<p><span class="math display">\[RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{y}_i)^2}\]</span></p>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>r2_train <span class="op">=</span> r2_score(y_train, y_pred_train)</span>
+<span id="cb6-2"><a href="#cb6-2"></a>rmse_train <span class="op">=</span> np.sqrt(mean_squared_error(y_train, y_pred_train))</span>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4"></a>r2_test <span class="op">=</span> r2_score(y_test, y_pred_test)</span>
+<span id="cb6-5"><a href="#cb6-5"></a>rmse_test <span class="op">=</span> np.sqrt(mean_squared_error(y_test, y_pred_test))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="resultados-del-modelo" class="slide level2">
+<h2>🖥️ Resultados del modelo</h2>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>resultados <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb7-2"><a href="#cb7-2"></a>    <span class="st">"Conjunto"</span>: [<span class="st">"Entrenamiento"</span>, <span class="st">"Prueba"</span>],</span>
+<span id="cb7-3"><a href="#cb7-3"></a>    <span class="st">"R²"</span>: [r2_train, r2_test],</span>
+<span id="cb7-4"><a href="#cb7-4"></a>    <span class="st">"RMSE"</span>: [rmse_train, rmse_test]</span>
+<span id="cb7-5"><a href="#cb7-5"></a>})</span>
+<span id="cb7-6"><a href="#cb7-6"></a></span>
+<span id="cb7-7"><a href="#cb7-7"></a>display(resultados)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+<table class="dataframe" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header" style="text-align: right;">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Conjunto</th>
+<th data-quarto-table-cell-role="th">R²</th>
+<th data-quarto-table-cell-role="th">RMSE</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
-<td>0.00632</td>
-<td>18.0</td>
-<td>2.31</td>
-<td>0.0</td>
-<td>0.538</td>
-<td>6.575</td>
-<td>65.2</td>
-<td>4.0900</td>
-<td>1.0</td>
-<td>296.0</td>
-<td>15.3</td>
-<td>396.90</td>
-<td>4.98</td>
+<td>Entrenamiento</td>
+<td>0.733756</td>
+<td>4.772670</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
-<td>0.02731</td>
-<td>0.0</td>
-<td>7.07</td>
-<td>0.0</td>
-<td>0.469</td>
-<td>6.421</td>
-<td>78.9</td>
-<td>4.9671</td>
-<td>2.0</td>
-<td>242.0</td>
-<td>17.8</td>
-<td>396.90</td>
-<td>9.14</td>
+<td>Prueba</td>
+<td>-0.219853</td>
+<td>5.727116</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Estos resultados indican un buen desempeño en entrenamiento, pero una caída significativa en la prueba sugiere sobreajuste.</p>
+</section>
+<section id="diagnóstico" class="slide level2">
+<h2>📋 Diagnóstico</h2>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="cf">if</span> r2_train <span class="op">&gt;</span> r2_test <span class="kw">and</span> <span class="bu">abs</span>(r2_train <span class="op">-</span> r2_test) <span class="op">&gt;</span> <span class="fl">0.1</span>:</span>
+<span id="cb8-2"><a href="#cb8-2"></a>    diagnostico <span class="op">=</span> <span class="st">"⚠️ Posible sobreajuste: pierde rendimiento en prueba."</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="cf">elif</span> r2_train <span class="op">&lt;</span> <span class="fl">0.5</span> <span class="kw">and</span> r2_test <span class="op">&lt;</span> <span class="fl">0.5</span>:</span>
+<span id="cb8-4"><a href="#cb8-4"></a>    diagnostico <span class="op">=</span> <span class="st">"⚠️ Subajuste: no captura bien patrones."</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="cf">else</span>:</span>
+<span id="cb8-6"><a href="#cb8-6"></a>    diagnostico <span class="op">=</span> <span class="st">"✅ Buen ajuste: generaliza bien."</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="bu">print</span>(diagnostico)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>⚠️ Posible sobreajuste: pierde rendimiento en prueba.</code></pre>
+</div>
+</div>
+<p>El diagnóstico confirma que existe un problema de sobreajuste.</p>
+</section>
+<section id="coeficientes-entrenamiento" class="slide level2">
+<h2>🔖 Coeficientes (Entrenamiento)</h2>
+<p>Los coeficientes indican cuánto influye cada variable en la predicción.</p>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>coef_train_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb10-2"><a href="#cb10-2"></a>    <span class="st">"Variable"</span>: X.columns,</span>
+<span id="cb10-3"><a href="#cb10-3"></a>    <span class="st">"Coeficiente"</span>: model_train.coef_</span>
+<span id="cb10-4"><a href="#cb10-4"></a>})</span>
+<span id="cb10-5"><a href="#cb10-5"></a></span>
+<span id="cb10-6"><a href="#cb10-6"></a>coef_train_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="88">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+<table class="dataframe" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header" style="text-align: right;">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Variable</th>
+<th data-quarto-table-cell-role="th">Coeficiente</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>CRIM</td>
+<td>-0.202135</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>ZN</td>
+<td>0.044128</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
-<td>0.02729</td>
-<td>0.0</td>
-<td>7.07</td>
-<td>0.0</td>
-<td>0.469</td>
-<td>7.185</td>
-<td>61.1</td>
-<td>4.9671</td>
-<td>2.0</td>
-<td>242.0</td>
-<td>17.8</td>
-<td>392.83</td>
-<td>4.03</td>
+<td>INDUS</td>
+<td>0.052674</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
-<td>0.03237</td>
-<td>0.0</td>
-<td>2.18</td>
-<td>0.0</td>
-<td>0.458</td>
-<td>6.998</td>
-<td>45.8</td>
-<td>6.0622</td>
-<td>3.0</td>
-<td>222.0</td>
-<td>18.7</td>
-<td>394.63</td>
-<td>2.94</td>
+<td>CHAS</td>
+<td>1.884743</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
-<td>0.06905</td>
-<td>0.0</td>
-<td>2.18</td>
-<td>0.0</td>
-<td>0.458</td>
-<td>7.147</td>
-<td>54.2</td>
-<td>6.0622</td>
-<td>3.0</td>
-<td>222.0</td>
-<td>18.7</td>
-<td>396.90</td>
-<td>5.33</td>
+<td>NOX</td>
+<td>-14.928149</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RM</td>
+<td>4.760387</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>AGE</td>
+<td>0.002887</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>DIS</td>
+<td>-1.300253</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>RAD</td>
+<td>0.461662</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>TAX</td>
+<td>-0.015543</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>PTRATIO</td>
+<td>-0.811632</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>B</td>
+<td>-0.001972</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LSTAT</td>
+<td>-0.532273</td>
 </tr>
 </tbody>
 </table>
@@ -853,394 +1533,129 @@
 </div>
 </div>
 </div>
+<p>Observamos que variables como <code>RM</code> (habitaciones promedio) tienen fuerte impacto positivo, mientras que <code>NOX</code> (contaminación) tiene un impacto negativo significativo.</p>
 </section>
-<section id="división-y-modelo" class="slide level2">
-<h2>División y Modelo</h2>
-<div id="2dd1f936" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb2-2"><a href=""></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb2-3"><a href=""></a></span>
-<span id="cb2-4"><a href=""></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb2-5"><a href=""></a>model <span class="op">=</span> LinearRegression()</span>
-<span id="cb2-6"><a href=""></a>model.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
-<style>#sk-container-id-1 {color: black;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LinearRegression()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked=""><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">LinearRegression</label><div class="sk-toggleable__content"><pre>LinearRegression()</pre></div></div></div></div></div>
-</div>
-</div>
-</section>
-<section id="evaluación-del-modelo" class="slide level2">
-<h2>Evaluación del Modelo</h2>
-<div id="d632ea2f" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score, mean_squared_error</span>
-<span id="cb3-2"><a href=""></a></span>
-<span id="cb3-3"><a href=""></a>y_pred_train <span class="op">=</span> model.predict(X_train)</span>
-<span id="cb3-4"><a href=""></a>y_pred_test <span class="op">=</span> model.predict(X_test)</span>
-<span id="cb3-5"><a href=""></a></span>
-<span id="cb3-6"><a href=""></a>r2_train <span class="op">=</span> r2_score(y_train, y_pred_train)</span>
-<span id="cb3-7"><a href=""></a>r2_test <span class="op">=</span> r2_score(y_test, y_pred_test)</span>
-<span id="cb3-8"><a href=""></a>mse_train <span class="op">=</span> mean_squared_error(y_train, y_pred_train)</span>
-<span id="cb3-9"><a href=""></a>mse_test <span class="op">=</span> mean_squared_error(y_test, y_pred_test)</span>
-<span id="cb3-10"><a href=""></a></span>
-<span id="cb3-11"><a href=""></a>r2_train, mse_train, r2_test, mse_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
-<pre><code>(0.7508856358979673,
- 21.641412753226312,
- 0.6687594935356307,
- 24.291119474973613)</code></pre>
-</div>
-</div>
-</section>
-<section id="análisis-estadístico" class="slide level2">
-<h2>Análisis Estadístico</h2>
-<div id="6fd68bec" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
-<span id="cb5-2"><a href=""></a></span>
-<span id="cb5-3"><a href=""></a>X_train_sm <span class="op">=</span> sm.add_constant(X_train)</span>
-<span id="cb5-4"><a href=""></a>ols_model <span class="op">=</span> sm.OLS(y_train, X_train_sm).fit()</span>
-<span id="cb5-5"><a href=""></a>ols_model.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
-<table class="simpletable caption-top" data-quarto-postprocess="true">
-<caption>OLS Regression Results</caption>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Dep. Variable:</td>
-<td>MEDV</td>
-<td data-quarto-table-cell-role="th">R-squared:</td>
-<td>0.751</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Model:</td>
-<td>OLS</td>
-<td data-quarto-table-cell-role="th">Adj. R-squared:</td>
-<td>0.743</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Method:</td>
-<td>Least Squares</td>
-<td data-quarto-table-cell-role="th">F-statistic:</td>
-<td>90.43</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Date:</td>
-<td>Wed, 02 Apr 2025</td>
-<td data-quarto-table-cell-role="th">Prob (F-statistic):</td>
-<td>6.21e-109</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Time:</td>
-<td>17:18:46</td>
-<td data-quarto-table-cell-role="th">Log-Likelihood:</td>
-<td>-1194.3</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">No. Observations:</td>
-<td>404</td>
-<td data-quarto-table-cell-role="th">AIC:</td>
-<td>2417.</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Df Residuals:</td>
-<td>390</td>
-<td data-quarto-table-cell-role="th">BIC:</td>
-<td>2473.</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Df Model:</td>
-<td>13</td>
-<td data-quarto-table-cell-role="th"></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Covariance Type:</td>
-<td>nonrobust</td>
-<td data-quarto-table-cell-role="th"></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-
-
-<table class="simpletable caption-top" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td></td>
-<td data-quarto-table-cell-role="th">coef</td>
-<td data-quarto-table-cell-role="th">std err</td>
-<td data-quarto-table-cell-role="th">t</td>
-<td data-quarto-table-cell-role="th">P&gt;|t|</td>
-<td data-quarto-table-cell-role="th">[0.025</td>
-<td data-quarto-table-cell-role="th">0.975]</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">const</td>
-<td>30.2468</td>
-<td>5.677</td>
-<td>5.328</td>
-<td>0.000</td>
-<td>19.086</td>
-<td>41.408</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">CRIM</td>
-<td>-0.1131</td>
-<td>0.035</td>
-<td>-3.250</td>
-<td>0.001</td>
-<td>-0.181</td>
-<td>-0.045</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">ZN</td>
-<td>0.0301</td>
-<td>0.016</td>
-<td>1.882</td>
-<td>0.061</td>
-<td>-0.001</td>
-<td>0.062</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">INDUS</td>
-<td>0.0404</td>
-<td>0.067</td>
-<td>0.599</td>
-<td>0.549</td>
-<td>-0.092</td>
-<td>0.173</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">CHAS</td>
-<td>2.7844</td>
-<td>0.956</td>
-<td>2.914</td>
-<td>0.004</td>
-<td>0.905</td>
-<td>4.663</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">NOX</td>
-<td>-17.2026</td>
-<td>4.236</td>
-<td>-4.061</td>
-<td>0.000</td>
-<td>-25.531</td>
-<td>-8.874</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">RM</td>
-<td>4.4388</td>
-<td>0.464</td>
-<td>9.567</td>
-<td>0.000</td>
-<td>3.527</td>
-<td>5.351</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">AGE</td>
-<td>-0.0063</td>
-<td>0.015</td>
-<td>-0.432</td>
-<td>0.666</td>
-<td>-0.035</td>
-<td>0.022</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">DIS</td>
-<td>-1.4479</td>
-<td>0.226</td>
-<td>-6.408</td>
-<td>0.000</td>
-<td>-1.892</td>
-<td>-1.004</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">RAD</td>
-<td>0.2624</td>
-<td>0.076</td>
-<td>3.454</td>
-<td>0.001</td>
-<td>0.113</td>
-<td>0.412</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">TAX</td>
-<td>-0.0106</td>
-<td>0.004</td>
-<td>-2.508</td>
-<td>0.013</td>
-<td>-0.019</td>
-<td>-0.002</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">PTRATIO</td>
-<td>-0.9155</td>
-<td>0.144</td>
-<td>-6.357</td>
-<td>0.000</td>
-<td>-1.199</td>
-<td>-0.632</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">B</td>
-<td>0.0124</td>
-<td>0.003</td>
-<td>4.166</td>
-<td>0.000</td>
-<td>0.007</td>
-<td>0.018</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">LSTAT</td>
-<td>-0.5086</td>
-<td>0.056</td>
-<td>-9.133</td>
-<td>0.000</td>
-<td>-0.618</td>
-<td>-0.399</td>
-</tr>
-</tbody>
-</table>
-
-
-<table class="simpletable caption-top" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Omnibus:</td>
-<td>133.052</td>
-<td data-quarto-table-cell-role="th">Durbin-Watson:</td>
-<td>2.114</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Prob(Omnibus):</td>
-<td>0.000</td>
-<td data-quarto-table-cell-role="th">Jarque-Bera (JB):</td>
-<td>579.817</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Skew:</td>
-<td>1.379</td>
-<td data-quarto-table-cell-role="th">Prob(JB):</td>
-<td>1.24e-126</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Kurtosis:</td>
-<td>8.181</td>
-<td data-quarto-table-cell-role="th">Cond. No.</td>
-<td>1.49e+04</td>
-</tr>
-</tbody>
-</table>
-<br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br>[2] The condition number is large, 1.49e+04. This might indicate that there are<br>strong multicollinearity or other numerical problems.
-</div>
-</div>
-</section>
-<section class="slide level2">
-
-</section></section>
-<section>
-<section id="diccionario-de-variables" class="title-slide slide level1 center">
-<h1>Diccionario de Variables</h1>
-<div id="9a4cbe83" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a>descripcion_variables <span class="op">=</span> {</span>
-<span id="cb6-2"><a href=""></a>    <span class="st">'CRIM'</span>: <span class="st">'CRIM (Tasa criminalidad per cápita)'</span>,</span>
-<span id="cb6-3"><a href=""></a>    <span class="st">'ZN'</span>: <span class="st">'ZN (% terrenos residenciales &gt; 25,000 pies²)'</span>,</span>
-<span id="cb6-4"><a href=""></a>    <span class="st">'INDUS'</span>: <span class="st">'INDUS (% tierra para negocios no minoristas)'</span>,</span>
-<span id="cb6-5"><a href=""></a>    <span class="st">'CHAS'</span>: <span class="st">'CHAS (Río Charles, 1=sí)'</span>,</span>
-<span id="cb6-6"><a href=""></a>    <span class="st">'NOX'</span>: <span class="st">'NOX (Contaminación del aire, NOx)'</span>,</span>
-<span id="cb6-7"><a href=""></a>    <span class="st">'RM'</span>: <span class="st">'RM (Habitaciones promedio por casa)'</span>,</span>
-<span id="cb6-8"><a href=""></a>    <span class="st">'AGE'</span>: <span class="st">'AGE (</span><span class="sc">% c</span><span class="st">asas construidas antes de 1940)'</span>,</span>
-<span id="cb6-9"><a href=""></a>    <span class="st">'DIS'</span>: <span class="st">'DIS (Distancia a centros de empleo)'</span>,</span>
-<span id="cb6-10"><a href=""></a>    <span class="st">'RAD'</span>: <span class="st">'RAD (Índice de accesibilidad a autopistas)'</span>,</span>
-<span id="cb6-11"><a href=""></a>    <span class="st">'TAX'</span>: <span class="st">'TAX (Tasa de impuesto a la propiedad)'</span>,</span>
-<span id="cb6-12"><a href=""></a>    <span class="st">'PTRATIO'</span>: <span class="st">'PTRATIO (Relación estudiantes/profesores)'</span>,</span>
-<span id="cb6-13"><a href=""></a>    <span class="st">'B'</span>: <span class="st">'B (Proporción poblacional afrodescendiente)'</span>,</span>
-<span id="cb6-14"><a href=""></a>    <span class="st">'LSTAT'</span>: <span class="st">'LSTAT (% población de bajo estatus socioeconómico)'</span></span>
-<span id="cb6-15"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="gráfico-de-coeficientes" class="slide level2">
-<h2>Gráfico de Coeficientes</h2>
-<div id="998cf88b" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb7-2"><a href=""></a></span>
-<span id="cb7-3"><a href=""></a>coeficientes <span class="op">=</span> pd.Series(model.coef_, index<span class="op">=</span>X.columns)</span>
-<span id="cb7-4"><a href=""></a>coef_desc <span class="op">=</span> coeficientes.rename(index<span class="op">=</span>descripcion_variables)</span>
-<span id="cb7-5"><a href=""></a></span>
-<span id="cb7-6"><a href=""></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">6</span>))</span>
-<span id="cb7-7"><a href=""></a>coef_desc.sort_values().plot(kind<span class="op">=</span><span class="st">'barh'</span>, color<span class="op">=</span><span class="st">'skyblue'</span>)</span>
-<span id="cb7-8"><a href=""></a>plt.title(<span class="st">"Importancia de Variables en Regresión Lineal"</span>)</span>
-<span id="cb7-9"><a href=""></a>plt.xlabel(<span class="st">"Valor del Coeficiente"</span>)</span>
-<span id="cb7-10"><a href=""></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb7-11"><a href=""></a>plt.tight_layout()</span>
-<span id="cb7-12"><a href=""></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
+<section id="coeficientes-prueba" class="slide level2">
+<h2>🔖 Coeficientes (Prueba)</h2>
+<p>Coeficientes obtenidos del modelo ajustado exclusivamente con datos de prueba.</p>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>coef_test_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb11-2"><a href="#cb11-2"></a>    <span class="st">"Variable"</span>: X.columns,</span>
+<span id="cb11-3"><a href="#cb11-3"></a>    <span class="st">"Coeficiente"</span>: model_test.coef_</span>
+<span id="cb11-4"><a href="#cb11-4"></a>})</span>
+<span id="cb11-5"><a href="#cb11-5"></a></span>
+<span id="cb11-6"><a href="#cb11-6"></a>coef_test_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="89">
 <div>
-<figure>
-<p><img data-src="Untitled-1_files/figure-revealjs/cell-7-output-1.png" width="950" height="564"></p>
-</figure>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+<table class="dataframe" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header" style="text-align: right;">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Variable</th>
+<th data-quarto-table-cell-role="th">Coeficiente</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>CRIM</td>
+<td>-9.624134e-02</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>ZN</td>
+<td>-1.608814e-12</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>INDUS</td>
+<td>-4.840746e-01</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>CHAS</td>
+<td>-2.517014e-13</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>NOX</td>
+<td>-2.552033e+01</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>RM</td>
+<td>9.741610e-01</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>AGE</td>
+<td>-3.183947e-02</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>DIS</td>
+<td>-1.492257e+00</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>RAD</td>
+<td>8.177203e-02</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>TAX</td>
+<td>1.386100e-02</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>PTRATIO</td>
+<td>-1.455628e-01</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>B</td>
+<td>1.026000e-02</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>LSTAT</td>
+<td>-3.405549e-01</td>
+</tr>
+</tbody>
+</table>
+
 </div>
 </div>
 </div>
+<p>Comparativamente, los coeficientes en prueba muestran fuertes variaciones respecto al modelo de entrenamiento, indicando inestabilidad y la necesidad de regularización.</p>
 </section>
-<section id="gráficas-de-interpretación-top-4" class="slide level2">
-<h2>Gráficas de Interpretación (Top 4)</h2>
-<div id="ff494c7a" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a>top_vars <span class="op">=</span> coeficientes.<span class="bu">abs</span>().sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">4</span>).index.tolist()</span>
-<span id="cb8-2"><a href=""></a></span>
-<span id="cb8-3"><a href=""></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">14</span>,<span class="dv">10</span>))</span>
-<span id="cb8-4"><a href=""></a>axs <span class="op">=</span> axs.flatten()</span>
-<span id="cb8-5"><a href=""></a></span>
-<span id="cb8-6"><a href=""></a><span class="cf">for</span> i, var <span class="kw">in</span> <span class="bu">enumerate</span>(top_vars):</span>
-<span id="cb8-7"><a href=""></a>    axs[i].scatter(X_test[var], y_test, label<span class="op">=</span><span class="st">'Real'</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
-<span id="cb8-8"><a href=""></a>    axs[i].scatter(X_test[var], y_pred_test, label<span class="op">=</span><span class="st">'Predicción'</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
-<span id="cb8-9"><a href=""></a>    axs[i].set_xlabel(descripcion_variables[var])</span>
-<span id="cb8-10"><a href=""></a>    axs[i].set_ylabel(<span class="st">'MEDV ($1000s)'</span>)</span>
-<span id="cb8-11"><a href=""></a>    axs[i].set_title(<span class="ss">f"</span><span class="sc">{</span>descripcion_variables[var]<span class="sc">}</span><span class="ss"> vs MEDV"</span>)</span>
-<span id="cb8-12"><a href=""></a>    axs[i].legend()</span>
-<span id="cb8-13"><a href=""></a>    axs[i].grid(<span class="va">True</span>)</span>
-<span id="cb8-14"><a href=""></a></span>
-<span id="cb8-15"><a href=""></a>plt.suptitle(<span class="st">"Variables Más Relevantes vs Precio de Vivienda"</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb8-16"><a href=""></a>plt.tight_layout(rect<span class="op">=</span>[<span class="dv">0</span>, <span class="fl">0.03</span>, <span class="dv">1</span>, <span class="fl">0.95</span>])</span>
-<span id="cb8-17"><a href=""></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="comparación-de-coeficientes-entrenamiento-vs-prueba" class="slide level2 scrollable">
+<h2>📊 Comparación de Coeficientes: Entrenamiento vs Prueba</h2>
+<div class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="Untitled-1_files/figure-revealjs/cell-8-output-1.png" width="1333" height="915"></p>
-</figure>
+<p><img data-src="Untitled-1_files/figure-revealjs/cell-11-output-1.png" width="1717" height="569"></p>
 </div>
 </div>
-</div>
-</section>
-<section class="slide level2">
-
-</section></section>
-<section>
-<section id="conclusiones" class="title-slide slide level1 center">
-<h1>Conclusiones</h1>
-<ul>
-<li class="fragment">La regresión lineal logra un buen ajuste inicial.</li>
-<li class="fragment"><code>RM</code> y <code>LSTAT</code> son las variables más influyentes.</li>
-<li class="fragment">Los errores son moderados, lo cual sugiere posibilidad de mejorar con regularización.</li>
-<li class="fragment">El modelo permite interpretar de manera clara cómo cada variable afecta el precio de la vivienda.</li>
-</ul>
-</section>
-<section class="slide level2">
-
-</section></section>
-<section id="siguientes-pasos" class="title-slide slide level1 center">
-<h1>Siguientes Pasos</h1>
-<ul>
-<li class="fragment">Explorar modelos regularizados: Ridge, Lasso</li>
-<li class="fragment">Probar transformaciones no lineales</li>
-<li class="fragment">Usar validación cruzada para robustez</li>
-<li class="fragment">Aplicar el modelo a nuevos conjuntos de datos</li>
-</ul>
-<div class="quarto-auto-generated-content">
+<p>Esta gráfica muestra claramente las discrepancias en los coeficientes entre ambos conjuntos, reforzando el diagnóstico de sobreajuste.</p>
 <p><img src="Utadeo70-fondoblanco.png" class="slide-logo"></p>
 <div class="footer footer-default">
 
 </div>
-</div>
-</section>
+</section></section>
     </div>
   </div>
 
@@ -1268,6 +1683,7 @@
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
+'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -1485,7 +1901,18 @@
         }
         return false;
       }
-      const onCopySuccess = function(e) {
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -1517,50 +1944,11 @@
         }, 1000);
         // clear code selection
         e.clearSelection();
-      }
-      const getTextToCopy = function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-        text: getTextToCopy
       });
-      clipboard.on('success', onCopySuccess);
-      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        // For code content inside modals, clipBoardJS needs to be initialized with a container option
-        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-          text: getTextToCopy,
-          container: window.document.getElementById('quarto-embedded-source-code-modal')
-        });
-        clipboardModal.on('success', onCopySuccess);
-      }
-        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-        var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp('/' + window.location.host + '/');
-        var isInternal = (href) => {
-            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-        }
-        // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-        for (var i=0; i<links.length; i++) {
-          const link = links[i];
-          if (!isInternal(link.href)) {
-            // undo the damage that might have been done by quarto-nav.js in the case of
-            // links that we want to consider external
-            if (link.dataset.originalHref !== undefined) {
-              link.href = link.dataset.originalHref;
-            }
-          }
-        }
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      function tippyHover(el, contentFn) {
         const config = {
           allowHTML: true,
+          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -1570,17 +1958,8 @@
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start',
+          placement: 'bottom-start'
         };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
@@ -1594,11 +1973,7 @@
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          if (note) {
-            return note.innerHTML;
-          } else {
-            return "";
-          }
+          return note.innerHTML;
         });
       }
           let selectedAnnoteEl;
@@ -1642,7 +2017,6 @@
                 }
                 div.style.top = top - 2 + "px";
                 div.style.height = height + 4 + "px";
-                div.style.left = 0;
                 let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
                 if (gutterDiv === null) {
                   gutterDiv = window.document.createElement("div");
@@ -1668,8 +2042,8 @@
             });
             selectedAnnoteEl = undefined;
           };
-            // Handle positioning of the toggle
-        window.addEventListener(
+          // Handle positioning of the toggle
+          window.addEventListener(
           "resize",
           throttle(() => {
             elRect = undefined;
@@ -1677,23 +2051,23 @@
               selectCodeLines(selectedAnnoteEl);
             }
           }, 10)
-        );
-        function throttle(fn, ms) {
-        let throttle = false;
-        let timer;
-          return (...args) => {
-            if(!throttle) { // first call gets through
-                fn.apply(this, args);
-                throttle = true;
-            } else { // all the others get throttled
-                if(timer) clearTimeout(timer); // cancel #2
-                timer = setTimeout(() => {
+          );
+          function throttle(fn, ms) {
+          let throttle = false;
+          let timer;
+            return (...args) => {
+              if(!throttle) { // first call gets through
                   fn.apply(this, args);
-                  timer = throttle = false;
-                }, ms);
-            }
-          };
-        }
+                  throttle = true;
+              } else { // all the others get throttled
+                  if(timer) clearTimeout(timer); // cancel #2
+                  timer = setTimeout(() => {
+                    fn.apply(this, args);
+                    timer = throttle = false;
+                  }, ms);
+              }
+            };
+          }
           const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
           for (let i=0; i<annoteTargets.length; i++) {
             const annoteTarget = annoteTargets[i];
@@ -1738,7 +2112,7 @@
                   options: {
                     flipVariations: false, // true by default
                     allowedAutoPlacements: ['right'],
-                    fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                    fallbackPlacements: ['right', 'top', 'top-start', 'top-end'],
                   },
                 },
                 {

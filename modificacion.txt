@@ -1,0 +1,190 @@
+---
+title: "📊 Análisis completo: Regresión Lineal con Boston Housing"
+subtitle: "🔍 Paso a paso con Python"
+author: "👨‍🏫 Jorge Iván Romero Gelvez"
+institute: "🏛️ Universidad Jorge Tadeo Lozano"
+date: "📅 Abril 2025"
+format: 
+  revealjs:
+    theme: simple
+    transition: fade
+---
+
+# 📚 Librerías necesarias
+
+A continuación cargamos las librerías básicas para análisis de datos (`pandas`, `numpy`), creación y evaluación del modelo de regresión (`scikit-learn`).
+
+```python
+import pandas as pd  # Manipulación de datos
+import numpy as np   # Operaciones matemáticas
+from sklearn.linear_model import LinearRegression  # Modelo Lineal
+from sklearn.metrics import r2_score, mean_squared_error  # Métricas de rendimiento
+import matplotlib.pyplot as plt  # Gráficos
+```
+
+---
+
+# 📥 Cargar datos
+
+Cargamos el dataset `Boston.csv` que contiene información socioeconómica sobre viviendas.
+
+```python
+boston_df = pd.read_csv("Boston.csv")
+boston_df.head()
+```
+
+---
+
+# 🔍 División manual del dataset
+
+Realizamos una división secuencial, tomando el primer 80% para entrenar y el siguiente 20% para probar el modelo.
+
+```python
+n = len(boston_df)
+n_train = int(n * 0.8)
+
+X = boston_df.drop(columns=['medv'])
+y = boston_df['medv']
+
+X_train = X.iloc[:n_train]
+y_train = y.iloc[:n_train]
+
+X_test = X.iloc[n_train:]
+y_test = y.iloc[n_train:]
+```
+
+---
+
+# 📐 Modelo de Regresión Lineal
+
+El modelo de regresión lineal busca minimizar la función:
+
+$$\hat{y} = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_n x_n$$
+
+```python
+# Modelo para entrenamiento
+model_train = LinearRegression()
+model_train.fit(X_train, y_train)
+
+# Modelo exclusivo para comparación (prueba)
+model_test = LinearRegression()
+model_test.fit(X_test, y_test)
+```
+
+---
+
+# 🔮 Predicciones
+
+Generamos predicciones con ambos modelos.
+
+```python
+y_pred_train = model_train.predict(X_train)
+y_pred_test = model_train.predict(X_test)
+```
+
+---
+
+# 📈 Métricas de rendimiento
+
+Las métricas usadas son:
+
+- **R²** (Coeficiente de determinación):
+
+$$R^2 = 1 - \frac{\sum{(y - \hat{y})^2}}{\sum{(y - \bar{y})^2}}$$
+
+- **RMSE** (Raíz del error cuadrático medio):
+
+$$RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{y}_i)^2}$$
+
+```python
+r2_train = r2_score(y_train, y_pred_train)
+rmse_train = np.sqrt(mean_squared_error(y_train, y_pred_train))
+
+r2_test = r2_score(y_test, y_pred_test)
+rmse_test = np.sqrt(mean_squared_error(y_test, y_pred_test))
+```
+
+---
+
+# 🖥️ Resultados del modelo
+
+```markdown
+| Conjunto      | R²       | RMSE     |
+|---------------|----------|----------|
+| Entrenamiento | {r2_train:.4f} | {rmse_train:.4f} |
+| Prueba        | {r2_test:.4f} | {rmse_test:.4f} |
+```
+
+Estos resultados indican un buen desempeño en entrenamiento, pero una caída significativa en la prueba sugiere sobreajuste.
+
+---
+
+# 📋 Diagnóstico
+
+```python
+if r2_train > r2_test and abs(r2_train - r2_test) > 0.1:
+    diagnostico = "⚠️ Posible sobreajuste: pierde rendimiento en prueba."
+elif r2_train < 0.5 and r2_test < 0.5:
+    diagnostico = "⚠️ Subajuste: no captura bien patrones."
+else:
+    diagnostico = "✅ Buen ajuste: generaliza bien."
+
+print(diagnostico)
+```
+
+El diagnóstico confirma que existe un problema de sobreajuste.
+
+---
+
+# 🔖 Coeficientes (Entrenamiento)
+
+Los coeficientes indican cuánto influye cada variable en la predicción.
+
+```python
+coef_train_df = pd.DataFrame({
+    "Variable": X.columns,
+    "Coeficiente": model_train.coef_
+})
+
+coef_train_df
+```
+
+Observamos que variables como `RM` (habitaciones promedio) tienen fuerte impacto positivo, mientras que `NOX` (contaminación) tiene un impacto negativo significativo.
+
+---
+
+# 🔖 Coeficientes (Prueba)
+
+Coeficientes obtenidos del modelo ajustado exclusivamente con datos de prueba.
+
+```python
+coef_test_df = pd.DataFrame({
+    "Variable": X.columns,
+    "Coeficiente": model_test.coef_
+})
+
+coef_test_df
+```
+
+Comparativamente, los coeficientes en prueba muestran fuertes variaciones respecto al modelo de entrenamiento, indicando inestabilidad y la necesidad de regularización.
+
+---
+
+# 📊 Gráfica comparativa de Coeficientes
+
+Una comparación visual facilita el entendimiento:
+
+```python
+plt.figure(figsize=(10,6))
+plt.bar(X.columns, model_train.coef_, alpha=0.7, label="Entrenamiento")
+plt.bar(X.columns, model_test.coef_, alpha=0.7, label="Prueba")
+plt.xticks(rotation=45)
+plt.xlabel('Variables')
+plt.ylabel('Coeficientes')
+plt.title('Comparativa de Coeficientes entre Entrenamiento y Prueba')
+plt.legend()
+plt.tight_layout()
+plt.show()
+```
+
+Esta gráfica muestra claramente las discrepancias en los coeficientes entre ambos conjuntos, reforzando el diagnóstico de sobreajuste.
