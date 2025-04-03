@@ -5,7 +5,8 @@ author: "👨‍🏫 Jorge Iván Romero Gelvez"
 institute: "🏛️ Universidad Jorge Tadeo Lozano"
 date: "📅 Abril 2025"
 format: 
-  revealjs: 
+  revealjs:
+    slide-level: 1  
     theme: [default, custom.scss]
     slide-number: true
     highlight-style: dracula
@@ -28,6 +29,7 @@ execute:
   freeze: false
 jupyter: python3
 ---
+
 # Introducción
 
 ## 💡 ¿Qué significa la frase?
@@ -35,6 +37,7 @@ jupyter: python3
 > **“Un buen modelo no solo ajusta bien los datos, sino que también generaliza.”**
 
 ![](1_bt-E2YcPafjiPbZFDMMmNQ.jpeg){alt="Gráfico ilustrando generalización en modelos"fig-align="center" width="200" style="border-radius: 1rem;"}
+
 ---
 
 ## 🔧 Ajustar bien los datos
@@ -102,10 +105,9 @@ La máquina fallará en reconocer un perro nuevo porque no tiene estrictamente l
 - ✅ Usando **validación cruzada**
 - ⚖️ Aplicando **Ridge y Lasso** para controlar la complejidad
 - 🧪 Comparando resultados en entrenamiento y prueba
+- 🎓 *El arte del aprendizaje automático es encontrar el punto justo entre sesgo y varianza.*
 
-> 🎓 *El arte del aprendizaje automático es encontrar el punto justo entre sesgo y varianza.*
-
-![](balance.gif){#fig-surus}
+![](balance.gif){fig-align="center"}
 
 ---
 
@@ -133,6 +135,8 @@ flowchart LR
 
 ```
 
+---
+
 ## 🆚 Comparación de Técnicas
 ::: {.small}
 | Técnica            | Problema que aborda                                      | Cómo lo resuelve                                                       | Ventajas                                                                 | Limitaciones                                                              |
@@ -141,6 +145,7 @@ flowchart LR
 | **Regresión Lasso**| - Multicolinealidad<br>- Sobreajuste<br>- Alta dimensionalidad | Penalización L1 que puede reducir coeficientes a cero (selección de variables) | - Selección automática de variables<br>- Modelos más interpretables      | - Puede eliminar variables importantes si están correlacionadas           |
 | **Validación cruzada** | - Sobreajuste<br>- Mala generalización del modelo | Divide los datos en subconjuntos para evaluar múltiples veces el modelo | - Estima rendimiento real<br>- Ayuda a elegir hiperparámetros óptimos   | - Mayor costo computacional<br>- Sensible a la forma de dividir los datos |
 :::
+
 ---
 
 # El dataset
@@ -179,14 +184,14 @@ El conjunto de datos **Boston Housing** contiene información sobre barrios de B
 
 A continuación cargamos las librerías básicas para análisis de datos (`pandas`, `numpy`), creación y evaluación del modelo de regresión (`scikit-learn`).
 
-```python
+```{python}
 import pandas as pd  # Manipulación de datos
 import numpy as np   # Operaciones matemáticas
 from sklearn.linear_model import LinearRegression  # Modelo Lineal
 from sklearn.metrics import r2_score, mean_squared_error  # Métricas de rendimiento
 import matplotlib.pyplot as plt  # Gráficos
-
 ```
+
 ---
 
 ## 📥 Carga del Dataset {.scrollable}
@@ -215,6 +220,7 @@ boston_df = pd.DataFrame(np.column_stack([data, target]), columns=columns)
 # Visualizar las primeras filas
 boston_df.tail()
 ```
+
 ---
 
 ## 🔍 División manual del dataset
