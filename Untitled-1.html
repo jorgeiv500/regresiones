@@ -416,45 +416,16 @@
 </div>
 
   <p class="date">2025-01-01</p>
-</section><section id="TOC">
-<nav role="doc-toc"> 
-<h2 id="toc-title">Contenido</h2>
-<ul>
-<li class="fragment"><a href="#/introducción" id="/toc-introducción">Introducción</a></li>
-<li class="fragment"></li>
-<li class="fragment"></li>
-<li class="fragment"></li>
-<li class="fragment"></li>
-<li class="fragment"></li>
-<li class="fragment"></li>
-<li class="fragment"></li>
-<li class="fragment"><a href="#/el-dataset" id="/toc-el-dataset">El dataset</a></li>
-<li class="fragment"></li>
-<li class="fragment"></li>
-<li class="fragment"></li>
-<li class="fragment"></li>
-<li class="fragment"></li>
-<li class="fragment"><a href="#/predicciones" id="/toc-predicciones">🔮 Predicciones</a></li>
-<li class="fragment"></li>
-<li class="fragment"></li>
-<li class="fragment"></li>
-<li class="fragment"></li>
-<li class="fragment"></li>
-<li class="fragment"></li>
-</ul>
-</nav>
 </section>
-<section id="introducción" class="slide level1">
-<h1>Introducción</h1>
-<h2 id="qué-significa-la-frase">💡 ¿Qué significa la frase?</h2>
+<section id="qué-significa-la-frase" class="slide level2">
+<h2>💡 ¿Qué significa la frase?</h2>
 <blockquote>
 <p><strong>“Un buen modelo no solo ajusta bien los datos, sino que también generaliza.”</strong></p>
 </blockquote>
 
 <img data-src="1_bt-E2YcPafjiPbZFDMMmNQ.jpeg" alt="Gráfico ilustrando generalización en modelos" width="200" class="r-stretch quarto-figure-center"></section>
-<section class="slide level1">
-
-<h2 id="ajustar-bien-los-datos">🔧 Ajustar bien los datos</h2>
+<section id="ajustar-bien-los-datos" class="slide level2">
+<h2>🔧 Ajustar bien los datos</h2>
 <ul>
 <li class="fragment">📉 El modelo <strong>aprende patrones</strong> de los datos de entrenamiento<br>
 </li>
@@ -465,9 +436,8 @@
 <li class="fragment">⚠️ Riesgo de <strong>sobreajuste (overfitting)</strong></li>
 </ul>
 </section>
-<section class="slide level1">
-
-<h2 id="underfitting">Underfitting</h2>
+<section id="underfitting" class="slide level2">
+<h2>Underfitting</h2>
 <h3 id="entreno-al-modelo-con-1-sola-raza-de-perro">Entreno al modelo con 1 sola raza de perro</h3>
 <div class="quarto-figure quarto-figure-center" style="border-radius: 1rem;">
 <figure>
@@ -483,9 +453,8 @@
 <p>La máquina fallará en reconocer al perro por falta de suficientes muestras. No puede generalizar el conocimiento.</p>
 </div>
 </section>
-<section class="slide level1">
-
-<h2 id="overfitting">Overfitting</h2>
+<section id="overfitting" class="slide level2">
+<h2>Overfitting</h2>
 <h3 id="entreno-al-modelo-con-10-razas-de-perro-color-marrón">Entreno al modelo con 10 razas de perro color marrón</h3>
 <div class="quarto-figure quarto-figure-center" style="border-radius: 1rem;">
 <figure>
@@ -500,7 +469,9 @@
 <div style="font-size: 0.9em; color: gray; margin-top: 1em;">
 <p>La máquina fallará en reconocer un perro nuevo porque no tiene estrictamente los mismos valores de las muestras de entrenamiento.</p>
 </div>
-<h2 id="generalizar-los-datos">🌍 Generalizar los datos</h2>
+</section>
+<section id="generalizar-los-datos" class="slide level2">
+<h2>🌍 Generalizar los datos</h2>
 <ul>
 <li class="fragment">🧠 El modelo <strong>funciona bien con datos nuevos</strong><br>
 </li>
@@ -510,9 +481,8 @@
 <li class="fragment">🎯 Es el verdadero objetivo del aprendizaje automático</li>
 </ul>
 </section>
-<section class="slide level1">
-
-<h2 id="comparación-ajustar-vs.-generalizar">🆚 Comparación: Ajustar vs.&nbsp;Generalizar</h2>
+<section id="comparación-ajustar-vs.-generalizar" class="slide level2">
+<h2>🆚 Comparación: Ajustar vs.&nbsp;Generalizar</h2>
 <table>
 <colgroup>
 <col style="width: 25%">
@@ -545,9 +515,8 @@
 </tbody>
 </table>
 </section>
-<section class="slide level1">
-
-<h2 id="cómo-logramos-un-buen-equilibrio">🛠️ ¿Cómo logramos un buen equilibrio?</h2>
+<section id="cómo-logramos-un-buen-equilibrio" class="slide level2">
+<h2>🛠️ ¿Cómo logramos un buen equilibrio?</h2>
 <ul>
 <li class="fragment">✅ Usando <strong>validación cruzada</strong></li>
 <li class="fragment">⚖️ Aplicando <strong>Ridge y Lasso</strong> para controlar la complejidad</li>
@@ -556,9 +525,8 @@
 </ul>
 
 <img data-src="balance.gif" class="r-stretch quarto-figure-center"></section>
-<section class="slide level1">
-
-<h2 id="retomando">📌 RETOMANDO</h2>
+<section id="retomando" class="slide level2">
+<h2>📌 RETOMANDO</h2>
 <ul>
 <li class="fragment">📚 <strong>Modelo base:</strong> punto de partida</li>
 <li class="fragment">🧰 <strong>Ridge:</strong> reduce varianza, estabiliza coeficientes</li>
@@ -572,7 +540,7 @@
 <div>
 <div>
 <pre class="mermaid mermaid-js">flowchart LR
-    A["📥 Dataset limpio (Boston.csv)"] --&gt; B["📊 Modelo base\nRegresión Lineal"]
+    A["📥 Dataset limpio (Boston)"] --&gt; B["📊 Modelo base\nRegresión Lineal"]
     B --&gt; C{"🔍 ¿Problemas?"}
     C -- Sobreajuste / multicolinealidad --&gt; D["🧰 Ridge (L2)"]
     C -- Muchas variables irrelevantes --&gt; E["🧹 Lasso (L1)"]
@@ -588,9 +556,8 @@
 </div>
 </div>
 </section>
-<section class="slide level1">
-
-<h2 id="comparación-de-técnicas">🆚 Comparación de Técnicas</h2>
+<section id="comparación-de-técnicas" class="slide level2">
+<h2>🆚 Comparación de Técnicas</h2>
 <div class="small">
 <table>
 <colgroup>
@@ -635,19 +602,18 @@
 </table>
 </div>
 </section>
-<section id="el-dataset" class="slide level1">
-<h1>El dataset</h1>
-</section>
-<section class="slide level1">
-
-<h2 class="scrollable smaller" id="descripción-del-dataset">1️⃣ Descripción del Dataset</h2>
+<section id="descripción-del-dataset" class="slide level2 scrollable smaller">
+<h2>1️⃣ Descripción del Dataset 🏘️</h2>
 <p>El conjunto de datos <strong>Boston Housing</strong> contiene información sobre barrios de Boston, recopilada por el U.S. Census.</p>
 <ul>
-<li class="fragment">Observaciones: 506</li>
-<li class="fragment">Variables independientes: 13 características socioeconómicas y urbanas</li>
-<li class="fragment">Variable dependiente: <code>MEDV</code> (Valor medio de vivienda ocupada por sus dueños, en miles de dólares)</li>
+<li class="fragment"><strong>Observaciones:</strong> 506</li>
+<li class="fragment"><strong>Variables independientes:</strong> 13 características socioeconómicas y urbanas</li>
+<li class="fragment"><strong>Variable dependiente:</strong> <code>MEDV</code> (Valor medio de vivienda ocupada por sus dueños, en miles de dólares)</li>
 </ul>
-<h2 class="scrollable smaller" id="descripción-del-dataset-1">2️⃣ Descripción del Dataset</h2>
+
+<img data-src="lenny.gif" class="r-stretch quarto-figure-center"></section>
+<section id="descripción-del-dataset-1" class="slide level2 scrollable smaller">
+<h2>2️⃣ Descripción del Dataset 🏘️</h2>
 <table>
 <colgroup>
 <col style="width: 43%">
@@ -661,67 +627,66 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td>CRIM</td>
+<td>🕵️‍♂️ CRIM</td>
 <td>Tasa de criminalidad per cápita por ciudad</td>
 </tr>
 <tr class="even">
-<td>ZN</td>
+<td>🏡 ZN</td>
 <td>Proporción de terrenos residenciales (&gt;25,000 pies²)</td>
 </tr>
 <tr class="odd">
-<td>INDUS</td>
+<td>🏭 INDUS</td>
 <td>Proporción de tierra para negocios no minoristas</td>
 </tr>
 <tr class="even">
-<td>CHAS</td>
+<td>🌊 CHAS</td>
 <td>Frontera con río Charles (1: sí, 0: no)</td>
 </tr>
 <tr class="odd">
-<td>NOX</td>
+<td>🧪 NOX</td>
 <td>Concentración de óxidos nítricos (contaminación del aire)</td>
 </tr>
 <tr class="even">
-<td>RM</td>
+<td>🛏️ RM</td>
 <td>Número promedio de habitaciones por vivienda</td>
 </tr>
 <tr class="odd">
-<td>AGE</td>
+<td>🏚️ AGE</td>
 <td>% de unidades construidas antes de 1940</td>
 </tr>
 <tr class="even">
-<td>DIS</td>
+<td>📍 DIS</td>
 <td>Distancia a cinco centros de empleo</td>
 </tr>
 <tr class="odd">
-<td>RAD</td>
+<td>🛣️ RAD</td>
 <td>Índice de accesibilidad a autopistas radiales</td>
 </tr>
 <tr class="even">
-<td>TAX</td>
+<td>💸 TAX</td>
 <td>Tasa de impuesto a la propiedad</td>
 </tr>
 <tr class="odd">
-<td>PTRATIO</td>
+<td>👨‍🏫 PTRATIO</td>
 <td>Relación alumno-profesor en cada barrio</td>
 </tr>
 <tr class="even">
-<td>B</td>
+<td>👥 B</td>
 <td>Proporción poblacional afrodescendiente (cálculo especial)</td>
 </tr>
 <tr class="odd">
-<td>LSTAT</td>
+<td>📉 LSTAT</td>
 <td>% de población con bajo estatus socioeconómico</td>
 </tr>
 <tr class="even">
-<td>MEDV</td>
+<td>💰 MEDV</td>
 <td>Valor medio de la vivienda (en miles de dólares)</td>
 </tr>
 </tbody>
 </table>
 </section>
-<section class="slide level1">
-
-<h2 id="librerías-necesarias">📚 Librerías necesarias</h2>
+<section id="librerías-necesarias" class="slide level2">
+<h2>📚 Librerías necesarias</h2>
 <p>A continuación cargamos las librerías básicas para análisis de datos (<code>pandas</code>, <code>numpy</code>), creación y evaluación del modelo de regresión (<code>scikit-learn</code>).</p>
 <div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd  <span class="co"># Manipulación de datos</span></span>
@@ -731,9 +696,8 @@
 <span id="cb1-5"><a href="#cb1-5"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt  <span class="co"># Gráficos</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section class="slide level1">
-
-<h2 class="scrollable" id="carga-del-dataset">📥 Carga del Dataset</h2>
+<section id="carga-del-dataset" class="slide level2 scrollable">
+<h2>📥 Carga del Dataset</h2>
 <p>Cargamos el dataset que contiene información socioeconómica sobre viviendas.</p>
 <div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -756,7 +720,7 @@
 <span id="cb2-18"><a href="#cb2-18"></a></span>
 <span id="cb2-19"><a href="#cb2-19"></a><span class="co"># Visualizar las primeras filas</span></span>
 <span id="cb2-20"><a href="#cb2-20"></a>boston_df.tail()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="101">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -885,9 +849,8 @@
 </div>
 </div>
 </section>
-<section class="slide level1">
-
-<h2 id="división-manual-del-dataset">🔍 División manual del dataset</h2>
+<section id="división-manual-del-dataset" class="slide level2">
+<h2>🔍 División manual del dataset</h2>
 <p>Realizamos una división secuencial, tomando el primer 80% para entrenar y el siguiente 20% para probar el modelo.</p>
 <div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>n <span class="op">=</span> <span class="bu">len</span>(boston_df)</span>
@@ -903,9 +866,8 @@
 <span id="cb3-11"><a href="#cb3-11"></a>y_test <span class="op">=</span> y.iloc[n_train:]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section class="slide level1">
-
-<h2 id="modelo-de-regresión-lineal">📐 Modelo de Regresión Lineal</h2>
+<section id="modelo-de-regresión-lineal" class="slide level2">
+<h2>📐 Modelo de Regresión Lineal</h2>
 <p>El modelo de regresión lineal busca minimizar la función:</p>
 <p><span class="math display">\[\hat{y} = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_n x_n\]</span></p>
 <div class="cell" data-execution_count="4">
@@ -920,8 +882,8 @@
 <span id="cb4-9"><a href="#cb4-9"></a><span class="co"># Modelo exclusivo para comparación (prueba)</span></span>
 <span id="cb4-10"><a href="#cb4-10"></a>model_test <span class="op">=</span> LinearRegression()</span>
 <span id="cb4-11"><a href="#cb4-11"></a>model_test.fit(X_test, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
-<style>#sk-container-id-1 {
+<div class="cell-output cell-output-display" data-execution_count="103">
+<style>#sk-container-id-10 {
   /* Definition of color scheme common for light and dark mode */
   --sklearn-color-text: #000;
   --sklearn-color-text-muted: #666;
@@ -952,15 +914,15 @@
   }
 }
 
-#sk-container-id-1 {
+#sk-container-id-10 {
   color: var(--sklearn-color-text);
 }
 
-#sk-container-id-1 pre {
+#sk-container-id-10 pre {
   padding: 0;
 }
 
-#sk-container-id-1 input.sk-hidden--visually {
+#sk-container-id-10 input.sk-hidden--visually {
   border: 0;
   clip: rect(1px 1px 1px 1px);
   clip: rect(1px, 1px, 1px, 1px);
@@ -972,7 +934,7 @@
   width: 1px;
 }
 
-#sk-container-id-1 div.sk-dashed-wrapped {
+#sk-container-id-10 div.sk-dashed-wrapped {
   border: 1px dashed var(--sklearn-color-line);
   margin: 0 0.4em 0.5em 0.4em;
   box-sizing: border-box;
@@ -980,7 +942,7 @@
   background-color: var(--sklearn-color-background);
 }
 
-#sk-container-id-1 div.sk-container {
+#sk-container-id-10 div.sk-container {
   /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
      but bootstrap.min.css set `[hidden] { display: none !important; }`
      so we also need the `!important` here to be able to override the
@@ -990,7 +952,7 @@
   position: relative;
 }
 
-#sk-container-id-1 div.sk-text-repr-fallback {
+#sk-container-id-10 div.sk-text-repr-fallback {
   display: none;
 }
 
@@ -1006,14 +968,14 @@ div.sk-item {
 
 /* Parallel-specific style estimator block */
 
-#sk-container-id-1 div.sk-parallel-item::after {
+#sk-container-id-10 div.sk-parallel-item::after {
   content: "";
   width: 100%;
   border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
   flex-grow: 1;
 }
 
-#sk-container-id-1 div.sk-parallel {
+#sk-container-id-10 div.sk-parallel {
   display: flex;
   align-items: stretch;
   justify-content: center;
@@ -1021,28 +983,28 @@ div.sk-item {
   position: relative;
 }
 
-#sk-container-id-1 div.sk-parallel-item {
+#sk-container-id-10 div.sk-parallel-item {
   display: flex;
   flex-direction: column;
 }
 
-#sk-container-id-1 div.sk-parallel-item:first-child::after {
+#sk-container-id-10 div.sk-parallel-item:first-child::after {
   align-self: flex-end;
   width: 50%;
 }
 
-#sk-container-id-1 div.sk-parallel-item:last-child::after {
+#sk-container-id-10 div.sk-parallel-item:last-child::after {
   align-self: flex-start;
   width: 50%;
 }
 
-#sk-container-id-1 div.sk-parallel-item:only-child::after {
+#sk-container-id-10 div.sk-parallel-item:only-child::after {
   width: 0;
 }
 
 /* Serial-specific style estimator block */
 
-#sk-container-id-1 div.sk-serial {
+#sk-container-id-10 div.sk-serial {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1060,14 +1022,14 @@ clickable and can be expanded/collapsed.
 
 /* Pipeline and ColumnTransformer style (default) */
 
-#sk-container-id-1 div.sk-toggleable {
+#sk-container-id-10 div.sk-toggleable {
   /* Default theme specific background. It is overwritten whether we have a
   specific estimator or a Pipeline/ColumnTransformer */
   background-color: var(--sklearn-color-background);
 }
 
 /* Toggleable label */
-#sk-container-id-1 label.sk-toggleable__label {
+#sk-container-id-10 label.sk-toggleable__label {
   cursor: pointer;
   display: flex;
   width: 100%;
@@ -1080,13 +1042,13 @@ clickable and can be expanded/collapsed.
   gap: 0.5em;
 }
 
-#sk-container-id-1 label.sk-toggleable__label .caption {
+#sk-container-id-10 label.sk-toggleable__label .caption {
   font-size: 0.6rem;
   font-weight: lighter;
   color: var(--sklearn-color-text-muted);
 }
 
-#sk-container-id-1 label.sk-toggleable__label-arrow:before {
+#sk-container-id-10 label.sk-toggleable__label-arrow:before {
   /* Arrow on the left of the label */
   content: "▸";
   float: left;
@@ -1094,13 +1056,13 @@ clickable and can be expanded/collapsed.
   color: var(--sklearn-color-icon);
 }
 
-#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {
+#sk-container-id-10 label.sk-toggleable__label-arrow:hover:before {
   color: var(--sklearn-color-text);
 }
 
 /* Toggleable content - dropdown */
 
-#sk-container-id-1 div.sk-toggleable__content {
+#sk-container-id-10 div.sk-toggleable__content {
   max-height: 0;
   max-width: 0;
   overflow: hidden;
@@ -1109,12 +1071,12 @@ clickable and can be expanded/collapsed.
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-1 div.sk-toggleable__content.fitted {
+#sk-container-id-10 div.sk-toggleable__content.fitted {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
-#sk-container-id-1 div.sk-toggleable__content pre {
+#sk-container-id-10 div.sk-toggleable__content pre {
   margin: 0.2em;
   border-radius: 0.25em;
   color: var(--sklearn-color-text);
@@ -1122,79 +1084,79 @@ clickable and can be expanded/collapsed.
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-1 div.sk-toggleable__content.fitted pre {
+#sk-container-id-10 div.sk-toggleable__content.fitted pre {
   /* unfitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
-#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+#sk-container-id-10 input.sk-toggleable__control:checked~div.sk-toggleable__content {
   /* Expand drop-down */
   max-height: 200px;
   max-width: 100%;
   overflow: auto;
 }
 
-#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+#sk-container-id-10 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
   content: "▾";
 }
 
 /* Pipeline/ColumnTransformer-specific style */
 
-#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-10 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-1 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-10 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
 /* Estimator-specific style */
 
 /* Colorize estimator box */
-#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-10 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-1 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-10 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
-#sk-container-id-1 div.sk-label label.sk-toggleable__label,
-#sk-container-id-1 div.sk-label label {
+#sk-container-id-10 div.sk-label label.sk-toggleable__label,
+#sk-container-id-10 div.sk-label label {
   /* The background is the default theme color */
   color: var(--sklearn-color-text-on-default-background);
 }
 
 /* On hover, darken the color of the background */
-#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {
+#sk-container-id-10 div.sk-label:hover label.sk-toggleable__label {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
 /* Label box, darken color on hover, fitted */
-#sk-container-id-1 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+#sk-container-id-10 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
 /* Estimator label */
 
-#sk-container-id-1 div.sk-label label {
+#sk-container-id-10 div.sk-label label {
   font-family: monospace;
   font-weight: bold;
   display: inline-block;
   line-height: 1.2em;
 }
 
-#sk-container-id-1 div.sk-label-container {
+#sk-container-id-10 div.sk-label-container {
   text-align: center;
 }
 
 /* Estimator-specific */
-#sk-container-id-1 div.sk-estimator {
+#sk-container-id-10 div.sk-estimator {
   font-family: monospace;
   border: 1px dotted var(--sklearn-color-border-box);
   border-radius: 0.25em;
@@ -1204,18 +1166,18 @@ clickable and can be expanded/collapsed.
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-1 div.sk-estimator.fitted {
+#sk-container-id-10 div.sk-estimator.fitted {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
 /* on hover */
-#sk-container-id-1 div.sk-estimator:hover {
+#sk-container-id-10 div.sk-estimator:hover {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-1 div.sk-estimator.fitted:hover {
+#sk-container-id-10 div.sk-estimator.fitted:hover {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-2);
 }
@@ -1303,7 +1265,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 
 /* "?"-specific style due to the `<a>` HTML tag */
 
-#sk-container-id-1 a.estimator_doc_link {
+#sk-container-id-10 a.estimator_doc_link {
   float: right;
   font-size: 1rem;
   line-height: 1em;
@@ -1318,39 +1280,38 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
   border: var(--sklearn-color-unfitted-level-1) 1pt solid;
 }
 
-#sk-container-id-1 a.estimator_doc_link.fitted {
+#sk-container-id-10 a.estimator_doc_link.fitted {
   /* fitted */
   border: var(--sklearn-color-fitted-level-1) 1pt solid;
   color: var(--sklearn-color-fitted-level-1);
 }
 
 /* On hover */
-#sk-container-id-1 a.estimator_doc_link:hover {
+#sk-container-id-10 a.estimator_doc_link:hover {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-3);
   color: var(--sklearn-color-background);
   text-decoration: none;
 }
 
-#sk-container-id-1 a.estimator_doc_link.fitted:hover {
+#sk-container-id-10 a.estimator_doc_link.fitted:hover {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-3);
 }
-</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LinearRegression()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked=""><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LinearRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.linear_model.LinearRegression.html">?<span>Documentation for LinearRegression</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>LinearRegression()</pre></div> </div></div></div></div>
+</style><div id="sk-container-id-10" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LinearRegression()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-10" type="checkbox" checked=""><label for="sk-estimator-id-10" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LinearRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.linear_model.LinearRegression.html">?<span>Documentation for LinearRegression</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>LinearRegression()</pre></div> </div></div></div></div>
 </div>
 </div>
 </section>
-<section id="predicciones" class="slide level1">
-<h1>🔮 Predicciones</h1>
+<section id="predicciones" class="slide level2">
+<h2>🔮 Predicciones</h2>
 <p>Generamos predicciones con ambos modelos.</p>
 <div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>y_pred_train <span class="op">=</span> model_train.predict(X_train)</span>
 <span id="cb5-2"><a href="#cb5-2"></a>y_pred_test <span class="op">=</span> model_train.predict(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section class="slide level1">
-
-<h2 class="scrollable" id="métricas-de-rendimiento">📈 Métricas de rendimiento</h2>
+<section id="métricas-de-rendimiento" class="slide level2 scrollable">
+<h2>📈 Métricas de rendimiento</h2>
 <p>Las métricas usadas son:</p>
 <ul>
 <li class="fragment"><strong>R²</strong> (Coeficiente de determinación):</li>
@@ -1368,9 +1329,8 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <span id="cb6-5"><a href="#cb6-5"></a>rmse_test <span class="op">=</span> np.sqrt(mean_squared_error(y_test, y_pred_test))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section class="slide level1">
-
-<h2 id="resultados-del-modelo">🖥️ Resultados del modelo</h2>
+<section id="resultados-del-modelo" class="slide level2">
+<h2>🖥️ Resultados del modelo</h2>
 <div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>resultados <span class="op">=</span> pd.DataFrame({</span>
 <span id="cb7-2"><a href="#cb7-2"></a>    <span class="st">"Conjunto"</span>: [<span class="st">"Entrenamiento"</span>, <span class="st">"Prueba"</span>],</span>
@@ -1425,9 +1385,8 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 <p>Estos resultados indican un buen desempeño en entrenamiento, pero una caída significativa en la prueba sugiere sobreajuste.</p>
 </section>
-<section class="slide level1">
-
-<h2 id="diagnóstico">📋 Diagnóstico</h2>
+<section id="diagnóstico" class="slide level2">
+<h2>📋 Diagnóstico</h2>
 <div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="cf">if</span> r2_train <span class="op">&gt;</span> r2_test <span class="kw">and</span> <span class="bu">abs</span>(r2_train <span class="op">-</span> r2_test) <span class="op">&gt;</span> <span class="fl">0.1</span>:</span>
 <span id="cb8-2"><a href="#cb8-2"></a>    diagnostico <span class="op">=</span> <span class="st">"⚠️ Posible sobreajuste: pierde rendimiento en prueba."</span></span>
@@ -1443,9 +1402,8 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 <p>El diagnóstico confirma que existe un problema de sobreajuste.</p>
 </section>
-<section class="slide level1">
-
-<h2 id="coeficientes-entrenamiento">🔖 Coeficientes (Entrenamiento)</h2>
+<section id="coeficientes-entrenamiento" class="slide level2">
+<h2>🔖 Coeficientes (Entrenamiento)</h2>
 <p>Los coeficientes indican cuánto influye cada variable en la predicción.</p>
 <div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>coef_train_df <span class="op">=</span> pd.DataFrame({</span>
@@ -1454,7 +1412,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <span id="cb10-4"><a href="#cb10-4"></a>})</span>
 <span id="cb10-5"><a href="#cb10-5"></a></span>
 <span id="cb10-6"><a href="#cb10-6"></a>coef_train_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
+<div class="cell-output cell-output-display" data-execution_count="108">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -1552,9 +1510,8 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 <p>Observamos que variables como <code>RM</code> (habitaciones promedio) tienen fuerte impacto positivo, mientras que <code>NOX</code> (contaminación) tiene un impacto negativo significativo.</p>
 </section>
-<section class="slide level1">
-
-<h2 id="coeficientes-prueba">🔖 Coeficientes (Prueba)</h2>
+<section id="coeficientes-prueba" class="slide level2">
+<h2>🔖 Coeficientes (Prueba)</h2>
 <p>Coeficientes obtenidos del modelo ajustado exclusivamente con datos de prueba.</p>
 <div class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>coef_test_df <span class="op">=</span> pd.DataFrame({</span>
@@ -1563,7 +1520,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <span id="cb11-4"><a href="#cb11-4"></a>})</span>
 <span id="cb11-5"><a href="#cb11-5"></a></span>
 <span id="cb11-6"><a href="#cb11-6"></a>coef_test_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
+<div class="cell-output cell-output-display" data-execution_count="109">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -1661,9 +1618,8 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 <p>Comparativamente, los coeficientes en prueba muestran fuertes variaciones respecto al modelo de entrenamiento, indicando inestabilidad y la necesidad de regularización.</p>
 </section>
-<section class="slide level1">
-
-<h2 class="scrollable" id="comparación-de-coeficientes-entrenamiento-vs-prueba">📊 Comparación de Coeficientes: Entrenamiento vs Prueba</h2>
+<section id="comparación-de-coeficientes-entrenamiento-vs-prueba" class="slide level2 scrollable">
+<h2>📊 Comparación de Coeficientes: Entrenamiento vs Prueba</h2>
 <div class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <p><img data-src="Untitled-1_files/figure-revealjs/cell-12-output-1.png" width="1717" height="569"></p>

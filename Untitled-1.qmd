@@ -6,7 +6,6 @@ institute: "🏛️ Universidad Jorge Tadeo Lozano"
 date: "📅 Abril 2025"
 format: 
   revealjs:
-    slide-level: 1  
     theme: [default, custom.scss]
     slide-number: true
     highlight-style: dracula
@@ -30,7 +29,7 @@ execute:
 jupyter: python3
 ---
 
-# Introducción
+
 
 ## 💡 ¿Qué significa la frase?
 
@@ -123,7 +122,7 @@ La máquina fallará en reconocer un perro nuevo porque no tiene estrictamente l
 %%| echo: false
 %%| fig-width: 6.5%%| 
 flowchart LR
-    A["📥 Dataset limpio (Boston.csv)"] --> B["📊 Modelo base\nRegresión Lineal"]
+    A["📥 Dataset limpio (Boston)"] --> B["📊 Modelo base\nRegresión Lineal"]
     B --> C{"🔍 ¿Problemas?"}
     C -- Sobreajuste / multicolinealidad --> D["🧰 Ridge (L2)"]
     C -- Muchas variables irrelevantes --> E["🧹 Lasso (L1)"]
@@ -146,37 +145,39 @@ flowchart LR
 | **Validación cruzada** | - Sobreajuste<br>- Mala generalización del modelo | Divide los datos en subconjuntos para evaluar múltiples veces el modelo | - Estima rendimiento real<br>- Ayuda a elegir hiperparámetros óptimos   | - Mayor costo computacional<br>- Sensible a la forma de dividir los datos |
 :::
 
----
-
-# El dataset
 
 ---
 
-## 1️⃣ Descripción del Dataset{.scrollable .smaller}
+## 1️⃣ Descripción del Dataset 🏘️ {.scrollable .smaller}
 
 El conjunto de datos **Boston Housing** contiene información sobre barrios de Boston, recopilada por el U.S. Census.
 
-- Observaciones: 506
-- Variables independientes: 13 características socioeconómicas y urbanas
-- Variable dependiente: `MEDV` (Valor medio de vivienda ocupada por sus dueños, en miles de dólares)
+- **Observaciones:** 506
+- **Variables independientes:** 13 características socioeconómicas y urbanas
+- **Variable dependiente:** `MEDV` (Valor medio de vivienda ocupada por sus dueños, en miles de dólares)
+
+![](lenny.gif){fig-align="center"}
   
-## 2️⃣ Descripción del Dataset{.scrollable .smaller}
+--- 
+
+## 2️⃣ Descripción del Dataset 🏘️ {.scrollable .smaller}
 | Variable | Descripción |
 |----------|-------------|
-| CRIM     | Tasa de criminalidad per cápita por ciudad |
-| ZN       | Proporción de terrenos residenciales (>25,000 pies²) |
-| INDUS    | Proporción de tierra para negocios no minoristas |
-| CHAS     | Frontera con río Charles (1: sí, 0: no) |
-| NOX      | Concentración de óxidos nítricos (contaminación del aire) |
-| RM       | Número promedio de habitaciones por vivienda |
-| AGE      | % de unidades construidas antes de 1940 |
-| DIS      | Distancia a cinco centros de empleo |
-| RAD      | Índice de accesibilidad a autopistas radiales |
-| TAX      | Tasa de impuesto a la propiedad |
-| PTRATIO  | Relación alumno-profesor en cada barrio |
-| B        | Proporción poblacional afrodescendiente (cálculo especial) |
-| LSTAT    | % de población con bajo estatus socioeconómico |
-| MEDV     | Valor medio de la vivienda (en miles de dólares) |
+| 🕵️‍♂️ CRIM     | Tasa de criminalidad per cápita por ciudad |
+| 🏡 ZN       | Proporción de terrenos residenciales (>25,000 pies²) |
+| 🏭 INDUS    | Proporción de tierra para negocios no minoristas |
+| 🌊 CHAS     | Frontera con río Charles (1: sí, 0: no) |
+| 🧪 NOX      | Concentración de óxidos nítricos (contaminación del aire) |
+| 🛏️ RM       | Número promedio de habitaciones por vivienda |
+| 🏚️ AGE      | % de unidades construidas antes de 1940 |
+| 📍 DIS      | Distancia a cinco centros de empleo |
+| 🛣️ RAD      | Índice de accesibilidad a autopistas radiales |
+| 💸 TAX      | Tasa de impuesto a la propiedad |
+| 👨‍🏫 PTRATIO  | Relación alumno-profesor en cada barrio |
+| 👥 B        | Proporción poblacional afrodescendiente (cálculo especial) |
+| 📉 LSTAT    | % de población con bajo estatus socioeconómico |
+| 💰 MEDV     | Valor medio de la vivienda (en miles de dólares) |
+
 
 ---
 
@@ -265,7 +266,7 @@ model_test.fit(X_test, y_test)
 
 ---
 
-# 🔮 Predicciones
+## 🔮 Predicciones
 
 Generamos predicciones con ambos modelos.
 
