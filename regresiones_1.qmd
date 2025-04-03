@@ -251,17 +251,12 @@ El modelo de regresión lineal busca minimizar la función:
 $$\hat{y} = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_n x_n$$
 
 ```{python}
-import pandas as pd
-import numpy as np
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import r2_score, mean_squared_error
-# Modelo para entrenamiento
-model_train = LinearRegression()
-model_train.fit(X_train, y_train)
 
-# Modelo exclusivo para comparación (prueba)
-model_test = LinearRegression()
-model_test.fit(X_test, y_test)
+# Entrenar el modelo con datos de entrenamiento
+model = LinearRegression()
+model.fit(X_train, y_train)
+
 ```
 
 ---
@@ -271,8 +266,9 @@ model_test.fit(X_test, y_test)
 Generamos predicciones con ambos modelos.
 
 ```{python}
-y_pred_train = model_train.predict(X_train)
-y_pred_test = model_train.predict(X_test)
+y_pred_train = model.predict(X_train)
+y_pred_test = model.predict(X_test)
+
 ```
 
 ---
@@ -290,11 +286,15 @@ $$R^2 = 1 - \frac{\sum{(y - \hat{y})^2}}{\sum{(y - \bar{y})^2}}$$
 $$RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{y}_i)^2}$$
 
 ```{python}
+from sklearn.metrics import r2_score, mean_squared_error
+import numpy as np
+
 r2_train = r2_score(y_train, y_pred_train)
 rmse_train = np.sqrt(mean_squared_error(y_train, y_pred_train))
 
 r2_test = r2_score(y_test, y_pred_test)
 rmse_test = np.sqrt(mean_squared_error(y_test, y_pred_test))
+
 ```
 
 ---
@@ -302,6 +302,8 @@ rmse_test = np.sqrt(mean_squared_error(y_test, y_pred_test))
 ## 🖥️ Resultados del modelo
 
 ```{python}
+import pandas as pd
+
 resultados = pd.DataFrame({
     "Conjunto": ["Entrenamiento", "Prueba"],
     "R²": [r2_train, r2_test],
@@ -309,6 +311,7 @@ resultados = pd.DataFrame({
 })
 
 display(resultados)
+
 
 ```
 Estos resultados indican un buen desempeño en entrenamiento, pero una caída significativa en la prueba sugiere sobreajuste.
@@ -326,45 +329,31 @@ else:
     diagnostico = "✅ Buen ajuste: generaliza bien."
 
 print(diagnostico)
+
 ```
 
 El diagnóstico confirma que existe un problema de sobreajuste.
 
 ---
 
-## 🔖 Coeficientes (Entrenamiento)
+## 🔖 Coeficientes
 
 Los coeficientes indican cuánto influye cada variable en la predicción.
 
 ```{python}
-coef_train_df = pd.DataFrame({
+coef_df = pd.DataFrame({
     "Variable": X.columns,
-    "Coeficiente": model_train.coef_
+    "Coeficiente": model.coef_
 })
 
-coef_train_df
+coef_df
+
 ```
 
 Observamos que variables como `RM` (habitaciones promedio) tienen fuerte impacto positivo, mientras que `NOX` (contaminación) tiene un impacto negativo significativo.
 
 ---
 
-## 🔖 Coeficientes (Prueba)
-
-Coeficientes obtenidos del modelo ajustado exclusivamente con datos de prueba.
-
-```{python}
-coef_test_df = pd.DataFrame({
-    "Variable": X.columns,
-    "Coeficiente": model_test.coef_
-})
-
-coef_test_df
-```
-
-Comparativamente, los coeficientes en prueba muestran fuertes variaciones respecto al modelo de entrenamiento, indicando inestabilidad y la necesidad de regularización.
-
----
 
 ## 📊 Comparación de Coeficientes: Entrenamiento vs Prueba {.scrollable}
 
@@ -372,43 +361,19 @@ Comparativamente, los coeficientes en prueba muestran fuertes variaciones respec
 #| echo: false
 #| code-overflow: wrap
 
+
 import matplotlib.pyplot as plt
 import numpy as np
 
-# Datos base
 variables = X.columns
-coef_train = model_train.coef_
-coef_test = model_test.coef_
-coef_diff = np.abs(coef_train - coef_test)
+coef = model.coef_
 
-# Crear subplots
-fig, axs = plt.subplots(1, 3, figsize=(18, 6))
-
-# 1️⃣ Coeficientes en entrenamiento y prueba
-axs[0].bar(variables, coef_train, alpha=0.7, label='Entrenamiento')
-axs[0].bar(variables, coef_test, alpha=0.7, label='Prueba')
-axs[0].set_title("Coeficientes por variable")
-axs[0].tick_params(axis='x', rotation=45)
-axs[0].set_ylabel("Valor del coeficiente")
-axs[0].legend()
-
-# 2️⃣ Diferencias absolutas
-axs[1].bar(variables, coef_diff, color='tomato')
-axs[1].set_title("Diferencia absoluta entre coeficientes")
-axs[1].tick_params(axis='x', rotation=45)
-axs[1].set_ylabel("|Entrenamiento - Prueba|")
-
-# 3️⃣ Dispersión
-axs[2].scatter(coef_train, coef_test)
-axs[2].plot([-10, 10], [-10, 10], 'r--')
-axs[2].set_title("Dispersión: Entrenamiento vs Prueba")
-axs[2].set_xlabel("Coef. Entrenamiento")
-axs[2].set_ylabel("Coef. Prueba")
-axs[2].grid(True)
-
-plt.suptitle("🔍 Análisis de Estabilidad del Modelo Lineal", fontsize=16)
+plt.figure(figsize=(10, 5))
+plt.bar(variables, coef)
+plt.xticks(rotation=45)
+plt.title("Coeficientes del Modelo de Regresión Lineal")
+plt.ylabel("Valor del Coeficiente")
+plt.grid(True)
 plt.tight_layout()
 plt.show()
 ```
-
-Esta gráfica muestra claramente las discrepancias en los coeficientes entre ambos conjuntos, reforzando el diagnóstico de sobreajuste.
