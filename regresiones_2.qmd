@@ -142,10 +142,25 @@ plt.show()
 
 ## 📌 Conclusión final de los resultados obtenidos
 
-| Modelo | R² | RMSE | R² CV promedio |
-|--------|----|------|----------------|
-| Ridge  | `r2_ridge:.2f` | `rmse_ridge:.2f` | `ridge_cv.mean():.2f` |
-| Lasso  | `r2_lasso:.2f` | `rmse_lasso:.2f` | `lasso_cv.mean():.2f` |
+```{python}
+import pandas as pd
+
+# Suponiendo que ya tienes calculados estos valores:
+# r2_ridge, rmse_ridge, ridge_cv
+# r2_lasso, rmse_lasso, lasso_cv
+
+# Crear el DataFrame resumen
+resultados_df = pd.DataFrame({
+    'Modelo': ['Ridge', 'Lasso'],
+    'R²': [r2_ridge, r2_lasso],
+    'RMSE': [rmse_ridge, rmse_lasso],
+    'R² CV promedio': [ridge_cv.mean(), lasso_cv.mean()]
+})
+
+# Mostrar el DataFrame con dos decimales
+resultados_df = resultados_df.round(2)
+resultados_df
+```
 
 ---
 
@@ -159,4 +174,96 @@ plt.show()
 > ✅ Ridge y Lasso son herramientas clave para construir modelos más robustos y útiles en producción.
 
 ---
+
+## 📘  Números y estructuras matemáticas
+
+## 🔹 Escalares
+- Un **escalar** es un único número.
+- Representa una cantidad en una dimensión.
+- Ejemplo: `x = 5`
+
+## 🔹 Vectores
+- Lista ordenada de números (componentes).
+- Dirección y magnitud:
+
+$\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ \dots \\ x_n \end{bmatrix}$
+
+## 🔹 Matrices
+- Tabla bidimensional de números:
+
+$ A = \begin{bmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{bmatrix}$
+
+## 🔹 Tensors
+- Generalización a múltiples dimensiones.
+- Ej. imágenes RGB, secuencias, videos, etc.
+
+---
+
+# 📘 Probabilidad y distribuciones
+
+## 🔹 Fundamentos
+- **Probabilidad** mide incertidumbre.
+- **Variable aleatoria**: asigna valores a eventos.
+
+## 🔹 Distribuciones comunes
+- **Bernoulli**, **Binomial**, **Normal**:
+
+
+$\mathcal{N}(x; \mu, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left( -\frac{(x - \mu)^2}{2\sigma^2} \right)$
+
+
+![Distribuciones comunes](distr.png)
+
+
+---
+
+# 📘 Teoría de la información
+
+## 🔹 Entropía
+
+$H(X) = -\sum_{x} P(x) \log P(x)$
+
+## 🔹 Entropía cruzada
+
+$H(P, Q) = -\sum_x P(x) \log Q(x)$
+
+## 🔹 Divergencia KL
+
+$D_{KL}(P \| Q) = \sum_x P(x) \log \frac{P(x)}{Q(x)}
+$
+
+## 🔹 Información mutua
+
+$I(X; Y) = H(X) - H(X | Y)
+$
+
+---
+
+# 📘 Parámetros y optimización
+
+## 🔹 Parámetros vs Hiperparámetros
+- **Parámetros**: aprendidos durante entrenamiento (ej. pesos  $W$ ).
+- **Hiperparámetros**: definidos antes (ej. tasa de aprendizaje). Ejemplo, en ridge y lasso, $\lambda$
+
+## 🔹 Optimización
+- Minimizar la función de pérdida.
+
+### Métodos:
+- **Gradiente descendiente**:
+
+$
+\theta \leftarrow \theta - \eta \nabla_\theta J(\theta)
+$
+
+- **SGD**, **Adam**, **RMSProp**
+
+---
+
+# ¡Gracias por tu atención! 🙌
+
+- Material basado en *Deep Learning* — Goodfellow, Bengio y Courville.
+- Presentación para uso docente.
+
+---
+
 

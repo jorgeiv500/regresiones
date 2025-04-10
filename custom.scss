@@ -57,3 +57,29 @@ $presentation-heading-letter-spacing: normal !default;
 .reveal .cell-output table {
   font-size: 0.75em;
 }
+
+/* 🧠 Ajustes visuales para bloques de código */
+.reveal pre code {
+  font-size: 0.75em;          /* Letra más pequeña */
+  max-height: 200px;          /* Altura máxima de la caja de código */
+  overflow-y: auto;           /* Scroll vertical si excede */
+  overflow-x: auto;           /* Scroll horizontal si es necesario */
+  display: block;
+  padding: 1rem;
+  border-radius: 6px;
+  background-color: #1e1e1e;  /* Fondo oscuro estilo 'dracula' */
+  color: #f8f8f2;             /* Texto claro */
+}
+
+/* Limitar altura de las cajas de código incluyendo contenedor */
+.reveal div.cell > pre,        /* Contenedor del bloque */
+.reveal pre code {
+  max-height: 250px;           /* Ajusta la altura a tu gusto */
+  overflow-y: auto;            /* Scroll si excede */
+  font-size: 0.75em;           /* Letra más pequeña */
+  background-color: #1e1e1e;   /* Estilo oscuro (opcional) */
+  color: #f8f8f2;
+  border-radius: 6px;
+  padding: 1em;
+}
+
