@@ -434,7 +434,6 @@
 <li><a href="#/formulación-matemática-transbordo" id="/toc-formulación-matemática-transbordo">🔣 Formulación Matemática Transbordo</a></li>
 <li><a href="#/enunciado-del-problema-de-transbordo" id="/toc-enunciado-del-problema-de-transbordo">🔁 Enunciado del Problema de Transbordo</a></li>
 <li><a href="#/diagrama-del-modelo-de-transbordo" id="/toc-diagrama-del-modelo-de-transbordo">🌐 Diagrama del modelo de Transbordo</a></li>
-<li><a href="#/pyomo-modelo-de-transbordo-con-highlight-code" id="/toc-pyomo-modelo-de-transbordo-con-highlight-code">🧮 Pyomo: Modelo de Transbordo con highlight-code</a></li>
 <li><a href="#/comparativa-entre-modelos-de-flujo" id="/toc-comparativa-entre-modelos-de-flujo">📊 Comparativa entre Modelos de Flujo</a></li>
 <li><a href="#/conclusión-io-y-modelos-de-flujo" id="/toc-conclusión-io-y-modelos-de-flujo">🧠 Conclusión: IO y Modelos de Flujo</a></li>
 </ul>
@@ -620,7 +619,7 @@
 </section>
 <section id="pyomo-asignación-binaria" class="slide level2">
 <h2>💻 Pyomo: Asignación Binaria</h2>
-<div id="b9e41b7d" class="cell" data-execution_count="1">
+<div id="24311f61" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb4" data-code-line-numbers="1-17|19-27|29|37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="im">from</span> pyomo.environ <span class="im">import</span> <span class="op">*</span></span>
 <span id="cb4-2"><a href=""></a><span class="im">import</span> os</span>
 <span id="cb4-3"><a href=""></a><span class="im">import</span> random</span>
@@ -670,16 +669,16 @@
 <span id="cb4-47"><a href=""></a>    <span class="cf">for</span> j <span class="kw">in</span> D:</span>
 <span id="cb4-48"><a href=""></a>        <span class="bu">print</span>(i, j, caso_asig.x[i, j]())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>El óptimo es = 11.0
-T1 P1 0.0
+<pre><code>El óptimo es = 8.0
+T1 P1 1.0
 T1 P2 0.0
-T1 P3 1.0
+T1 P3 0.0
 T2 P1 0.0
 T2 P2 1.0
 T2 P3 0.0
-T3 P1 1.0
+T3 P1 0.0
 T3 P2 0.0
-T3 P3 0.0</code></pre>
+T3 P3 1.0</code></pre>
 </div>
 </div>
 </section>
@@ -796,43 +795,6 @@ T3 P3 0.0</code></pre>
 </div>
 </div>
 </div>
-</section>
-<section id="pyomo-modelo-de-transbordo-con-highlight-code" class="slide level2 smaller">
-<h2>🧮 Pyomo: Modelo de Transbordo con highlight-code</h2>
-<div class="sourceCode" id="cb7" data-auto-animate="true"><pre class="sourceCode numberSource python fragment number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a><span class="co">#| code-line-numbers: true</span></span>
-<span id="cb7-2"><a href=""></a><span class="im">from</span> pyomo.environ <span class="im">import</span> <span class="op">*</span></span>
-<span id="cb7-3"><a href=""></a><span class="im">import</span> os</span>
-<span id="cb7-4"><a href=""></a>os.environ[<span class="st">'NEOS_EMAIL'</span>] <span class="op">=</span> <span class="st">'jorgei.romerog@utadeo.edu.co'</span></span>
-<span id="cb7-5"><a href=""></a></span>
-<span id="cb7-6"><a href=""></a>plantas <span class="op">=</span> [<span class="st">'P1'</span>, <span class="st">'P2'</span>]</span>
-<span id="cb7-7"><a href=""></a>hubs <span class="op">=</span> [<span class="st">'H1'</span>]</span>
-<span id="cb7-8"><a href=""></a>tiendas <span class="op">=</span> [<span class="st">'T1'</span>, <span class="st">'T2'</span>, <span class="st">'T3'</span>]</span>
-<span id="cb7-9"><a href=""></a></span>
-<span id="cb7-10"><a href=""></a>arcos <span class="op">=</span> [(<span class="st">'P1'</span>, <span class="st">'H1'</span>), (<span class="st">'P2'</span>, <span class="st">'H1'</span>), (<span class="st">'H1'</span>, <span class="st">'T1'</span>), (<span class="st">'H1'</span>, <span class="st">'T2'</span>), (<span class="st">'H1'</span>, <span class="st">'T3'</span>)]</span>
-<span id="cb7-11"><a href=""></a></span>
-<span id="cb7-12"><a href=""></a>costos <span class="op">=</span> {(<span class="st">'P1'</span>,<span class="st">'H1'</span>):<span class="dv">4</span>, (<span class="st">'P2'</span>,<span class="st">'H1'</span>):<span class="dv">3</span>, (<span class="st">'H1'</span>,<span class="st">'T1'</span>):<span class="dv">5</span>, (<span class="st">'H1'</span>,<span class="st">'T2'</span>):<span class="dv">2</span>, (<span class="st">'H1'</span>,<span class="st">'T3'</span>):<span class="dv">6</span>}</span>
-<span id="cb7-13"><a href=""></a>b <span class="op">=</span> {<span class="st">'P1'</span>:<span class="op">-</span><span class="dv">20</span>, <span class="st">'P2'</span>:<span class="op">-</span><span class="dv">25</span>, <span class="st">'H1'</span>:<span class="dv">0</span>, <span class="st">'T1'</span>:<span class="dv">10</span>, <span class="st">'T2'</span>:<span class="dv">15</span>, <span class="st">'T3'</span>:<span class="dv">20</span>}</span>
-<span id="cb7-14"><a href=""></a></span>
-<span id="cb7-15"><a href=""></a>modelo_trans <span class="op">=</span> ConcreteModel()</span>
-<span id="cb7-16"><a href=""></a>nodos <span class="op">=</span> plantas <span class="op">+</span> hubs <span class="op">+</span> tiendas</span>
-<span id="cb7-17"><a href=""></a>modelo_trans.x <span class="op">=</span> Var(arcos, domain<span class="op">=</span>NonNegativeReals)</span>
-<span id="cb7-18"><a href=""></a></span>
-<span id="cb7-19"><a href=""></a>modelo_trans.obj <span class="op">=</span> Objective(expr<span class="op">=</span><span class="bu">sum</span>(costos[i]<span class="op">*</span>modelo_trans.x[i] <span class="cf">for</span> i <span class="kw">in</span> arcos), sense<span class="op">=</span>minimize)</span>
-<span id="cb7-20"><a href=""></a></span>
-<span id="cb7-21"><a href=""></a>modelo_trans.bal <span class="op">=</span> ConstraintList()</span>
-<span id="cb7-22"><a href=""></a><span class="cf">for</span> n <span class="kw">in</span> nodos:</span>
-<span id="cb7-23"><a href=""></a>    entrada <span class="op">=</span> <span class="bu">sum</span>(modelo_trans.x[i,j] <span class="cf">for</span> (i,j) <span class="kw">in</span> arcos <span class="cf">if</span> j<span class="op">==</span>n)</span>
-<span id="cb7-24"><a href=""></a>    salida <span class="op">=</span> <span class="bu">sum</span>(modelo_trans.x[n,j] <span class="cf">for</span> (n,j) <span class="kw">in</span> arcos <span class="cf">if</span> n<span class="op">==</span>n)</span>
-<span id="cb7-25"><a href=""></a>    modelo_trans.bal.add(expr<span class="op">=</span>salida <span class="op">-</span> entrada <span class="op">==</span> b[n])</span>
-<span id="cb7-26"><a href=""></a></span>
-<span id="cb7-27"><a href=""></a>solver <span class="op">=</span> SolverManagerFactory(<span class="st">'neos'</span>)</span>
-<span id="cb7-28"><a href=""></a>results <span class="op">=</span> solver.solve(modelo_trans, solver<span class="op">=</span><span class="st">'cplex'</span>)</span>
-<span id="cb7-29"><a href=""></a></span>
-<span id="cb7-30"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Costo mínimo total: </span><span class="sc">{</span>modelo_trans<span class="sc">.</span>obj()<span class="sc">:.0f}</span><span class="ss">"</span>)</span>
-<span id="cb7-31"><a href=""></a><span class="cf">for</span> i <span class="kw">in</span> arcos:</span>
-<span id="cb7-32"><a href=""></a>    val <span class="op">=</span> modelo_trans.x[i]()</span>
-<span id="cb7-33"><a href=""></a>    <span class="cf">if</span> val <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb7-34"><a href=""></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>val<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="comparativa-entre-modelos-de-flujo" class="slide level2">
 <h2>📊 Comparativa entre Modelos de Flujo</h2>
