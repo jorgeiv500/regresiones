@@ -1,0 +1,165 @@
+---
+title: "🚛 Resolución de Problemas de Transporte en Python"
+subtitle: "📦 Programación Lineal con Pyomo"
+author: "👨‍🏫 Jorge Iván Romero Gelvez"
+institute: "🏛️ Universidad Jorge Tadeo Lozano"
+date: "📅 Abril 2025"
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    highlight-style: dracula
+    code-line-numbers: true
+    code-annotations: hover
+    mermaid:
+      theme: forest
+    transition: fade
+    chalkboard: true
+    logo: Utadeo70-fondoblanco.png
+    toc: true
+    toc-title: "Contenido"
+    toc-depth: 2
+    scrollable: true
+execute:
+  echo: true
+  warning: false
+jupyter: python3
+---
+
+## 🎯 Introducción al Problema de Transporte
+
+- Es un caso clásico de Programación Lineal.
+- Objetivo: transportar bienes desde almacenes (fuentes) hasta proyectos (destinos) **al mínimo costo**.
+- Se basa en datos de:
+  - Capacidades de suministro
+  - Demandas en los destinos
+  - Costos unitarios de transporte
+
+---
+
+## 🌐 Representación del problema
+
+![Esquema del problema de transporte](https://machinelearninggeek.com/wp-content/uploads/2022/01/image-10.png)
+
+- Nodos: almacenes (orígenes) y proyectos (destinos).
+- Arcos: rutas posibles entre ellos con costos asociados.
+
+---
+
+## 📋 Datos del problema
+
+- Almacenes: A, B, C
+- Proyectos: 1, 2, 3
+
+```python
+almacenes = ['A', 'B', 'C']
+proyectos = ['1', '2', '3']
+
+suministro = {'A': 300, 'B': 600, 'C': 600}
+demanda = {'1': 150, '2': 450, '3': 900}
+
+costos = {
+    ('A','1'): 5, ('A','2'): 1, ('A','3'): 9,
+    ('B','1'): 4, ('B','2'): 2, ('B','3'): 8,
+    ('C','1'): 8, ('C','2'): 7, ('C','3'): 2
+}
+```
+
+---
+
+## 🧮 Formulación en Pyomo
+
+```python
+from pyomo.environ import *
+
+model = ConcreteModel()
+model.Rutas = Set(initialize=[(i,j) for i in almacenes for j in proyectos])
+model.X = Var(model.Rutas, domain=NonNegativeReals)
+
+model.objetivo = Objective(
+    expr=sum(costos[i] * model.X[i] for i in model.Rutas),
+    sense=minimize
+)
+```
+
+---
+
+## 🔧 Restricciones de oferta y demanda
+
+```python
+model.oferta = ConstraintList()
+for i in almacenes:
+    model.oferta.add(sum(model.X[i,j] for j in proyectos) <= suministro[i])
+
+model.demanda = ConstraintList()
+for j in proyectos:
+    model.demanda.add(sum(model.X[i,j] for i in almacenes) >= demanda[j])
+```
+
+---
+
+## 🧠 Resolviendo el modelo
+
+```python
+from pyomo.opt import SolverFactory
+opt = SolverFactory('glpk')
+result = opt.solve(model)
+model.display()
+```
+
+---
+
+## 📊 Resultados
+
+```python
+for i in model.Rutas:
+    if model.X[i]() > 0:
+        print(f"Ruta {i}: {model.X[i]():.0f} unidades")
+
+print(f"Costo mínimo total: {model.objetivo():.0f}")
+```
+
+📌 Resultado esperado:
+```
+Ruta ('A', '2') = 300
+Ruta ('B', '1') = 150
+Ruta ('B', '2') = 150
+Ruta ('B', '3') = 300
+Ruta ('C', '3') = 600
+Costo mínimo total: 4800
+```
+
+---
+
+## 🧾 Tablas de datos
+
+### Tabla de Suministro
+| Almacén | Capacidad |
+|---------|-----------|
+| A       | 300       |
+| B       | 600       |
+| C       | 600       |
+
+### Tabla de Demanda
+| Proyecto | Demanda |
+|----------|---------|
+| 1        | 150     |
+| 2        | 450     |
+| 3        | 900     |
+
+### Matriz de Costos
+| Desde \ Hacia | 1 | 2 | 3 |
+|---------------|---|---|---|
+| A             | 5 | 1 | 9 |
+| B             | 4 | 2 | 8 |
+| C             | 8 | 7 | 2 |
+
+---
+
+## 🧾 Conclusión
+
+- El modelo de transporte permite tomar decisiones óptimas en distribución logística.
+- Pyomo ofrece una sintaxis clara y poderosa para formular el modelo.
+- Se puede extender fácilmente a modelos más complejos (transbordo, múltiples productos, restricciones adicionales).
+
+---
