@@ -1,9 +1,9 @@
 ---
-title: "📦 Modelos de Redes en Logística y Operaciones"
+title: "📦 Modelos de Redes lineales: De transporte a Transbordo"
 subtitle: "🔗 Transporte, Asignación, Transbordo y Flujos Multicommodity"
 author: "👨‍🏫 Jorge Iván Romero Gelvez"
 institute: "🏛️ Universidad Jorge Tadeo Lozano"
-date: "📅 Abril 2025"
+date: today
 format: 
   revealjs:
     theme: [default, custom.scss]
@@ -27,6 +27,146 @@ execute:
   echo: true
   freeze: false
 jupyter: python3
+---
+## 🎬 Introducción
+
+- Muchos problemas reales pueden modelarse como redes de nodos conectados por arcos.
+- Estos modelos permiten encontrar rutas óptimas, asignaciones eficientes o balances de flujo.
+
+  - 🎯 **Objetivo**: Aprender a representar y resolver modelos clásicos de redes mediante optimización.
+a
+---
+
+## 🧩 ¿Qué es un modelo de red?
+
+Una red dirigida incluye:
+
+- **Nodos**: puntos donde se origina, transforma o termina el flujo.
+- **Arcos**: conexiones con costos, capacidades o flujos.
+
+  💡 **Ejemplo general**:
+  > Distribuir unidades desde nodos origen hasta nodos destino, al menor costo.
+
+---
+
+## 🚛 1. Modelo de Transporte
+
+**Objetivo**: Minimizar el costo de enviar unidades de varios orígenes a varios destinos.
+
+$$
+\min \sum_{i=1}^{m} \sum_{j=1}^{n} c_{ij} x_{ij}
+$$
+
+Sujeto a:
+
+- $$\sum_j x_{ij} = a_i \quad \forall i$$
+- $$\sum_i x_{ij} = b_j \quad \forall j$$
+- $$x_{ij} \geq 0$$
+
+```mermaid
+flowchart LR
+  N1[Origen 1] -->|x11| D1[Destino 1]
+  N1 -->|x12| D2[Destino 2]
+  N2[Origen 2] -->|x21| D1
+  N2 -->|x22| D2
+```
+
+---
+
+## 💻 Código Pyomo: Transporte
+
+```python
+from pyomo.environ import *
+
+model = ConcreteModel()
+
+origenes = ['N1', 'N2']
+destinos = ['D1', 'D2']
+c = {('N1','D1'): 4, ('N1','D2'): 6, ('N2','D1'): 5, ('N2','D2'): 3}
+a = {'N1': 30, 'N2': 40}
+b = {'D1': 20, 'D2': 50}
+
+model.x = Var(c.keys(), domain=NonNegativeReals)
+model.obj = Objective(expr=sum(c[i]*model.x[i] for i in c), sense=minimize)
+model.oferta = Constraint(origenes, rule=lambda m, i: sum(m.x[i,j] for j in destinos) == a[i])
+model.demanda = Constraint(destinos, rule=lambda m, j: sum(m.x[i,j] for i in origenes) == b[j])
+```
+
+---
+
+## 🎯 2. Modelo de Asignación
+
+Es un caso especial del modelo de transporte donde todas las ofertas y demandas son 1.
+
+$$
+\min \sum_{i=1}^{n} \sum_{j=1}^{n} c_{ij} x_{ij}
+$$
+
+Sujeto a:
+
+- $$\sum_j x_{ij} = 1 \quad \forall i$$
+- $$\sum_i x_{ij} = 1 \quad \forall j$$
+- $$x_{ij} \in \{0,1\}$$
+
+---
+
+## 💻 Pyomo: Asignación Binaria
+
+```python
+trabajadores = ['E1', 'E2', 'E3']
+tareas = ['T1', 'T2', 'T3']
+cost = {('E1','T1'):3, ('E1','T2'):2, ('E1','T3'):4,
+        ('E2','T1'):4, ('E2','T2'):3, ('E2','T3'):1,
+        ('E3','T1'):5, ('E3','T2'):2, ('E3','T3'):2}
+
+model.x = Var(cost.keys(), domain=Binary)
+model.obj = Objective(expr=sum(cost[i]*model.x[i] for i in cost), sense=minimize)
+model.restr1 = Constraint(trabajadores, rule=lambda m, i: sum(m.x[i,j] for j in tareas) == 1)
+model.restr2 = Constraint(tareas, rule=lambda m, j: sum(m.x[i,j] for i in trabajadores) == 1)
+```
+
+---
+
+## 🔁 3. Modelo de Transbordo
+
+Permite el paso por nodos intermedios.
+
+$$
+\sum_j x_{ij} - \sum_j x_{ji} = b_i
+$$
+
+- $b_i < 0$: nodo emisor
+- $b_i > 0$: nodo receptor
+- $b_i = 0$: nodo de tránsito
+
+---
+
+## 💻 Pyomo: Transbordo
+
+```python
+nodos = ['N1','N2','N3']
+arcos = [('N1','N2'),('N2','N3'),('N1','N3')]
+costos = {('N1','N2'):3, ('N2','N3'):2, ('N1','N3'):5}
+bi = {'N1': -60, 'N2': 0, 'N3': 60}
+
+model.x = Var(arcos, domain=NonNegativeReals)
+model.obj = Objective(expr=sum(costos[i]*model.x[i] for i in arcos), sense=minimize)
+model.balances = Constraint(nodos, rule=lambda m, i:
+    sum(m.x[i,j] for (ii,j) in arcos if ii == i) - sum(m.x[j,i] for (j,jj) in arcos if jj == i) == bi[i])
+```
+
+---
+
+## 📊 Métodos de Resolución
+
+| Método              | Tipo       | Ejemplo                   |
+|---------------------|------------|----------------------------|
+| Simplex, GLPK, CBC | Exacto     | Transporte, transbordo     |
+| Húngaro             | Exacto     | Asignación binaria         |
+| Ramificación y Acot.| Exacto     | Programación entera        |
+| Búsqueda local      | Aproximado | Vecino más cercano         |
+| Metaheurísticas     | Aproximado | Recocido, genético         |
+
 ---
 
 ## 📌 Introducción general

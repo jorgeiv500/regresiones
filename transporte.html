@@ -8,11 +8,11 @@
 <link href="transporte_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="transporte_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="transporte_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.5.55">
 
   <meta name="author" content="👨‍🏫 Jorge Iván Romero Gelvez">
-  <meta name="dcterms.date" content="2025-01-01">
-  <title>🚛 Resolución de Problemas de Transporte en Python</title>
+  <meta name="dcterms.date" content="2025-04-10">
+  <title>Problemas de Transporte, Asignación y Transbordo</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -32,7 +32,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -43,7 +43,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -224,7 +224,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -388,14 +389,17 @@
       margin-right: 0; 
     }
   </style>
+  <meta name="mermaid-theme" content="forest">
+  <script src="transporte_files/libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="transporte_files/libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="transporte_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">🚛 Resolución de Problemas de Transporte en Python</h1>
-  <p class="subtitle">📦 Programación Lineal con Pyomo</p>
+  <h1 class="title">Problemas de Transporte, Asignación y Transbordo</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -408,36 +412,69 @@
     </div>
 </div>
 
-  <p class="date">2025-01-01</p>
+  <p class="date">2025-04-10</p>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Contenido</h2>
 <ul>
-<li><a href="#/introducción-al-problema-de-transporte" id="/toc-introducción-al-problema-de-transporte">🎯 Introducción al Problema de Transporte</a></li>
+<li><a href="#/introducción-general" id="/toc-introducción-general">🎯 Introducción General</a></li>
+<li><a href="#/problema-de-transporte" id="/toc-problema-de-transporte">🚚 Problema de Transporte</a></li>
 <li><a href="#/representación-del-problema" id="/toc-representación-del-problema">🌐 Representación del problema</a></li>
-<li><a href="#/datos-del-problema" id="/toc-datos-del-problema">📋 Datos del problema</a></li>
-<li><a href="#/formulación-en-pyomo" id="/toc-formulación-en-pyomo">🧮 Formulación en Pyomo</a></li>
-<li><a href="#/restricciones-de-oferta-y-demanda" id="/toc-restricciones-de-oferta-y-demanda">🔧 Restricciones de oferta y demanda</a></li>
-<li><a href="#/resolviendo-el-modelo" id="/toc-resolviendo-el-modelo">🧠 Resolviendo el modelo</a></li>
-<li><a href="#/resultados" id="/toc-resultados">📊 Resultados</a></li>
-<li><a href="#/tablas-de-datos" id="/toc-tablas-de-datos">🧾 Tablas de datos</a></li>
-<li><a href="#/conclusión" id="/toc-conclusión">🧾 Conclusión</a></li>
-<li></li>
+<li><a href="#/formulación-matemática-transporte" id="/toc-formulación-matemática-transporte">🔣 Formulación Matemática Transporte</a></li>
+<li><a href="#/caso-hillier-envío-de-madera-al-mercado" id="/toc-caso-hillier-envío-de-madera-al-mercado">Caso Hillier: Envío de madera al mercado</a></li>
+<li><a href="#/datos-del-problema-hillier" id="/toc-datos-del-problema-hillier">📋 Datos del problema (Hillier)</a></li>
+<li><a href="#/costos-y-parámetros" id="/toc-costos-y-parámetros">🔣 Costos y parámetros</a></li>
+<li><a href="#/pyomo-formulación-del-modelo" id="/toc-pyomo-formulación-del-modelo">🧮 Pyomo: Formulación del modelo</a></li>
+<li><a href="#/solución-óptima-esperada" id="/toc-solución-óptima-esperada">✅ Solución óptima esperada</a></li>
+<li><a href="#/problema-de-asignación" id="/toc-problema-de-asignación">👥 Problema de Asignación</a></li>
+<li><a href="#/formulación-asignación" id="/toc-formulación-asignación">🔣 Formulación Asignación</a></li>
+<li><a href="#/contexto-del-problema-de-asignación" id="/toc-contexto-del-problema-de-asignación">🧠 Contexto del Problema de Asignación</a></li>
+<li><a href="#/pyomo-asignación-binaria" id="/toc-pyomo-asignación-binaria">💻 Pyomo: Asignación Binaria</a></li>
+<li><a href="#/problema-de-transbordo" id="/toc-problema-de-transbordo">🔁 Problema de Transbordo</a></li>
+<li><a href="#/formulación-matemática-transbordo" id="/toc-formulación-matemática-transbordo">🔣 Formulación Matemática Transbordo</a></li>
+<li><a href="#/enunciado-del-problema-de-transbordo" id="/toc-enunciado-del-problema-de-transbordo">🔁 Enunciado del Problema de Transbordo</a></li>
+<li><a href="#/diagrama-del-modelo-de-transbordo" id="/toc-diagrama-del-modelo-de-transbordo">🌐 Diagrama del modelo de Transbordo</a></li>
+<li><a href="#/pyomo-modelo-de-transbordo-con-highlight-code" id="/toc-pyomo-modelo-de-transbordo-con-highlight-code">🧮 Pyomo: Modelo de Transbordo con highlight-code</a></li>
+<li><a href="#/comparativa-entre-modelos-de-flujo" id="/toc-comparativa-entre-modelos-de-flujo">📊 Comparativa entre Modelos de Flujo</a></li>
+<li><a href="#/conclusión-io-y-modelos-de-flujo" id="/toc-conclusión-io-y-modelos-de-flujo">🧠 Conclusión: IO y Modelos de Flujo</a></li>
 </ul>
 </nav>
 </section>
-<section id="introducción-al-problema-de-transporte" class="slide level2">
-<h2>🎯 Introducción al Problema de Transporte</h2>
+<section id="introducción-general" class="slide level2">
+<h2>🎯 Introducción General</h2>
+<div class="fragment">
 <ul>
-<li>Es un caso clásico de Programación Lineal.</li>
-<li>Objetivo: transportar bienes desde almacenes (fuentes) hasta proyectos (destinos) <strong>al mínimo costo</strong>.</li>
-<li>Se basa en datos de:
-<ul>
-<li>Capacidades de suministro</li>
-<li>Demandas en los destinos</li>
-<li>Costos unitarios de transporte</li>
-</ul></li>
+<li>Transporte, Asignación y Transbordo son modelos clave en logística y operaciones.</li>
 </ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Todos se basan en minimizar el costo de mover recursos bajo restricciones.</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Son casos particulares del problema de <strong>flujo de costo mínimo</strong>.</li>
+</ul>
+</div>
+</section>
+<section id="problema-de-transporte" class="slide level2">
+<h2>🚚 Problema de Transporte</h2>
+<div class="fragment">
+<ul>
+<li>Llevar productos desde fuentes a destinos al menor costo.</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Oferta total = demanda total.</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Representa un flujo directo sin nodos intermedios.</li>
+</ul>
+</div>
 </section>
 <section id="representación-del-problema" class="slide level2">
 <h2>🌐 Representación del problema</h2>
@@ -447,162 +484,422 @@
 <li>Arcos: rutas posibles entre ellos con costos asociados.</li>
 </ul>
 </section>
-<section id="datos-del-problema" class="slide level2">
-<h2>📋 Datos del problema</h2>
+<section id="formulación-matemática-transporte" class="slide level2">
+<h2>🔣 Formulación Matemática Transporte</h2>
+<p><span class="math display">\[
+\min \sum_{i=1}^{m} \sum_{j=1}^{n} c_{ij} x_{ij}
+\]</span> Sujeto a:</p>
+<div class="fragment">
 <ul>
-<li>Almacenes: A, B, C</li>
-<li>Proyectos: 1, 2, 3</li>
+<li>Oferta: <span class="math inline">\(\sum_j x_{ij} = a_i\)</span></li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>almacenes <span class="op">=</span> [<span class="st">'A'</span>, <span class="st">'B'</span>, <span class="st">'C'</span>]</span>
-<span id="cb1-2"><a href="#cb1-2"></a>proyectos <span class="op">=</span> [<span class="st">'1'</span>, <span class="st">'2'</span>, <span class="st">'3'</span>]</span>
-<span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a>suministro <span class="op">=</span> {<span class="st">'A'</span>: <span class="dv">300</span>, <span class="st">'B'</span>: <span class="dv">600</span>, <span class="st">'C'</span>: <span class="dv">600</span>}</span>
-<span id="cb1-5"><a href="#cb1-5"></a>demanda <span class="op">=</span> {<span class="st">'1'</span>: <span class="dv">150</span>, <span class="st">'2'</span>: <span class="dv">450</span>, <span class="st">'3'</span>: <span class="dv">900</span>}</span>
-<span id="cb1-6"><a href="#cb1-6"></a></span>
-<span id="cb1-7"><a href="#cb1-7"></a>costos <span class="op">=</span> {</span>
-<span id="cb1-8"><a href="#cb1-8"></a>    (<span class="st">'A'</span>,<span class="st">'1'</span>): <span class="dv">5</span>, (<span class="st">'A'</span>,<span class="st">'2'</span>): <span class="dv">1</span>, (<span class="st">'A'</span>,<span class="st">'3'</span>): <span class="dv">9</span>,</span>
-<span id="cb1-9"><a href="#cb1-9"></a>    (<span class="st">'B'</span>,<span class="st">'1'</span>): <span class="dv">4</span>, (<span class="st">'B'</span>,<span class="st">'2'</span>): <span class="dv">2</span>, (<span class="st">'B'</span>,<span class="st">'3'</span>): <span class="dv">8</span>,</span>
-<span id="cb1-10"><a href="#cb1-10"></a>    (<span class="st">'C'</span>,<span class="st">'1'</span>): <span class="dv">8</span>, (<span class="st">'C'</span>,<span class="st">'2'</span>): <span class="dv">7</span>, (<span class="st">'C'</span>,<span class="st">'3'</span>): <span class="dv">2</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="formulación-en-pyomo" class="slide level2">
-<h2>🧮 Formulación en Pyomo</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">from</span> pyomo.environ <span class="im">import</span> <span class="op">*</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a></span>
-<span id="cb2-3"><a href="#cb2-3"></a>model <span class="op">=</span> ConcreteModel()</span>
-<span id="cb2-4"><a href="#cb2-4"></a>model.Rutas <span class="op">=</span> Set(initialize<span class="op">=</span>[(i,j) <span class="cf">for</span> i <span class="kw">in</span> almacenes <span class="cf">for</span> j <span class="kw">in</span> proyectos])</span>
-<span id="cb2-5"><a href="#cb2-5"></a>model.X <span class="op">=</span> Var(model.Rutas, domain<span class="op">=</span>NonNegativeReals)</span>
-<span id="cb2-6"><a href="#cb2-6"></a></span>
-<span id="cb2-7"><a href="#cb2-7"></a>model.objetivo <span class="op">=</span> Objective(</span>
-<span id="cb2-8"><a href="#cb2-8"></a>    expr<span class="op">=</span><span class="bu">sum</span>(costos[i] <span class="op">*</span> model.X[i] <span class="cf">for</span> i <span class="kw">in</span> model.Rutas),</span>
-<span id="cb2-9"><a href="#cb2-9"></a>    sense<span class="op">=</span>minimize</span>
-<span id="cb2-10"><a href="#cb2-10"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="restricciones-de-oferta-y-demanda" class="slide level2">
-<h2>🔧 Restricciones de oferta y demanda</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>model.oferta <span class="op">=</span> ConstraintList()</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="cf">for</span> i <span class="kw">in</span> almacenes:</span>
-<span id="cb3-3"><a href="#cb3-3"></a>    model.oferta.add(<span class="bu">sum</span>(model.X[i,j] <span class="cf">for</span> j <span class="kw">in</span> proyectos) <span class="op">&lt;=</span> suministro[i])</span>
-<span id="cb3-4"><a href="#cb3-4"></a></span>
-<span id="cb3-5"><a href="#cb3-5"></a>model.demanda <span class="op">=</span> ConstraintList()</span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="cf">for</span> j <span class="kw">in</span> proyectos:</span>
-<span id="cb3-7"><a href="#cb3-7"></a>    model.demanda.add(<span class="bu">sum</span>(model.X[i,j] <span class="cf">for</span> i <span class="kw">in</span> almacenes) <span class="op">&gt;=</span> demanda[j])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="resolviendo-el-modelo" class="slide level2">
-<h2>🧠 Resolviendo el modelo</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="im">from</span> pyomo.opt <span class="im">import</span> SolverFactory</span>
-<span id="cb4-2"><a href="#cb4-2"></a>opt <span class="op">=</span> SolverFactory(<span class="st">'glpk'</span>)</span>
-<span id="cb4-3"><a href="#cb4-3"></a>result <span class="op">=</span> opt.solve(model)</span>
-<span id="cb4-4"><a href="#cb4-4"></a>model.display()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="resultados" class="slide level2">
-<h2>📊 Resultados</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="cf">for</span> i <span class="kw">in</span> model.Rutas:</span>
-<span id="cb5-2"><a href="#cb5-2"></a>    <span class="cf">if</span> model.X[i]() <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb5-3"><a href="#cb5-3"></a>        <span class="bu">print</span>(<span class="ss">f"Ruta </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>model<span class="sc">.</span>X[i]()<span class="sc">:.0f}</span><span class="ss"> unidades"</span>)</span>
-<span id="cb5-4"><a href="#cb5-4"></a></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="bu">print</span>(<span class="ss">f"Costo mínimo total: </span><span class="sc">{</span>model<span class="sc">.</span>objetivo()<span class="sc">:.0f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>📌 Resultado esperado:</p>
-<pre><code>Ruta ('A', '2') = 300
-Ruta ('B', '1') = 150
-Ruta ('B', '2') = 150
-Ruta ('B', '3') = 300
-Ruta ('C', '3') = 600
-Costo mínimo total: 4800</code></pre>
-</section>
-<section id="tablas-de-datos" class="slide level2">
-<h2>🧾 Tablas de datos</h2>
-<h3 id="tabla-de-suministro">Tabla de Suministro</h3>
-<table>
-<thead>
-<tr class="header">
-<th>Almacén</th>
-<th>Capacidad</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>A</td>
-<td>300</td>
-</tr>
-<tr class="even">
-<td>B</td>
-<td>600</td>
-</tr>
-<tr class="odd">
-<td>C</td>
-<td>600</td>
-</tr>
-</tbody>
-</table>
-<h3 id="tabla-de-demanda">Tabla de Demanda</h3>
-<table>
-<thead>
-<tr class="header">
-<th>Proyecto</th>
-<th>Demanda</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>150</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>450</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td>900</td>
-</tr>
-</tbody>
-</table>
-<h3 id="matriz-de-costos">Matriz de Costos</h3>
-<table>
-<thead>
-<tr class="header">
-<th>Desde &nbsp;Hacia</th>
-<th>1</th>
-<th>2</th>
-<th>3</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>A</td>
-<td>5</td>
-<td>1</td>
-<td>9</td>
-</tr>
-<tr class="even">
-<td>B</td>
-<td>4</td>
-<td>2</td>
-<td>8</td>
-</tr>
-<tr class="odd">
-<td>C</td>
-<td>8</td>
-<td>7</td>
-<td>2</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="conclusión" class="slide level2">
-<h2>🧾 Conclusión</h2>
+</div>
+<div class="fragment">
 <ul>
-<li>El modelo de transporte permite tomar decisiones óptimas en distribución logística.</li>
-<li>Pyomo ofrece una sintaxis clara y poderosa para formular el modelo.</li>
-<li>Se puede extender fácilmente a modelos más complejos (transbordo, múltiples productos, restricciones adicionales).</li>
+<li>Demanda: <span class="math inline">\(\sum_i x_{ij} = b_j\)</span></li>
 </ul>
+</div>
+<div class="fragment">
+<ul>
+<li>No negatividad: <span class="math inline">\(x_{ij} \geq 0\)</span></li>
+</ul>
+</div>
 </section>
-<section class="slide level2">
+<section id="caso-hillier-envío-de-madera-al-mercado" class="slide level2">
+<h2>Caso Hillier: Envío de madera al mercado</h2>
+<div class="fragment">
+<ul>
+<li>Tres fábricas (f1, f2, f3) deben enviar madera a cinco mercados (m1–m5).</li>
+<li>Se busca minimizar el costo total de transporte.</li>
+<li>Modelo de <strong>transporte clásico</strong> resuelto con Pyomo.</li>
+</ul>
+</div>
+</section>
+<section id="datos-del-problema-hillier" class="slide level2">
+<h2>📋 Datos del problema (Hillier)</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href=""></a></span>
+<span id="cb1-3"><a href=""></a>df <span class="op">=</span> pd.read_excel(<span class="st">'madera.xlsx'</span>, <span class="st">'tren'</span>, index_col<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb1-4"><a href=""></a>O <span class="op">=</span> <span class="bu">list</span>(df.index.<span class="bu">map</span>(<span class="bu">str</span>))</span>
+<span id="cb1-5"><a href=""></a>D <span class="op">=</span> <span class="bu">list</span>(df.columns.<span class="bu">map</span>(<span class="bu">str</span>))</span>
+<span id="cb1-6"><a href=""></a></span>
+<span id="cb1-7"><a href=""></a>cij <span class="op">=</span> {(i, j): df.at[i, j] <span class="cf">for</span> i <span class="kw">in</span> O <span class="cf">for</span> j <span class="kw">in</span> D}</span>
+<span id="cb1-8"><a href=""></a>oferta <span class="op">=</span> {<span class="st">'f1'</span>: <span class="dv">15</span>, <span class="st">'f2'</span>: <span class="dv">20</span>, <span class="st">'f3'</span>: <span class="dv">15</span>}</span>
+<span id="cb1-9"><a href=""></a>demanda <span class="op">=</span> {<span class="st">'m1'</span>: <span class="dv">11</span>, <span class="st">'m2'</span>: <span class="dv">12</span>, <span class="st">'m3'</span>: <span class="dv">9</span>, <span class="st">'m4'</span>: <span class="dv">10</span>, <span class="st">'m5'</span>: <span class="dv">8</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="costos-y-parámetros" class="slide level2">
+<h2>🔣 Costos y parámetros</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="bu">print</span>(cij)</span>
+<span id="cb2-2"><a href=""></a><span class="bu">print</span>(oferta)</span>
+<span id="cb2-3"><a href=""></a><span class="bu">print</span>(demanda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>📌 Resultado esperado: - Costos unitarios por ruta entre fábricas y mercados. - Oferta y demanda bien definidas.</p>
+</section>
+<section id="pyomo-formulación-del-modelo" class="slide level2">
+<h2>🧮 Pyomo: Formulación del modelo</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="im">from</span> pyomo.environ <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb3-2"><a href=""></a><span class="im">import</span> os</span>
+<span id="cb3-3"><a href=""></a>os.environ[<span class="st">'NEOS_EMAIL'</span>] <span class="op">=</span> <span class="st">'jorgei.romerog@utadeo.edu.co'</span></span>
+<span id="cb3-4"><a href=""></a></span>
+<span id="cb3-5"><a href=""></a>caso1 <span class="op">=</span> ConcreteModel()</span>
+<span id="cb3-6"><a href=""></a>caso1.x <span class="op">=</span> Var(O, D, domain<span class="op">=</span>NonNegativeReals)</span>
+<span id="cb3-7"><a href=""></a></span>
+<span id="cb3-8"><a href=""></a>caso1.obj <span class="op">=</span> Objective(</span>
+<span id="cb3-9"><a href=""></a>    expr<span class="op">=</span><span class="bu">sum</span>(cij[i, j] <span class="op">*</span> caso1.x[i, j] <span class="cf">for</span> i <span class="kw">in</span> O <span class="cf">for</span> j <span class="kw">in</span> D),</span>
+<span id="cb3-10"><a href=""></a>    sense<span class="op">=</span>minimize)</span>
+<span id="cb3-11"><a href=""></a></span>
+<span id="cb3-12"><a href=""></a>caso1.ro <span class="op">=</span> ConstraintList()</span>
+<span id="cb3-13"><a href=""></a><span class="cf">for</span> i <span class="kw">in</span> O:</span>
+<span id="cb3-14"><a href=""></a>    caso1.ro.add(expr<span class="op">=</span><span class="bu">sum</span>(caso1.x[i, j] <span class="cf">for</span> j <span class="kw">in</span> D) <span class="op">==</span> oferta[i])</span>
+<span id="cb3-15"><a href=""></a></span>
+<span id="cb3-16"><a href=""></a>caso1.rd <span class="op">=</span> ConstraintList()</span>
+<span id="cb3-17"><a href=""></a><span class="cf">for</span> j <span class="kw">in</span> D:</span>
+<span id="cb3-18"><a href=""></a>    caso1.rd.add(expr<span class="op">=</span><span class="bu">sum</span>(caso1.x[i, j] <span class="cf">for</span> i <span class="kw">in</span> O) <span class="op">==</span> demanda[j])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="solución-óptima-esperada" class="slide level2">
+<h2>✅ Solución óptima esperada</h2>
+<p>Costo mínimo total: <strong>2816.0</strong></p>
+<p>Distribución óptima: - f1 → m1: 6 - f1 → m3: 9 - f2 → m1: 2 - f2 → m4: 10 - f2 → m5: 8 - f3 → m1: 3 - f3 → m2: 12</p>
+<p>🎯 Las demás rutas tienen asignación cero.</p>
+</section>
+<section id="problema-de-asignación" class="slide level2">
+<h2>👥 Problema de Asignación</h2>
+<div class="fragment">
+<ul>
+<li>Cada recurso se asigna a una tarea.</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Oferta y demanda unitaria.</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Variables binarias.</li>
+</ul>
+</div>
+</section>
+<section id="formulación-asignación" class="slide level2">
+<h2>🔣 Formulación Asignación</h2>
+<p><span class="math display">\[
+\min \sum_{i=1}^{n} \sum_{j=1}^{n} c_{ij} x_{ij}
+\]</span> Sujeto a:</p>
+<div class="fragment">
+<ul>
+<li><span class="math inline">\(\sum_j x_{ij} = 1 \quad \forall i\)</span></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li><span class="math inline">\(\sum_i x_{ij} = 1 \quad \forall j\)</span></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li><span class="math inline">\(x_{ij} \in \{0,1\}\)</span></li>
+</ul>
+</div>
+</section>
+<section id="contexto-del-problema-de-asignación" class="slide level2">
+<h2>🧠 Contexto del Problema de Asignación</h2>
+<div class="fragment">
+<p>El problema de asignación es un <strong>caso particular del problema de transporte</strong>.</p>
+</div>
+<div class="fragment">
+<p>Cada recurso (trabajador) debe asignarse a exactamente una tarea.</p>
+</div>
+<div class="fragment">
+<p>La solución busca <strong>minimizar el costo total de asignación</strong>.</p>
+</div>
+<div class="fragment">
+<p>Tiene aplicaciones en programación de turnos, asignación de personal, planificación de producción, etc.</p>
+</div>
+<div class="fragment">
+<p>El modelo matemático es compacto y resoluble de forma eficiente con herramientas de IO.</p>
+</div>
+</section>
+<section id="pyomo-asignación-binaria" class="slide level2">
+<h2>💻 Pyomo: Asignación Binaria</h2>
+<div id="b9e41b7d" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb4" data-code-line-numbers="1-17|19-27|29|37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="im">from</span> pyomo.environ <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb4-2"><a href=""></a><span class="im">import</span> os</span>
+<span id="cb4-3"><a href=""></a><span class="im">import</span> random</span>
+<span id="cb4-4"><a href=""></a></span>
+<span id="cb4-5"><a href=""></a><span class="co"># Correo para acceso a NEOS</span></span>
+<span id="cb4-6"><a href=""></a>os.environ[<span class="st">'NEOS_EMAIL'</span>] <span class="op">=</span> <span class="st">'jorgei.romerog@utadeo.edu.co'</span></span>
+<span id="cb4-7"><a href=""></a></span>
+<span id="cb4-8"><a href=""></a><span class="co"># Definición de conjuntos</span></span>
+<span id="cb4-9"><a href=""></a>O <span class="op">=</span> [<span class="st">'T1'</span>, <span class="st">'T2'</span>, <span class="st">'T3'</span>]</span>
+<span id="cb4-10"><a href=""></a>D <span class="op">=</span> [<span class="st">'P1'</span>, <span class="st">'P2'</span>, <span class="st">'P3'</span>]</span>
+<span id="cb4-11"><a href=""></a></span>
+<span id="cb4-12"><a href=""></a><span class="co"># Costos aleatorios entre trabajadores y tareas</span></span>
+<span id="cb4-13"><a href=""></a>cij <span class="op">=</span> {(i, j): random.randint(<span class="dv">1</span>, <span class="dv">10</span>) <span class="cf">for</span> i <span class="kw">in</span> O <span class="cf">for</span> j <span class="kw">in</span> D}</span>
+<span id="cb4-14"><a href=""></a></span>
+<span id="cb4-15"><a href=""></a><span class="co"># Oferta y demanda unitaria</span></span>
+<span id="cb4-16"><a href=""></a>oferta <span class="op">=</span> {i: <span class="dv">1</span> <span class="cf">for</span> i <span class="kw">in</span> O}</span>
+<span id="cb4-17"><a href=""></a>demanda <span class="op">=</span> {j: <span class="dv">1</span> <span class="cf">for</span> j <span class="kw">in</span> D}</span>
+<span id="cb4-18"><a href=""></a></span>
+<span id="cb4-19"><a href=""></a><span class="co"># Modelo Pyomo</span></span>
+<span id="cb4-20"><a href=""></a>caso_asig <span class="op">=</span> ConcreteModel()</span>
+<span id="cb4-21"><a href=""></a>caso_asig.x <span class="op">=</span> Var(O, D, domain<span class="op">=</span>Binary)</span>
+<span id="cb4-22"><a href=""></a></span>
+<span id="cb4-23"><a href=""></a><span class="co"># Función objetivo: minimizar el costo total</span></span>
+<span id="cb4-24"><a href=""></a>caso_asig.obj <span class="op">=</span> Objective(</span>
+<span id="cb4-25"><a href=""></a>    expr<span class="op">=</span><span class="bu">sum</span>(cij[i, j] <span class="op">*</span> caso_asig.x[i, j] <span class="cf">for</span> i <span class="kw">in</span> O <span class="cf">for</span> j <span class="kw">in</span> D),</span>
+<span id="cb4-26"><a href=""></a>    sense<span class="op">=</span>minimize</span>
+<span id="cb4-27"><a href=""></a>)</span>
+<span id="cb4-28"><a href=""></a></span>
+<span id="cb4-29"><a href=""></a><span class="co"># Restricciones de asignación (oferta)</span></span>
+<span id="cb4-30"><a href=""></a>caso_asig.ro <span class="op">=</span> ConstraintList()</span>
+<span id="cb4-31"><a href=""></a><span class="cf">for</span> i <span class="kw">in</span> O:</span>
+<span id="cb4-32"><a href=""></a>    caso_asig.ro.add(expr<span class="op">=</span><span class="bu">sum</span>(caso_asig.x[i, j] <span class="cf">for</span> j <span class="kw">in</span> D) <span class="op">==</span> oferta[i])</span>
+<span id="cb4-33"><a href=""></a></span>
+<span id="cb4-34"><a href=""></a><span class="co"># Restricciones de tareas (demanda)</span></span>
+<span id="cb4-35"><a href=""></a>caso_asig.rd <span class="op">=</span> ConstraintList()</span>
+<span id="cb4-36"><a href=""></a><span class="cf">for</span> j <span class="kw">in</span> D:</span>
+<span id="cb4-37"><a href=""></a>    caso_asig.rd.add(expr<span class="op">=</span><span class="bu">sum</span>(caso_asig.x[i, j] <span class="cf">for</span> i <span class="kw">in</span> O) <span class="op">==</span> demanda[j])</span>
+<span id="cb4-38"><a href=""></a></span>
+<span id="cb4-39"><a href=""></a><span class="co"># Resolución con NEOS usando CPLEX</span></span>
+<span id="cb4-40"><a href=""></a>solver_manager <span class="op">=</span> SolverManagerFactory(<span class="st">'neos'</span>)</span>
+<span id="cb4-41"><a href=""></a>results <span class="op">=</span> solver_manager.solve(caso_asig, solver<span class="op">=</span><span class="st">'cplex'</span>)</span>
+<span id="cb4-42"><a href=""></a></span>
+<span id="cb4-43"><a href=""></a><span class="co"># Resultados</span></span>
+<span id="cb4-44"><a href=""></a>optimo <span class="op">=</span> caso_asig.obj()</span>
+<span id="cb4-45"><a href=""></a><span class="bu">print</span>(<span class="st">'El óptimo es ='</span>, optimo)</span>
+<span id="cb4-46"><a href=""></a><span class="cf">for</span> i <span class="kw">in</span> O:</span>
+<span id="cb4-47"><a href=""></a>    <span class="cf">for</span> j <span class="kw">in</span> D:</span>
+<span id="cb4-48"><a href=""></a>        <span class="bu">print</span>(i, j, caso_asig.x[i, j]())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>El óptimo es = 11.0
+T1 P1 0.0
+T1 P2 0.0
+T1 P3 1.0
+T2 P1 0.0
+T2 P2 1.0
+T2 P3 0.0
+T3 P1 1.0
+T3 P2 0.0
+T3 P3 0.0</code></pre>
+</div>
+</div>
+</section>
+<section id="problema-de-transbordo" class="slide level2">
+<h2>🔁 Problema de Transbordo</h2>
+<div class="fragment">
+<ul>
+<li>Permite nodos intermedios.</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Generalización del modelo de transporte.</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Algunos nodos tienen <span class="math inline">\(b_i = 0\)</span>.</li>
+</ul>
+</div>
+</section>
+<section id="formulación-matemática-transbordo" class="slide level2">
+<h2>🔣 Formulación Matemática Transbordo</h2>
+<p><span class="math display">\[
+\min \sum_{(i,j) \in A} c_{ij} x_{ij}
+\]</span></p>
+<p>Sujeto a:</p>
+<div class="fragment">
+<ul>
+<li>Balance: <span class="math inline">\(\sum_j x_{ij} - \sum_j x_{ji} = b_i\)</span></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Capacidad: <span class="math inline">\(l_{ij} \leq x_{ij} \leq u_{ij}\)</span></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>No negatividad: <span class="math inline">\(x_{ij} \geq 0\)</span></li>
+</ul>
+</div>
+</section>
+<section id="enunciado-del-problema-de-transbordo" class="slide level2">
+<h2>🔁 Enunciado del Problema de Transbordo</h2>
+<div class="fragment fade-in-then-out">
+<p>Una empresa distribuye productos desde 2 plantas hacia 3 tiendas.</p>
+</div>
+<div class="fragment fade-in-then-out">
+<p>Para reducir costos logísticos, considera usar <strong>centros de consolidación (hubs)</strong> antes de llegar a las tiendas.</p>
+</div>
+<div class="fragment fade-in-then-out">
+<p>Cada planta tiene una <strong>oferta limitada</strong>, y cada tienda tiene una <strong>demanda fija</strong>.</p>
+</div>
+<div class="fragment fade-in-then-out">
+<p>Los <strong>costos de envío</strong> dependen del trayecto: planta → centro → tienda.</p>
+</div>
+<div class="fragment fade-in-then-out">
+<p>Se desea encontrar la forma <strong>más económica</strong> de cubrir toda la demanda respetando la capacidad de las plantas.</p>
+</div>
+</section>
+<section id="diagrama-del-modelo-de-transbordo" class="slide level2">
+<h2>🌐 Diagrama del modelo de Transbordo</h2>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource default number-lines code-with-copy"><code class="sourceCode default"><span id="cb6-1"><a href=""></a>flowchart LR</span>
+<span id="cb6-2"><a href=""></a>  subgraph Fuentes</span>
+<span id="cb6-3"><a href=""></a>    P1((P1)):::source</span>
+<span id="cb6-4"><a href=""></a>    P2((P2)):::source</span>
+<span id="cb6-5"><a href=""></a>  end</span>
+<span id="cb6-6"><a href=""></a></span>
+<span id="cb6-7"><a href=""></a>  subgraph Centro</span>
+<span id="cb6-8"><a href=""></a>    H1((H1)):::hub</span>
+<span id="cb6-9"><a href=""></a>  end</span>
+<span id="cb6-10"><a href=""></a></span>
+<span id="cb6-11"><a href=""></a>  subgraph Tiendas</span>
+<span id="cb6-12"><a href=""></a>    T1((T1)):::sink</span>
+<span id="cb6-13"><a href=""></a>    T2((T2)):::sink</span>
+<span id="cb6-14"><a href=""></a>    T3((T3)):::sink</span>
+<span id="cb6-15"><a href=""></a>  end</span>
+<span id="cb6-16"><a href=""></a></span>
+<span id="cb6-17"><a href=""></a>  P1 --&gt; H1</span>
+<span id="cb6-18"><a href=""></a>  P2 --&gt; H1</span>
+<span id="cb6-19"><a href=""></a>  H1 --&gt; T1</span>
+<span id="cb6-20"><a href=""></a>  H1 --&gt; T2</span>
+<span id="cb6-21"><a href=""></a>  H1 --&gt; T3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  subgraph Fuentes
+    P1((P1)):::source
+    P2((P2)):::source
+  end
 
+  subgraph Centro
+    H1((H1)):::hub
+  end
 
-<img src="Utadeo70-fondoblanco.png" class="slide-logo r-stretch"><div class="footer footer-default">
+  subgraph Tiendas
+    T1((T1)):::sink
+    T2((T2)):::sink
+    T3((T3)):::sink
+  end
 
+  P1 --&gt; H1
+  P2 --&gt; H1
+  H1 --&gt; T1
+  H1 --&gt; T2
+  H1 --&gt; T3
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="pyomo-modelo-de-transbordo-con-highlight-code" class="slide level2 smaller">
+<h2>🧮 Pyomo: Modelo de Transbordo con highlight-code</h2>
+<div class="sourceCode" id="cb7" data-auto-animate="true"><pre class="sourceCode numberSource python fragment number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a><span class="co">#| code-line-numbers: true</span></span>
+<span id="cb7-2"><a href=""></a><span class="im">from</span> pyomo.environ <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb7-3"><a href=""></a><span class="im">import</span> os</span>
+<span id="cb7-4"><a href=""></a>os.environ[<span class="st">'NEOS_EMAIL'</span>] <span class="op">=</span> <span class="st">'jorgei.romerog@utadeo.edu.co'</span></span>
+<span id="cb7-5"><a href=""></a></span>
+<span id="cb7-6"><a href=""></a>plantas <span class="op">=</span> [<span class="st">'P1'</span>, <span class="st">'P2'</span>]</span>
+<span id="cb7-7"><a href=""></a>hubs <span class="op">=</span> [<span class="st">'H1'</span>]</span>
+<span id="cb7-8"><a href=""></a>tiendas <span class="op">=</span> [<span class="st">'T1'</span>, <span class="st">'T2'</span>, <span class="st">'T3'</span>]</span>
+<span id="cb7-9"><a href=""></a></span>
+<span id="cb7-10"><a href=""></a>arcos <span class="op">=</span> [(<span class="st">'P1'</span>, <span class="st">'H1'</span>), (<span class="st">'P2'</span>, <span class="st">'H1'</span>), (<span class="st">'H1'</span>, <span class="st">'T1'</span>), (<span class="st">'H1'</span>, <span class="st">'T2'</span>), (<span class="st">'H1'</span>, <span class="st">'T3'</span>)]</span>
+<span id="cb7-11"><a href=""></a></span>
+<span id="cb7-12"><a href=""></a>costos <span class="op">=</span> {(<span class="st">'P1'</span>,<span class="st">'H1'</span>):<span class="dv">4</span>, (<span class="st">'P2'</span>,<span class="st">'H1'</span>):<span class="dv">3</span>, (<span class="st">'H1'</span>,<span class="st">'T1'</span>):<span class="dv">5</span>, (<span class="st">'H1'</span>,<span class="st">'T2'</span>):<span class="dv">2</span>, (<span class="st">'H1'</span>,<span class="st">'T3'</span>):<span class="dv">6</span>}</span>
+<span id="cb7-13"><a href=""></a>b <span class="op">=</span> {<span class="st">'P1'</span>:<span class="op">-</span><span class="dv">20</span>, <span class="st">'P2'</span>:<span class="op">-</span><span class="dv">25</span>, <span class="st">'H1'</span>:<span class="dv">0</span>, <span class="st">'T1'</span>:<span class="dv">10</span>, <span class="st">'T2'</span>:<span class="dv">15</span>, <span class="st">'T3'</span>:<span class="dv">20</span>}</span>
+<span id="cb7-14"><a href=""></a></span>
+<span id="cb7-15"><a href=""></a>modelo_trans <span class="op">=</span> ConcreteModel()</span>
+<span id="cb7-16"><a href=""></a>nodos <span class="op">=</span> plantas <span class="op">+</span> hubs <span class="op">+</span> tiendas</span>
+<span id="cb7-17"><a href=""></a>modelo_trans.x <span class="op">=</span> Var(arcos, domain<span class="op">=</span>NonNegativeReals)</span>
+<span id="cb7-18"><a href=""></a></span>
+<span id="cb7-19"><a href=""></a>modelo_trans.obj <span class="op">=</span> Objective(expr<span class="op">=</span><span class="bu">sum</span>(costos[i]<span class="op">*</span>modelo_trans.x[i] <span class="cf">for</span> i <span class="kw">in</span> arcos), sense<span class="op">=</span>minimize)</span>
+<span id="cb7-20"><a href=""></a></span>
+<span id="cb7-21"><a href=""></a>modelo_trans.bal <span class="op">=</span> ConstraintList()</span>
+<span id="cb7-22"><a href=""></a><span class="cf">for</span> n <span class="kw">in</span> nodos:</span>
+<span id="cb7-23"><a href=""></a>    entrada <span class="op">=</span> <span class="bu">sum</span>(modelo_trans.x[i,j] <span class="cf">for</span> (i,j) <span class="kw">in</span> arcos <span class="cf">if</span> j<span class="op">==</span>n)</span>
+<span id="cb7-24"><a href=""></a>    salida <span class="op">=</span> <span class="bu">sum</span>(modelo_trans.x[n,j] <span class="cf">for</span> (n,j) <span class="kw">in</span> arcos <span class="cf">if</span> n<span class="op">==</span>n)</span>
+<span id="cb7-25"><a href=""></a>    modelo_trans.bal.add(expr<span class="op">=</span>salida <span class="op">-</span> entrada <span class="op">==</span> b[n])</span>
+<span id="cb7-26"><a href=""></a></span>
+<span id="cb7-27"><a href=""></a>solver <span class="op">=</span> SolverManagerFactory(<span class="st">'neos'</span>)</span>
+<span id="cb7-28"><a href=""></a>results <span class="op">=</span> solver.solve(modelo_trans, solver<span class="op">=</span><span class="st">'cplex'</span>)</span>
+<span id="cb7-29"><a href=""></a></span>
+<span id="cb7-30"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Costo mínimo total: </span><span class="sc">{</span>modelo_trans<span class="sc">.</span>obj()<span class="sc">:.0f}</span><span class="ss">"</span>)</span>
+<span id="cb7-31"><a href=""></a><span class="cf">for</span> i <span class="kw">in</span> arcos:</span>
+<span id="cb7-32"><a href=""></a>    val <span class="op">=</span> modelo_trans.x[i]()</span>
+<span id="cb7-33"><a href=""></a>    <span class="cf">if</span> val <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb7-34"><a href=""></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>val<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="comparativa-entre-modelos-de-flujo" class="slide level2">
+<h2>📊 Comparativa entre Modelos de Flujo</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 15%">
+<col style="width: 14%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 24%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Modelo</th>
+<th>Nodos</th>
+<th>Arcos</th>
+<th>Variables</th>
+<th>Naturaleza</th>
+<th>Balance (b_i)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Transporte</td>
+<td>Origen, destino</td>
+<td>Total (m n)</td>
+<td>Continuas (x_{ij} )</td>
+<td>Flujo directo</td>
+<td>Oferta/demanda exacta</td>
+</tr>
+<tr class="even">
+<td>Asignación</td>
+<td>Agentes, tareas</td>
+<td>Cuadrada (n n)</td>
+<td>Binarias (x_{ij} {0,1})</td>
+<td>1 a 1 (unitaria)</td>
+<td>Cada nodo balanceado (=1)</td>
+</tr>
+<tr class="odd">
+<td>Transbordo</td>
+<td>Origen, intermedio, destino</td>
+<td>Flexible según red</td>
+<td>Continuas (x_{ij} )</td>
+<td>Flujo con nodos internos</td>
+<td>(b_i &lt; 0, &gt; 0, = 0) según rol</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="conclusión-io-y-modelos-de-flujo" class="slide level2">
+<h2>🧠 Conclusión: IO y Modelos de Flujo</h2>
+<ul>
+<li>El modelo de transbordo es <strong>una extensión de PL aplicada a redes</strong>.</li>
+<li>Integra:
+<ul>
+<li>Restricciones estructurales de red (incidencia).</li>
+<li>Variables sobre aristas.</li>
+<li>Eficiencia computacional mediante algoritmos especializados.</li>
+</ul></li>
+<li>Es uno de los pilares de la <strong>Investigación de Operaciones en redes</strong>.</li>
+</ul>
+<div class="quarto-auto-generated-content">
+<p><img src="Utadeo70-fondoblanco.png" class="slide-logo"></p>
+<div class="footer footer-default">
+
+</div>
 </div>
 </section>
     </div>
@@ -632,7 +929,6 @@ Costo mínimo total: 4800</code></pre>
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -850,18 +1146,7 @@ Costo mínimo total: 4800</code></pre>
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -893,11 +1178,50 @@ Costo mínimo total: 4800</code></pre>
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
-      function tippyHover(el, contentFn) {
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -907,8 +1231,17 @@ Costo mínimo total: 4800</code></pre>
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
@@ -922,7 +1255,11 @@ Costo mínimo total: 4800</code></pre>
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
           let selectedAnnoteEl;
@@ -966,6 +1303,7 @@ Costo mínimo total: 4800</code></pre>
                 }
                 div.style.top = top - 2 + "px";
                 div.style.height = height + 4 + "px";
+                div.style.left = 0;
                 let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
                 if (gutterDiv === null) {
                   gutterDiv = window.document.createElement("div");
@@ -991,8 +1329,8 @@ Costo mínimo total: 4800</code></pre>
             });
             selectedAnnoteEl = undefined;
           };
-          // Handle positioning of the toggle
-          window.addEventListener(
+            // Handle positioning of the toggle
+        window.addEventListener(
           "resize",
           throttle(() => {
             elRect = undefined;
@@ -1000,23 +1338,23 @@ Costo mínimo total: 4800</code></pre>
               selectCodeLines(selectedAnnoteEl);
             }
           }, 10)
-          );
-          function throttle(fn, ms) {
-          let throttle = false;
-          let timer;
-            return (...args) => {
-              if(!throttle) { // first call gets through
+        );
+        function throttle(fn, ms) {
+        let throttle = false;
+        let timer;
+          return (...args) => {
+            if(!throttle) { // first call gets through
+                fn.apply(this, args);
+                throttle = true;
+            } else { // all the others get throttled
+                if(timer) clearTimeout(timer); // cancel #2
+                timer = setTimeout(() => {
                   fn.apply(this, args);
-                  throttle = true;
-              } else { // all the others get throttled
-                  if(timer) clearTimeout(timer); // cancel #2
-                  timer = setTimeout(() => {
-                    fn.apply(this, args);
-                    timer = throttle = false;
-                  }, ms);
-              }
-            };
-          }
+                  timer = throttle = false;
+                }, ms);
+            }
+          };
+        }
           const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
           for (let i=0; i<annoteTargets.length; i++) {
             const annoteTarget = annoteTargets[i];
@@ -1061,7 +1399,7 @@ Costo mínimo total: 4800</code></pre>
                   options: {
                     flipVariations: false, // true by default
                     allowedAutoPlacements: ['right'],
-                    fallbackPlacements: ['right', 'top', 'top-start', 'top-end'],
+                    fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
                   },
                 },
                 {
