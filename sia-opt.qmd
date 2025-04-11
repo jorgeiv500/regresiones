@@ -1,0 +1,185 @@
+---
+title: "Brochure SIA OPT"
+author: "👨‍🏫 Jorge Iván Romero Gelvez"
+institute: "🏛️ Universidad Jorge Tadeo Lozano"
+date: today
+format:
+  revealjs:
+    theme: custom.scss
+    slide-number: true
+    highlight-style: dracula
+    code-line-numbers: true
+    code-annotations: hover
+    mermaid:
+      theme: forest
+    transition: fade
+    chalkboard: true
+    logo: Utadeo70-fondoblanco.png
+    toc: true
+    toc-title: "Contenido"
+    toc-depth: 2
+    scrollable: true
+execute:
+  echo: true
+  warning: false
+jupyter: python3
+---
+
+## 📘 SIA OPT
+### Semillero de Investigación en Inteligencia Artificial y Optimización
+Facultad de Ingeniería – Universidad Jorge Tadeo Lozano
+
+---
+
+## 🧭 Identidad del Semillero {auto-animate=true}
+::: {.fragment}
+- **Nombre:** SIA OPT
+:::
+::: {.fragment}
+- **Grupo de investigación:** ID&SI (COL0159544)
+:::
+::: {.fragment}
+- **Área:** Computación y Ciencias de la Información
+:::
+::: {.fragment}
+- **Institución:** Universidad Jorge Tadeo Lozano
+:::
+::: {.fragment}
+- **Redes:** REDCOLSI, SDEWES, WDEA
+:::
+
+---
+
+## 🌟 Propósito {auto-animate=true}
+Fomentar la formación investigativa interdisciplinar mediante:
+
+::: {.fragment}
+- Inteligencia Artificial
+:::
+::: {.fragment}
+- Optimización computacional
+:::
+::: {.fragment}
+- Tecnologías inteligentes
+:::
+
+::: {.fragment}
+Aplicación en problemas reales del entorno social, industrial y ambiental.
+:::
+
+---
+
+## 🎯 Objetivos {auto-animate=true}
+### General
+::: {.fragment}
+Desarrollar proyectos con impacto científico, social y tecnológico en IA y optimización.
+:::
+
+### Específicos
+::: {.fragment}
+- Formar competencias investigativas.
+:::
+::: {.fragment}
+- Aplicar técnicas de IA y optimización.
+:::
+::: {.fragment}
+- Generar productos de conocimiento.
+:::
+::: {.fragment}
+- Participar en eventos científicos.
+:::
+
+---
+
+## 🧪 Líneas de Investigación {auto-animate=true}
+::: {.fragment}
+1. **Inteligencia Artificial**
+   - ML, Deep Learning, NLP, Visión por Computador, IA Generativa
+   - Aplicaciones en salud, energía, sostenibilidad, organizaciones.
+:::
+
+::: {.fragment}
+2. **Optimización Computacional**
+   - Programacion matematica, Metaheuristica y simulación
+   - Aplicaciones en organizaciones, logística, movilidad, producción
+:::
+
+::: {.fragment}
+3. **Water-Energy Nexus y Tecnologías Emergentes**
+   - *Temas:* gestión del agua, análisis de sistemas hídricos, fijación de precios del agua, energía hidroeléctrica, integración agua-renovables, adaptación al cambio climático, seguridad hídrica.
+   - *Tecnologías aplicadas:* inteligencia artificial (ML-CV) agricultura de precision, Internet de las cosas (IoT).
+:::
+
+---
+
+## 🧰 Metodologías {auto-animate=true}
+::: {.fragment}
+- **CRISP-DM**: Proyectos de ciencia de datos
+:::
+::: {.fragment}
+- **SCRUM / KANBAN**: Gestión ágil
+:::
+::: {.fragment}
+- **Design Thinking + Modelado matemático**
+:::
+::: {.fragment}
+- **ML-Ops + Full stack**
+:::
+
+
+
+---
+
+## 📌 Proyectos Destacados {auto-animate=true}
+::: {.fragment}
+- IA para ....
+:::
+::: {.fragment}
+- Optimización de ...
+:::
+::: {.fragment}
+- Reconocimiento / clasicifacion de ...
+:::
+::: {.fragment}
+- Análisis xxx con series temporales
+:::
+::: {.fragment}
+- Detección de fraude con ML, (por ejemplo)
+:::
+::: {.fragment}
+- Gestión inteligente de ...
+:::
+
+---
+
+## 🤝 Alianzas y Participación {auto-animate=true}
+::: {.fragment}
+- REDCOLSI (encuentros regionales y nacionales)
+:::
+::: {.fragment}
+- WDEA y SDEWES (eventos internacionales)
+:::
+::: {.fragment}
+- Colaboraciones con otros semilleros UTADEO
+:::
+
+---
+
+## 📅 Estrategia 2025
+
+| Eje | Actividades | Indicadores |
+|-----|-------------|-------------|
+| Formación | Talleres, clubes | 21 estudiantes activos |
+| Investigación | Proyectos, artículos | 1 productos presentados |
+| Divulgación | Ferias, redes | Participación institucional |
+| Interacción | Convenios, alianzas | Colaboraciones activas |
+
+
+---
+
+## 🚀 ¡Únete al SIA OPT! {auto-animate=true}
+
+::: {style="margin-top: 100px;"}
+Explora, investiga, innova y transforma con IA, optimización y soluciones para el agua y la energía.
+:::
+
