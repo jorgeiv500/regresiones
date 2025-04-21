@@ -1,12 +1,11 @@
 ---
-title: "🚛 Resolución de Problemas de Transporte en Python"
-subtitle: "📦 Programación Lineal con Pyomo"
+title: "Problemas de Transporte, Asignación y Transbordo"
 author: "👨‍🏫 Jorge Iván Romero Gelvez"
 institute: "🏛️ Universidad Jorge Tadeo Lozano"
-date: "📅 Abril 2025"
+date: today
 format:
   revealjs:
-    theme: simple
+    theme: custom.scss
     slide-number: true
     highlight-style: dracula
     code-line-numbers: true
@@ -26,14 +25,31 @@ execute:
 jupyter: python3
 ---
 
-## 🎯 Introducción al Problema de Transporte
+## 🎯 Introducción General
 
-- Es un caso clásico de Programación Lineal.
-- Objetivo: transportar bienes desde almacenes (fuentes) hasta proyectos (destinos) **al mínimo costo**.
-- Se basa en datos de:
-  - Capacidades de suministro
-  - Demandas en los destinos
-  - Costos unitarios de transporte
+::: {.fragment}
+- Transporte, Asignación y Transbordo son modelos clave en logística y operaciones.
+:::
+::: {.fragment}
+- Todos se basan en minimizar el costo de mover recursos bajo restricciones.
+:::
+::: {.fragment}
+- Son casos particulares del problema de **flujo de costo mínimo**.
+:::
+
+---
+
+## 🚚 Problema de Transporte
+
+::: {.fragment}
+- Llevar productos desde fuentes a destinos al menor costo.
+:::
+::: {.fragment}
+- Oferta total = demanda total.
+:::
+::: {.fragment}
+- Representa un flujo directo sin nodos intermedios.
+:::
 
 ---
 
@@ -46,120 +62,320 @@ jupyter: python3
 
 ---
 
-## 📋 Datos del problema
+## 🔣 Formulación Matemática Transporte
 
-- Almacenes: A, B, C
-- Proyectos: 1, 2, 3
+$$
+\min \sum_{i=1}^{m} \sum_{j=1}^{n} c_{ij} x_{ij}
+$$
+Sujeto a:
+
+::: {.fragment}
+- Oferta: $\sum_j x_{ij} = a_i$
+:::
+
+::: {.fragment}
+- Demanda: $\sum_i x_{ij} = b_j$
+:::
+::: {.fragment}
+- No negatividad: $x_{ij} \geq 0$
+:::
+---
+
+## Caso Hillier: Envío de madera al mercado
+
+::: {.fragment}
+- Tres fábricas (f1, f2, f3) deben enviar madera a cinco mercados (m1–m5).
+- Se busca minimizar el costo total de transporte.
+- Modelo de **transporte clásico** resuelto con Pyomo.
+:::
+
+---
+
+## 📋 Datos del problema (Hillier)
 
 ```python
-almacenes = ['A', 'B', 'C']
-proyectos = ['1', '2', '3']
+import pandas as pd
 
-suministro = {'A': 300, 'B': 600, 'C': 600}
-demanda = {'1': 150, '2': 450, '3': 900}
+df = pd.read_excel('madera.xlsx', 'tren', index_col=0)
+O = list(df.index.map(str))
+D = list(df.columns.map(str))
 
-costos = {
-    ('A','1'): 5, ('A','2'): 1, ('A','3'): 9,
-    ('B','1'): 4, ('B','2'): 2, ('B','3'): 8,
-    ('C','1'): 8, ('C','2'): 7, ('C','3'): 2
-}
+cij = {(i, j): df.at[i, j] for i in O for j in D}
+oferta = {'f1': 15, 'f2': 20, 'f3': 15}
+demanda = {'m1': 11, 'm2': 12, 'm3': 9, 'm4': 10, 'm5': 8}
 ```
 
 ---
 
-## 🧮 Formulación en Pyomo
+## 🔣 Costos y parámetros
 
 ```python
-from pyomo.environ import *
-
-model = ConcreteModel()
-model.Rutas = Set(initialize=[(i,j) for i in almacenes for j in proyectos])
-model.X = Var(model.Rutas, domain=NonNegativeReals)
-
-model.objetivo = Objective(
-    expr=sum(costos[i] * model.X[i] for i in model.Rutas),
-    sense=minimize
-)
-```
-
----
-
-## 🔧 Restricciones de oferta y demanda
-
-```python
-model.oferta = ConstraintList()
-for i in almacenes:
-    model.oferta.add(sum(model.X[i,j] for j in proyectos) <= suministro[i])
-
-model.demanda = ConstraintList()
-for j in proyectos:
-    model.demanda.add(sum(model.X[i,j] for i in almacenes) >= demanda[j])
-```
-
----
-
-## 🧠 Resolviendo el modelo
-
-```python
-from pyomo.opt import SolverFactory
-opt = SolverFactory('glpk')
-result = opt.solve(model)
-model.display()
-```
-
----
-
-## 📊 Resultados
-
-```python
-for i in model.Rutas:
-    if model.X[i]() > 0:
-        print(f"Ruta {i}: {model.X[i]():.0f} unidades")
-
-print(f"Costo mínimo total: {model.objetivo():.0f}")
+print(cij)
+print(oferta)
+print(demanda)
 ```
 
 📌 Resultado esperado:
+- Costos unitarios por ruta entre fábricas y mercados.
+- Oferta y demanda bien definidas.
+
+---
+
+## 🧮 Pyomo: Formulación del modelo
+
+```python
+from pyomo.environ import *
+import os
+os.environ['NEOS_EMAIL'] = 'jorgei.romerog@utadeo.edu.co'
+
+caso1 = ConcreteModel()
+caso1.x = Var(O, D, domain=NonNegativeReals)
+
+caso1.obj = Objective(
+    expr=sum(cij[i, j] * caso1.x[i, j] for i in O for j in D),
+    sense=minimize)
+
+caso1.ro = ConstraintList()
+for i in O:
+    caso1.ro.add(expr=sum(caso1.x[i, j] for j in D) == oferta[i])
+
+caso1.rd = ConstraintList()
+for j in D:
+    caso1.rd.add(expr=sum(caso1.x[i, j] for i in O) == demanda[j])
 ```
-Ruta ('A', '2') = 300
-Ruta ('B', '1') = 150
-Ruta ('B', '2') = 150
-Ruta ('B', '3') = 300
-Ruta ('C', '3') = 600
-Costo mínimo total: 4800
+
+---
+
+## ✅ Solución óptima esperada
+
+Costo mínimo total: **2816.0**
+
+Distribución óptima:
+- f1 → m1: 6
+- f1 → m3: 9
+- f2 → m1: 2
+- f2 → m4: 10
+- f2 → m5: 8
+- f3 → m1: 3
+- f3 → m2: 12
+
+🎯 Las demás rutas tienen asignación cero.
+
+
+
+---
+
+## 👥 Problema de Asignación
+
+::: {.fragment}
+- Cada recurso se asigna a una tarea.
+:::
+::: {.fragment}
+- Oferta y demanda unitaria.
+:::
+::: {.fragment}
+- Variables binarias.
+:::
+
+---
+
+## 🔣 Formulación Asignación
+
+$$
+\min \sum_{i=1}^{n} \sum_{j=1}^{n} c_{ij} x_{ij}
+$$
+Sujeto a:
+
+::: {.fragment}
+- $\sum_j x_{ij} = 1 \quad \forall i$
+:::
+::: {.fragment}
+- $\sum_i x_{ij} = 1 \quad \forall j$
+:::
+::: {.fragment}
+- $x_{ij} \in \{0,1\}$
+:::
+---
+
+## 🧠 Contexto del Problema de Asignación
+
+::: {.fragment} 
+ El problema de asignación es un **caso particular del problema de transporte**.
+:::
+::: {.fragment} 
+Cada recurso (trabajador) debe asignarse a exactamente una tarea.
+:::
+::: {.fragment} 
+La solución busca **minimizar el costo total de asignación**.
+:::
+::: {.fragment } 
+Tiene aplicaciones en programación de turnos, asignación de personal, planificación de producción, etc.
+:::
+::: {.fragment} 
+El modelo matemático es compacto y resoluble de forma eficiente con herramientas de IO.
+:::
+
+---
+## 💻 Pyomo: Asignación Binaria
+
+```{python}
+#| code-line-numbers: "1-17|19-27|29|37"
+
+from pyomo.environ import *
+import os
+import random
+
+# Correo para acceso a NEOS
+os.environ['NEOS_EMAIL'] = 'jorgei.romerog@utadeo.edu.co'
+
+# Definición de conjuntos
+O = ['T1', 'T2', 'T3']
+D = ['P1', 'P2', 'P3']
+
+# Costos aleatorios entre trabajadores y tareas
+cij = {(i, j): random.randint(1, 10) for i in O for j in D}
+
+# Oferta y demanda unitaria
+oferta = {i: 1 for i in O}
+demanda = {j: 1 for j in D}
+
+# Modelo Pyomo
+caso_asig = ConcreteModel()
+caso_asig.x = Var(O, D, domain=Binary)
+
+# Función objetivo: minimizar el costo total
+caso_asig.obj = Objective(
+    expr=sum(cij[i, j] * caso_asig.x[i, j] for i in O for j in D),
+    sense=minimize
+)
+
+# Restricciones de asignación (oferta)
+caso_asig.ro = ConstraintList()
+for i in O:
+    caso_asig.ro.add(expr=sum(caso_asig.x[i, j] for j in D) == oferta[i])
+
+# Restricciones de tareas (demanda)
+caso_asig.rd = ConstraintList()
+for j in D:
+    caso_asig.rd.add(expr=sum(caso_asig.x[i, j] for i in O) == demanda[j])
+
+# Resolución con NEOS usando CPLEX
+solver_manager = SolverManagerFactory('neos')
+results = solver_manager.solve(caso_asig, solver='cplex')
+
+# Resultados
+optimo = caso_asig.obj()
+print('El óptimo es =', optimo)
+for i in O:
+    for j in D:
+        print(i, j, caso_asig.x[i, j]())
+
 ```
 
 ---
 
-## 🧾 Tablas de datos
+## 🔁 Problema de Transbordo
 
-### Tabla de Suministro
-| Almacén | Capacidad |
-|---------|-----------|
-| A       | 300       |
-| B       | 600       |
-| C       | 600       |
-
-### Tabla de Demanda
-| Proyecto | Demanda |
-|----------|---------|
-| 1        | 150     |
-| 2        | 450     |
-| 3        | 900     |
-
-### Matriz de Costos
-| Desde \ Hacia | 1 | 2 | 3 |
-|---------------|---|---|---|
-| A             | 5 | 1 | 9 |
-| B             | 4 | 2 | 8 |
-| C             | 8 | 7 | 2 |
+::: {.fragment}
+- Permite nodos intermedios.
+:::
+::: {.fragment}
+- Generalización del modelo de transporte.
+:::
+::: {.fragment}
+- Algunos nodos tienen $b_i = 0$.
+:::
 
 ---
 
-## 🧾 Conclusión
 
-- El modelo de transporte permite tomar decisiones óptimas en distribución logística.
-- Pyomo ofrece una sintaxis clara y poderosa para formular el modelo.
-- Se puede extender fácilmente a modelos más complejos (transbordo, múltiples productos, restricciones adicionales).
+## 🔣 Formulación Matemática Transbordo
+
+$$
+\min \sum_{(i,j) \in A} c_{ij} x_{ij}
+$$
+
+Sujeto a:
+
+::: {.fragment}
+- Balance: $\sum_j x_{ij} - \sum_j x_{ji} = b_i$
+:::
+::: {.fragment}
+- Capacidad: $l_{ij} \leq x_{ij} \leq u_{ij}$
+:::
+::: {.fragment}
+- No negatividad: $x_{ij} \geq 0$
+:::
 
 ---
+
+## 🔁 Enunciado del Problema de Transbordo
+
+::: {.fragment .fade-in-then-out}
+Una empresa distribuye productos desde 2 plantas hacia 3 tiendas.
+:::
+::: {.fragment .fade-in-then-out}
+Para reducir costos logísticos, considera usar **centros de consolidación (hubs)** antes de llegar a las tiendas.
+:::
+::: {.fragment .fade-in-then-out}
+Cada planta tiene una **oferta limitada**, y cada tienda tiene una **demanda fija**.
+:::
+::: {.fragment .fade-in-then-out}
+Los **costos de envío** dependen del trayecto: planta → centro → tienda.
+:::
+::: {.fragment .fade-in-then-out}
+Se desea encontrar la forma **más económica** de cubrir toda la demanda respetando la capacidad de las plantas.
+:::
+
+---
+
+## 🌐 Diagrama del modelo de Transbordo
+
+```{mermaid}
+flowchart LR
+  subgraph Fuentes
+    P1((P1)):::source
+    P2((P2)):::source
+  end
+
+  subgraph Centro
+    H1((H1)):::hub
+  end
+
+  subgraph Tiendas
+    T1((T1)):::sink
+    T2((T2)):::sink
+    T3((T3)):::sink
+  end
+
+  P1 --> H1
+  P2 --> H1
+  H1 --> T1
+  H1 --> T2
+  H1 --> T3
+```
+
+
+
+
+---
+
+## 📊 Comparativa entre Modelos de Flujo
+
+| Modelo      | Nodos         | Arcos         | Variables        | Naturaleza      | Balance \(b_i\)         |
+|-------------|----------------|---------------|------------------|------------------|--------------------------|
+| Transporte  | Origen, destino | Total \(m \times n\) | Continuas \(x_{ij} \geq 0\) | Flujo directo   | Oferta/demanda exacta   |
+| Asignación  | Agentes, tareas | Cuadrada \(n \times n\) | Binarias \(x_{ij} \in \{0,1\}\) | 1 a 1 (unitaria) | Cada nodo balanceado \(=1\) |
+| Transbordo  | Origen, intermedio, destino | Flexible según red | Continuas \(x_{ij} \geq 0\) | Flujo con nodos internos | \(b_i < 0, > 0, = 0\) según rol |
+
+---
+
+## 🧠 Conclusión: IO y Modelos de Flujo
+
+- El modelo de transbordo es **una extensión de PL aplicada a redes**.
+- Integra:
+  - Restricciones estructurales de red (incidencia).
+  - Variables sobre aristas.
+  - Eficiencia computacional mediante algoritmos especializados.
+- Es uno de los pilares de la **Investigación de Operaciones en redes**.
+

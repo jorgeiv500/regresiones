@@ -1,0 +1,134 @@
+---
+title: "📐 Modelos de Redes Lineales: De Transporte a Transbordo"
+subtitle: "🔗 De la teoría a la optimización en redes"
+author: "👨‍🏫 Jorge Iván Romero Gelvez"
+institute: "🏛️ Universidad Jorge Tadeo Lozano"
+date:  today
+format: 
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    highlight-style: dracula
+    code-line-numbers: true
+    code-annotations: hover
+    mermaid:
+      theme: forest
+    transition: fade
+    chalkboard: true
+    logo: Utadeo70-fondoblanco.png
+    toc: true
+    toc-title: "Contenido"
+    toc-depth: 2
+    incremental: true
+    scrollable: true
+execute: 
+  warning: false
+  message: false
+  echo: true
+  freeze: false
+jupyter: python3
+---
+
+## 📘 Capítulo 9: Flujo de Costo Mínimo en Redes
+
+- Se busca determinar el flujo óptimo en una red dirigida que minimiza el costo total.
+- Cada arco tiene un costo por unidad \( c_{ij} \), y los nodos tienen demandas \( b_i \).
+
+$$
+\min \sum_{(i,j) \in A} c_{ij} x_{ij}
+$$
+
+Sujeto a:
+
+- **Balance nodal**:
+  $$\sum_j x_{ij} - \sum_j x_{ji} = b_i \quad \forall i$$
+
+- **Restricciones de capacidad (opcional)**:
+  $$l_{ij} \leq x_{ij} \leq u_{ij}$$
+
+- **No negatividad**:
+  $$x_{ij} \geq 0$$
+
+---
+
+## 🕸️ Representación de Red y Variables
+
+- \( x_{ij} \): flujo sobre el arco dirigido de \( i \rightarrow j \)
+- \( c_{ij} \): costo por unidad enviada por el arco \( (i,j) \)
+- \( b_i \): suministro/demanda neta en nodo \( i \)
+
+```mermaid
+flowchart LR
+  A[Fuente b₁ = -20] -->|x₁₂| B[b₂ = 0]
+  B -->|x₂₃| C[Sumidero b₃ = 20]
+  A -->|x₁₃| C
+```
+
+---
+
+## 💻 Pyomo para Flujo de Costo Mínimo
+
+```python
+from pyomo.environ import *
+
+model = ConcreteModel()
+nodos = ['A','B','C']
+arcos = [('A','B'),('B','C'),('A','C')]
+c = {('A','B'): 2, ('B','C'): 3, ('A','C'): 5}
+b = {'A': -20, 'B': 0, 'C': 20}
+
+model.x = Var(arcos, domain=NonNegativeReals)
+model.obj = Objective(expr=sum(c[i]*model.x[i] for i in arcos), sense=minimize)
+
+# Restricciones de balance nodal
+model.bal = Constraint(nodos, rule=lambda m, i:
+  sum(m.x[i,j] for (ii,j) in arcos if ii == i)
+  - sum(m.x[j,i] for (j,jj) in arcos if jj == i)
+  == b[i])
+```
+
+---
+
+## ⚖️ Propiedades del Modelo
+
+- La matriz \( A \) del sistema de restricciones tiene estructura **incidencia nodo-arco**.
+- Es dispersa y tiene exactamente dos coeficientes no nulos por columna: +1 y -1.
+- Estas propiedades permiten usar algoritmos especializados como el **simplex de red**.
+
+---
+
+## 🚦 Capacidades y Cotas
+
+Es común restringir el flujo en ciertos arcos:
+
+$$
+l_{ij} \leq x_{ij} \leq u_{ij}
+$$
+
+En Pyomo se puede definir así:
+
+```python
+model.x = Var(arcos, domain=NonNegativeReals, bounds=lambda m, i, j: (l[i,j], u[i,j]))
+```
+
+---
+
+## 🔁 Transformaciones útiles
+
+- Si un arco tiene \( l_{ij} > 0 \), se puede redefinir la variable como:
+
+$$
+x_{ij}' = x_{ij} - l_{ij}
+$$
+
+- Si hay ganancias \( g_{ij} > 1 \) por unidad transportada, el problema deja de ser lineal en general.
+
+---
+
+## 🧠 Reflexión
+
+- El problema de flujo de costo mínimo es la base para muchos otros modelos.
+- Se usa como base para transporte, transbordo, flujos múltiples y diseño de redes.
+- Su estructura especial permite algoritmos eficientes más allá del simplex general.
+
+---

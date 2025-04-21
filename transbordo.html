@@ -8,11 +8,11 @@
 <link href="transbordo_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="transbordo_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="transbordo_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.5.55">
 
   <meta name="author" content="👨‍🏫 Jorge Iván Romero Gelvez">
-  <meta name="dcterms.date" content="2025-01-01">
-  <title>📦 Modelos de Redes en Logística y Operaciones</title>
+  <meta name="dcterms.date" content="2025-04-10">
+  <title>📦 Modelos de Redes lineales: De transporte a Transbordo</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -32,7 +32,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -43,7 +43,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -224,7 +224,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -394,7 +395,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">📦 Modelos de Redes en Logística y Operaciones</h1>
+  <h1 class="title">📦 Modelos de Redes lineales: De transporte a Transbordo</h1>
   <p class="subtitle">🔗 Transporte, Asignación, Transbordo y Flujos Multicommodity</p>
 
 <div class="quarto-title-authors">
@@ -408,17 +409,26 @@
     </div>
 </div>
 
-  <p class="date">2025-01-01</p>
+  <p class="date">2025-04-10</p>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Contenido</h2>
 <ul>
+<li class="fragment"><a href="#/introducción" id="/toc-introducción">🎬 Introducción</a></li>
+<li class="fragment"><a href="#/qué-es-un-modelo-de-red" id="/toc-qué-es-un-modelo-de-red">🧩 ¿Qué es un modelo de red?</a></li>
+<li class="fragment"><a href="#/modelo-de-transporte" id="/toc-modelo-de-transporte">🚛 1. Modelo de Transporte</a></li>
+<li class="fragment"><a href="#/código-pyomo-transporte" id="/toc-código-pyomo-transporte">💻 Código Pyomo: Transporte</a></li>
+<li class="fragment"><a href="#/modelo-de-asignación" id="/toc-modelo-de-asignación">🎯 2. Modelo de Asignación</a></li>
+<li class="fragment"><a href="#/pyomo-asignación-binaria" id="/toc-pyomo-asignación-binaria">💻 Pyomo: Asignación Binaria</a></li>
+<li class="fragment"><a href="#/modelo-de-transbordo" id="/toc-modelo-de-transbordo">🔁 3. Modelo de Transbordo</a></li>
+<li class="fragment"><a href="#/pyomo-transbordo" id="/toc-pyomo-transbordo">💻 Pyomo: Transbordo</a></li>
+<li class="fragment"><a href="#/métodos-de-resolución" id="/toc-métodos-de-resolución">📊 Métodos de Resolución</a></li>
 <li class="fragment"><a href="#/introducción-general" id="/toc-introducción-general">📌 Introducción general</a></li>
 <li class="fragment"><a href="#/modelo-de-transporte-clásico" id="/toc-modelo-de-transporte-clásico">🚛 1. Modelo de Transporte Clásico</a></li>
 <li class="fragment"><a href="#/código-en-pyomo-modelo-de-transporte" id="/toc-código-en-pyomo-modelo-de-transporte">🧮 Código en Pyomo: Modelo de Transporte</a></li>
 <li class="fragment"><a href="#/modelo-de-asignación-lineal-y-método-húngaro" id="/toc-modelo-de-asignación-lineal-y-método-húngaro">🧮 2. Modelo de Asignación (lineal y método húngaro)</a></li>
 <li class="fragment"><a href="#/pyomo-para-asignación" id="/toc-pyomo-para-asignación">🧮 Pyomo para Asignación</a></li>
-<li class="fragment"><a href="#/modelo-de-transbordo" id="/toc-modelo-de-transbordo">🔁 3. Modelo de Transbordo</a></li>
+<li class="fragment"><a href="#/modelo-de-transbordo-1" id="/toc-modelo-de-transbordo-1">🔁 3. Modelo de Transbordo</a></li>
 <li class="fragment"><a href="#/pyomo-con-transbordo" id="/toc-pyomo-con-transbordo">🧮 Pyomo con transbordo</a></li>
 <li class="fragment"><a href="#/soluciones-exactas-vs-aproximadas" id="/toc-soluciones-exactas-vs-aproximadas">🧭 4. Soluciones Exactas vs Aproximadas</a></li>
 <li class="fragment"><a href="#/flujos-single-commodity-vs-multi-commodity" id="/toc-flujos-single-commodity-vs-multi-commodity">📦 5. Flujos Single Commodity vs Multi Commodity</a></li>
@@ -428,6 +438,149 @@
 <li class="fragment"><a href="#/referencias" id="/toc-referencias">📚 Referencias</a></li>
 </ul>
 </nav>
+</section>
+<section id="introducción" class="slide level2">
+<h2>🎬 Introducción</h2>
+<ul>
+<li class="fragment"><p>Muchos problemas reales pueden modelarse como redes de nodos conectados por arcos.</p></li>
+<li class="fragment"><p>Estos modelos permiten encontrar rutas óptimas, asignaciones eficientes o balances de flujo.</p>
+<ul>
+<li class="fragment">🎯 <strong>Objetivo</strong>: Aprender a representar y resolver modelos clásicos de redes mediante optimización.</li>
+</ul></li>
+</ul>
+</section>
+<section id="qué-es-un-modelo-de-red" class="slide level2">
+<h2>🧩 ¿Qué es un modelo de red?</h2>
+<p>Una red dirigida incluye:</p>
+<ul>
+<li class="fragment"><strong>Nodos</strong>: puntos donde se origina, transforma o termina el flujo.</li>
+<li class="fragment"><strong>Arcos</strong>: conexiones con costos, capacidades o flujos.</li>
+</ul>
+<p>💡 <strong>Ejemplo general</strong>: &gt; Distribuir unidades desde nodos origen hasta nodos destino, al menor costo.</p>
+</section>
+<section id="modelo-de-transporte" class="slide level2">
+<h2>🚛 1. Modelo de Transporte</h2>
+<p><strong>Objetivo</strong>: Minimizar el costo de enviar unidades de varios orígenes a varios destinos.</p>
+<p><span class="math display">\[
+\min \sum_{i=1}^{m} \sum_{j=1}^{n} c_{ij} x_{ij}
+\]</span></p>
+<p>Sujeto a:</p>
+<ul>
+<li class="fragment"><span class="math display">\[\sum_j x_{ij} = a_i \quad \forall i\]</span></li>
+<li class="fragment"><span class="math display">\[\sum_i x_{ij} = b_j \quad \forall j\]</span></li>
+<li class="fragment"><span class="math display">\[x_{ij} \geq 0\]</span></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource mermaid number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a href=""></a>flowchart LR</span>
+<span id="cb1-2"><a href=""></a>  N1[Origen 1] --&gt;|x11| D1[Destino 1]</span>
+<span id="cb1-3"><a href=""></a>  N1 --&gt;|x12| D2[Destino 2]</span>
+<span id="cb1-4"><a href=""></a>  N2[Origen 2] --&gt;|x21| D1</span>
+<span id="cb1-5"><a href=""></a>  N2 --&gt;|x22| D2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="código-pyomo-transporte" class="slide level2">
+<h2>💻 Código Pyomo: Transporte</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="im">from</span> pyomo.environ <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb2-2"><a href=""></a></span>
+<span id="cb2-3"><a href=""></a>model <span class="op">=</span> ConcreteModel()</span>
+<span id="cb2-4"><a href=""></a></span>
+<span id="cb2-5"><a href=""></a>origenes <span class="op">=</span> [<span class="st">'N1'</span>, <span class="st">'N2'</span>]</span>
+<span id="cb2-6"><a href=""></a>destinos <span class="op">=</span> [<span class="st">'D1'</span>, <span class="st">'D2'</span>]</span>
+<span id="cb2-7"><a href=""></a>c <span class="op">=</span> {(<span class="st">'N1'</span>,<span class="st">'D1'</span>): <span class="dv">4</span>, (<span class="st">'N1'</span>,<span class="st">'D2'</span>): <span class="dv">6</span>, (<span class="st">'N2'</span>,<span class="st">'D1'</span>): <span class="dv">5</span>, (<span class="st">'N2'</span>,<span class="st">'D2'</span>): <span class="dv">3</span>}</span>
+<span id="cb2-8"><a href=""></a>a <span class="op">=</span> {<span class="st">'N1'</span>: <span class="dv">30</span>, <span class="st">'N2'</span>: <span class="dv">40</span>}</span>
+<span id="cb2-9"><a href=""></a>b <span class="op">=</span> {<span class="st">'D1'</span>: <span class="dv">20</span>, <span class="st">'D2'</span>: <span class="dv">50</span>}</span>
+<span id="cb2-10"><a href=""></a></span>
+<span id="cb2-11"><a href=""></a>model.x <span class="op">=</span> Var(c.keys(), domain<span class="op">=</span>NonNegativeReals)</span>
+<span id="cb2-12"><a href=""></a>model.obj <span class="op">=</span> Objective(expr<span class="op">=</span><span class="bu">sum</span>(c[i]<span class="op">*</span>model.x[i] <span class="cf">for</span> i <span class="kw">in</span> c), sense<span class="op">=</span>minimize)</span>
+<span id="cb2-13"><a href=""></a>model.oferta <span class="op">=</span> Constraint(origenes, rule<span class="op">=</span><span class="kw">lambda</span> m, i: <span class="bu">sum</span>(m.x[i,j] <span class="cf">for</span> j <span class="kw">in</span> destinos) <span class="op">==</span> a[i])</span>
+<span id="cb2-14"><a href=""></a>model.demanda <span class="op">=</span> Constraint(destinos, rule<span class="op">=</span><span class="kw">lambda</span> m, j: <span class="bu">sum</span>(m.x[i,j] <span class="cf">for</span> i <span class="kw">in</span> origenes) <span class="op">==</span> b[j])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="modelo-de-asignación" class="slide level2">
+<h2>🎯 2. Modelo de Asignación</h2>
+<p>Es un caso especial del modelo de transporte donde todas las ofertas y demandas son 1.</p>
+<p><span class="math display">\[
+\min \sum_{i=1}^{n} \sum_{j=1}^{n} c_{ij} x_{ij}
+\]</span></p>
+<p>Sujeto a:</p>
+<ul>
+<li class="fragment"><span class="math display">\[\sum_j x_{ij} = 1 \quad \forall i\]</span></li>
+<li class="fragment"><span class="math display">\[\sum_i x_{ij} = 1 \quad \forall j\]</span></li>
+<li class="fragment"><span class="math display">\[x_{ij} \in \{0,1\}\]</span></li>
+</ul>
+</section>
+<section id="pyomo-asignación-binaria" class="slide level2">
+<h2>💻 Pyomo: Asignación Binaria</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a>trabajadores <span class="op">=</span> [<span class="st">'E1'</span>, <span class="st">'E2'</span>, <span class="st">'E3'</span>]</span>
+<span id="cb3-2"><a href=""></a>tareas <span class="op">=</span> [<span class="st">'T1'</span>, <span class="st">'T2'</span>, <span class="st">'T3'</span>]</span>
+<span id="cb3-3"><a href=""></a>cost <span class="op">=</span> {(<span class="st">'E1'</span>,<span class="st">'T1'</span>):<span class="dv">3</span>, (<span class="st">'E1'</span>,<span class="st">'T2'</span>):<span class="dv">2</span>, (<span class="st">'E1'</span>,<span class="st">'T3'</span>):<span class="dv">4</span>,</span>
+<span id="cb3-4"><a href=""></a>        (<span class="st">'E2'</span>,<span class="st">'T1'</span>):<span class="dv">4</span>, (<span class="st">'E2'</span>,<span class="st">'T2'</span>):<span class="dv">3</span>, (<span class="st">'E2'</span>,<span class="st">'T3'</span>):<span class="dv">1</span>,</span>
+<span id="cb3-5"><a href=""></a>        (<span class="st">'E3'</span>,<span class="st">'T1'</span>):<span class="dv">5</span>, (<span class="st">'E3'</span>,<span class="st">'T2'</span>):<span class="dv">2</span>, (<span class="st">'E3'</span>,<span class="st">'T3'</span>):<span class="dv">2</span>}</span>
+<span id="cb3-6"><a href=""></a></span>
+<span id="cb3-7"><a href=""></a>model.x <span class="op">=</span> Var(cost.keys(), domain<span class="op">=</span>Binary)</span>
+<span id="cb3-8"><a href=""></a>model.obj <span class="op">=</span> Objective(expr<span class="op">=</span><span class="bu">sum</span>(cost[i]<span class="op">*</span>model.x[i] <span class="cf">for</span> i <span class="kw">in</span> cost), sense<span class="op">=</span>minimize)</span>
+<span id="cb3-9"><a href=""></a>model.restr1 <span class="op">=</span> Constraint(trabajadores, rule<span class="op">=</span><span class="kw">lambda</span> m, i: <span class="bu">sum</span>(m.x[i,j] <span class="cf">for</span> j <span class="kw">in</span> tareas) <span class="op">==</span> <span class="dv">1</span>)</span>
+<span id="cb3-10"><a href=""></a>model.restr2 <span class="op">=</span> Constraint(tareas, rule<span class="op">=</span><span class="kw">lambda</span> m, j: <span class="bu">sum</span>(m.x[i,j] <span class="cf">for</span> i <span class="kw">in</span> trabajadores) <span class="op">==</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="modelo-de-transbordo" class="slide level2">
+<h2>🔁 3. Modelo de Transbordo</h2>
+<p>Permite el paso por nodos intermedios.</p>
+<p><span class="math display">\[
+\sum_j x_{ij} - \sum_j x_{ji} = b_i
+\]</span></p>
+<ul>
+<li class="fragment"><span class="math inline">\(b_i &lt; 0\)</span>: nodo emisor</li>
+<li class="fragment"><span class="math inline">\(b_i &gt; 0\)</span>: nodo receptor</li>
+<li class="fragment"><span class="math inline">\(b_i = 0\)</span>: nodo de tránsito</li>
+</ul>
+</section>
+<section id="pyomo-transbordo" class="slide level2">
+<h2>💻 Pyomo: Transbordo</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a>nodos <span class="op">=</span> [<span class="st">'N1'</span>,<span class="st">'N2'</span>,<span class="st">'N3'</span>]</span>
+<span id="cb4-2"><a href=""></a>arcos <span class="op">=</span> [(<span class="st">'N1'</span>,<span class="st">'N2'</span>),(<span class="st">'N2'</span>,<span class="st">'N3'</span>),(<span class="st">'N1'</span>,<span class="st">'N3'</span>)]</span>
+<span id="cb4-3"><a href=""></a>costos <span class="op">=</span> {(<span class="st">'N1'</span>,<span class="st">'N2'</span>):<span class="dv">3</span>, (<span class="st">'N2'</span>,<span class="st">'N3'</span>):<span class="dv">2</span>, (<span class="st">'N1'</span>,<span class="st">'N3'</span>):<span class="dv">5</span>}</span>
+<span id="cb4-4"><a href=""></a>bi <span class="op">=</span> {<span class="st">'N1'</span>: <span class="op">-</span><span class="dv">60</span>, <span class="st">'N2'</span>: <span class="dv">0</span>, <span class="st">'N3'</span>: <span class="dv">60</span>}</span>
+<span id="cb4-5"><a href=""></a></span>
+<span id="cb4-6"><a href=""></a>model.x <span class="op">=</span> Var(arcos, domain<span class="op">=</span>NonNegativeReals)</span>
+<span id="cb4-7"><a href=""></a>model.obj <span class="op">=</span> Objective(expr<span class="op">=</span><span class="bu">sum</span>(costos[i]<span class="op">*</span>model.x[i] <span class="cf">for</span> i <span class="kw">in</span> arcos), sense<span class="op">=</span>minimize)</span>
+<span id="cb4-8"><a href=""></a>model.balances <span class="op">=</span> Constraint(nodos, rule<span class="op">=</span><span class="kw">lambda</span> m, i:</span>
+<span id="cb4-9"><a href=""></a>    <span class="bu">sum</span>(m.x[i,j] <span class="cf">for</span> (ii,j) <span class="kw">in</span> arcos <span class="cf">if</span> ii <span class="op">==</span> i) <span class="op">-</span> <span class="bu">sum</span>(m.x[j,i] <span class="cf">for</span> (j,jj) <span class="kw">in</span> arcos <span class="cf">if</span> jj <span class="op">==</span> i) <span class="op">==</span> bi[i])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="métodos-de-resolución" class="slide level2">
+<h2>📊 Métodos de Resolución</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Método</th>
+<th>Tipo</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Simplex, GLPK, CBC</td>
+<td>Exacto</td>
+<td>Transporte, transbordo</td>
+</tr>
+<tr class="even">
+<td>Húngaro</td>
+<td>Exacto</td>
+<td>Asignación binaria</td>
+</tr>
+<tr class="odd">
+<td>Ramificación y Acot.</td>
+<td>Exacto</td>
+<td>Programación entera</td>
+</tr>
+<tr class="even">
+<td>Búsqueda local</td>
+<td>Aproximado</td>
+<td>Vecino más cercano</td>
+</tr>
+<tr class="odd">
+<td>Metaheurísticas</td>
+<td>Aproximado</td>
+<td>Recocido, genético</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="introducción-general" class="slide level2">
 <h2>📌 Introducción general</h2>
@@ -449,28 +602,28 @@ $
            &amp; x_{ij} \geq 0
 \end{aligned}\]</span>
 <p>$</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource mermaid number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a href="#cb1-1"></a>flowchart LR</span>
-<span id="cb1-2"><a href="#cb1-2"></a>  A1[Planta A1] --&gt;|x11| B1[Bodega B1]</span>
-<span id="cb1-3"><a href="#cb1-3"></a>  A1 --&gt;|x12| B2[Bodega B2]</span>
-<span id="cb1-4"><a href="#cb1-4"></a>  A2[Planta A2] --&gt;|x21| B1</span>
-<span id="cb1-5"><a href="#cb1-5"></a>  A2 --&gt;|x22| B2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource mermaid number-lines code-with-copy"><code class="sourceCode"><span id="cb5-1"><a href=""></a>flowchart LR</span>
+<span id="cb5-2"><a href=""></a>  A1[Planta A1] --&gt;|x11| B1[Bodega B1]</span>
+<span id="cb5-3"><a href=""></a>  A1 --&gt;|x12| B2[Bodega B2]</span>
+<span id="cb5-4"><a href=""></a>  A2[Planta A2] --&gt;|x21| B1</span>
+<span id="cb5-5"><a href=""></a>  A2 --&gt;|x22| B2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="código-en-pyomo-modelo-de-transporte" class="slide level2">
 <h2>🧮 Código en Pyomo: Modelo de Transporte</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">from</span> pyomo.environ <span class="im">import</span> <span class="op">*</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a></span>
-<span id="cb2-3"><a href="#cb2-3"></a>model <span class="op">=</span> ConcreteModel()</span>
-<span id="cb2-4"><a href="#cb2-4"></a>origenes <span class="op">=</span> [<span class="st">'A1'</span>, <span class="st">'A2'</span>]</span>
-<span id="cb2-5"><a href="#cb2-5"></a>destinos <span class="op">=</span> [<span class="st">'B1'</span>, <span class="st">'B2'</span>]</span>
-<span id="cb2-6"><a href="#cb2-6"></a>c <span class="op">=</span> {(<span class="st">'A1'</span>,<span class="st">'B1'</span>): <span class="dv">4</span>, (<span class="st">'A1'</span>,<span class="st">'B2'</span>): <span class="dv">6</span>, (<span class="st">'A2'</span>,<span class="st">'B1'</span>): <span class="dv">5</span>, (<span class="st">'A2'</span>,<span class="st">'B2'</span>): <span class="dv">3</span>}</span>
-<span id="cb2-7"><a href="#cb2-7"></a>a <span class="op">=</span> {<span class="st">'A1'</span>: <span class="dv">30</span>, <span class="st">'A2'</span>: <span class="dv">40</span>}</span>
-<span id="cb2-8"><a href="#cb2-8"></a>b <span class="op">=</span> {<span class="st">'B1'</span>: <span class="dv">20</span>, <span class="st">'B2'</span>: <span class="dv">50</span>}</span>
-<span id="cb2-9"><a href="#cb2-9"></a></span>
-<span id="cb2-10"><a href="#cb2-10"></a>model.x <span class="op">=</span> Var(c.keys(), domain<span class="op">=</span>NonNegativeReals)</span>
-<span id="cb2-11"><a href="#cb2-11"></a>model.obj <span class="op">=</span> Objective(expr<span class="op">=</span><span class="bu">sum</span>(c[i]<span class="op">*</span>model.x[i] <span class="cf">for</span> i <span class="kw">in</span> c), sense<span class="op">=</span>minimize)</span>
-<span id="cb2-12"><a href="#cb2-12"></a></span>
-<span id="cb2-13"><a href="#cb2-13"></a>model.oferta <span class="op">=</span> Constraint(origenes, rule<span class="op">=</span><span class="kw">lambda</span> m, i: <span class="bu">sum</span>(m.x[i,j] <span class="cf">for</span> j <span class="kw">in</span> destinos) <span class="op">==</span> a[i])</span>
-<span id="cb2-14"><a href="#cb2-14"></a>model.demanda <span class="op">=</span> Constraint(destinos, rule<span class="op">=</span><span class="kw">lambda</span> m, j: <span class="bu">sum</span>(m.x[i,j] <span class="cf">for</span> i <span class="kw">in</span> origenes) <span class="op">==</span> b[j])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="im">from</span> pyomo.environ <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb6-2"><a href=""></a></span>
+<span id="cb6-3"><a href=""></a>model <span class="op">=</span> ConcreteModel()</span>
+<span id="cb6-4"><a href=""></a>origenes <span class="op">=</span> [<span class="st">'A1'</span>, <span class="st">'A2'</span>]</span>
+<span id="cb6-5"><a href=""></a>destinos <span class="op">=</span> [<span class="st">'B1'</span>, <span class="st">'B2'</span>]</span>
+<span id="cb6-6"><a href=""></a>c <span class="op">=</span> {(<span class="st">'A1'</span>,<span class="st">'B1'</span>): <span class="dv">4</span>, (<span class="st">'A1'</span>,<span class="st">'B2'</span>): <span class="dv">6</span>, (<span class="st">'A2'</span>,<span class="st">'B1'</span>): <span class="dv">5</span>, (<span class="st">'A2'</span>,<span class="st">'B2'</span>): <span class="dv">3</span>}</span>
+<span id="cb6-7"><a href=""></a>a <span class="op">=</span> {<span class="st">'A1'</span>: <span class="dv">30</span>, <span class="st">'A2'</span>: <span class="dv">40</span>}</span>
+<span id="cb6-8"><a href=""></a>b <span class="op">=</span> {<span class="st">'B1'</span>: <span class="dv">20</span>, <span class="st">'B2'</span>: <span class="dv">50</span>}</span>
+<span id="cb6-9"><a href=""></a></span>
+<span id="cb6-10"><a href=""></a>model.x <span class="op">=</span> Var(c.keys(), domain<span class="op">=</span>NonNegativeReals)</span>
+<span id="cb6-11"><a href=""></a>model.obj <span class="op">=</span> Objective(expr<span class="op">=</span><span class="bu">sum</span>(c[i]<span class="op">*</span>model.x[i] <span class="cf">for</span> i <span class="kw">in</span> c), sense<span class="op">=</span>minimize)</span>
+<span id="cb6-12"><a href=""></a></span>
+<span id="cb6-13"><a href=""></a>model.oferta <span class="op">=</span> Constraint(origenes, rule<span class="op">=</span><span class="kw">lambda</span> m, i: <span class="bu">sum</span>(m.x[i,j] <span class="cf">for</span> j <span class="kw">in</span> destinos) <span class="op">==</span> a[i])</span>
+<span id="cb6-14"><a href=""></a>model.demanda <span class="op">=</span> Constraint(destinos, rule<span class="op">=</span><span class="kw">lambda</span> m, j: <span class="bu">sum</span>(m.x[i,j] <span class="cf">for</span> i <span class="kw">in</span> origenes) <span class="op">==</span> b[j])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="modelo-de-asignación-lineal-y-método-húngaro" class="slide level2">
 <h2>🧮 2. Modelo de Asignación (lineal y método húngaro)</h2>
@@ -486,45 +639,45 @@ $
            &amp; x_{ij} \in \{0, 1\}
 \end{aligned}\]</span>
 <p>$</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource mermaid number-lines code-with-copy"><code class="sourceCode"><span id="cb3-1"><a href="#cb3-1"></a>flowchart TD</span>
-<span id="cb3-2"><a href="#cb3-2"></a>  A[Trabajadores] --&gt;|xij| B[Tareas]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource mermaid number-lines code-with-copy"><code class="sourceCode"><span id="cb7-1"><a href=""></a>flowchart TD</span>
+<span id="cb7-2"><a href=""></a>  A[Trabajadores] --&gt;|xij| B[Tareas]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li class="fragment"><strong>Método húngaro</strong>: Algoritmo eficiente tipo greedy-matching.</li>
 </ul>
 </section>
 <section id="pyomo-para-asignación" class="slide level2">
 <h2>🧮 Pyomo para Asignación</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>trabajadores <span class="op">=</span> [<span class="st">'T1'</span>,<span class="st">'T2'</span>,<span class="st">'T3'</span>]</span>
-<span id="cb4-2"><a href="#cb4-2"></a>tareas <span class="op">=</span> [<span class="st">'P1'</span>,<span class="st">'P2'</span>,<span class="st">'P3'</span>]</span>
-<span id="cb4-3"><a href="#cb4-3"></a>cost <span class="op">=</span> {(i,j): random.randint(<span class="dv">1</span>,<span class="dv">10</span>) <span class="cf">for</span> i <span class="kw">in</span> trabajadores <span class="cf">for</span> j <span class="kw">in</span> tareas}</span>
-<span id="cb4-4"><a href="#cb4-4"></a>model.x <span class="op">=</span> Var(cost.keys(), domain<span class="op">=</span>Binary)</span>
-<span id="cb4-5"><a href="#cb4-5"></a></span>
-<span id="cb4-6"><a href="#cb4-6"></a>model.obj <span class="op">=</span> Objective(expr<span class="op">=</span><span class="bu">sum</span>(cost[i]<span class="op">*</span>model.x[i] <span class="cf">for</span> i <span class="kw">in</span> cost), sense<span class="op">=</span>minimize)</span>
-<span id="cb4-7"><a href="#cb4-7"></a>model.restr1 <span class="op">=</span> Constraint(trabajadores, rule<span class="op">=</span><span class="kw">lambda</span> m, i: <span class="bu">sum</span>(m.x[i,j] <span class="cf">for</span> j <span class="kw">in</span> tareas) <span class="op">==</span> <span class="dv">1</span>)</span>
-<span id="cb4-8"><a href="#cb4-8"></a>model.restr2 <span class="op">=</span> Constraint(tareas, rule<span class="op">=</span><span class="kw">lambda</span> m, j: <span class="bu">sum</span>(m.x[i,j] <span class="cf">for</span> i <span class="kw">in</span> trabajadores) <span class="op">==</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a>trabajadores <span class="op">=</span> [<span class="st">'T1'</span>,<span class="st">'T2'</span>,<span class="st">'T3'</span>]</span>
+<span id="cb8-2"><a href=""></a>tareas <span class="op">=</span> [<span class="st">'P1'</span>,<span class="st">'P2'</span>,<span class="st">'P3'</span>]</span>
+<span id="cb8-3"><a href=""></a>cost <span class="op">=</span> {(i,j): random.randint(<span class="dv">1</span>,<span class="dv">10</span>) <span class="cf">for</span> i <span class="kw">in</span> trabajadores <span class="cf">for</span> j <span class="kw">in</span> tareas}</span>
+<span id="cb8-4"><a href=""></a>model.x <span class="op">=</span> Var(cost.keys(), domain<span class="op">=</span>Binary)</span>
+<span id="cb8-5"><a href=""></a></span>
+<span id="cb8-6"><a href=""></a>model.obj <span class="op">=</span> Objective(expr<span class="op">=</span><span class="bu">sum</span>(cost[i]<span class="op">*</span>model.x[i] <span class="cf">for</span> i <span class="kw">in</span> cost), sense<span class="op">=</span>minimize)</span>
+<span id="cb8-7"><a href=""></a>model.restr1 <span class="op">=</span> Constraint(trabajadores, rule<span class="op">=</span><span class="kw">lambda</span> m, i: <span class="bu">sum</span>(m.x[i,j] <span class="cf">for</span> j <span class="kw">in</span> tareas) <span class="op">==</span> <span class="dv">1</span>)</span>
+<span id="cb8-8"><a href=""></a>model.restr2 <span class="op">=</span> Constraint(tareas, rule<span class="op">=</span><span class="kw">lambda</span> m, j: <span class="bu">sum</span>(m.x[i,j] <span class="cf">for</span> i <span class="kw">in</span> trabajadores) <span class="op">==</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="modelo-de-transbordo" class="slide level2">
+<section id="modelo-de-transbordo-1" class="slide level2">
 <h2>🔁 3. Modelo de Transbordo</h2>
 <ul>
 <li class="fragment">Extensión del modelo de transporte permitiendo nodos intermedios.</li>
 <li class="fragment">Se representa como un <strong>flujo con costo mínimo</strong> en redes.</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource mermaid number-lines code-with-copy"><code class="sourceCode"><span id="cb5-1"><a href="#cb5-1"></a>flowchart LR</span>
-<span id="cb5-2"><a href="#cb5-2"></a>  O1[Origen] --&gt;|c1| H1[Hub]</span>
-<span id="cb5-3"><a href="#cb5-3"></a>  H1 --&gt;|c2| D1[Destino]</span>
-<span id="cb5-4"><a href="#cb5-4"></a>  O1 --&gt;|c3| D1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource mermaid number-lines code-with-copy"><code class="sourceCode"><span id="cb9-1"><a href=""></a>flowchart LR</span>
+<span id="cb9-2"><a href=""></a>  O1[Origen] --&gt;|c1| H1[Hub]</span>
+<span id="cb9-3"><a href=""></a>  H1 --&gt;|c2| D1[Destino]</span>
+<span id="cb9-4"><a href=""></a>  O1 --&gt;|c3| D1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="pyomo-con-transbordo" class="slide level2">
 <h2>🧮 Pyomo con transbordo</h2>
 <p>Usamos balance nodal: $ <em>j x</em>{ij} - <em>j x</em>{ji} = b_i $</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>nodos <span class="op">=</span> [<span class="st">'O1'</span>,<span class="st">'H1'</span>,<span class="st">'D1'</span>]</span>
-<span id="cb6-2"><a href="#cb6-2"></a>arcos <span class="op">=</span> [(<span class="st">'O1'</span>,<span class="st">'H1'</span>),(<span class="st">'H1'</span>,<span class="st">'D1'</span>),(<span class="st">'O1'</span>,<span class="st">'D1'</span>)]</span>
-<span id="cb6-3"><a href="#cb6-3"></a>costo <span class="op">=</span> {<span class="st">'O1,H1'</span>: <span class="dv">2</span>, <span class="st">'H1,D1'</span>: <span class="dv">3</span>, <span class="st">'O1,D1'</span>: <span class="dv">5</span>}</span>
-<span id="cb6-4"><a href="#cb6-4"></a>bi <span class="op">=</span> {<span class="st">'O1'</span>: <span class="op">-</span><span class="dv">50</span>, <span class="st">'H1'</span>: <span class="dv">0</span>, <span class="st">'D1'</span>: <span class="dv">50</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a>nodos <span class="op">=</span> [<span class="st">'O1'</span>,<span class="st">'H1'</span>,<span class="st">'D1'</span>]</span>
+<span id="cb10-2"><a href=""></a>arcos <span class="op">=</span> [(<span class="st">'O1'</span>,<span class="st">'H1'</span>),(<span class="st">'H1'</span>,<span class="st">'D1'</span>),(<span class="st">'O1'</span>,<span class="st">'D1'</span>)]</span>
+<span id="cb10-3"><a href=""></a>costo <span class="op">=</span> {<span class="st">'O1,H1'</span>: <span class="dv">2</span>, <span class="st">'H1,D1'</span>: <span class="dv">3</span>, <span class="st">'O1,D1'</span>: <span class="dv">5</span>}</span>
+<span id="cb10-4"><a href=""></a>bi <span class="op">=</span> {<span class="st">'O1'</span>: <span class="op">-</span><span class="dv">50</span>, <span class="st">'H1'</span>: <span class="dv">0</span>, <span class="st">'D1'</span>: <span class="dv">50</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="soluciones-exactas-vs-aproximadas" class="slide level2">
 <h2>🧭 4. Soluciones Exactas vs Aproximadas</h2>
-<table>
+<table class="caption-top">
 <thead>
 <tr class="header">
 <th>Método</th>
@@ -567,9 +720,9 @@ $
 <li class="fragment"><strong>Single commodity</strong>: un solo tipo de producto fluye por la red.</li>
 <li class="fragment"><strong>Multi-commodity</strong>: múltiples productos comparten nodos y arcos.</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource mermaid number-lines code-with-copy"><code class="sourceCode"><span id="cb7-1"><a href="#cb7-1"></a>flowchart LR</span>
-<span id="cb7-2"><a href="#cb7-2"></a>  S[Source] --&gt;|Producto A| T1[Transbordo] --&gt;|A| D1[Destino A]</span>
-<span id="cb7-3"><a href="#cb7-3"></a>  S --&gt;|Producto B| T1 --&gt;|B| D2[Destino B]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource mermaid number-lines code-with-copy"><code class="sourceCode"><span id="cb11-1"><a href=""></a>flowchart LR</span>
+<span id="cb11-2"><a href=""></a>  S[Source] --&gt;|Producto A| T1[Transbordo] --&gt;|A| D1[Destino A]</span>
+<span id="cb11-3"><a href=""></a>  S --&gt;|Producto B| T1 --&gt;|B| D2[Destino B]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <h3 id="restricciones-adicionales">Restricciones adicionales:</h3>
 <ul>
 <li class="fragment">Capacidad compartida: ( <em>k x^k</em>{ij} u_{ij} )</li>
@@ -588,12 +741,12 @@ $
 </section>
 <section id="implementación-multi-commodity" class="slide level2">
 <h2>🧮 Implementación Multi-commodity</h2>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>productos <span class="op">=</span> [<span class="st">'A'</span>,<span class="st">'B'</span>]</span>
-<span id="cb8-2"><a href="#cb8-2"></a>costos <span class="op">=</span> {(<span class="st">'A'</span>,<span class="st">'O1'</span>,<span class="st">'D1'</span>):<span class="dv">2</span>, (<span class="st">'B'</span>,<span class="st">'O1'</span>,<span class="st">'D2'</span>):<span class="dv">3</span>}</span>
-<span id="cb8-3"><a href="#cb8-3"></a>capacidad <span class="op">=</span> {(<span class="st">'O1'</span>,<span class="st">'T1'</span>):<span class="dv">50</span>}</span>
-<span id="cb8-4"><a href="#cb8-4"></a></span>
-<span id="cb8-5"><a href="#cb8-5"></a>model.x <span class="op">=</span> Var(productos, arcos, domain<span class="op">=</span>NonNegativeReals)</span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="co"># Restricciones de balance y capacidad cruzada por arco</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a>productos <span class="op">=</span> [<span class="st">'A'</span>,<span class="st">'B'</span>]</span>
+<span id="cb12-2"><a href=""></a>costos <span class="op">=</span> {(<span class="st">'A'</span>,<span class="st">'O1'</span>,<span class="st">'D1'</span>):<span class="dv">2</span>, (<span class="st">'B'</span>,<span class="st">'O1'</span>,<span class="st">'D2'</span>):<span class="dv">3</span>}</span>
+<span id="cb12-3"><a href=""></a>capacidad <span class="op">=</span> {(<span class="st">'O1'</span>,<span class="st">'T1'</span>):<span class="dv">50</span>}</span>
+<span id="cb12-4"><a href=""></a></span>
+<span id="cb12-5"><a href=""></a>model.x <span class="op">=</span> Var(productos, arcos, domain<span class="op">=</span>NonNegativeReals)</span>
+<span id="cb12-6"><a href=""></a><span class="co"># Restricciones de balance y capacidad cruzada por arco</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="conclusión-general" class="slide level2">
 <h2>🎯 Conclusión General</h2>
@@ -611,9 +764,11 @@ $
 <li class="fragment">Ghiani et al.&nbsp;– <em>Introduction to Logistics Systems Management</em>.</li>
 <li class="fragment">Pyomo Docs – https://pyomo.readthedocs.io</li>
 </ul>
+<div class="quarto-auto-generated-content">
+<p><img src="Utadeo70-fondoblanco.png" class="slide-logo"></p>
+<div class="footer footer-default">
 
-<img src="Utadeo70-fondoblanco.png" class="slide-logo r-stretch"><div class="footer footer-default">
-
+</div>
 </div>
 </section>
     </div>
@@ -643,7 +798,6 @@ $
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -861,18 +1015,7 @@ $
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -904,11 +1047,50 @@ $
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
-      function tippyHover(el, contentFn) {
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -918,8 +1100,17 @@ $
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
@@ -933,7 +1124,11 @@ $
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
           let selectedAnnoteEl;
@@ -977,6 +1172,7 @@ $
                 }
                 div.style.top = top - 2 + "px";
                 div.style.height = height + 4 + "px";
+                div.style.left = 0;
                 let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
                 if (gutterDiv === null) {
                   gutterDiv = window.document.createElement("div");
@@ -1002,8 +1198,8 @@ $
             });
             selectedAnnoteEl = undefined;
           };
-          // Handle positioning of the toggle
-          window.addEventListener(
+            // Handle positioning of the toggle
+        window.addEventListener(
           "resize",
           throttle(() => {
             elRect = undefined;
@@ -1011,23 +1207,23 @@ $
               selectCodeLines(selectedAnnoteEl);
             }
           }, 10)
-          );
-          function throttle(fn, ms) {
-          let throttle = false;
-          let timer;
-            return (...args) => {
-              if(!throttle) { // first call gets through
+        );
+        function throttle(fn, ms) {
+        let throttle = false;
+        let timer;
+          return (...args) => {
+            if(!throttle) { // first call gets through
+                fn.apply(this, args);
+                throttle = true;
+            } else { // all the others get throttled
+                if(timer) clearTimeout(timer); // cancel #2
+                timer = setTimeout(() => {
                   fn.apply(this, args);
-                  throttle = true;
-              } else { // all the others get throttled
-                  if(timer) clearTimeout(timer); // cancel #2
-                  timer = setTimeout(() => {
-                    fn.apply(this, args);
-                    timer = throttle = false;
-                  }, ms);
-              }
-            };
-          }
+                  timer = throttle = false;
+                }, ms);
+            }
+          };
+        }
           const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
           for (let i=0; i<annoteTargets.length; i++) {
             const annoteTarget = annoteTargets[i];
@@ -1072,7 +1268,7 @@ $
                   options: {
                     flipVariations: false, // true by default
                     allowedAutoPlacements: ['right'],
-                    fallbackPlacements: ['right', 'top', 'top-start', 'top-end'],
+                    fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
                   },
                 },
                 {

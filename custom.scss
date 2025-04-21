@@ -1,10 +1,10 @@
 /*-- scss:defaults --*/
 
-// Tipografía moderna (Roboto o similar)
+// Tipografía moderna
 $font-family-sans-serif: "Roboto", "Segoe UI", "Helvetica Neue", Arial, sans-serif !default;
 
-// Tamaños de fuente más pequeños
-$presentation-font-size-root: 30px !default; // tamaño base
+// Tamaños para presentación compacta
+$presentation-font-size-root: 30px !default;
 $presentation-font-smaller: 0.8 !default;
 
 $presentation-h1-font-size: 2.2em !default;
@@ -12,17 +12,19 @@ $presentation-h2-font-size: 1.4em !default;
 $presentation-h3-font-size: 1.1em !default;
 $presentation-h4-font-size: 1em !default;
 
-// Otros ajustes visuales opcionales
+// Colores base
 $body-bg: #ffffff !default;
 $body-color: #333333 !default;
 $link-color: #007bff !default;
 
-// Líneas de títulos más limpias
+// Títulos
 $presentation-heading-font-weight: 500 !default;
 $presentation-heading-letter-spacing: normal !default;
 
+
 /*-- scss:rules --*/
 
+// General
 .reveal .slide {
   font-weight: 300;
   line-height: 1.4;
@@ -35,21 +37,25 @@ $presentation-heading-letter-spacing: normal !default;
   font-weight: 500;
 }
 
+// Código en línea
 .reveal code {
   font-size: 0.9em;
 }
+
+// Tablas
 .reveal .slide table {
-  font-size: 0.8em; /* Ajusta según necesidad */
+  font-size: 0.8em;
 }
-/* 👇 Ajuste para resultados de celdas */
+
+// Output Jupyter
 .reveal .cell-output {
   font-size: 0.75em;
   margin-top: 1rem;
-  max-height: 300px;        /* Limita la altura del resultado */
-  overflow-y: auto;         /* Activa scroll vertical si es necesario */
-  overflow-x: auto;         /* Por si hay tablas anchas */
-  padding-right: 0.5rem;    /* Espacio al lado del scroll */
-  border: 1px solid #ddd;   /* Opcional: para que el área se note más */
+  max-height: 160px;
+  overflow-y: auto;
+  overflow-x: auto;
+  padding-right: 0.5rem;
+  border: 1px solid #ddd;
   border-radius: 4px;
   background-color: #f9f9f9;
 }
@@ -58,28 +64,78 @@ $presentation-heading-letter-spacing: normal !default;
   font-size: 0.75em;
 }
 
-/* 🧠 Ajustes visuales para bloques de código */
-.reveal pre code {
-  font-size: 0.75em;          /* Letra más pequeña */
-  max-height: 200px;          /* Altura máxima de la caja de código */
-  overflow-y: auto;           /* Scroll vertical si excede */
-  overflow-x: auto;           /* Scroll horizontal si es necesario */
-  display: block;
-  padding: 1rem;
-  border-radius: 6px;
-  background-color: #1e1e1e;  /* Fondo oscuro estilo 'dracula' */
-  color: #f8f8f2;             /* Texto claro */
-}
-
-/* Limitar altura de las cajas de código incluyendo contenedor */
-.reveal div.cell > pre,        /* Contenedor del bloque */
-.reveal pre code {
-  max-height: 250px;           /* Ajusta la altura a tu gusto */
-  overflow-y: auto;            /* Scroll si excede */
-  font-size: 0.75em;           /* Letra más pequeña */
-  background-color: #1e1e1e;   /* Estilo oscuro (opcional) */
+// Bloques de código (optimizado para evitar scroll innecesario)
+.reveal pre code,
+.reveal div.cell > pre {
+  font-size: 1.2em;              // 👈 Letra más compacta
+  max-height: 400px;            // 👈 Altura generosa antes del scroll
+  overflow-y: auto;
+  overflow-x: auto;
+  background-color: #1e1e1e;
   color: #f8f8f2;
   border-radius: 6px;
-  padding: 1em;
+  padding: 0.75em;
+  white-space: pre;             // 👈 No se rompe por líneas
 }
 
+// Estilo VSCode-like con barra
+.reveal pre.sourceCode {
+  background-color: #1e1e1e !important;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  border: 1px solid #444;
+  padding: 2rem 1rem 1rem 1rem;
+  position: relative;
+  overflow-x: auto;
+  font-size: 0.7rem;
+  color: #eaeaea;
+  width: 80%;
+  margin: 2rem auto;
+}
+
+// Barra tipo editor
+.reveal pre.sourceCode::before {
+  content: "Editor";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #2d2d2d;
+  color: #ccc;
+  font-size: 0.9rem;
+  padding: 0.3rem 1rem;
+  border-radius: 12px 12px 0 0;
+  border-bottom: 1px solid #444;
+  z-index: 1;
+}
+
+// Botones decorativos
+.reveal pre.sourceCode::after {
+  content: "";
+  position: absolute;
+  top: 0.35rem;
+  left: 1rem;
+  font-size: 0.9rem;
+  color: #ccc;
+  letter-spacing: 0.4rem;
+  z-index: 2;
+}
+// 🚫 Evita fondos negros heredados de temas
+.reveal div.sourceCode,
+.reveal div.cell,
+.reveal pre.highlight {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.mermaid .source {
+  fill: #d0eaff;
+}
+.mermaid .hub {
+  fill: #e8e8ff;
+}
+.mermaid .sink {
+  fill: #dfffd0;
+}
