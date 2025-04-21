@@ -21,7 +21,12 @@ format:
     toc-depth: 1
     incremental: true
     scrollable: true
-    multiplex: true
+    multiplex:
+      url: 'https://shorthaired-pale-emoji.glitch.me/'
+    plugins:
+      - reveal-multiplex
+    includes:
+      after-body: multiplex-scripts.html
 
 execute: 
   warning: false
