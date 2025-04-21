@@ -22,8 +22,8 @@ format:
     incremental: true
     scrollable: true
     multiplex:
-      secret: '13652805320794272084'  # clave de ejemplo para maestro
-      id: '1ea875674b17ca76'          # ID público
+      secret: '17452016579951291178'  
+      id: '88701c599224a60f'          # ID público
       url: 'https://reveal-multiplex.glitch.me'
     plugins:
       - reveal-multiplex
