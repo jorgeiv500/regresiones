@@ -27,6 +27,8 @@ format:
       url: 'https://reveal-multiplex.glitch.me'
     plugins:
       - reveal-multiplex
+    includes:
+      after-body: multiplex-scripts.html
 
 execute: 
   warning: false
