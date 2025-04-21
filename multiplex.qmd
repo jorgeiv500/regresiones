@@ -6,6 +6,7 @@ institute: "🏩 Universidad Jorge Tadeo Lozano"
 date: "🗕️ Abril 2025"
 format: 
   revealjs:
+  
     theme: [default, custom.scss]
     slide-number: true
     highlight-style: dracula
@@ -21,24 +22,32 @@ format:
     toc-depth: 1
     incremental: true
     scrollable: true
+    webcam: 
+      toggleKey: "c" # Change the key to toggle the video
+      enabled: false #
+      persistent: false # Keep the stream open (the came
     multiplex:
       url: 'https://shorthaired-pale-emoji.glitch.me/'
     plugins:
       - reveal-multiplex
+      - webcam
+      
     includes:
       after-body: multiplex-scripts.html
-
 execute: 
   warning: false
   message: false
   echo: true
   freeze: false
-
+  revealjs-plugins:
+  - webcam
 jupyter: python3
 ---
 
-## 🎓 Introducción
+## 🎓 Introducción 
+## Slide title goes here {data-video="small top-right"}
 
+- Slide content goes here
 ### Contexto histórico
 
 Desde los años 50, el aprendizaje automático se ha orientado a que las máquinas extraigan patrones desde datos sin instrucciones explícitas. Sin embargo, un reto constante ha sido lograr **modelos que no solo funcionen bien con los datos de entrenamiento, sino que generalicen a datos nuevos**.
