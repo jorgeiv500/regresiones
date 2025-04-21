@@ -21,14 +21,12 @@ format:
     toc-depth: 1
     incremental: true
     scrollable: true
-
     multiplex:
-      secret: 'abc123'              # 🔐 clave secreta para la sesión
-      id: 'utadeo-presentacion'     # 📡 ID único de la sesión
-      url: 'https://foil-sneaky-tub.glitch.me'  # 🌍 URL del WebSocket
-
+      secret: '13652805320794272084'  # clave de ejemplo para maestro
+      id: '1ea875674b17ca76'          # ID público
+      url: 'https://reveal-multiplex.glitch.me'
     plugins:
-      - reveal-multiplex            # 🔌 asegura que se cargue el plugin
+      - reveal-multiplex
 
 execute: 
   warning: false
