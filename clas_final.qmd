@@ -1,0 +1,152 @@
+---
+title: "🧠 Métricas y Hiperparámetros en ML"
+subtitle: "📈 Evaluación de Modelos y Ajuste_final"
+author: "Jorge Iván Romero Gelvez"
+lang: es
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    highlight-style: dracula
+    code-line-numbers: true
+    code-annotations: hover
+    chalkboard: true
+    toc: true
+    toc-title: "Contenido"
+    toc-depth: 1
+    incremental: true
+    scrollable: true
+execute: 
+  warning: false
+  message: false
+  echo: false
+  freeze: true
+jupyter: python3
+---
+
+## 🎯 ¿Qué es una Matriz de Confusión?
+
+|                      | Predicción: Positivo | Predicción: Negativo |
+|----------------------|----------------------|----------------------|
+| **Real: Positivo**   | ✅ TP                | ❌ FN                |
+| **Real: Negativo**   | ❌ FP                | ✅ TN                |
+
+- TP: Verdaderos positivos
+- TN: Verdaderos negativos
+- FP: Falsos positivos
+- FN: Falsos negativos
+
+---
+
+## 📏 Métricas Derivadas
+
+- **Precision** = TP / (TP + FP)
+  > ¿De las predicciones positivas, cuántas fueron correctas?
+
+- **Recall** = TP / (TP + FN)
+  > ¿De los positivos reales, cuántos detectó correctamente el modelo?
+
+- **F1-score** = 2 × (Precision × Recall) / (Precision + Recall)
+  > Balance entre precisión y recall
+
+- **AUC (Área Bajo la Curva ROC)**
+  > Mide la capacidad del modelo para discriminar entre clases.
+  > Rango: 0.5 (azar) a 1.0 (perfecto).
+
+---
+
+## 🧠 Ejemplo Numérico
+
+```text
+Matriz:
+TP = 80  FP = 10
+FN = 20  TN = 90
+```
+
+- **Precision** = 80 / (80 + 10) = 0.888
+- **Recall** = 80 / (80 + 20) = 0.80
+- **F1-score** ≈ 0.842
+- **AUC** ≈ Área bajo curva ROC generada por TPR vs FPR
+
+---
+
+## 📌 ¿Cuándo usar cada métrica?
+
+| Métrica   | Útil cuando...                                      |
+|-----------|------------------------------------------------------|
+| Precision | FP son costosos (e.g., spam, fraude)                |
+| Recall    | FN son peligrosos (e.g., cáncer, fallos críticos)   |
+| F1-score  | Se necesita un balance en clases desbalanceadas     |
+| AUC       | Quieres evaluar el poder discriminativo global      |
+
+---
+
+## 📌 **Resumen: Hiperparámetros en Aprendizaje Automático**
+
+- **Definición**: Configuraciones externas al modelo que controlan su comportamiento. No se aprenden automáticamente.
+
+- **Importancia**:
+  1. Capacidad de representación del modelo
+  2. Optimización efectiva
+  3. Regularización adecuada
+
+---
+
+## ⚙️ Ejemplos de Hiperparámetros
+
+- Número de capas o neuronas
+- Tasa de aprendizaje
+- λ (decaimiento de peso)
+- α (momento)
+- Early stopping
+- Maxout, dropout
+- Preprocesamientos opcionales
+
+---
+
+## 🧩 Capacidad y Curva en U
+
+- 📉 **Underfitting**: Capacidad baja → error alto
+- 📈 **Overfitting**: Capacidad alta → error de generalización alto
+- ✅ Punto óptimo: Capacidad intermedia
+
+---
+
+## 🚀 Tasa de Aprendizaje
+
+- Es el hiperparámetro más sensible
+- Curva en U del error de entrenamiento
+- Muy alta → divergencia
+- Muy baja → aprendizaje lento o estancado
+
+---
+
+## 🔍 Selección y Optimización
+
+- Usar conjunto de validación (no entrenamiento ni prueba)
+- Métodos comunes:
+  - 🔍 Manual
+  - 🧮 Grid Search
+  - 🎲 Random Search
+
+- Puede verse como un problema de optimización:
+  - Variables: hiperparámetros
+  - Función objetivo: error de validación
+
+---
+## 🧮 ¿Qué es Grid Search?
+
+- **Grid Search** es un método de búsqueda exhaustiva para encontrar la mejor combinación de hiperparámetros.
+- Se define una **rejilla (grid)** de posibles valores para cada hiperparámetro.
+- El modelo se entrena y evalúa con cada combinación posible.
+- Se utiliza una métrica (e.g., F1, AUC) para comparar los resultados.
+- Se puede usar junto a **validación cruzada** para obtener estimaciones más robustas.
+
+Ejemplo de rejilla para regresión logística con regularización L2:
+
+```python
+param_grid = {
+    'logisticregression__C': [0.01, 0.1, 1, 10, 100]
+}
+```
+
