@@ -1,0 +1,155 @@
+---
+title: "🧠 Redes Neuronales Feedforward"
+subtitle: "Introducción conceptual y práctica"
+author: "👨‍🏫 Jorge Iván Romero Gelvez"
+institute: "Universidad Jorge Tadeo Lozano"
+format:
+  revealjs:
+    
+    slide-number: true
+    highlight-style: dracula
+    code-line-numbers: true
+    code-annotations: hover
+    chalkboard: true
+    toc: true
+    toc-title: "Contenido"
+    toc-depth: 1
+    incremental: true
+    scrollable: true
+---
+
+## 🌐 ¿Qué es una Red Neuronal Feedforward?
+
+- Arquitectura más simple de red neuronal artificial
+- Información viaja en una sola dirección: **entrada → capas ocultas → salida**
+- Sin ciclos o retroalimentación
+- Base de modelos más complejos (CNN, RNN, etc.)
+
+---
+
+## 🔩 Estructura de una Red Feedforward
+
+```mermaid
+graph TD
+  A[Entrada] --> B[Capa Oculta 1]
+  B --> C[Capa Oculta 2]
+  C --> D[Salida]
+```
+
+- Cada neurona aplica una **transformación lineal** seguida de una función de activación no lineal.
+
+---
+
+## 🧮 Función matemática
+
+\[
+\hat{y} = f(W_2 \cdot f(W_1 \cdot x + b_1) + b_2)
+\]
+
+- \( x \): vector de entrada  
+- \( W \): pesos  
+- \( b \): sesgos  
+- \( f \): función de activación (ReLU, Sigmoide, etc.)
+
+---
+
+## 🔧 Código en Python con Keras
+
+```python
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+
+model = Sequential([
+    Dense(16, activation='relu', input_shape=(10,)),
+    Dense(8, activation='relu'),
+    Dense(1, activation='sigmoid')
+])
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+model.summary()
+```
+
+---
+
+## 🧠 ¿Qué aprende una red neuronal?
+
+- Aprende a **ajustar los pesos** para minimizar el error (pérdida)
+- Utiliza **descenso del gradiente** + **retropropagación**
+
+\[
+\text{Error} = \frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)^2
+\]
+
+---
+
+## 📊 Aplicaciones típicas
+
+- Clasificación (e.g., diagnóstico médico)
+- Regresión (e.g., predicción de precios)
+- Reconocimiento de patrones
+
+---
+
+## 🔍 Visualización de capas
+
+```python
+import tensorflow as tf
+from tensorflow.keras.utils import plot_model
+
+plot_model(model, show_shapes=True, show_layer_names=True)
+```
+
+---
+
+## 🧪 Ejemplo con datos reales
+
+```python
+from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+
+X, y = load_breast_cancer(return_X_y=True)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+model.fit(X_train, y_train, epochs=50, batch_size=32, validation_split=0.2)
+```
+
+---
+
+## 🧩 Funciones de Activación comunes
+
+| Nombre      | Fórmula                            | Uso común             |
+|-------------|------------------------------------|------------------------|
+| ReLU        | \( \max(0, x) \)                  | Capas ocultas         |
+| Sigmoide    | \( \frac{1}{1 + e^{-x}} \)        | Clasificación binaria |
+| Tanh        | \( \frac{e^x - e^{-x}}{e^x + e^{-x}} \) | Alternativa a sigmoide |
+
+---
+
+## ❓ Preguntas para discusión
+
+- ¿Qué limita la capacidad de aprendizaje de una red feedforward?
+- ¿Cómo evitar el sobreajuste?
+- ¿Cuántas capas y neuronas debo usar?
+
+---
+
+## 🎓 Conclusiones
+
+✅ Las redes feedforward son el fundamento de muchas arquitecturas modernas  
+✅ Pueden resolver problemas complejos de clasificación y regresión  
+✅ Es importante entender su estructura, entrenamiento y evaluación
+
+---
+
+## 📚 Referencias
+
+- Goodfellow et al. "Deep Learning"
+- Géron, Aurélien. "Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow"
+- Coursera - Andrew Ng
+
+---
+
