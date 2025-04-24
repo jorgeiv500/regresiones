@@ -42,9 +42,7 @@ graph TD
 
 ## 🧮 Función matemática
 
-\[
-\hat{y} = f(W_2 \cdot f(W_1 \cdot x + b_1) + b_2)
-\]
+$\hat{y} = f(W_2 \cdot f(W_1 \cdot x + b_1) + b_2)$
 
 - \( x \): vector de entrada  
 - \( W \): pesos  
@@ -75,9 +73,7 @@ model.summary()
 - Aprende a **ajustar los pesos** para minimizar el error (pérdida)
 - Utiliza **descenso del gradiente** + **retropropagación**
 
-\[
-\text{Error} = \frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)^2
-\]
+$\text{Error} = \frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)^2$
 
 ---
 
