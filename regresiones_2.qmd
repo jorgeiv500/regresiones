@@ -1,6 +1,11 @@
 ---
+<<<<<<< HEAD
 title: "📉 Regularización con Ridge, Lasso y Validación Cruzada"
 subtitle: "🔬 Continuación del análisis: Dataset Boston Housing"
+=======
+title: "📉 Ridge, Lasso y Validación Cruzada"
+subtitle: "🔧 Mitigando el sobreajuste en el dataset Boston Housing"
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 author: "👨‍🏫 Jorge Iván Romero Gelvez"
 institute: "🏛️ Universidad Jorge Tadeo Lozano"
 date: "📅 Abril 2025"
@@ -11,29 +16,44 @@ format:
     highlight-style: dracula
     code-line-numbers: true
     code-annotations: hover
+<<<<<<< HEAD
     mermaid:
       theme: forest
     transition: fade
     chalkboard: true
     logo: Utadeo70-fondoblanco.png
+=======
+    transition: fade
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
     toc: true
     toc-title: "Contenido"
     toc-depth: 1
     incremental: true
     scrollable: true
 execute:
+<<<<<<< HEAD
   warning: false
   message: false
   echo: true
+=======
+  echo: true
+  warning: false
+  message: false
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
   freeze: false
 jupyter: python3
 ---
 
+<<<<<<< HEAD
 ## 📥 Carga del Dataset
+=======
+## ⚙️ Preparación del entorno
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 
 ```{python}
 import pandas as pd
 import numpy as np
+<<<<<<< HEAD
 
 # Cargar los datos desde la URL
 url = "http://lib.stat.cmu.edu/datasets/boston"
@@ -105,16 +125,65 @@ y_pred_ridge = ridge.predict(X_test)
 
 ```{python}
 from sklearn.metrics import mean_squared_error, r2_score
+=======
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.linear_model import Ridge, Lasso
+from sklearn.metrics import r2_score, mean_squared_error
+import matplotlib.pyplot as plt
 
-r2_ridge = r2_score(y_test, y_pred_ridge)
-rmse_ridge = np.sqrt(mean_squared_error(y_test, y_pred_ridge))
+# Cargar dataset Boston Housing
+url = "http://lib.stat.cmu.edu/datasets/boston"
+raw_df = pd.read_csv(url, sep="\s+", skiprows=22, header=None)
+data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
+target = raw_df.values[1::2, 2]
 
-print("R² Ridge:", r2_ridge)
-print("RMSE Ridge:", rmse_ridge)
+columns = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM',
+           'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+
+X = pd.DataFrame(data, columns=columns)
+y = target
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 ```
 
 ---
 
+## 🧮 Regresión Ridge
+
+La regresión Ridge añade una penalización L2 a la función de costo:
+
+$$
+\min_\beta \left[ \sum_{i=1}^n (y_i - X_i \beta)^2 + \lambda \sum_{j=1}^p \beta_j^2 \right]
+$$
+
+- Reduce coeficientes grandes
+- Mantiene todas las variables
+- Ideal para multicolinealidad
+
+---
+
+## 🔧 Entrenamiento y evaluación de Ridge
+
+```{python}
+ridge = Ridge(alpha=1.0)
+ridge.fit(X_train, y_train)
+y_pred_ridge = ridge.predict(X_test)
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
+
+r2_ridge = r2_score(y_test, y_pred_ridge)
+rmse_ridge = np.sqrt(mean_squared_error(y_test, y_pred_ridge))
+
+<<<<<<< HEAD
+print("R² Ridge:", r2_ridge)
+print("RMSE Ridge:", rmse_ridge)
+=======
+r2_ridge, rmse_ridge
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
+```
+
+---
+
+<<<<<<< HEAD
 ## 🧹 Regresión Lasso (L1)
 
 ### 🧮 Función de costo:
@@ -149,10 +218,38 @@ rmse_lasso = np.sqrt(mean_squared_error(y_test, y_pred_lasso))
 
 print("R² Lasso:", r2_lasso)
 print("RMSE Lasso:", rmse_lasso)
+=======
+## 🧹 Regresión Lasso
+
+La regresión Lasso añade penalización L1:
+
+$$
+\min_\beta \left[ \sum_{i=1}^n (y_i - X_i \beta)^2 + \lambda \sum_{j=1}^p |\beta_j| \right]
+$$
+
+- Elimina coeficientes irrelevantes
+- Modelo más simple e interpretable
+- Ideal para selección de variables
+
+---
+
+## 🔧 Entrenamiento y evaluación de Lasso
+
+```{python}
+lasso = Lasso(alpha=0.1)
+lasso.fit(X_train, y_train)
+y_pred_lasso = lasso.predict(X_test)
+
+r2_lasso = r2_score(y_test, y_pred_lasso)
+rmse_lasso = np.sqrt(mean_squared_error(y_test, y_pred_lasso))
+
+r2_lasso, rmse_lasso
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 ```
 
 ---
 
+<<<<<<< HEAD
 ## 🔁 Validación cruzada Ridge y Lasso
 
 ```{python}
@@ -161,28 +258,53 @@ lasso_scores = cross_val_score(Lasso(alpha=0.1), X, y, cv=10, scoring='r2')
 
 print("Promedio R² Ridge CV:", ridge_scores.mean())
 print("Promedio R² Lasso CV:", lasso_scores.mean())
+=======
+## 🔁 Validación Cruzada
+
+Comparamos la capacidad de generalización de Ridge y Lasso usando 10-fold cross-validation:
+
+```{python}
+ridge_cv = cross_val_score(Ridge(alpha=1.0), X, y, cv=10, scoring='r2')
+lasso_cv = cross_val_score(Lasso(alpha=0.1), X, y, cv=10, scoring='r2')
+
+ridge_cv.mean(), lasso_cv.mean()
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 ```
 
 ---
 
+<<<<<<< HEAD
 ## 📈 Comparación de Coeficientes
 
 ```{python}
 import matplotlib.pyplot as plt
 
+=======
+## 📊 Comparación de coeficientes
+
+```{python}
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 plt.figure(figsize=(12,6))
 plt.bar(X.columns, ridge.coef_, alpha=0.7, label="Ridge")
 plt.bar(X.columns, lasso.coef_, alpha=0.7, label="Lasso")
 plt.xticks(rotation=45)
 plt.title("Coeficientes: Ridge vs Lasso")
+<<<<<<< HEAD
 plt.ylabel("Valor")
 plt.legend()
 plt.tight_layout()
+=======
+plt.ylabel("Valor del Coeficiente")
+plt.legend()
+plt.tight_layout()
+plt.grid(True)
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 plt.show()
 ```
 
 ---
 
+<<<<<<< HEAD
 ## ✅ Conclusiones
 
 - 🔬 **Ridge** estabiliza el modelo pero conserva todas las variables
@@ -191,4 +313,132 @@ plt.show()
 - 🧠 La regularización mejora la generalización
 
 > *El equilibrio ideal entre sesgo y varianza requiere análisis matemático y visual.*
+=======
+## 📌 Conclusión final de los resultados obtenidos
+
+```{python}
+import pandas as pd
+
+# Suponiendo que ya tienes calculados estos valores:
+# r2_ridge, rmse_ridge, ridge_cv
+# r2_lasso, rmse_lasso, lasso_cv
+
+# Crear el DataFrame resumen
+resultados_df = pd.DataFrame({
+    'Modelo': ['Ridge', 'Lasso'],
+    'R²': [r2_ridge, r2_lasso],
+    'RMSE': [rmse_ridge, rmse_lasso],
+    'R² CV promedio': [ridge_cv.mean(), lasso_cv.mean()]
+})
+
+# Mostrar el DataFrame con dos decimales
+resultados_df = resultados_df.round(2)
+resultados_df
+```
+
+---
+
+## 🧠 Interpretación
+
+- 📉 El modelo lineal original mostró signos de **sobreajuste**.
+- 🛠️ Ridge mantuvo todas las variables, redujo varianza y estabilizó coeficientes.
+- 🧹 Lasso eliminó coeficientes irrelevantes, simplificando el modelo.
+- 🔄 La validación cruzada mostró que ambos métodos **generalizan mejor**.
+
+> ✅ Ridge y Lasso son herramientas clave para construir modelos más robustos y útiles en producción.
+
+---
+
+## 📘  Números y estructuras matemáticas
+
+## 🔹 Escalares
+- Un **escalar** es un único número.
+- Representa una cantidad en una dimensión.
+- Ejemplo: `x = 5`
+
+## 🔹 Vectores
+- Lista ordenada de números (componentes).
+- Dirección y magnitud:
+
+$\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ \dots \\ x_n \end{bmatrix}$
+
+## 🔹 Matrices
+- Tabla bidimensional de números:
+
+$ A = \begin{bmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{bmatrix}$
+
+## 🔹 Tensors
+- Generalización a múltiples dimensiones.
+- Ej. imágenes RGB, secuencias, videos, etc.
+
+---
+
+# 📘 Probabilidad y distribuciones
+
+## 🔹 Fundamentos
+- **Probabilidad** mide incertidumbre.
+- **Variable aleatoria**: asigna valores a eventos.
+
+## 🔹 Distribuciones comunes
+- **Bernoulli**, **Binomial**, **Normal**:
+
+
+$\mathcal{N}(x; \mu, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left( -\frac{(x - \mu)^2}{2\sigma^2} \right)$
+
+
+![Distribuciones comunes](distr.png)
+
+
+---
+
+# 📘 Teoría de la información
+
+## 🔹 Entropía
+
+$H(X) = -\sum_{x} P(x) \log P(x)$
+
+## 🔹 Entropía cruzada
+
+$H(P, Q) = -\sum_x P(x) \log Q(x)$
+
+## 🔹 Divergencia KL
+
+$D_{KL}(P \| Q) = \sum_x P(x) \log \frac{P(x)}{Q(x)}
+$
+
+## 🔹 Información mutua
+
+$I(X; Y) = H(X) - H(X | Y)
+$
+
+---
+
+# 📘 Parámetros y optimización
+
+## 🔹 Parámetros vs Hiperparámetros
+- **Parámetros**: aprendidos durante entrenamiento (ej. pesos  $W$ ).
+- **Hiperparámetros**: definidos antes (ej. tasa de aprendizaje). Ejemplo, en ridge y lasso, $\lambda$
+
+## 🔹 Optimización
+- Minimizar la función de pérdida.
+
+### Métodos:
+- **Gradiente descendiente**:
+
+$
+\theta \leftarrow \theta - \eta \nabla_\theta J(\theta)
+$
+
+- **SGD**, **Adam**, **RMSProp**
+
+---
+
+# ¡Gracias por tu atención! 🙌
+
+- Material basado en *Deep Learning* — Goodfellow, Bengio y Courville.
+- Presentación para uso docente.
+
+---
+
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 

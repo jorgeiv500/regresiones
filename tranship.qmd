@@ -1,0 +1,156 @@
+---
+title: "🔁 Resolución del Problema de Transbordo"
+subtitle: "📦 Optimización de Redes con Pyomo"
+author: "👨‍🏫 Jorge Iván Romero Gelvez"
+institute: "🏛️ Universidad Jorge Tadeo Lozano"
+date: "📅 Abril 2025"
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    highlight-style: dracula
+    code-line-numbers: true
+    code-annotations: hover
+    mermaid:
+      theme: forest
+    transition: fade
+    chalkboard: true
+    logo: Utadeo70-fondoblanco.png
+    toc: true
+    toc-title: "Contenido"
+    toc-depth: 2
+    scrollable: true
+execute:
+  echo: true
+  warning: false
+jupyter: python3
+---
+
+## 🚚 ¿Qué es el problema de transbordo?
+
+- Variante del problema de transporte.
+- Involucra **nodos intermedios**: el flujo pasa por depósitos o almacenes temporales.
+- Ejemplo real: rutas entre fábricas y clientes pasando por centros de distribución.
+
+---
+
+## 🖼️ Diagrama de red
+
+![Problema de transbordo](https://machinelearninggeek.com/wp-content/uploads/2022/02/image-3.png)
+
+- Fábricas: A, B, C
+- Almacenes intermedios: P, Q
+- Proyectos (destinos): 1, 2, 3
+
+---
+
+## 📋 Datos del problema
+
+```python
+# Orígenes (fábricas)
+fabricas = ['A', 'B', 'C']
+suministro = {'A': 100, 'B': 200, 'C': 200}
+
+# Nodos intermedios (almacenes)
+almacenes = ['P', 'Q']
+
+# Destinos (proyectos)
+proyectos = ['1', '2', '3']
+demanda = {'1': 50, '2': 150, '3': 300}
+
+# Costos de fábricas a almacenes
+costos_fab_alma = {
+    ('A', 'P'): 3, ('A', 'Q'): 2,
+    ('B', 'P'): 4, ('B', 'Q'): 3,
+    ('C', 'P'): 2.5, ('C', 'Q'): 3.5
+}
+
+# Costos de almacenes a proyectos
+costos_alma_proj = {
+    ('P', '1'): 2, ('P', '2'): 1, ('P', '3'): 4,
+    ('Q', '1'): 3, ('Q', '2'): 2, ('Q', '3'): 5
+}
+```
+
+---
+
+## ⚙️ Formulación en Pyomo
+
+```python
+from pyomo.environ import *
+
+model = ConcreteModel()
+model.Rutas_1 = Set(initialize=[(i, j) for i in fabricas for j in almacenes])
+model.Rutas_2 = Set(initialize=[(i, j) for i in almacenes for j in proyectos])
+
+model.X1 = Var(model.Rutas_1, domain=NonNegativeReals)
+model.X2 = Var(model.Rutas_2, domain=NonNegativeReals)
+
+model.obj = Objective(
+    expr=sum(costos_fab_alma[i]*model.X1[i] for i in model.Rutas_1) +
+         sum(costos_alma_proj[i]*model.X2[i] for i in model.Rutas_2),
+    sense=minimize
+)
+```
+
+---
+
+## 📐 Restricciones del modelo
+
+```python
+# Restricción de oferta (fábricas)
+model.oferta = ConstraintList()
+for i in fabricas:
+    model.oferta.add(sum(model.X1[i, j] for j in almacenes) <= suministro[i])
+
+# Restricción de demanda (proyectos)
+model.demanda = ConstraintList()
+for j in proyectos:
+    model.demanda.add(sum(model.X2[i, j] for i in almacenes) >= demanda[j])
+
+# Flujo intermedio: lo que entra a P o Q debe salir
+model.flujo = ConstraintList()
+for w in almacenes:
+    model.flujo.add(
+        sum(model.X1[i, w] for i in fabricas) ==
+        sum(model.X2[w, j] for j in proyectos)
+    )
+```
+
+---
+
+## 🧠 Resolviendo el modelo
+
+```python
+from pyomo.opt import SolverFactory
+opt = SolverFactory('glpk')
+results = opt.solve(model)
+model.display()
+```
+
+---
+
+## 📊 Resultados esperados
+
+```python
+for i in model.Rutas_1:
+    if model.X1[i]() > 0:
+        print(f"Ruta {i} (Fábrica → Almacén): {model.X1[i]():.0f}")
+
+for i in model.Rutas_2:
+    if model.X2[i]() > 0:
+        print(f"Ruta {i} (Almacén → Proyecto): {model.X2[i]():.0f}")
+
+print(f"Costo total mínimo: {model.obj():.2f}")
+```
+
+---
+
+## 📌 Conclusión
+
+- El problema de transbordo amplía el modelo clásico de transporte.
+- Pyomo permite una formulación flexible y clara.
+- Se adapta fácilmente a escenarios con múltiples capas logísticas.
+- Ideal para casos reales como hubs, bodegas, puertos, etc.
+
+---

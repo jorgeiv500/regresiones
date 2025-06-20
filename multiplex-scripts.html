@@ -1,0 +1,18 @@
+<!-- socket-script.html -->
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+<script>
+  const socket = io("http://localhost:3000");
+
+  socket.on("connect", () => {
+    console.log("🔌 Conectado al servidor:", socket.id);
+    socket.emit("mensaje", "¡Hola desde el cliente Quarto!");
+  });
+
+  socket.on("mensaje", (data) => {
+    console.log("📩 Mensaje del servidor:", data);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("❌ Desconectado del servidor.");
+  });
+</script>

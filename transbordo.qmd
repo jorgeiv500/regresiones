@@ -1,0 +1,356 @@
+---
+title: "📦 Modelos de Redes lineales: De transporte a Transbordo"
+subtitle: "🔗 Transporte, Asignación, Transbordo y Flujos Multicommodity"
+author: "👨‍🏫 Jorge Iván Romero Gelvez"
+institute: "🏛️ Universidad Jorge Tadeo Lozano"
+date: today
+format: 
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    highlight-style: dracula
+    code-line-numbers: true
+    code-annotations: hover
+    mermaid:
+      theme: forest
+    transition: fade
+    chalkboard: true
+    logo: Utadeo70-fondoblanco.png
+    toc: true
+    toc-title: "Contenido"
+    toc-depth: 2
+    incremental: true
+    scrollable: true
+execute: 
+  warning: false
+  message: false
+  echo: true
+  freeze: false
+jupyter: python3
+---
+## 🎬 Introducción
+
+- Muchos problemas reales pueden modelarse como redes de nodos conectados por arcos.
+- Estos modelos permiten encontrar rutas óptimas, asignaciones eficientes o balances de flujo.
+
+  - 🎯 **Objetivo**: Aprender a representar y resolver modelos clásicos de redes mediante optimización.
+a
+---
+
+## 🧩 ¿Qué es un modelo de red?
+
+Una red dirigida incluye:
+
+- **Nodos**: puntos donde se origina, transforma o termina el flujo.
+- **Arcos**: conexiones con costos, capacidades o flujos.
+
+  💡 **Ejemplo general**:
+  > Distribuir unidades desde nodos origen hasta nodos destino, al menor costo.
+
+---
+
+## 🚛 1. Modelo de Transporte
+
+**Objetivo**: Minimizar el costo de enviar unidades de varios orígenes a varios destinos.
+
+$$
+\min \sum_{i=1}^{m} \sum_{j=1}^{n} c_{ij} x_{ij}
+$$
+
+Sujeto a:
+
+- $$\sum_j x_{ij} = a_i \quad \forall i$$
+- $$\sum_i x_{ij} = b_j \quad \forall j$$
+- $$x_{ij} \geq 0$$
+
+```mermaid
+flowchart LR
+  N1[Origen 1] -->|x11| D1[Destino 1]
+  N1 -->|x12| D2[Destino 2]
+  N2[Origen 2] -->|x21| D1
+  N2 -->|x22| D2
+```
+
+---
+
+## 💻 Código Pyomo: Transporte
+
+```python
+from pyomo.environ import *
+
+model = ConcreteModel()
+
+origenes = ['N1', 'N2']
+destinos = ['D1', 'D2']
+c = {('N1','D1'): 4, ('N1','D2'): 6, ('N2','D1'): 5, ('N2','D2'): 3}
+a = {'N1': 30, 'N2': 40}
+b = {'D1': 20, 'D2': 50}
+
+model.x = Var(c.keys(), domain=NonNegativeReals)
+model.obj = Objective(expr=sum(c[i]*model.x[i] for i in c), sense=minimize)
+model.oferta = Constraint(origenes, rule=lambda m, i: sum(m.x[i,j] for j in destinos) == a[i])
+model.demanda = Constraint(destinos, rule=lambda m, j: sum(m.x[i,j] for i in origenes) == b[j])
+```
+
+---
+
+## 🎯 2. Modelo de Asignación
+
+Es un caso especial del modelo de transporte donde todas las ofertas y demandas son 1.
+
+$$
+\min \sum_{i=1}^{n} \sum_{j=1}^{n} c_{ij} x_{ij}
+$$
+
+Sujeto a:
+
+- $$\sum_j x_{ij} = 1 \quad \forall i$$
+- $$\sum_i x_{ij} = 1 \quad \forall j$$
+- $$x_{ij} \in \{0,1\}$$
+
+---
+
+## 💻 Pyomo: Asignación Binaria
+
+```python
+trabajadores = ['E1', 'E2', 'E3']
+tareas = ['T1', 'T2', 'T3']
+cost = {('E1','T1'):3, ('E1','T2'):2, ('E1','T3'):4,
+        ('E2','T1'):4, ('E2','T2'):3, ('E2','T3'):1,
+        ('E3','T1'):5, ('E3','T2'):2, ('E3','T3'):2}
+
+model.x = Var(cost.keys(), domain=Binary)
+model.obj = Objective(expr=sum(cost[i]*model.x[i] for i in cost), sense=minimize)
+model.restr1 = Constraint(trabajadores, rule=lambda m, i: sum(m.x[i,j] for j in tareas) == 1)
+model.restr2 = Constraint(tareas, rule=lambda m, j: sum(m.x[i,j] for i in trabajadores) == 1)
+```
+
+---
+
+## 🔁 3. Modelo de Transbordo
+
+Permite el paso por nodos intermedios.
+
+$$
+\sum_j x_{ij} - \sum_j x_{ji} = b_i
+$$
+
+- $b_i < 0$: nodo emisor
+- $b_i > 0$: nodo receptor
+- $b_i = 0$: nodo de tránsito
+
+---
+
+## 💻 Pyomo: Transbordo
+
+```python
+nodos = ['N1','N2','N3']
+arcos = [('N1','N2'),('N2','N3'),('N1','N3')]
+costos = {('N1','N2'):3, ('N2','N3'):2, ('N1','N3'):5}
+bi = {'N1': -60, 'N2': 0, 'N3': 60}
+
+model.x = Var(arcos, domain=NonNegativeReals)
+model.obj = Objective(expr=sum(costos[i]*model.x[i] for i in arcos), sense=minimize)
+model.balances = Constraint(nodos, rule=lambda m, i:
+    sum(m.x[i,j] for (ii,j) in arcos if ii == i) - sum(m.x[j,i] for (j,jj) in arcos if jj == i) == bi[i])
+```
+
+---
+
+## 📊 Métodos de Resolución
+
+| Método              | Tipo       | Ejemplo                   |
+|---------------------|------------|----------------------------|
+| Simplex, GLPK, CBC | Exacto     | Transporte, transbordo     |
+| Húngaro             | Exacto     | Asignación binaria         |
+| Ramificación y Acot.| Exacto     | Programación entera        |
+| Búsqueda local      | Aproximado | Vecino más cercano         |
+| Metaheurísticas     | Aproximado | Recocido, genético         |
+
+---
+
+## 📌 Introducción general
+
+- Los modelos de red permiten representar **problemas logísticos complejos** con nodos y arcos.
+- Permiten decisiones óptimas en: distribución, asignación de recursos, ruteo y diseño de cadenas.
+
+---
+
+## 🚛 1. Modelo de Transporte Clásico
+
+- Distribuir un producto desde varios orígenes a varios destinos minimizando costos.
+
+$
+\begin{aligned}
+\text{Min:} & \sum_{i=1}^{m}\sum_{j=1}^{n} c_{ij} x_{ij} \\
+\text{s.a.} & \sum_j x_{ij} = a_i && \text{(oferta)} \\
+           & \sum_i x_{ij} = b_j && \text{(demanda)} \\
+           & x_{ij} \geq 0
+\end{aligned}
+$
+
+```mermaid
+flowchart LR
+  A1[Planta A1] -->|x11| B1[Bodega B1]
+  A1 -->|x12| B2[Bodega B2]
+  A2[Planta A2] -->|x21| B1
+  A2 -->|x22| B2
+```
+
+---
+
+## 🧮 Código en Pyomo: Modelo de Transporte
+
+```python
+from pyomo.environ import *
+
+model = ConcreteModel()
+origenes = ['A1', 'A2']
+destinos = ['B1', 'B2']
+c = {('A1','B1'): 4, ('A1','B2'): 6, ('A2','B1'): 5, ('A2','B2'): 3}
+a = {'A1': 30, 'A2': 40}
+b = {'B1': 20, 'B2': 50}
+
+model.x = Var(c.keys(), domain=NonNegativeReals)
+model.obj = Objective(expr=sum(c[i]*model.x[i] for i in c), sense=minimize)
+
+model.oferta = Constraint(origenes, rule=lambda m, i: sum(m.x[i,j] for j in destinos) == a[i])
+model.demanda = Constraint(destinos, rule=lambda m, j: sum(m.x[i,j] for i in origenes) == b[j])
+```
+
+---
+
+## 🧮 2. Modelo de Asignación (lineal y método húngaro)
+
+- Asignar tareas a recursos con un costo mínimo.
+- Es un caso especial del modelo de transporte con oferta y demanda igual a 1.
+
+$
+\begin{aligned}
+\text{Min:} & \sum_{i=1}^{n} \sum_{j=1}^{n} c_{ij} x_{ij} \\
+\text{s.a.} & \sum_{j} x_{ij} = 1 \quad \forall i \\
+           & \sum_{i} x_{ij} = 1 \quad \forall j \\
+           & x_{ij} \in \{0, 1\}
+\end{aligned}
+$
+
+```mermaid
+flowchart TD
+  A[Trabajadores] -->|xij| B[Tareas]
+```
+
+- **Método húngaro**: Algoritmo eficiente tipo greedy-matching.
+
+---
+
+## 🧮 Pyomo para Asignación
+
+```python
+trabajadores = ['T1','T2','T3']
+tareas = ['P1','P2','P3']
+cost = {(i,j): random.randint(1,10) for i in trabajadores for j in tareas}
+model.x = Var(cost.keys(), domain=Binary)
+
+model.obj = Objective(expr=sum(cost[i]*model.x[i] for i in cost), sense=minimize)
+model.restr1 = Constraint(trabajadores, rule=lambda m, i: sum(m.x[i,j] for j in tareas) == 1)
+model.restr2 = Constraint(tareas, rule=lambda m, j: sum(m.x[i,j] for i in trabajadores) == 1)
+```
+
+---
+
+## 🔁 3. Modelo de Transbordo
+
+- Extensión del modelo de transporte permitiendo nodos intermedios.
+- Se representa como un **flujo con costo mínimo** en redes.
+
+```mermaid
+flowchart LR
+  O1[Origen] -->|c1| H1[Hub]
+  H1 -->|c2| D1[Destino]
+  O1 -->|c3| D1
+```
+
+---
+
+## 🧮 Pyomo con transbordo
+
+Usamos balance nodal:
+$ \sum_j x_{ij} - \sum_j x_{ji} = b_i $
+
+```python
+nodos = ['O1','H1','D1']
+arcos = [('O1','H1'),('H1','D1'),('O1','D1')]
+costo = {'O1,H1': 2, 'H1,D1': 3, 'O1,D1': 5}
+bi = {'O1': -50, 'H1': 0, 'D1': 50}
+```
+
+---
+
+## 🧭 4. Soluciones Exactas vs Aproximadas
+
+| Método               | Tipo       | Ejemplo                 |
+|----------------------|------------|--------------------------|
+| PL con Solver        | Exacta     | Simplex, CBC, GLPK      |
+| Húngaro              | Exacta     | Asignación binaria      |
+| Ramificación/Acot.   | Exacta     | Integer Programming     |
+| Búsqueda local       | Aproximada | Greedy, Vecino cercano  |
+| Metaheurísticas      | Aproximada | Recocido, Genético      |
+
+---
+
+## 📦 5. Flujos Single Commodity vs Multi Commodity
+
+- **Single commodity**: un solo tipo de producto fluye por la red.
+- **Multi-commodity**: múltiples productos comparten nodos y arcos.
+
+```mermaid
+flowchart LR
+  S[Source] -->|Producto A| T1[Transbordo] -->|A| D1[Destino A]
+  S -->|Producto B| T1 -->|B| D2[Destino B]
+```
+
+### Restricciones adicionales:
+- Capacidad compartida: \( \sum_k x^k_{ij} \leq u_{ij} \)
+
+---
+
+## 🔣 Formulación Multi-Commodity
+
+$
+\begin{aligned}
+\min & \sum_{k} \sum_{(i,j)} c^k_{ij} x^k_{ij} \\
+\text{s.a. } & \sum_j x^k_{ij} - \sum_j x^k_{ji} = b^k_i \quad \forall i,k \\
+& \sum_k x^k_{ij} \leq u_{ij} \quad \forall (i,j) \\
+& x^k_{ij} \geq 0
+\end{aligned}
+$
+
+---
+
+## 🧮 Implementación Multi-commodity
+
+```python
+productos = ['A','B']
+costos = {('A','O1','D1'):2, ('B','O1','D2'):3}
+capacidad = {('O1','T1'):50}
+
+model.x = Var(productos, arcos, domain=NonNegativeReals)
+# Restricciones de balance y capacidad cruzada por arco
+```
+
+---
+
+## 🎯 Conclusión General
+
+- Los modelos de red permiten formular y resolver problemas logísticos reales.
+- Técnicas como programación lineal y heurísticas dan flexibilidad y eficiencia.
+- Pyomo + NEOS ofrece una plataforma poderosa y abierta para su resolución.
+
+---
+
+## 📚 Referencias
+
+- Hillier & Lieberman – *Introducción a la Investigación de Operaciones*.
+- Taha – *Investigación de Operaciones*.
+- Ghiani et al. – *Introduction to Logistics Systems Management*.
+- Pyomo Docs – https://pyomo.readthedocs.io

@@ -1,0 +1,153 @@
+---
+title: "🤖 Agente Inteligente con RAG"
+subtitle: "🔍 Respuestas con búsqueda semántica y generación aumentada"
+author: "👨‍🏫 Jorge Iván Romero Gelvez"
+institute: "🏛️ Universidad Jorge Tadeo Lozano"
+date: "📅 Abril 2025"
+format: 
+  revealjs: 
+    theme: [default, custom.scss]
+    slide-number: true
+    highlight-style: dracula
+    code-line-numbers: true
+    code-annotations: hover
+    mermaid:
+      theme: forest
+    transition: fade
+    chalkboard: true
+    logo: Utadeo70-fondoblanco.png
+    toc: true
+    toc-title: "Contenido"
+    toc-depth: 1
+    incremental: true
+    scrollable: true
+execute: 
+  warning: false
+  message: false
+  echo: true
+  freeze: false
+jupyter: python3
+---
+
+## ¿Qué es un agente RAG?
+
+- **RAG**: Retrieval-Augmented Generation
+- Une dos mundos:
+  - 🔎 **Búsqueda semántica** en documentos (con vectores)
+  - ✍️ **Generación de texto** con IA (como ChatGPT)
+- ¿Para qué sirve?
+  - Crear asistentes que responden con base en documentos reales
+  - Evitar "alucinaciones" de la IA
+  - Respuestas confiables y trazables
+
+---
+
+## ¿Cómo funciona?
+
+```mermaid
+graph TD
+  A[Usuario] -->|Pregunta| B[Frontend (Next.js)]
+  B --> C[API /chat]
+  C --> D[Vector Store (Pinecone)]
+  D -->|Chunks relevantes| E[LangChain + OpenAI]
+  E -->|Respuesta| B
+```
+
+---
+
+## Paso 1: Indexar los documentos
+
+- Archivos: PDF, Word, Excel, Imágenes con OCR
+- Fragmentar en bloques:
+
+```ts
+new RecursiveCharacterTextSplitter({
+  chunkSize: 500,
+  chunkOverlap: 50,
+});
+```
+
+- Enviar a Pinecone:
+
+```ts
+await PineconeStore.fromDocuments(docs, new OpenAIEmbeddings(), {
+  pineconeIndex: pinecone.Index("utadeo-2")
+});
+```
+
+---
+
+## Paso 2: Recuperar contexto relevante
+
+```ts
+const results = await index.query({
+  vector: embedding,
+  topK: 5,
+  includeMetadata: true,
+});
+```
+
+- Busca por similitud
+- Devuelve textos relacionados con la pregunta del usuario
+
+---
+
+## Paso 3: Generar la respuesta
+
+```ts
+const chain = RetrievalQAChain.fromLLM(
+  new OpenAI({ temperature: 0 }),
+  vectorStore.asRetriever()
+);
+const response = await chain.call({ query: question });
+```
+
+- LangChain crea un prompt con los documentos recuperados
+- OpenAI genera una respuesta informada y confiable
+
+---
+
+## ¿Qué desarrollamos?
+
+- Una app web con interfaz de chat
+- Permite que cualquier persona explore información de programas
+- Ideal para ferias, eventos y procesos de admisión
+
+---
+
+## ¿Dónde se usa?
+
+- 🏫 Educación: asistentes de orientación académica
+- 🏢 Empresas: soporte interno basado en manuales
+- ⚖️ Gobierno: atención ciudadana con normativas
+- 📚 Bibliotecas: exploración semántica de contenidos
+
+---
+
+## ¿Y qué más se puede hacer?
+
+- Integrar autenticación (e.g. usuarios registrados)
+- Mostrar la fuente exacta de la respuesta
+- Guardar conversaciones para análisis
+- Entrenar con nuevos documentos dinámicamente
+
+---
+
+## 🚀 ¡Pruébalo tú mismo!
+
+Escanea el siguiente código QR y chatea con nuestro agente 👇
+
+![](https://api.qrserver.com/v1/create-qr-code/?data=https://chat-feria.vercel.app/&size=200x200)
+
+[https://chat-feria.vercel.app](https://chat-feria.vercel.app)
+
+---
+
+## ¡Gracias por acompañarnos!
+
+> "Donde la ciencia y el arte se encuentran, la inteligencia artificial puede guiarnos."
+
+Explora. Pregunta. Aprende. 🤖💡
+
+
+---

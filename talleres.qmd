@@ -1,0 +1,109 @@
+---
+title: "🔍 Vive la Ingeniería: Talleres de Realidad Virtual e Inteligencia Artificial"
+author: "👨‍🏫 Jorge Iván Romero Gelvez"
+institute: "🏛️ Universidad Jorge Tadeo Lozano"
+date: "📅 Abril 2025"
+format: 
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    highlight-style: dracula
+    code-line-numbers: true
+    code-annotations: hover
+    mermaid:
+      theme: forest
+    transition: fade
+    chalkboard: true
+    logo: Utadeo70-fondoblanco.png
+    toc: true
+    toc-title: "Contenido"
+    toc-depth: 1
+    incremental: true
+    scrollable: true
+execute: 
+  warning: false
+  message: false
+  echo: true
+---
+
+## 👋 Bienvenida
+
+### No te vamos a contar una carrera. Te la vamos a hacer vivir.
+
+- ¿Qué estudiar?
+- ¿Qué hace realmente un ingeniero?
+- ¿Cómo saber si esto es para mí?
+
+Hoy lo vas a descubrir **viviéndolo**.
+
+---
+
+## 🤖 Taller 1: Habla con un Agente Inteligente
+
+### ¿Qué es?
+
+- Un asistente conversacional con **Inteligencia Artificial** avanzada (RAG).
+- Usa documentos reales para responder con precisión.
+- Te explica qué materias verías, qué salidas laborales hay, y más.
+
+---
+
+## 🧠 ¿Qué aprenderías si estudias Ingeniería de Sistemas?
+
+- A crear este tipo de agentes.
+- A programar modelos de lenguaje.
+- A combinar IA con bases de datos y sistemas reales.
+
+> ¡No solo usarás la IA, la construirás!
+
+---
+
+## 🕶 Taller 2: Desafío Picking en Realidad Virtual
+
+### ¿Qué es?
+
+- Te pones unas gafas de VR.
+- Entras en una **bodega virtual**.
+- Realizas un test de **picking**: eficiencia, tiempos, decisiones.
+
+---
+
+## ⚙️ ¿Qué harías si estudias Ingeniería Industrial?
+
+- Simular procesos logísticos.
+- Optimizar operaciones reales.
+- Aplicar tecnología en la gestión.
+
+> ¡Transformarás la industria desde la ingeniería!
+
+---
+
+## 🚀 ¿Por qué esto importa?
+
+- Porque la ingeniería hoy **no solo se aprende**, ¡se vive!
+- Porque estudiar ingeniería es construir el futuro: 
+  - Con IA (Sistemas)
+  - Con procesos inteligentes (Industrial)
+
+---
+
+## 🔚 UTADEO 
+
+### No lo imagines. Vívelo.
+
+- Pregunta
+- Interactúa
+- Experimenta
+
+¡Bienvenidos al futuro de la ingeniería en **Utadeo**! 🎓
+
+
+---
+
+## 💬 Preguntas y comentarios
+
+---
+
+class: center, middle
+
+# ¡Gracias!

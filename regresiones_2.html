@@ -8,11 +8,19 @@
 <link href="regresiones_2_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="regresiones_2_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="regresiones_2_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<<<<<<< HEAD
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="👨‍🏫 Jorge Iván Romero Gelvez">
   <meta name="dcterms.date" content="2025-01-01">
   <title>📉 Regularización con Ridge, Lasso y Validación Cruzada</title>
+=======
+  <meta name="generator" content="quarto-1.3.450">
+
+  <meta name="author" content="👨‍🏫 Jorge Iván Romero Gelvez">
+  <meta name="dcterms.date" content="2025-01-01">
+  <title>📉 Ridge, Lasso y Validación Cruzada</title>
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -32,7 +40,11 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
+<<<<<<< HEAD
     pre > code.sourceCode > span { line-height: 1.25; }
+=======
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -43,7 +55,11 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
+<<<<<<< HEAD
     pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+=======
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -100,8 +116,11 @@
   <link href="regresiones_2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="regresiones_2_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="regresiones_2_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+<<<<<<< HEAD
   <link href="regresiones_2_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
   <link href="regresiones_2_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+=======
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
   <link href="regresiones_2_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
@@ -224,8 +243,12 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
+<<<<<<< HEAD
     padding-bottom: 0.5rem;
     margin-bottom: 0;
+=======
+    margin-bottom: 0.5rem;
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -389,14 +412,25 @@
       margin-right: 0; 
     }
   </style>
+<<<<<<< HEAD
+=======
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 </head>
 <body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
+<<<<<<< HEAD
   <h1 class="title">📉 Regularización con Ridge, Lasso y Validación Cruzada</h1>
   <p class="subtitle">🔬 Continuación del análisis: Dataset Boston Housing</p>
+=======
+  <h1 class="title">📉 Ridge, Lasso y Validación Cruzada</h1>
+  <p class="subtitle">🔧 Mitigando el sobreajuste en el dataset Boston Housing</p>
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -410,6 +444,7 @@
 </div>
 
   <p class="date">2025-01-01</p>
+<<<<<<< HEAD
 </section>
 <section id="carga-del-dataset" class="slide level2">
 <h2>📥 Carga del Dataset</h2>
@@ -543,10 +578,115 @@ RMSE Lasso: 5.43056574851312</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>Promedio R² Ridge CV: 0.2561668703759343
 Promedio R² Lasso CV: 0.26432738934873734</code></pre>
+=======
+</section><section id="TOC">
+<nav role="doc-toc"> 
+<h2 id="toc-title">Contenido</h2>
+<ul>
+<li class="fragment"><a href="#/probabilidad-y-distribuciones" id="/toc-probabilidad-y-distribuciones">📘 Probabilidad y distribuciones</a></li>
+<li class="fragment"><a href="#/teoría-de-la-información" id="/toc-teoría-de-la-información">📘 Teoría de la información</a></li>
+<li class="fragment"><a href="#/parámetros-y-optimización" id="/toc-parámetros-y-optimización">📘 Parámetros y optimización</a></li>
+<li class="fragment"><a href="#/gracias-por-tu-atención" id="/toc-gracias-por-tu-atención">¡Gracias por tu atención! 🙌</a></li>
+</ul>
+</nav>
+</section>
+<section id="preparación-del-entorno" class="slide level2">
+<h2>⚙️ Preparación del entorno</h2>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split, cross_val_score</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> Ridge, Lasso</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score, mean_squared_error</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="co"># Cargar dataset Boston Housing</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>url <span class="op">=</span> <span class="st">"http://lib.stat.cmu.edu/datasets/boston"</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>raw_df <span class="op">=</span> pd.read_csv(url, sep<span class="op">=</span><span class="st">"\s+"</span>, skiprows<span class="op">=</span><span class="dv">22</span>, header<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb1-11"><a href="#cb1-11"></a>data <span class="op">=</span> np.hstack([raw_df.values[::<span class="dv">2</span>, :], raw_df.values[<span class="dv">1</span>::<span class="dv">2</span>, :<span class="dv">2</span>]])</span>
+<span id="cb1-12"><a href="#cb1-12"></a>target <span class="op">=</span> raw_df.values[<span class="dv">1</span>::<span class="dv">2</span>, <span class="dv">2</span>]</span>
+<span id="cb1-13"><a href="#cb1-13"></a></span>
+<span id="cb1-14"><a href="#cb1-14"></a>columns <span class="op">=</span> [<span class="st">'CRIM'</span>, <span class="st">'ZN'</span>, <span class="st">'INDUS'</span>, <span class="st">'CHAS'</span>, <span class="st">'NOX'</span>, <span class="st">'RM'</span>,</span>
+<span id="cb1-15"><a href="#cb1-15"></a>           <span class="st">'AGE'</span>, <span class="st">'DIS'</span>, <span class="st">'RAD'</span>, <span class="st">'TAX'</span>, <span class="st">'PTRATIO'</span>, <span class="st">'B'</span>, <span class="st">'LSTAT'</span>]</span>
+<span id="cb1-16"><a href="#cb1-16"></a></span>
+<span id="cb1-17"><a href="#cb1-17"></a>X <span class="op">=</span> pd.DataFrame(data, columns<span class="op">=</span>columns)</span>
+<span id="cb1-18"><a href="#cb1-18"></a>y <span class="op">=</span> target</span>
+<span id="cb1-19"><a href="#cb1-19"></a></span>
+<span id="cb1-20"><a href="#cb1-20"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="regresión-ridge" class="slide level2">
+<h2>🧮 Regresión Ridge</h2>
+<p>La regresión Ridge añade una penalización L2 a la función de costo:</p>
+<p><span class="math display">\[
+\min_\beta \left[ \sum_{i=1}^n (y_i - X_i \beta)^2 + \lambda \sum_{j=1}^p \beta_j^2 \right]
+\]</span></p>
+<ul>
+<li class="fragment">Reduce coeficientes grandes</li>
+<li class="fragment">Mantiene todas las variables</li>
+<li class="fragment">Ideal para multicolinealidad</li>
+</ul>
+</section>
+<section id="entrenamiento-y-evaluación-de-ridge" class="slide level2">
+<h2>🔧 Entrenamiento y evaluación de Ridge</h2>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>ridge <span class="op">=</span> Ridge(alpha<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a>ridge.fit(X_train, y_train)</span>
+<span id="cb2-3"><a href="#cb2-3"></a>y_pred_ridge <span class="op">=</span> ridge.predict(X_test)</span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a>r2_ridge <span class="op">=</span> r2_score(y_test, y_pred_ridge)</span>
+<span id="cb2-6"><a href="#cb2-6"></a>rmse_ridge <span class="op">=</span> np.sqrt(mean_squared_error(y_test, y_pred_ridge))</span>
+<span id="cb2-7"><a href="#cb2-7"></a></span>
+<span id="cb2-8"><a href="#cb2-8"></a>r2_ridge, rmse_ridge</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>(0.6662221670168522, 4.9474428978724605)</code></pre>
+</div>
+</div>
+</section>
+<section id="regresión-lasso" class="slide level2">
+<h2>🧹 Regresión Lasso</h2>
+<p>La regresión Lasso añade penalización L1:</p>
+<p><span class="math display">\[
+\min_\beta \left[ \sum_{i=1}^n (y_i - X_i \beta)^2 + \lambda \sum_{j=1}^p |\beta_j| \right]
+\]</span></p>
+<ul>
+<li class="fragment">Elimina coeficientes irrelevantes</li>
+<li class="fragment">Modelo más simple e interpretable</li>
+<li class="fragment">Ideal para selección de variables</li>
+</ul>
+</section>
+<section id="entrenamiento-y-evaluación-de-lasso" class="slide level2">
+<h2>🔧 Entrenamiento y evaluación de Lasso</h2>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>lasso <span class="op">=</span> Lasso(alpha<span class="op">=</span><span class="fl">0.1</span>)</span>
+<span id="cb4-2"><a href="#cb4-2"></a>lasso.fit(X_train, y_train)</span>
+<span id="cb4-3"><a href="#cb4-3"></a>y_pred_lasso <span class="op">=</span> lasso.predict(X_test)</span>
+<span id="cb4-4"><a href="#cb4-4"></a></span>
+<span id="cb4-5"><a href="#cb4-5"></a>r2_lasso <span class="op">=</span> r2_score(y_test, y_pred_lasso)</span>
+<span id="cb4-6"><a href="#cb4-6"></a>rmse_lasso <span class="op">=</span> np.sqrt(mean_squared_error(y_test, y_pred_lasso))</span>
+<span id="cb4-7"><a href="#cb4-7"></a></span>
+<span id="cb4-8"><a href="#cb4-8"></a>r2_lasso, rmse_lasso</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>(0.6569712802223936, 5.015535241022056)</code></pre>
+</div>
+</div>
+</section>
+<section id="validación-cruzada" class="slide level2">
+<h2>🔁 Validación Cruzada</h2>
+<p>Comparamos la capacidad de generalización de Ridge y Lasso usando 10-fold cross-validation:</p>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>ridge_cv <span class="op">=</span> cross_val_score(Ridge(alpha<span class="op">=</span><span class="fl">1.0</span>), X, y, cv<span class="op">=</span><span class="dv">10</span>, scoring<span class="op">=</span><span class="st">'r2'</span>)</span>
+<span id="cb6-2"><a href="#cb6-2"></a>lasso_cv <span class="op">=</span> cross_val_score(Lasso(alpha<span class="op">=</span><span class="fl">0.1</span>), X, y, cv<span class="op">=</span><span class="dv">10</span>, scoring<span class="op">=</span><span class="st">'r2'</span>)</span>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4"></a>ridge_cv.mean(), lasso_cv.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>(0.2561668703759322, 0.2643273893487371)</code></pre>
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 </div>
 </div>
 </section>
 <section id="comparación-de-coeficientes" class="slide level2">
+<<<<<<< HEAD
 <h2>📈 Comparación de Coeficientes</h2>
 <div id="0a57f876" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -587,6 +727,233 @@ Promedio R² Lasso CV: 0.26432738934873734</code></pre>
 </div>
 </div>
 </section>
+=======
+<h2>📊 Comparación de coeficientes</h2>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">6</span>))</span>
+<span id="cb8-2"><a href="#cb8-2"></a>plt.bar(X.columns, ridge.coef_, alpha<span class="op">=</span><span class="fl">0.7</span>, label<span class="op">=</span><span class="st">"Ridge"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3"></a>plt.bar(X.columns, lasso.coef_, alpha<span class="op">=</span><span class="fl">0.7</span>, label<span class="op">=</span><span class="st">"Lasso"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb8-5"><a href="#cb8-5"></a>plt.title(<span class="st">"Coeficientes: Ridge vs Lasso"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6"></a>plt.ylabel(<span class="st">"Valor del Coeficiente"</span>)</span>
+<span id="cb8-7"><a href="#cb8-7"></a>plt.legend()</span>
+<span id="cb8-8"><a href="#cb8-8"></a>plt.tight_layout()</span>
+<span id="cb8-9"><a href="#cb8-9"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb8-10"><a href="#cb8-10"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img data-src="regresiones_2_files/figure-revealjs/cell-6-output-1.png" width="1141" height="566"></p>
+</div>
+</div>
+</section>
+<section id="conclusión-final-de-los-resultados-obtenidos" class="slide level2">
+<h2>📌 Conclusión final de los resultados obtenidos</h2>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="co"># Suponiendo que ya tienes calculados estos valores:</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co"># r2_ridge, rmse_ridge, ridge_cv</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co"># r2_lasso, rmse_lasso, lasso_cv</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co"># Crear el DataFrame resumen</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a>resultados_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb9-9"><a href="#cb9-9"></a>    <span class="st">'Modelo'</span>: [<span class="st">'Ridge'</span>, <span class="st">'Lasso'</span>],</span>
+<span id="cb9-10"><a href="#cb9-10"></a>    <span class="st">'R²'</span>: [r2_ridge, r2_lasso],</span>
+<span id="cb9-11"><a href="#cb9-11"></a>    <span class="st">'RMSE'</span>: [rmse_ridge, rmse_lasso],</span>
+<span id="cb9-12"><a href="#cb9-12"></a>    <span class="st">'R² CV promedio'</span>: [ridge_cv.mean(), lasso_cv.mean()]</span>
+<span id="cb9-13"><a href="#cb9-13"></a>})</span>
+<span id="cb9-14"><a href="#cb9-14"></a></span>
+<span id="cb9-15"><a href="#cb9-15"></a><span class="co"># Mostrar el DataFrame con dos decimales</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a>resultados_df <span class="op">=</span> resultados_df.<span class="bu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb9-17"><a href="#cb9-17"></a>resultados_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+<table class="dataframe" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header" style="text-align: right;">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Modelo</th>
+<th data-quarto-table-cell-role="th">R²</th>
+<th data-quarto-table-cell-role="th">RMSE</th>
+<th data-quarto-table-cell-role="th">R² CV promedio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Ridge</td>
+<td>0.67</td>
+<td>4.95</td>
+<td>0.26</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Lasso</td>
+<td>0.66</td>
+<td>5.02</td>
+<td>0.26</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="interpretación" class="slide level2">
+<h2>🧠 Interpretación</h2>
+<ul>
+<li class="fragment">📉 El modelo lineal original mostró signos de <strong>sobreajuste</strong>.</li>
+<li class="fragment">🛠️ Ridge mantuvo todas las variables, redujo varianza y estabilizó coeficientes.</li>
+<li class="fragment">🧹 Lasso eliminó coeficientes irrelevantes, simplificando el modelo.</li>
+<li class="fragment">🔄 La validación cruzada mostró que ambos métodos <strong>generalizan mejor</strong>.</li>
+</ul>
+<blockquote>
+<p>✅ Ridge y Lasso son herramientas clave para construir modelos más robustos y útiles en producción.</p>
+</blockquote>
+</section>
+<section id="números-y-estructuras-matemáticas" class="slide level2">
+<h2>📘 Números y estructuras matemáticas</h2>
+</section>
+<section id="escalares" class="slide level2">
+<h2>🔹 Escalares</h2>
+<ul>
+<li class="fragment">Un <strong>escalar</strong> es un único número.</li>
+<li class="fragment">Representa una cantidad en una dimensión.</li>
+<li class="fragment">Ejemplo: <code>x = 5</code></li>
+</ul>
+</section>
+<section id="vectores" class="slide level2">
+<h2>🔹 Vectores</h2>
+<ul>
+<li class="fragment">Lista ordenada de números (componentes).</li>
+<li class="fragment">Dirección y magnitud:</li>
+</ul>
+<p><span class="math inline">\(\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ \dots \\ x_n \end{bmatrix}\)</span></p>
+</section>
+<section id="matrices" class="slide level2">
+<h2>🔹 Matrices</h2>
+<ul>
+<li class="fragment">Tabla bidimensional de números:</li>
+</ul>
+$ A =
+<span class="math display">\[\begin{bmatrix} a_{11} &amp; a_{12} \\ a_{21} &amp; a_{22} \end{bmatrix}\]</span>
+<p>$</p>
+</section>
+<section id="tensors" class="slide level2">
+<h2>🔹 Tensors</h2>
+<ul>
+<li class="fragment">Generalización a múltiples dimensiones.</li>
+<li class="fragment">Ej. imágenes RGB, secuencias, videos, etc.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+</section>
+<section>
+<section id="probabilidad-y-distribuciones" class="title-slide slide level1 center">
+<h1>📘 Probabilidad y distribuciones</h1>
+
+</section>
+<section id="fundamentos" class="slide level2">
+<h2>🔹 Fundamentos</h2>
+<ul>
+<li class="fragment"><strong>Probabilidad</strong> mide incertidumbre.</li>
+<li class="fragment"><strong>Variable aleatoria</strong>: asigna valores a eventos.</li>
+</ul>
+</section>
+<section id="distribuciones-comunes" class="slide level2">
+<h2>🔹 Distribuciones comunes</h2>
+<ul>
+<li class="fragment"><strong>Bernoulli</strong>, <strong>Binomial</strong>, <strong>Normal</strong>:</li>
+</ul>
+<p><span class="math inline">\(\mathcal{N}(x; \mu, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left( -\frac{(x - \mu)^2}{2\sigma^2} \right)\)</span></p>
+
+<img data-src="distr.png" class="r-stretch quarto-figure-center"><p class="caption">Distribuciones comunes</p></section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="teoría-de-la-información" class="title-slide slide level1 center">
+<h1>📘 Teoría de la información</h1>
+
+</section>
+<section id="entropía" class="slide level2">
+<h2>🔹 Entropía</h2>
+<p><span class="math inline">\(H(X) = -\sum_{x} P(x) \log P(x)\)</span></p>
+</section>
+<section id="entropía-cruzada" class="slide level2">
+<h2>🔹 Entropía cruzada</h2>
+<p><span class="math inline">\(H(P, Q) = -\sum_x P(x) \log Q(x)\)</span></p>
+</section>
+<section id="divergencia-kl" class="slide level2">
+<h2>🔹 Divergencia KL</h2>
+<p>$D_{KL}(P | Q) = _x P(x) $</p>
+</section>
+<section id="información-mutua" class="slide level2">
+<h2>🔹 Información mutua</h2>
+<p>$I(X; Y) = H(X) - H(X | Y) $</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="parámetros-y-optimización" class="title-slide slide level1 center">
+<h1>📘 Parámetros y optimización</h1>
+
+</section>
+<section id="parámetros-vs-hiperparámetros" class="slide level2">
+<h2>🔹 Parámetros vs Hiperparámetros</h2>
+<ul>
+<li class="fragment"><strong>Parámetros</strong>: aprendidos durante entrenamiento (ej. pesos <span class="math inline">\(W\)</span> ).</li>
+<li class="fragment"><strong>Hiperparámetros</strong>: definidos antes (ej. tasa de aprendizaje). Ejemplo, en ridge y lasso, <span class="math inline">\(\lambda\)</span></li>
+</ul>
+</section>
+<section id="optimización" class="slide level2">
+<h2>🔹 Optimización</h2>
+<ul>
+<li class="fragment">Minimizar la función de pérdida.</li>
+</ul>
+<h3 id="métodos">Métodos:</h3>
+<ul>
+<li class="fragment"><strong>Gradiente descendiente</strong>:</li>
+</ul>
+<p>$ - _J() $</p>
+<ul>
+<li class="fragment"><strong>SGD</strong>, <strong>Adam</strong>, <strong>RMSProp</strong></li>
+</ul>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="gracias-por-tu-atención" class="title-slide slide level1 center">
+<h1>¡Gracias por tu atención! 🙌</h1>
+<ul>
+<li class="fragment">Material basado en <em>Deep Learning</em> — Goodfellow, Bengio y Courville.</li>
+<li class="fragment">Presentación para uso docente.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<div class="footer footer-default">
+
+</div>
+</section></section>
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
     </div>
   </div>
 
@@ -597,7 +964,10 @@ Promedio R² Lasso CV: 0.26432738934873734</code></pre>
   <script src="regresiones_2_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
   <script src="regresiones_2_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="regresiones_2_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+<<<<<<< HEAD
   <script src="regresiones_2_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+=======
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
   <script src="regresiones_2_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -614,12 +984,20 @@ Promedio R² Lasso CV: 0.26432738934873734</code></pre>
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
+<<<<<<< HEAD
+=======
+'smaller': false,
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
+<<<<<<< HEAD
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
+=======
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -790,7 +1168,11 @@ Promedio R² Lasso CV: 0.26432738934873734</code></pre>
         },
 
         // reveal.js plugins
+<<<<<<< HEAD
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+=======
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 
           RevealMath,
           RevealNotes,
@@ -831,7 +1213,22 @@ Promedio R² Lasso CV: 0.26432738934873734</code></pre>
         }
         return false;
       }
+<<<<<<< HEAD
       const onCopySuccess = function(e) {
+=======
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -863,6 +1260,7 @@ Promedio R² Lasso CV: 0.26432738934873734</code></pre>
         }, 1000);
         // clear code selection
         e.clearSelection();
+<<<<<<< HEAD
       }
       const getTextToCopy = function(trigger) {
           const codeEl = trigger.previousElementSibling.cloneNode(true);
@@ -907,6 +1305,13 @@ Promedio R² Lasso CV: 0.26432738934873734</code></pre>
       function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
+=======
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -916,6 +1321,7 @@ Promedio R² Lasso CV: 0.26432738934873734</code></pre>
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
+<<<<<<< HEAD
           placement: 'bottom-start',
         };
         if (contentFn) {
@@ -927,6 +1333,10 @@ Promedio R² Lasso CV: 0.26432738934873734</code></pre>
         if (onUntriggerFn) {
           config.onUntrigger = onUntriggerFn;
         }
+=======
+          placement: 'bottom-start'
+        };
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
@@ -940,11 +1350,15 @@ Promedio R² Lasso CV: 0.26432738934873734</code></pre>
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
+<<<<<<< HEAD
           if (note) {
             return note.innerHTML;
           } else {
             return "";
           }
+=======
+          return note.innerHTML;
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
         });
       }
           let selectedAnnoteEl;
@@ -988,7 +1402,10 @@ Promedio R² Lasso CV: 0.26432738934873734</code></pre>
                 }
                 div.style.top = top - 2 + "px";
                 div.style.height = height + 4 + "px";
+<<<<<<< HEAD
                 div.style.left = 0;
+=======
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
                 let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
                 if (gutterDiv === null) {
                   gutterDiv = window.document.createElement("div");
@@ -1014,8 +1431,13 @@ Promedio R² Lasso CV: 0.26432738934873734</code></pre>
             });
             selectedAnnoteEl = undefined;
           };
+<<<<<<< HEAD
             // Handle positioning of the toggle
         window.addEventListener(
+=======
+          // Handle positioning of the toggle
+          window.addEventListener(
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
           "resize",
           throttle(() => {
             elRect = undefined;
@@ -1023,6 +1445,7 @@ Promedio R² Lasso CV: 0.26432738934873734</code></pre>
               selectCodeLines(selectedAnnoteEl);
             }
           }, 10)
+<<<<<<< HEAD
         );
         function throttle(fn, ms) {
         let throttle = false;
@@ -1040,6 +1463,25 @@ Promedio R² Lasso CV: 0.26432738934873734</code></pre>
             }
           };
         }
+=======
+          );
+          function throttle(fn, ms) {
+          let throttle = false;
+          let timer;
+            return (...args) => {
+              if(!throttle) { // first call gets through
+                  fn.apply(this, args);
+                  throttle = true;
+              } else { // all the others get throttled
+                  if(timer) clearTimeout(timer); // cancel #2
+                  timer = setTimeout(() => {
+                    fn.apply(this, args);
+                    timer = throttle = false;
+                  }, ms);
+              }
+            };
+          }
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
           const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
           for (let i=0; i<annoteTargets.length; i++) {
             const annoteTarget = annoteTargets[i];
@@ -1084,7 +1526,11 @@ Promedio R² Lasso CV: 0.26432738934873734</code></pre>
                   options: {
                     flipVariations: false, // true by default
                     allowedAutoPlacements: ['right'],
+<<<<<<< HEAD
                     fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+=======
+                    fallbackPlacements: ['right', 'top', 'top-start', 'top-end'],
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
                   },
                 },
                 {

@@ -1,0 +1,203 @@
+---
+title: "📘 Regularización en Machine Learning"
+subtitle: "🔍 Exploración didáctica y aplicada"
+author: "👨‍🏫 Jorge Iván Romero Gelvez"
+institute: "🏛️ Universidad Jorge Tadeo Lozano"
+date: "📅 Abril 2025"
+format: 
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    highlight-style: dracula
+    code-line-numbers: true
+    code-annotations: hover
+    mermaid:
+      theme: forest
+    transition: fade
+    chalkboard: true
+    logo: Utadeo70-fondoblanco.png
+    toc: true
+    toc-title: "Contenido"
+    toc-depth: 1
+    incremental: true
+    scrollable: true
+execute: 
+  warning: false
+  message: false
+  echo: true
+  freeze: false
+jupyter: python3
+---
+
+# 📜 Contexto histórico y relevancia
+
+- Desde los tiempos de **Occam (s. XIII)** se valora la simplicidad como principio para explicar fenómenos.
+- En ML, esto se traduce en **preferir modelos simples** que generalicen bien.
+- La **regularización** es un conjunto de técnicas para **evitar el sobreajuste** (overfitting).
+
+## ¿Por qué es importante?
+
+- Controla la **complejidad del modelo** sin reducir excesivamente su capacidad.
+- Mejora la **generalización**: desempeño sobre datos no vistos.
+- Permite balancear **sesgo vs. varianza**.
+
+---
+
+# 🎯 ¿Qué es la regularización?
+
+> Es cualquier modificación al algoritmo de aprendizaje que reduce el **error de generalización**, sin necesariamente reducir el error en entrenamiento.
+
+- Se implementa típicamente como un **término extra en la función de pérdida**:
+
+$J(w) = \text{MSE}_\text{train} + \lambda \cdot \Omega(w)$
+
+- Donde:
+  - $\text{MSE}_\text{train}$ es el error cuadrático medio.
+  - $\lambda$ controla el peso de la regularización.
+  - $\Omega(w)$ es el regularizador (ej. norma L2).
+
+
+---
+
+
+# 🧮 ¿Qué es weight decay exactamente?
+
+**Weight decay** es un tipo de regularización L2.
+
+- La idea es penalizar los pesos grandes:
+  - Evita que el modelo dependa demasiado de alguna característica.
+
+## ¿Cómo funciona?
+
+- Agregamos $\lambda \sum w_i^2$ a la función de costo.
+- El algoritmo ahora busca **minimizar tanto el error como la magnitud de los pesos**.
+
+## Intuición:
+
+- Pesos más pequeños → modelo más simple → menos riesgo de sobreajuste.
+- Es como un “freno” para que el modelo no se complique innecesariamente.
+
+---
+
+# 🧪 Ejemplo: Regresión lineal con weight decay{.scrollable}
+
+```{python}
+#| code-line-numbers: "|6|9"
+# Librerías necesarias
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import Ridge
+
+# Datos sintéticos (cuadráticos)
+x = np.linspace(-3, 3, 30)
+y = x**2 + np.random.randn(30) * 2
+X = np.vander(x, 10, increasing=True)  # polinomio grado 9
+
+# Modelo con regularización L2 (Ridge Regression)
+modelo = Ridge(alpha=10.0)  # lambda = 10
+modelo.fit(X, y)
+
+# Predicciones
+x_pred = np.linspace(-3, 3, 100)
+X_pred = np.vander(x_pred, 10, increasing=True)
+y_pred = modelo.predict(X_pred)
+
+# Gráfica
+plt.figure(figsize=(8,4))
+plt.scatter(x, y, label="Datos", color="blue")
+plt.plot(x_pred, y_pred, label="Modelo Regularizado", color="red")
+plt.title("Regresión polinomial con weight decay")
+plt.legend()
+plt.grid(True)
+plt.show()
+```
+
+::: {.fragment .fade-in}
+- **Línea 6**: Se define un polinomio de grado 9, potencialmente sobreajustable.
+- **Línea 9**: `alpha=10.0` agrega penalización L2. Reduce la magnitud de los pesos.
+:::
+
+---
+
+# ⚖️ Tipos comunes de regularización
+
+- **L2 (Ridge)**: Penaliza $\Omega(w) = \sum w_i^2$.
+  - Reduce todos los coeficientes de forma suave.
+
+- **L1 (Lasso)**: Penaliza $\Omega(w) = \sum |w_i|$.
+  - Promueve pesos exactamente cero: selección de variables.
+
+- **Elastic Net**: Combinación de L1 y L2.
+
+## Visualmente:
+
+```
+      L2        vs.       L1
+   (círculo)         (rombo)
+```
+
+---
+
+# 🧠 ¿Qué logra la regularización?
+
+- Impone una **preferencia por soluciones más simples**.
+- Reduce la **varianza** del modelo (menos sensibilidad al conjunto de entrenamiento).
+- Nos ayuda a encontrar un **punto medio óptimo** entre sesgo y varianza.
+
+---
+
+## 🧩 Entendiendo la curva en U (¡explicación clara!)
+
+- El eje **x** representa la **capacidad del modelo**: cuántas funciones puede representar (complejidad).
+- El eje **y** representa el **error**: cuánto se equivoca el modelo.
+
+### ¿Qué sucede?
+
+1. **Capacidad baja** (izquierda):
+   - El modelo no es lo suficientemente flexible.
+   - Tiene **alto sesgo**: no capta la estructura de los datos → **underfitting**.
+
+2. **Capacidad intermedia** (centro):
+   - El modelo es justo lo suficientemente flexible para capturar la estructura real.
+   - Tiene un buen equilibrio entre sesgo y varianza → **mejor generalización**.
+
+3. **Capacidad alta** (derecha):
+   - El modelo es muy flexible y empieza a memorizar el ruido de los datos.
+   - Tiene **alta varianza**: ajusta incluso errores aleatorios → **overfitting**.
+
+### Resultado: ¡una curva en forma de U!
+
+- El **mínimo** de la curva es el punto ideal de capacidad → justo donde la regularización ayuda.
+
+![Curva en U: error vs. capacidad](reg.png)
+
+---
+
+# 🧪 Validación cruzada: clave para ajustar $\lambda$
+
+Cuando elegimos el valor de $\lambda$, no debemos usar el conjunto de entrenamiento ni de prueba directamente. Para eso existe la **validación cruzada**.
+
+## ¿Cómo funciona la validación cruzada k-fold?
+
+1. Dividimos los datos en $k$ subconjuntos (folds).
+2. Entrenamos el modelo $k$ veces:
+   - Cada vez usamos $k-1$ subconjuntos para entrenar.
+   - El subconjunto restante se usa como validación.
+3. Promediamos los errores de validación.
+4. Elegimos el $\lambda$ que produce el menor error promedio.
+
+## Beneficios:
+
+- Usa **todos los datos** tanto para entrenar como para validar.
+- Permite comparar diferentes modelos o hiperparámetros de forma justa.
+
+> Tip: valores comunes para $k$ son 5 o 10.
+
+---
+
+# 🏁 Conclusiones
+
+- La regularización es esencial para obtener **modelos robustos**.
+- Evita el sobreajuste al penalizar soluciones complejas.
+- Existen distintas técnicas (L1, L2, Elastic Net), cada una con propiedades distintas.
+- Elegir el valor de $\lambda$ correctamKente es crucial (¡usa validación cruzada!).

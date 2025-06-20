@@ -1,0 +1,256 @@
+---
+title: "📘 Fundamentos de Machine Learning"
+subtitle: "🔍 Capítulo  - Ejemplos supervisado y no supervisado"
+author: "👨‍🏫 Jorge Iván Romero Gelvez"
+institute: "🏛️ Universidad Jorge Tadeo Lozano"
+date: "📅 Abril 2025"
+format: 
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    highlight-style: dracula
+    code-line-numbers: true
+    code-annotations: hover
+    mermaid:
+      theme: forest
+    transition: fade
+    chalkboard: true
+    logo: Utadeo70-fondoblanco.png
+    toc: true
+    toc-title: "Contenido"
+    toc-depth: 1
+    incremental: true
+    scrollable: true
+execute: 
+  warning: false
+  message: false
+  echo: true
+  freeze: false
+jupyter: python3
+---
+
+## 📜 Fundamentos: ¿Qué es el aprendizaje automático?
+
+- El **Machine Learning** busca construir algoritmos que **aprenden patrones a partir de datos**.
+- Aprender = mejorar el desempeño en una tarea con experiencia (datos).
+
+### Tipos principales:
+
+- **Aprendizaje supervisado**: se entrena con pares (entrada, salida deseada).
+- **Aprendizaje no supervisado**: el modelo descubre estructura sin etiquetas.
+
+---
+
+## 🤖 Ejemplo 1: Aprendizaje Supervisado - Clasificación
+
+Queremos predecir si un estudiante pasará o no basado en horas de estudio y sueño.
+
+#### Descripción del flujo:
+1. Se registran variables relevantes: horas de estudio y sueño.
+2. Se define un modelo de clasificación binaria.
+3. Se entrena el modelo con ejemplos etiquetados.
+4. Se evalúa su rendimiento en datos no vistos.
+
+```{python}
+#| code-line-numbers: "|5|9"
+import numpy as np
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+## Datos: [horas de estudio, horas de sueño]
+X = np.array([[5,6],[1,4],[3,6],[8,7],[1,3],[7,8],[4,4],[6,5]])
+y = np.array([1,0,1,1,0,1,0,1])  ## 1 = aprueba, 0 = no aprueba
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=0)
+modelo = LogisticRegression()
+modelo.fit(X_train, y_train)
+y_pred = modelo.predict(X_test)
+print("Precisión:", accuracy_score(y_test, y_pred))
+```
+
+::: {.fragment .fade-in}
+- **Línea 5**: Datos simples con 2 características.
+- **Línea 9**: Entrenamos un modelo de regresión logística.
+:::
+
+---
+
+## 📈 Capacidad, underfitting y overfitting
+
+- Un modelo muy simple puede **subajustar** (underfit): no capta patrones.
+- Un modelo muy complejo puede **sobreajustar** (overfit): memoriza ruido.
+
+#### ¿Cómo saber si tengo overfitting?
+- Precisión muy alta en entrenamiento y muy baja en prueba.
+
+#### Visual:
+
+```
+     Capacidad  ↑
+     Error
+      |\_      ← Mejor punto
+      |  \_
+      |    \______
+           →
+```
+
+---
+
+## 🔧 Hiperparámetros y conjuntos de validación
+
+- **Hiperparámetro**: configuración externa al modelo (ej. $k$ en $k$-vecinos).
+- Necesitamos **validación cruzada** o **conjunto de validación** para ajustarlos.
+
+```{python}
+#| code-line-numbers: "|6"
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import cross_val_score
+
+modelo = KNeighborsClassifier(n_neighbors=3)
+puntajes = cross_val_score(modelo, X, y, cv=4)
+print("Puntaje promedio de validación:", puntajes.mean())
+```
+
+::: {.fragment .fade-in}
+- **Línea 6**: Aplicamos validación cruzada 4-fold.
+:::
+
+---
+
+## 🎲 Estimadores, sesgo y varianza
+
+- **Estimador**: procedimiento para inferir un valor desconocido.
+- **Sesgo**: error por suposiciones demasiado fuertes.
+- **Varianza**: sensibilidad a los datos de entrenamiento.
+
+#### Compromiso:
+- Alto sesgo → underfitting.
+- Alta varianza → overfitting.
+- **Regularización ayuda a encontrar el balance.**
+
+---
+
+## 📊 Ejemplo 2: Aprendizaje No Supervisado - Clustering
+
+Agruparemos puntos 2D sin etiquetas usando K-Means.
+
+```{python}
+#| code-line-numbers: "|7|10"
+from sklearn.datasets import make_blobs
+from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
+
+X, _ = make_blobs(n_samples=100, centers=3, cluster_std=1.0, random_state=42)
+modelo = KMeans(n_clusters=3, random_state=42)
+modelo.fit(X)
+labels = modelo.predict(X)
+
+plt.scatter(X[:,0], X[:,1], c=labels, cmap="viridis")
+plt.title("Clustering con K-Means")
+plt.grid(True)
+plt.show()
+```
+
+::: {.fragment .fade-in}
+- **Línea 7**: Se crean datos con 3 grupos.
+- **Línea 10**: Se visualiza el agrupamiento sin etiquetas reales.
+:::
+
+---
+
+## 🧮 Estimación de máxima verosimilitud (MLE)
+
+- Método clásico para estimar parámetros.
+- Se eligen los parámetros que **maximizan la probabilidad de los datos observados**.
+
+$$
+\hat{\theta}_\text{MLE} = \underset{\theta}{\arg\max} \ p(x \mid \theta)
+$$
+
+- En muchos modelos de ML (como regresión logística), se basa en esta idea.
+
+---
+
+## 📐 Enfoque Bayesiano
+
+- A diferencia de MLE, **el enfoque Bayesiano incorpora incertidumbre** sobre los parámetros.
+
+$$
+p(\theta \mid x) = \frac{p(x \mid \theta) p(\theta)}{p(x)}
+$$
+
+- Permite actualizar creencias con nuevos datos.
+- En la práctica, se usa en inferencia probabilística y modelos generativos.
+
+---
+
+## 🧪 Ejercicios resueltos
+
+### 1. Clasificación binaria con datos médicos
+Dado: presión y glucosa → ¿diabético o no?
+
+---
+
+```{python}
+X = np.array([[120, 85],[140, 90],[100, 70],[160,100]])
+y = np.array([0, 1, 0, 1])
+modelo = LogisticRegression().fit(X, y)
+modelo.predict([[130, 88]])
+```
+
+---{python}
+X = np.array([[120, 85],[140, 90],[100, 70],[160,100]])
+y = np.array([0, 1, 0, 1])
+modelo = LogisticRegression().fit(X, y)
+modelo.predict([[130, 88]])
+```
+
+### 2. Clustering de clientes por compras
+
+---
+
+```{python}
+X = np.array([[100, 2],[300, 10],[200, 5],[400,12]])
+modelo = KMeans(n_clusters=2).fit(X)
+modelo.labels_
+```
+
+---{python}
+X = np.array([[100, 2],[300, 10],[200, 5],[400,12]])
+modelo = KMeans(n_clusters=2).fit(X)
+modelo.labels_
+```
+
+### 3. Comparar modelos con validación cruzada
+
+---
+
+```{python}
+from sklearn.tree import DecisionTreeClassifier
+modelos = [KNeighborsClassifier(), DecisionTreeClassifier()]
+for modelo in modelos:
+  print(cross_val_score(modelo, X, y, cv=2).mean())
+```
+
+---{python}
+from sklearn.tree import DecisionTreeClassifier
+modelos = [KNeighborsClassifier(), DecisionTreeClassifier()]
+for modelo in modelos:
+  print(cross_val_score(modelo, X, y, cv=2).mean())
+```
+
+---
+
+### 4. Analizar sesgo y varianza
+- Entrena modelos con diferentes profundidades (árboles).
+- Compara precisión en entrenamiento vs. validación.
+
+---
+
+## 🏁 Conclusión general
+
+- El aprendizaje supervisado y no supervisado son enfoques clave.
+- Conceptos como regularización, validación cruzada y MLE sustentan muchos algoritmos modernos.
+- Entender **sesgo y varianza** nos ayuda a diseñar modelos robustos.
+- La perspectiva Bayesiana añade un enfoque probabilístico profundo.

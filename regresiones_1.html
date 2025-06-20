@@ -8,7 +8,7 @@
 <link href="regresiones_1_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="regresiones_1_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="regresiones_1_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.5.57">
+  <meta name="generator" content="quarto-1.5.55">
 
   <meta name="author" content="👨‍🏫 Jorge Iván Romero Gelvez">
   <meta name="dcterms.date" content="2025-01-01">
@@ -691,7 +691,11 @@
 <section id="librerías-necesarias" class="slide level2">
 <h2>📚 Librerías necesarias</h2>
 <p>A continuación cargamos las librerías básicas para análisis de datos (<code>pandas</code>, <code>numpy</code>), creación y evaluación del modelo de regresión (<code>scikit-learn</code>).</p>
+<<<<<<< HEAD
 <div id="77c9d14b" class="cell" data-execution_count="1">
+=======
+<div id="e81391f0" class="cell" data-execution_count="1">
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd  <span class="co"># Manipulación de datos</span></span>
 <span id="cb1-2"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np   <span class="co"># Operaciones matemáticas</span></span>
 <span id="cb1-3"><a href=""></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression  <span class="co"># Modelo Lineal</span></span>
@@ -702,7 +706,11 @@
 <section id="carga-del-dataset" class="slide level2 scrollable">
 <h2>📥 Carga del Dataset</h2>
 <p>Cargamos el dataset que contiene información socioeconómica sobre viviendas.</p>
+<<<<<<< HEAD
 <div id="ca5049e8" class="cell" data-execution_count="2">
+=======
+<div id="c91f8186" class="cell" data-execution_count="2">
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-2"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-3"><a href=""></a></span>
@@ -723,7 +731,7 @@
 <span id="cb2-18"><a href=""></a></span>
 <span id="cb2-19"><a href=""></a><span class="co"># Visualizar las primeras filas</span></span>
 <span id="cb2-20"><a href=""></a>boston_df.tail()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="63">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -855,7 +863,11 @@
 <section id="división-manual-del-dataset" class="slide level2">
 <h2>🔍 División manual del dataset</h2>
 <p>Realizamos una división secuencial, tomando el primer 80% para entrenar y el siguiente 20% para probar el modelo.</p>
+<<<<<<< HEAD
 <div id="c4f2568a" class="cell" data-execution_count="3">
+=======
+<div id="9dd94a51" class="cell" data-execution_count="3">
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a>n <span class="op">=</span> <span class="bu">len</span>(boston_df)</span>
 <span id="cb3-2"><a href=""></a>n_train <span class="op">=</span> <span class="bu">int</span>(n <span class="op">*</span> <span class="fl">0.8</span>)</span>
 <span id="cb3-3"><a href=""></a></span>
@@ -873,6 +885,7 @@
 <h2>📐 Modelo de Regresión Lineal</h2>
 <p>El modelo de regresión lineal busca minimizar la función:</p>
 <p><span class="math display">\[\hat{y} = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_n x_n\]</span></p>
+<<<<<<< HEAD
 <div id="08ad0214" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb4-2"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -886,15 +899,31 @@
 <span id="cb4-10"><a href=""></a>model.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>LinearRegression()</code></pre>
+=======
+<div id="9ed8241e" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb4-2"><a href=""></a></span>
+<span id="cb4-3"><a href=""></a><span class="co"># Entrenar el modelo con datos de entrenamiento</span></span>
+<span id="cb4-4"><a href=""></a>model <span class="op">=</span> LinearRegression()</span>
+<span id="cb4-5"><a href=""></a>model.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="65">
+<style>#sk-container-id-7 {color: black;}#sk-container-id-7 pre{padding: 0;}#sk-container-id-7 div.sk-toggleable {background-color: white;}#sk-container-id-7 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-7 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-7 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-7 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-7 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-7 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-7 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-7 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-7 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-7 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-7 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-7 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-7 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-7 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-7 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-7 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-7 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-7 div.sk-item {position: relative;z-index: 1;}#sk-container-id-7 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-7 div.sk-item::before, #sk-container-id-7 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-7 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-7 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-7 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-7 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-7 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-7 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-7 div.sk-label-container {text-align: center;}#sk-container-id-7 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-7 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-7" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LinearRegression()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-7" type="checkbox" checked=""><label for="sk-estimator-id-7" class="sk-toggleable__label sk-toggleable__label-arrow">LinearRegression</label><div class="sk-toggleable__content"><pre>LinearRegression()</pre></div></div></div></div></div>
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 </div>
 </div>
 </section>
 <section id="predicciones" class="slide level2">
 <h2>🔮 Predicciones</h2>
 <p>Generamos predicciones con ambos modelos.</p>
+<<<<<<< HEAD
 <div id="919df886" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a>y_pred_train <span class="op">=</span> model.predict(X_train)</span>
 <span id="cb6-2"><a href=""></a>y_pred_test <span class="op">=</span> model.predict(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+=======
+<div id="9044e867" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a>y_pred_train <span class="op">=</span> model.predict(X_train)</span>
+<span id="cb5-2"><a href=""></a>y_pred_test <span class="op">=</span> model.predict(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 </div>
 </section>
 <section id="métricas-de-rendimiento" class="slide level2 scrollable">
@@ -908,6 +937,7 @@
 <li class="fragment"><strong>RMSE</strong> (Raíz del error cuadrático medio):</li>
 </ul>
 <p><span class="math display">\[RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{y}_i)^2}\]</span></p>
+<<<<<<< HEAD
 <div id="ab60adb6" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score, mean_squared_error</span>
 <span id="cb7-2"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -917,10 +947,22 @@
 <span id="cb7-6"><a href=""></a></span>
 <span id="cb7-7"><a href=""></a>r2_test <span class="op">=</span> r2_score(y_test, y_pred_test)</span>
 <span id="cb7-8"><a href=""></a>rmse_test <span class="op">=</span> np.sqrt(mean_squared_error(y_test, y_pred_test))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+=======
+<div id="3ff6ae4d" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score, mean_squared_error</span>
+<span id="cb6-2"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb6-3"><a href=""></a></span>
+<span id="cb6-4"><a href=""></a>r2_train <span class="op">=</span> r2_score(y_train, y_pred_train)</span>
+<span id="cb6-5"><a href=""></a>rmse_train <span class="op">=</span> np.sqrt(mean_squared_error(y_train, y_pred_train))</span>
+<span id="cb6-6"><a href=""></a></span>
+<span id="cb6-7"><a href=""></a>r2_test <span class="op">=</span> r2_score(y_test, y_pred_test)</span>
+<span id="cb6-8"><a href=""></a>rmse_test <span class="op">=</span> np.sqrt(mean_squared_error(y_test, y_pred_test))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 </div>
 </section>
 <section id="resultados-del-modelo" class="slide level2">
 <h2>🖥️ Resultados del modelo</h2>
+<<<<<<< HEAD
 <div id="03e864b5" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb8-2"><a href=""></a></span>
@@ -931,6 +973,18 @@
 <span id="cb8-7"><a href=""></a>})</span>
 <span id="cb8-8"><a href=""></a></span>
 <span id="cb8-9"><a href=""></a>display(resultados)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+=======
+<div id="138a8134" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb7-2"><a href=""></a></span>
+<span id="cb7-3"><a href=""></a>resultados <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb7-4"><a href=""></a>    <span class="st">"Conjunto"</span>: [<span class="st">"Entrenamiento"</span>, <span class="st">"Prueba"</span>],</span>
+<span id="cb7-5"><a href=""></a>    <span class="st">"R²"</span>: [r2_train, r2_test],</span>
+<span id="cb7-6"><a href=""></a>    <span class="st">"RMSE"</span>: [rmse_train, rmse_test]</span>
+<span id="cb7-7"><a href=""></a>})</span>
+<span id="cb7-8"><a href=""></a></span>
+<span id="cb7-9"><a href=""></a>display(resultados)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 <div class="cell-output cell-output-display">
 <div>
 <style scoped="">
@@ -979,6 +1033,7 @@
 </section>
 <section id="diagnóstico" class="slide level2">
 <h2>📋 Diagnóstico</h2>
+<<<<<<< HEAD
 <div id="4f9c879e" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a><span class="cf">if</span> r2_train <span class="op">&gt;</span> r2_test <span class="kw">and</span> <span class="bu">abs</span>(r2_train <span class="op">-</span> r2_test) <span class="op">&gt;</span> <span class="fl">0.1</span>:</span>
 <span id="cb9-2"><a href=""></a>    diagnostico <span class="op">=</span> <span class="st">"⚠️ Posible sobreajuste: pierde rendimiento en prueba."</span></span>
@@ -988,6 +1043,17 @@
 <span id="cb9-6"><a href=""></a>    diagnostico <span class="op">=</span> <span class="st">"✅ Buen ajuste: generaliza bien."</span></span>
 <span id="cb9-7"><a href=""></a></span>
 <span id="cb9-8"><a href=""></a><span class="bu">print</span>(diagnostico)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+=======
+<div id="14076f9e" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a><span class="cf">if</span> r2_train <span class="op">&gt;</span> r2_test <span class="kw">and</span> <span class="bu">abs</span>(r2_train <span class="op">-</span> r2_test) <span class="op">&gt;</span> <span class="fl">0.1</span>:</span>
+<span id="cb8-2"><a href=""></a>    diagnostico <span class="op">=</span> <span class="st">"⚠️ Posible sobreajuste: pierde rendimiento en prueba."</span></span>
+<span id="cb8-3"><a href=""></a><span class="cf">elif</span> r2_train <span class="op">&lt;</span> <span class="fl">0.5</span> <span class="kw">and</span> r2_test <span class="op">&lt;</span> <span class="fl">0.5</span>:</span>
+<span id="cb8-4"><a href=""></a>    diagnostico <span class="op">=</span> <span class="st">"⚠️ Subajuste: no captura bien patrones."</span></span>
+<span id="cb8-5"><a href=""></a><span class="cf">else</span>:</span>
+<span id="cb8-6"><a href=""></a>    diagnostico <span class="op">=</span> <span class="st">"✅ Buen ajuste: generaliza bien."</span></span>
+<span id="cb8-7"><a href=""></a></span>
+<span id="cb8-8"><a href=""></a><span class="bu">print</span>(diagnostico)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 <div class="cell-output cell-output-stdout">
 <pre><code>⚠️ Posible sobreajuste: pierde rendimiento en prueba.</code></pre>
 </div>
@@ -997,6 +1063,7 @@
 <section id="coeficientes" class="slide level2">
 <h2>🔖 Coeficientes</h2>
 <p>Los coeficientes indican cuánto influye cada variable en la predicción.</p>
+<<<<<<< HEAD
 <div id="32e6743e" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a>coef_df <span class="op">=</span> pd.DataFrame({</span>
 <span id="cb11-2"><a href=""></a>    <span class="st">"Variable"</span>: X.columns,</span>
@@ -1005,6 +1072,16 @@
 <span id="cb11-5"><a href=""></a></span>
 <span id="cb11-6"><a href=""></a>coef_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
+=======
+<div id="30dab0fa" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a>coef_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb10-2"><a href=""></a>    <span class="st">"Variable"</span>: X.columns,</span>
+<span id="cb10-3"><a href=""></a>    <span class="st">"Coeficiente"</span>: model.coef_</span>
+<span id="cb10-4"><a href=""></a>})</span>
+<span id="cb10-5"><a href=""></a></span>
+<span id="cb10-6"><a href=""></a>coef_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="70">
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -1104,7 +1181,11 @@
 </section>
 <section id="comparación-de-coeficientes-entrenamiento-vs-prueba" class="slide level2 scrollable">
 <h2>📊 Comparación de Coeficientes: Entrenamiento vs Prueba</h2>
+<<<<<<< HEAD
 <div id="d9fed84d" class="cell" data-execution_count="10">
+=======
+<div id="c7aeafe0" class="cell" data-execution_count="10">
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1113,7 +1194,6 @@
 </div>
 </div>
 </div>
-<p>Esta gráfica muestra claramente las discrepancias en los coeficientes entre ambos conjuntos, reforzando el diagnóstico de sobreajuste.</p>
 <div class="quarto-auto-generated-content">
 <p><img src="Utadeo70-fondoblanco.png" class="slide-logo"></p>
 <div class="footer footer-default">
