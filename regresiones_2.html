@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="regresiones_1_files/libs/clipboard/clipboard.min.js"></script>
-<script src="regresiones_1_files/libs/quarto-html/tabby.min.js"></script>
-<script src="regresiones_1_files/libs/quarto-html/popper.min.js"></script>
-<script src="regresiones_1_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="regresiones_1_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="regresiones_1_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="regresiones_1_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="regresiones_1_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="regresiones_2_files/libs/clipboard/clipboard.min.js"></script>
+<script src="regresiones_2_files/libs/quarto-html/tabby.min.js"></script>
+<script src="regresiones_2_files/libs/quarto-html/popper.min.js"></script>
+<script src="regresiones_2_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="regresiones_2_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="regresiones_2_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="regresiones_2_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="regresiones_2_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="👨‍🏫 Jorge Iván Romero Gelvez">
   <meta name="dcterms.date" content="2025-01-01">
-  <title>📊 Regresión Lineal y Regularización con Ridge y Lasso</title>
+  <title>📉 Regularización con Ridge, Lasso y Validación Cruzada</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="regresiones_1_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="regresiones_1_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="regresiones_2_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="regresiones_2_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -96,13 +96,13 @@
     code span.vs { color: #f1fa8c; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="regresiones_1_files/libs/revealjs/dist/theme/quarto.css">
-  <link href="regresiones_1_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="regresiones_1_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="regresiones_1_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="regresiones_1_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="regresiones_1_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="regresiones_1_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="regresiones_2_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="regresiones_2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="regresiones_2_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="regresiones_2_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="regresiones_2_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="regresiones_2_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="regresiones_2_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -389,21 +389,14 @@
       margin-right: 0; 
     }
   </style>
-  <meta name="mermaid-theme" content="forest">
-  <script src="regresiones_1_files/libs/quarto-diagram/mermaid.min.js"></script>
-  <script src="regresiones_1_files/libs/quarto-diagram/mermaid-init.js"></script>
-  <link href="regresiones_1_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-  
-  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">📊 Regresión Lineal y Regularización con Ridge y Lasso</h1>
-  <p class="subtitle">🔍 Un análisis con el dataset 🏘️ Boston Housing</p>
+  <h1 class="title">📉 Regularización con Ridge, Lasso y Validación Cruzada</h1>
+  <p class="subtitle">🔬 Continuación del análisis: Dataset Boston Housing</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -418,702 +411,175 @@
 
   <p class="date">2025-01-01</p>
 </section>
-<section id="qué-significa-la-frase" class="slide level2">
-<h2>💡 ¿Qué significa la frase?</h2>
-<blockquote>
-<p><strong>“Un buen modelo no solo ajusta bien los datos, sino que también generaliza.”</strong></p>
-</blockquote>
-
-<img data-src="1_bt-E2YcPafjiPbZFDMMmNQ.jpeg" class="quarto-figure quarto-figure-center r-stretch" style="border-radius: 1rem;" alt="Gráfico ilustrando generalización en modelos" width="200"></section>
-<section id="ajustar-bien-los-datos" class="slide level2">
-<h2>🔧 Ajustar bien los datos</h2>
-<ul>
-<li class="fragment">📉 El modelo <strong>aprende patrones</strong> de los datos de entrenamiento<br>
-</li>
-<li class="fragment">✅ Tiene bajo error en el conjunto de entrenamiento<br>
-</li>
-<li class="fragment">❗ Pero… puede <strong>memorizar</strong> incluso el ruido<br>
-</li>
-<li class="fragment">⚠️ Riesgo de <strong>sobreajuste (overfitting)</strong></li>
-</ul>
-</section>
-<section id="underfitting" class="slide level2">
-<h2>Underfitting</h2>
-<h3 id="entreno-al-modelo-con-1-sola-raza-de-perro">Entreno al modelo con 1 sola raza de perro</h3>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="ch.jpg" class="quarto-figure quarto-figure-center" style="border-radius: 1rem;" alt="Chihuahua" height="100"></p>
-</figure>
-</div>
-<ul>
-<li class="fragment">Muestra nueva: ¿Es perro? <img data-src="perro.png" class="quarto-figure quarto-figure-center" style="border-radius: 1rem;" alt="perro" height="60"></li>
-<li class="fragment">❌ <strong>NO lo reconoce</strong></li>
-<li class="fragment">🔎 La máquina <strong>falla en generalizar</strong> porque no ha visto suficientes ejemplos.</li>
-</ul>
-<div style="font-size: 0.9em; color: gray; margin-top: 1em;">
-<p>La máquina fallará en reconocer al perro por falta de suficientes muestras. No puede generalizar el conocimiento.</p>
-</div>
-</section>
-<section id="overfitting" class="slide level2">
-<h2>Overfitting</h2>
-<h3 id="entreno-al-modelo-con-10-razas-de-perro-color-marrón">Entreno al modelo con 10 razas de perro color marrón</h3>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="several.png" class="quarto-figure quarto-figure-center" style="border-radius: 1rem;" alt="varios" data-heiht="100"></p>
-</figure>
-</div>
-<ul>
-<li class="fragment">Muestra nueva: ¿Es perro? <img data-src="perro.png" class="quarto-figure quarto-figure-center" style="border-radius: 1rem;" alt="perro" height="60"></li>
-<li class="fragment">❌ <strong>NO lo reconoce</strong></li>
-<li class="fragment">⚠️ El modelo está <strong>demasiado ajustado</strong> a los datos de entrenamiento.</li>
-</ul>
-<div style="font-size: 0.9em; color: gray; margin-top: 1em;">
-<p>La máquina fallará en reconocer un perro nuevo porque no tiene estrictamente los mismos valores de las muestras de entrenamiento.</p>
-</div>
-</section>
-<section id="generalizar-los-datos" class="slide level2">
-<h2>🌍 Generalizar los datos</h2>
-<ul>
-<li class="fragment">🧠 El modelo <strong>funciona bien con datos nuevos</strong><br>
-</li>
-<li class="fragment">🔬 Puede <strong>predecir correctamente en el mundo real</strong><br>
-</li>
-<li class="fragment">📊 Tiene buen rendimiento en el <strong>conjunto de prueba</strong></li>
-<li class="fragment">🎯 Es el verdadero objetivo del aprendizaje automático</li>
-</ul>
-</section>
-<section id="comparación-ajustar-vs.-generalizar" class="slide level2">
-<h2>🆚 Comparación: Ajustar vs.&nbsp;Generalizar</h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 32%">
-<col style="width: 41%">
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th>🔧 <strong>Ajustar bien</strong></th>
-<th>🌍 <strong>Generalizar bien</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>🎯 Objetivo inicial</td>
-<td>Minimizar error en entrenamiento</td>
-<td>Predecir bien datos nuevos</td>
-</tr>
-<tr class="even">
-<td>⚠️ Riesgo</td>
-<td>Sobreajuste (memoriza)</td>
-<td>Subajuste si es demasiado simple</td>
-</tr>
-<tr class="odd">
-<td>🧰 Herramientas</td>
-<td>Modelos complejos</td>
-<td>Regularización y validación cruzada</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="cómo-logramos-un-buen-equilibrio" class="slide level2">
-<h2>🛠️ ¿Cómo logramos un buen equilibrio?</h2>
-<ul>
-<li class="fragment">✅ Usando <strong>validación cruzada</strong></li>
-<li class="fragment">⚖️ Aplicando <strong>Ridge y Lasso</strong> para controlar la complejidad</li>
-<li class="fragment">🧪 Comparando resultados en entrenamiento y prueba</li>
-<li class="fragment">🎓 <em>El arte del aprendizaje automático es encontrar el punto justo entre sesgo y varianza.</em></li>
-</ul>
-
-<img data-src="balance.gif" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="retomando" class="slide level2">
-<h2>📌 RETOMANDO</h2>
-<ul>
-<li class="fragment">📚 <strong>Modelo base:</strong> punto de partida</li>
-<li class="fragment">🧰 <strong>Ridge:</strong> reduce varianza, estabiliza coeficientes</li>
-<li class="fragment">🧹 <strong>Lasso:</strong> elimina variables irrelevantes</li>
-<li class="fragment">🔄 <strong>Validación cruzada:</strong> asegura buen desempeño fuera de muestra</li>
-<li class="fragment">🎯 <strong>Objetivo:</strong> lograr un modelo que generalice bien</li>
-<li class="fragment">💡 El mejor modelo no es el más complejo, sino el que predice con <strong>equilibrio</strong> y <strong>claridad.</strong></li>
-</ul>
-<div class="cell" data-reveal="true" data-fig-width="6.5%%|" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-    A["📥 Dataset limpio (Boston)"] --&gt; B["📊 Modelo base\nRegresión Lineal"]
-    B --&gt; C{"🔍 ¿Problemas?"}
-    C -- Sobreajuste / multicolinealidad --&gt; D["🧰 Ridge (L2)"]
-    C -- Muchas variables irrelevantes --&gt; E["🧹 Lasso (L1)"]
-    D &amp; E --&gt; F["🧪 Validación Cruzada"]
-    F --&gt; G["📈 Comparar\nR² y RMSE"]
-    G --&gt; H{"🎯 ¿Buen desempeño?"}
-    H -- Sí --&gt; I["✅ Seleccionar modelo final"]
-    H -- No --&gt; J["⚙️ Ajustar hiperparámetros\n🔄 Repetir"]
-
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-<section id="comparación-de-técnicas" class="slide level2">
-<h2>🆚 Comparación de Técnicas</h2>
-<div class="small">
-<table class="caption-top">
-<colgroup>
-<col style="width: 6%">
-<col style="width: 19%">
-<col style="width: 24%">
-<col style="width: 24%">
-<col style="width: 25%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Técnica</th>
-<th>Problema que aborda</th>
-<th>Cómo lo resuelve</th>
-<th>Ventajas</th>
-<th>Limitaciones</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Regresión Ridge</strong></td>
-<td>- Multicolinealidad<br>- Sobreajuste</td>
-<td>Penalización L2 que reduce el tamaño de los coeficientes grandes</td>
-<td>- Reduce varianza<br>- Mantiene todas las variables<br>- Buena generalización</td>
-<td>- No elimina variables irrelevantes</td>
-</tr>
-<tr class="even">
-<td><strong>Regresión Lasso</strong></td>
-<td>- Multicolinealidad<br>- Sobreajuste<br>- Alta dimensionalidad</td>
-<td>Penalización L1 que puede reducir coeficientes a cero (selección de variables)</td>
-<td>- Selección automática de variables<br>- Modelos más interpretables</td>
-<td>- Puede eliminar variables importantes si están correlacionadas</td>
-</tr>
-<tr class="odd">
-<td><strong>Validación cruzada</strong></td>
-<td>- Sobreajuste<br>- Mala generalización del modelo</td>
-<td>Divide los datos en subconjuntos para evaluar múltiples veces el modelo</td>
-<td>- Estima rendimiento real<br>- Ayuda a elegir hiperparámetros óptimos</td>
-<td>- Mayor costo computacional<br>- Sensible a la forma de dividir los datos</td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="descripción-del-dataset" class="slide level2 scrollable smaller">
-<h2>1️⃣ Descripción del Dataset 🏘️</h2>
-<p>El conjunto de datos <strong>Boston Housing</strong> contiene información sobre barrios de Boston, recopilada por el U.S. Census.</p>
-<ul>
-<li class="fragment"><strong>Observaciones:</strong> 506</li>
-<li class="fragment"><strong>Variables independientes:</strong> 13 características socioeconómicas y urbanas</li>
-<li class="fragment"><strong>Variable dependiente:</strong> <code>MEDV</code> (Valor medio de vivienda ocupada por sus dueños, en miles de dólares)</li>
-</ul>
-
-<img data-src="lenny.gif" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="descripción-del-dataset-1" class="slide level2 scrollable smaller">
-<h2>2️⃣ Descripción del Dataset 🏘️</h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 43%">
-<col style="width: 56%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Variable</th>
-<th>Descripción</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>🕵️‍♂️ CRIM</td>
-<td>Tasa de criminalidad per cápita por ciudad</td>
-</tr>
-<tr class="even">
-<td>🏡 ZN</td>
-<td>Proporción de terrenos residenciales (&gt;25,000 pies²)</td>
-</tr>
-<tr class="odd">
-<td>🏭 INDUS</td>
-<td>Proporción de tierra para negocios no minoristas</td>
-</tr>
-<tr class="even">
-<td>🌊 CHAS</td>
-<td>Frontera con río Charles (1: sí, 0: no)</td>
-</tr>
-<tr class="odd">
-<td>🧪 NOX</td>
-<td>Concentración de óxidos nítricos (contaminación del aire)</td>
-</tr>
-<tr class="even">
-<td>🛏️ RM</td>
-<td>Número promedio de habitaciones por vivienda</td>
-</tr>
-<tr class="odd">
-<td>🏚️ AGE</td>
-<td>% de unidades construidas antes de 1940</td>
-</tr>
-<tr class="even">
-<td>📍 DIS</td>
-<td>Distancia a cinco centros de empleo</td>
-</tr>
-<tr class="odd">
-<td>🛣️ RAD</td>
-<td>Índice de accesibilidad a autopistas radiales</td>
-</tr>
-<tr class="even">
-<td>💸 TAX</td>
-<td>Tasa de impuesto a la propiedad</td>
-</tr>
-<tr class="odd">
-<td>👨‍🏫 PTRATIO</td>
-<td>Relación alumno-profesor en cada barrio</td>
-</tr>
-<tr class="even">
-<td>👥 B</td>
-<td>Proporción poblacional afrodescendiente (cálculo especial)</td>
-</tr>
-<tr class="odd">
-<td>📉 LSTAT</td>
-<td>% de población con bajo estatus socioeconómico</td>
-</tr>
-<tr class="even">
-<td>💰 MEDV</td>
-<td>Valor medio de la vivienda (en miles de dólares)</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="librerías-necesarias" class="slide level2">
-<h2>📚 Librerías necesarias</h2>
-<p>A continuación cargamos las librerías básicas para análisis de datos (<code>pandas</code>, <code>numpy</code>), creación y evaluación del modelo de regresión (<code>scikit-learn</code>).</p>
-<div id="77c9d14b" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd  <span class="co"># Manipulación de datos</span></span>
-<span id="cb1-2"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np   <span class="co"># Operaciones matemáticas</span></span>
-<span id="cb1-3"><a href=""></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression  <span class="co"># Modelo Lineal</span></span>
-<span id="cb1-4"><a href=""></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score, mean_squared_error  <span class="co"># Métricas de rendimiento</span></span>
-<span id="cb1-5"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt  <span class="co"># Gráficos</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="carga-del-dataset" class="slide level2 scrollable">
+<section id="carga-del-dataset" class="slide level2">
 <h2>📥 Carga del Dataset</h2>
-<p>Cargamos el dataset que contiene información socioeconómica sobre viviendas.</p>
-<div id="ca5049e8" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb2-2"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<div id="ffd48dfb" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href=""></a></span>
+<span id="cb1-4"><a href=""></a><span class="co"># Cargar los datos desde la URL</span></span>
+<span id="cb1-5"><a href=""></a>url <span class="op">=</span> <span class="st">"http://lib.stat.cmu.edu/datasets/boston"</span></span>
+<span id="cb1-6"><a href=""></a>raw_df <span class="op">=</span> pd.read_csv(url, sep<span class="op">=</span><span class="st">"\s+"</span>, skiprows<span class="op">=</span><span class="dv">22</span>, header<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb1-7"><a href=""></a></span>
+<span id="cb1-8"><a href=""></a><span class="co"># Combinar las filas pares e impares en un único arreglo de datos</span></span>
+<span id="cb1-9"><a href=""></a>data <span class="op">=</span> np.hstack([raw_df.values[::<span class="dv">2</span>, :], raw_df.values[<span class="dv">1</span>::<span class="dv">2</span>, :<span class="dv">2</span>]])</span>
+<span id="cb1-10"><a href=""></a>target <span class="op">=</span> raw_df.values[<span class="dv">1</span>::<span class="dv">2</span>, <span class="dv">2</span>]</span>
+<span id="cb1-11"><a href=""></a></span>
+<span id="cb1-12"><a href=""></a><span class="co"># Nombres de columnas</span></span>
+<span id="cb1-13"><a href=""></a>columns <span class="op">=</span> [<span class="st">'CRIM'</span>, <span class="st">'ZN'</span>, <span class="st">'INDUS'</span>, <span class="st">'CHAS'</span>, <span class="st">'NOX'</span>, <span class="st">'RM'</span>,</span>
+<span id="cb1-14"><a href=""></a>           <span class="st">'AGE'</span>, <span class="st">'DIS'</span>, <span class="st">'RAD'</span>, <span class="st">'TAX'</span>, <span class="st">'PTRATIO'</span>, <span class="st">'B'</span>, <span class="st">'LSTAT'</span>, <span class="st">'MEDV'</span>]</span>
+<span id="cb1-15"><a href=""></a></span>
+<span id="cb1-16"><a href=""></a><span class="co"># Crear el DataFrame final</span></span>
+<span id="cb1-17"><a href=""></a>boston_df <span class="op">=</span> pd.DataFrame(np.column_stack([data, target]), columns<span class="op">=</span>columns)</span>
+<span id="cb1-18"><a href=""></a></span>
+<span id="cb1-19"><a href=""></a><span class="co"># División de datos</span></span>
+<span id="cb1-20"><a href=""></a>X <span class="op">=</span> boston_df.drop(columns<span class="op">=</span>[<span class="st">'MEDV'</span>])</span>
+<span id="cb1-21"><a href=""></a>y <span class="op">=</span> boston_df[<span class="st">'MEDV'</span>]</span>
+<span id="cb1-22"><a href=""></a></span>
+<span id="cb1-23"><a href=""></a>n <span class="op">=</span> <span class="bu">len</span>(boston_df)</span>
+<span id="cb1-24"><a href=""></a>n_train <span class="op">=</span> <span class="bu">int</span>(n <span class="op">*</span> <span class="fl">0.8</span>)</span>
+<span id="cb1-25"><a href=""></a></span>
+<span id="cb1-26"><a href=""></a>X_train <span class="op">=</span> X.iloc[:n_train]</span>
+<span id="cb1-27"><a href=""></a>y_train <span class="op">=</span> y.iloc[:n_train]</span>
+<span id="cb1-28"><a href=""></a></span>
+<span id="cb1-29"><a href=""></a>X_test <span class="op">=</span> X.iloc[n_train:]</span>
+<span id="cb1-30"><a href=""></a>y_test <span class="op">=</span> y.iloc[n_train:]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="objetivo-de-la-regularización" class="slide level2">
+<h2>🎯 Objetivo de la Regularización</h2>
+<ul>
+<li class="fragment">⚠️ El modelo lineal puede sobreajustar</li>
+<li class="fragment">🧰 Regularización reduce varianza penalizando la complejidad</li>
+<li class="fragment">🔎 Evaluaremos <strong>Ridge</strong>, <strong>Lasso</strong> y su desempeño con <strong>validación cruzada</strong></li>
+</ul>
+<blockquote>
+<p><strong>¿Cómo se controla el sobreajuste?</strong></p>
+</blockquote>
+</section>
+<section id="regresión-ridge-l2" class="slide level2">
+<h2>🔎 Regresión Ridge (L2)</h2>
+<h3 id="función-de-costo">🧮 Función de costo:</h3>
+<p><span class="math display">\[
+\min_\beta \left( \sum_{i=1}^{n}(y_i - X_i \beta)^2 + \lambda \sum_{j=1}^{p} \beta_j^2 \right)
+\]</span></p>
+<ul>
+<li class="fragment">🎯 Penaliza coeficientes grandes</li>
+<li class="fragment">✅ Reduce la varianza</li>
+<li class="fragment">❗ Mantiene todas las variables</li>
+</ul>
+</section>
+<section id="entrenamiento-ridge" class="slide level2">
+<h2>🔧 Entrenamiento Ridge</h2>
+<div id="2bd87353" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> Ridge</span>
+<span id="cb2-2"><a href=""></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
 <span id="cb2-3"><a href=""></a></span>
-<span id="cb2-4"><a href=""></a><span class="co"># Cargar los datos desde la URL</span></span>
-<span id="cb2-5"><a href=""></a>url <span class="op">=</span> <span class="st">"http://lib.stat.cmu.edu/datasets/boston"</span></span>
-<span id="cb2-6"><a href=""></a>raw_df <span class="op">=</span> pd.read_csv(url, sep<span class="op">=</span><span class="st">"\s+"</span>, skiprows<span class="op">=</span><span class="dv">22</span>, header<span class="op">=</span><span class="va">None</span>)</span>
-<span id="cb2-7"><a href=""></a></span>
-<span id="cb2-8"><a href=""></a><span class="co"># Combinar las filas pares e impares en un único arreglo de datos</span></span>
-<span id="cb2-9"><a href=""></a>data <span class="op">=</span> np.hstack([raw_df.values[::<span class="dv">2</span>, :], raw_df.values[<span class="dv">1</span>::<span class="dv">2</span>, :<span class="dv">2</span>]])</span>
-<span id="cb2-10"><a href=""></a>target <span class="op">=</span> raw_df.values[<span class="dv">1</span>::<span class="dv">2</span>, <span class="dv">2</span>]</span>
-<span id="cb2-11"><a href=""></a></span>
-<span id="cb2-12"><a href=""></a><span class="co"># Nombres de columnas</span></span>
-<span id="cb2-13"><a href=""></a>columns <span class="op">=</span> [<span class="st">'CRIM'</span>, <span class="st">'ZN'</span>, <span class="st">'INDUS'</span>, <span class="st">'CHAS'</span>, <span class="st">'NOX'</span>, <span class="st">'RM'</span>,</span>
-<span id="cb2-14"><a href=""></a>           <span class="st">'AGE'</span>, <span class="st">'DIS'</span>, <span class="st">'RAD'</span>, <span class="st">'TAX'</span>, <span class="st">'PTRATIO'</span>, <span class="st">'B'</span>, <span class="st">'LSTAT'</span>, <span class="st">'MEDV'</span>]</span>
-<span id="cb2-15"><a href=""></a></span>
-<span id="cb2-16"><a href=""></a><span class="co"># Crear el DataFrame final</span></span>
-<span id="cb2-17"><a href=""></a>boston_df <span class="op">=</span> pd.DataFrame(np.column_stack([data, target]), columns<span class="op">=</span>columns)</span>
-<span id="cb2-18"><a href=""></a></span>
-<span id="cb2-19"><a href=""></a><span class="co"># Visualizar las primeras filas</span></span>
-<span id="cb2-20"><a href=""></a>boston_df.tail()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-
-<table class="dataframe caption-top" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header" style="text-align: right;">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">CRIM</th>
-<th data-quarto-table-cell-role="th">ZN</th>
-<th data-quarto-table-cell-role="th">INDUS</th>
-<th data-quarto-table-cell-role="th">CHAS</th>
-<th data-quarto-table-cell-role="th">NOX</th>
-<th data-quarto-table-cell-role="th">RM</th>
-<th data-quarto-table-cell-role="th">AGE</th>
-<th data-quarto-table-cell-role="th">DIS</th>
-<th data-quarto-table-cell-role="th">RAD</th>
-<th data-quarto-table-cell-role="th">TAX</th>
-<th data-quarto-table-cell-role="th">PTRATIO</th>
-<th data-quarto-table-cell-role="th">B</th>
-<th data-quarto-table-cell-role="th">LSTAT</th>
-<th data-quarto-table-cell-role="th">MEDV</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">501</td>
-<td>0.06263</td>
-<td>0.0</td>
-<td>11.93</td>
-<td>0.0</td>
-<td>0.573</td>
-<td>6.593</td>
-<td>69.1</td>
-<td>2.4786</td>
-<td>1.0</td>
-<td>273.0</td>
-<td>21.0</td>
-<td>391.99</td>
-<td>9.67</td>
-<td>22.4</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">502</td>
-<td>0.04527</td>
-<td>0.0</td>
-<td>11.93</td>
-<td>0.0</td>
-<td>0.573</td>
-<td>6.120</td>
-<td>76.7</td>
-<td>2.2875</td>
-<td>1.0</td>
-<td>273.0</td>
-<td>21.0</td>
-<td>396.90</td>
-<td>9.08</td>
-<td>20.6</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">503</td>
-<td>0.06076</td>
-<td>0.0</td>
-<td>11.93</td>
-<td>0.0</td>
-<td>0.573</td>
-<td>6.976</td>
-<td>91.0</td>
-<td>2.1675</td>
-<td>1.0</td>
-<td>273.0</td>
-<td>21.0</td>
-<td>396.90</td>
-<td>5.64</td>
-<td>23.9</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">504</td>
-<td>0.10959</td>
-<td>0.0</td>
-<td>11.93</td>
-<td>0.0</td>
-<td>0.573</td>
-<td>6.794</td>
-<td>89.3</td>
-<td>2.3889</td>
-<td>1.0</td>
-<td>273.0</td>
-<td>21.0</td>
-<td>393.45</td>
-<td>6.48</td>
-<td>22.0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">505</td>
-<td>0.04741</td>
-<td>0.0</td>
-<td>11.93</td>
-<td>0.0</td>
-<td>0.573</td>
-<td>6.030</td>
-<td>80.8</td>
-<td>2.5050</td>
-<td>1.0</td>
-<td>273.0</td>
-<td>21.0</td>
-<td>396.90</td>
-<td>7.88</td>
-<td>11.9</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
+<span id="cb2-4"><a href=""></a>ridge <span class="op">=</span> Ridge(alpha<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb2-5"><a href=""></a>ridge.fit(X_train, y_train)</span>
+<span id="cb2-6"><a href=""></a>y_pred_ridge <span class="op">=</span> ridge.predict(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="división-manual-del-dataset" class="slide level2">
-<h2>🔍 División manual del dataset</h2>
-<p>Realizamos una división secuencial, tomando el primer 80% para entrenar y el siguiente 20% para probar el modelo.</p>
-<div id="c4f2568a" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a>n <span class="op">=</span> <span class="bu">len</span>(boston_df)</span>
-<span id="cb3-2"><a href=""></a>n_train <span class="op">=</span> <span class="bu">int</span>(n <span class="op">*</span> <span class="fl">0.8</span>)</span>
-<span id="cb3-3"><a href=""></a></span>
-<span id="cb3-4"><a href=""></a>X <span class="op">=</span> boston_df.drop(columns<span class="op">=</span>[<span class="st">'MEDV'</span>])</span>
-<span id="cb3-5"><a href=""></a>y <span class="op">=</span> boston_df[<span class="st">'MEDV'</span>]</span>
-<span id="cb3-6"><a href=""></a></span>
-<span id="cb3-7"><a href=""></a>X_train <span class="op">=</span> X.iloc[:n_train]</span>
-<span id="cb3-8"><a href=""></a>y_train <span class="op">=</span> y.iloc[:n_train]</span>
-<span id="cb3-9"><a href=""></a></span>
-<span id="cb3-10"><a href=""></a>X_test <span class="op">=</span> X.iloc[n_train:]</span>
-<span id="cb3-11"><a href=""></a>y_test <span class="op">=</span> y.iloc[n_train:]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="modelo-de-regresión-lineal" class="slide level2">
-<h2>📐 Modelo de Regresión Lineal</h2>
-<p>El modelo de regresión lineal busca minimizar la función:</p>
-<p><span class="math display">\[\hat{y} = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_n x_n\]</span></p>
-<div id="08ad0214" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb4-2"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb4-3"><a href=""></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb4-4"><a href=""></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score, mean_squared_error</span>
-<span id="cb4-5"><a href=""></a><span class="co"># Modelo para entrenamiento</span></span>
-<span id="cb4-6"><a href=""></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb4-7"><a href=""></a></span>
-<span id="cb4-8"><a href=""></a><span class="co"># Entrenar el modelo con datos de entrenamiento</span></span>
-<span id="cb4-9"><a href=""></a>model <span class="op">=</span> LinearRegression()</span>
-<span id="cb4-10"><a href=""></a>model.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
-<pre><code>LinearRegression()</code></pre>
-</div>
-</div>
-</section>
-<section id="predicciones" class="slide level2">
-<h2>🔮 Predicciones</h2>
-<p>Generamos predicciones con ambos modelos.</p>
-<div id="919df886" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a>y_pred_train <span class="op">=</span> model.predict(X_train)</span>
-<span id="cb6-2"><a href=""></a>y_pred_test <span class="op">=</span> model.predict(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="métricas-de-rendimiento" class="slide level2 scrollable">
-<h2>📈 Métricas de rendimiento</h2>
-<p>Las métricas usadas son:</p>
-<ul>
-<li class="fragment"><strong>R²</strong> (Coeficiente de determinación):</li>
-</ul>
-<p><span class="math display">\[R^2 = 1 - \frac{\sum{(y - \hat{y})^2}}{\sum{(y - \bar{y})^2}}\]</span></p>
-<ul>
-<li class="fragment"><strong>RMSE</strong> (Raíz del error cuadrático medio):</li>
-</ul>
-<p><span class="math display">\[RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{y}_i)^2}\]</span></p>
-<div id="ab60adb6" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score, mean_squared_error</span>
-<span id="cb7-2"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb7-3"><a href=""></a></span>
-<span id="cb7-4"><a href=""></a>r2_train <span class="op">=</span> r2_score(y_train, y_pred_train)</span>
-<span id="cb7-5"><a href=""></a>rmse_train <span class="op">=</span> np.sqrt(mean_squared_error(y_train, y_pred_train))</span>
-<span id="cb7-6"><a href=""></a></span>
-<span id="cb7-7"><a href=""></a>r2_test <span class="op">=</span> r2_score(y_test, y_pred_test)</span>
-<span id="cb7-8"><a href=""></a>rmse_test <span class="op">=</span> np.sqrt(mean_squared_error(y_test, y_pred_test))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="resultados-del-modelo" class="slide level2">
-<h2>🖥️ Resultados del modelo</h2>
-<div id="03e864b5" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb8-2"><a href=""></a></span>
-<span id="cb8-3"><a href=""></a>resultados <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb8-4"><a href=""></a>    <span class="st">"Conjunto"</span>: [<span class="st">"Entrenamiento"</span>, <span class="st">"Prueba"</span>],</span>
-<span id="cb8-5"><a href=""></a>    <span class="st">"R²"</span>: [r2_train, r2_test],</span>
-<span id="cb8-6"><a href=""></a>    <span class="st">"RMSE"</span>: [rmse_train, rmse_test]</span>
-<span id="cb8-7"><a href=""></a>})</span>
-<span id="cb8-8"><a href=""></a></span>
-<span id="cb8-9"><a href=""></a>display(resultados)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-
-<table class="dataframe caption-top" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header" style="text-align: right;">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Conjunto</th>
-<th data-quarto-table-cell-role="th">R²</th>
-<th data-quarto-table-cell-role="th">RMSE</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>Entrenamiento</td>
-<td>0.733756</td>
-<td>4.772670</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>Prueba</td>
-<td>-0.219853</td>
-<td>5.727116</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<p>Estos resultados indican un buen desempeño en entrenamiento, pero una caída significativa en la prueba sugiere sobreajuste.</p>
-</section>
-<section id="diagnóstico" class="slide level2">
-<h2>📋 Diagnóstico</h2>
-<div id="4f9c879e" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a><span class="cf">if</span> r2_train <span class="op">&gt;</span> r2_test <span class="kw">and</span> <span class="bu">abs</span>(r2_train <span class="op">-</span> r2_test) <span class="op">&gt;</span> <span class="fl">0.1</span>:</span>
-<span id="cb9-2"><a href=""></a>    diagnostico <span class="op">=</span> <span class="st">"⚠️ Posible sobreajuste: pierde rendimiento en prueba."</span></span>
-<span id="cb9-3"><a href=""></a><span class="cf">elif</span> r2_train <span class="op">&lt;</span> <span class="fl">0.5</span> <span class="kw">and</span> r2_test <span class="op">&lt;</span> <span class="fl">0.5</span>:</span>
-<span id="cb9-4"><a href=""></a>    diagnostico <span class="op">=</span> <span class="st">"⚠️ Subajuste: no captura bien patrones."</span></span>
-<span id="cb9-5"><a href=""></a><span class="cf">else</span>:</span>
-<span id="cb9-6"><a href=""></a>    diagnostico <span class="op">=</span> <span class="st">"✅ Buen ajuste: generaliza bien."</span></span>
-<span id="cb9-7"><a href=""></a></span>
-<span id="cb9-8"><a href=""></a><span class="bu">print</span>(diagnostico)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="evaluación-ridge" class="slide level2">
+<h2>📊 Evaluación Ridge</h2>
+<div id="4c9a2f4c" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error, r2_score</span>
+<span id="cb3-2"><a href=""></a></span>
+<span id="cb3-3"><a href=""></a>r2_ridge <span class="op">=</span> r2_score(y_test, y_pred_ridge)</span>
+<span id="cb3-4"><a href=""></a>rmse_ridge <span class="op">=</span> np.sqrt(mean_squared_error(y_test, y_pred_ridge))</span>
+<span id="cb3-5"><a href=""></a></span>
+<span id="cb3-6"><a href=""></a><span class="bu">print</span>(<span class="st">"R² Ridge:"</span>, r2_ridge)</span>
+<span id="cb3-7"><a href=""></a><span class="bu">print</span>(<span class="st">"RMSE Ridge:"</span>, rmse_ridge)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>⚠️ Posible sobreajuste: pierde rendimiento en prueba.</code></pre>
+<pre><code>R² Ridge: -0.1422856005263866
+RMSE Ridge: 5.5420391292494635</code></pre>
 </div>
 </div>
-<p>El diagnóstico confirma que existe un problema de sobreajuste.</p>
 </section>
-<section id="coeficientes" class="slide level2">
-<h2>🔖 Coeficientes</h2>
-<p>Los coeficientes indican cuánto influye cada variable en la predicción.</p>
-<div id="32e6743e" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a>coef_df <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb11-2"><a href=""></a>    <span class="st">"Variable"</span>: X.columns,</span>
-<span id="cb11-3"><a href=""></a>    <span class="st">"Coeficiente"</span>: model.coef_</span>
-<span id="cb11-4"><a href=""></a>})</span>
-<span id="cb11-5"><a href=""></a></span>
-<span id="cb11-6"><a href=""></a>coef_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-
-<table class="dataframe caption-top" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header" style="text-align: right;">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Variable</th>
-<th data-quarto-table-cell-role="th">Coeficiente</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>CRIM</td>
-<td>-0.202135</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>ZN</td>
-<td>0.044128</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>INDUS</td>
-<td>0.052674</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>CHAS</td>
-<td>1.884743</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>NOX</td>
-<td>-14.928149</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">5</td>
-<td>RM</td>
-<td>4.760387</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">6</td>
-<td>AGE</td>
-<td>0.002887</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">7</td>
-<td>DIS</td>
-<td>-1.300253</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">8</td>
-<td>RAD</td>
-<td>0.461662</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">9</td>
-<td>TAX</td>
-<td>-0.015543</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">10</td>
-<td>PTRATIO</td>
-<td>-0.811632</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">11</td>
-<td>B</td>
-<td>-0.001972</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">12</td>
-<td>LSTAT</td>
-<td>-0.532273</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<p>Observamos que variables como <code>RM</code> (habitaciones promedio) tienen fuerte impacto positivo, mientras que <code>NOX</code> (contaminación) tiene un impacto negativo significativo.</p>
+<section id="regresión-lasso-l1" class="slide level2">
+<h2>🧹 Regresión Lasso (L1)</h2>
+<h3 id="función-de-costo-1">🧮 Función de costo:</h3>
+<p><span class="math display">\[
+\min_\beta \left( \sum_{i=1}^{n}(y_i - X_i \beta)^2 + \lambda \sum_{j=1}^{p} |\beta_j| \right)
+\]</span></p>
+<ul>
+<li class="fragment">🎯 Penaliza coeficientes absolutos</li>
+<li class="fragment">🗑️ Elimina variables irrelevantes</li>
+<li class="fragment">🧠 Modelo más simple e interpretable</li>
+</ul>
 </section>
-<section id="comparación-de-coeficientes-entrenamiento-vs-prueba" class="slide level2 scrollable">
-<h2>📊 Comparación de Coeficientes: Entrenamiento vs Prueba</h2>
-<div id="d9fed84d" class="cell" data-execution_count="10">
+<section id="entrenamiento-lasso" class="slide level2">
+<h2>🔧 Entrenamiento Lasso</h2>
+<div id="92859cc2" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> Lasso</span>
+<span id="cb5-2"><a href=""></a></span>
+<span id="cb5-3"><a href=""></a>lasso <span class="op">=</span> Lasso(alpha<span class="op">=</span><span class="fl">0.1</span>)</span>
+<span id="cb5-4"><a href=""></a>lasso.fit(X_train, y_train)</span>
+<span id="cb5-5"><a href=""></a>y_pred_lasso <span class="op">=</span> lasso.predict(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="evaluación-lasso" class="slide level2">
+<h2>📊 Evaluación Lasso</h2>
+<div id="6138ecd9" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a>r2_lasso <span class="op">=</span> r2_score(y_test, y_pred_lasso)</span>
+<span id="cb6-2"><a href=""></a>rmse_lasso <span class="op">=</span> np.sqrt(mean_squared_error(y_test, y_pred_lasso))</span>
+<span id="cb6-3"><a href=""></a></span>
+<span id="cb6-4"><a href=""></a><span class="bu">print</span>(<span class="st">"R² Lasso:"</span>, r2_lasso)</span>
+<span id="cb6-5"><a href=""></a><span class="bu">print</span>(<span class="st">"RMSE Lasso:"</span>, rmse_lasso)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R² Lasso: -0.09679554785010347
+RMSE Lasso: 5.43056574851312</code></pre>
+</div>
+</div>
+</section>
+<section id="validación-cruzada-ridge-y-lasso" class="slide level2">
+<h2>🔁 Validación cruzada Ridge y Lasso</h2>
+<div id="bca22a2d" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a>ridge_scores <span class="op">=</span> cross_val_score(Ridge(alpha<span class="op">=</span><span class="fl">1.0</span>), X, y, cv<span class="op">=</span><span class="dv">10</span>, scoring<span class="op">=</span><span class="st">'r2'</span>)</span>
+<span id="cb8-2"><a href=""></a>lasso_scores <span class="op">=</span> cross_val_score(Lasso(alpha<span class="op">=</span><span class="fl">0.1</span>), X, y, cv<span class="op">=</span><span class="dv">10</span>, scoring<span class="op">=</span><span class="st">'r2'</span>)</span>
+<span id="cb8-3"><a href=""></a></span>
+<span id="cb8-4"><a href=""></a><span class="bu">print</span>(<span class="st">"Promedio R² Ridge CV:"</span>, ridge_scores.mean())</span>
+<span id="cb8-5"><a href=""></a><span class="bu">print</span>(<span class="st">"Promedio R² Lasso CV:"</span>, lasso_scores.mean())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Promedio R² Ridge CV: 0.2561668703759343
+Promedio R² Lasso CV: 0.26432738934873734</code></pre>
+</div>
+</div>
+</section>
+<section id="comparación-de-coeficientes" class="slide level2">
+<h2>📈 Comparación de Coeficientes</h2>
+<div id="0a57f876" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb10-2"><a href=""></a></span>
+<span id="cb10-3"><a href=""></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">6</span>))</span>
+<span id="cb10-4"><a href=""></a>plt.bar(X.columns, ridge.coef_, alpha<span class="op">=</span><span class="fl">0.7</span>, label<span class="op">=</span><span class="st">"Ridge"</span>)</span>
+<span id="cb10-5"><a href=""></a>plt.bar(X.columns, lasso.coef_, alpha<span class="op">=</span><span class="fl">0.7</span>, label<span class="op">=</span><span class="st">"Lasso"</span>)</span>
+<span id="cb10-6"><a href=""></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb10-7"><a href=""></a>plt.title(<span class="st">"Coeficientes: Ridge vs Lasso"</span>)</span>
+<span id="cb10-8"><a href=""></a>plt.ylabel(<span class="st">"Valor"</span>)</span>
+<span id="cb10-9"><a href=""></a>plt.legend()</span>
+<span id="cb10-10"><a href=""></a>plt.tight_layout()</span>
+<span id="cb10-11"><a href=""></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="regresiones_1_files/figure-revealjs/cell-11-output-1.png" width="949" height="470"></p>
+<p><img data-src="regresiones_2_files/figure-revealjs/cell-8-output-1.png" width="1141" height="566"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Esta gráfica muestra claramente las discrepancias en los coeficientes entre ambos conjuntos, reforzando el diagnóstico de sobreajuste.</p>
+</section>
+<section id="conclusiones" class="slide level2">
+<h2>✅ Conclusiones</h2>
+<ul>
+<li class="fragment">🔬 <strong>Ridge</strong> estabiliza el modelo pero conserva todas las variables</li>
+<li class="fragment">🧹 <strong>Lasso</strong> selecciona automáticamente, útil para modelos interpretables</li>
+<li class="fragment">🔄 <strong>Validación cruzada</strong> permite estimar desempeño real</li>
+<li class="fragment">🧠 La regularización mejora la generalización</li>
+</ul>
+<blockquote>
+<p><em>El equilibrio ideal entre sesgo y varianza requiere análisis matemático y visual.</em></p>
+</blockquote>
 <div class="quarto-auto-generated-content">
 <p><img src="Utadeo70-fondoblanco.png" class="slide-logo"></p>
 <div class="footer footer-default">
@@ -1125,20 +591,20 @@
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="regresiones_1_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="regresiones_2_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="regresiones_1_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="regresiones_1_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="regresiones_1_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="regresiones_1_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="regresiones_1_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="regresiones_1_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="regresiones_2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="regresiones_2_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="regresiones_2_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="regresiones_2_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="regresiones_2_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="regresiones_2_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="regresiones_1_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="regresiones_1_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="regresiones_1_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="regresiones_1_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="regresiones_2_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="regresiones_2_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="regresiones_2_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="regresiones_2_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

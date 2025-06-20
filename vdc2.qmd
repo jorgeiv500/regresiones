@@ -1,0 +1,184 @@
+---
+title: "¿Cómo aprende una IA a jugar Snake?"
+author: "Jorge Iván Romero Gelvez"
+format:
+  revealjs:
+    theme: custom.scss
+    transition: fade
+    slide-number: true
+    logo: logo-utadeo.png # Cambia por tu logo institucional si lo tienes
+    toc: false
+    chalkboard: true
+    embed-resources: true
+    css: styles.css # Personaliza con tu estilo si lo deseas
+---
+
+# 🐍 ¿Cómo aprende una IA a jugar Snake?
+<br>
+<div style="text-align:center;">
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Snake_game.gif" alt="Snake Game" width="300"/>
+</div>
+<br>
+> El modelo de IA aprende **jugando contra sí mismo** y usando su experiencia para mejorar.
+
+---
+
+## ¿Por qué usar Snake para enseñar IA?
+
+- Es simple de entender y programar
+- Tiene un entorno claro de **acción–reacción**
+- Permite experimentar fácilmente con **aprendizaje por refuerzo**
+
+---
+
+## ¿Qué "ve" la IA? 🧐
+
+**Estado (State):**  
+La IA recibe un vector de **11 valores booleanos** cada vez que toma una decisión.
+
+<div class="fragment">
+<ul>
+  <li><b>Peligro</b>: ¿Hay obstáculo adelante, a la derecha o a la izquierda?</li>
+  <li><b>Dirección actual</b>: ¿Va hacia arriba, abajo, izquierda o derecha?</li>
+  <li><b>Comida</b>: ¿Dónde está la comida respecto a la cabeza de la serpiente?</li>
+</ul>
+</div>
+
+<div style="text-align:center;">
+<img src="https://raw.githubusercontent.com/alexlenail/NN-SVG/master/snake-vision-diagram.svg" alt="snake state" width="400"/>
+</div>
+
+---
+
+## Ejemplo de vector de estado
+
+```python
+estado = [0, 1, 0,   0, 1, 0, 0,   1, 0, 0, 0]
+#   peligro     dirección     comida
+````
+
+<div style="font-size:1.2em;">
+<p>🟥 Peligro adelante</p>
+<p>🟩 Dirección actual: derecha</p>
+<p>🍏 Comida a la izquierda</p>
+</div>
+
+---
+
+## ¿Cómo decide la IA? 🤔
+
+**Acciones posibles:**
+
+* <span style="color:green;">Seguir recto</span> 🟢
+* <span style="color:orange;">Girar a la derecha</span> 🟠
+* <span style="color:blue;">Girar a la izquierda</span> 🔵
+
+<div style="text-align:center;">
+<img src="https://cdn.jsdelivr.net/gh/ai4allorg/images@master/snake_turns.png" alt="acciones snake" width="320"/>
+</div>
+
+<aside class="notes">
+La decisión es siempre relativa a la dirección actual para evitar giros de 180°.
+</aside>
+
+---
+
+## ¿Cómo sabe si lo está haciendo bien? 🏆
+
+**Sistema de recompensas:**
+
+| Evento                          | Recompensa |
+| ------------------------------- | :--------: |
+| Come una comida                 |     +10    |
+| Muere (colisión)                |     -10    |
+| No progresa (demasiados turnos) |     -10    |
+| Otro paso (sin evento especial) |      0     |
+
+<div style="text-align:center;">
+<img src="https://cdn.jsdelivr.net/gh/ai4allorg/images@master/snake_food.gif" alt="snake food" width="150"/>
+<img src="https://cdn.jsdelivr.net/gh/ai4allorg/images@master/snake_crash.gif" alt="snake crash" width="150"/>
+</div>
+
+---
+
+## ¿Cómo aprende? 📚
+
+* Cada experiencia `(estado, acción, recompensa, nuevo_estado, fin_de_juego)`
+  se **almacena en una "memoria"** (tipo `deque`).
+* El modelo **repite partidas y almacena hasta 100,000 experiencias**.
+
+<div style="text-align:center;">
+<img src="https://cdn.jsdelivr.net/gh/ai4allorg/images@master/replay_memory.svg" alt="replay memory" width="400"/>
+</div>
+
+---
+
+## La red neuronal (LinearQNet)
+
+* **Entradas:** Los 11 valores del estado
+* **Capas ocultas:** (Por ejemplo, 2 capas de 256 neuronas)
+* **Salidas:** 3 acciones posibles (recto, derecha, izquierda)
+
+```python
+class LinearQNet(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.linear1 = nn.Linear(11, 256)
+        self.linear2 = nn.Linear(256, 256)
+        self.linear3 = nn.Linear(256, 3)
+    def forward(self, x):
+        x = F.relu(self.linear1(x))
+        x = F.relu(self.linear2(x))
+        return self.linear3(x)
+```
+
+---
+
+## ¿Cómo se entrena la red? 🛠️
+
+* Se seleccionan al azar lotes de experiencias de la memoria (“reproducción de experiencia”)
+* La red ajusta sus pesos usando el **Error Cuadrático Medio (MSE)** y la ecuación de Bellman para actualizar los valores Q.
+
+<div style="text-align:center;">
+<img src="https://raw.githubusercontent.com/alexlenail/NN-SVG/master/mlp-snake.svg" alt="Red neuronal" width="400"/>
+</div>
+
+---
+
+## Resultados del entrenamiento 📈
+
+* La IA comienza moviéndose al azar.
+* Poco a poco, sobrevive más, come más comida y **aprende estrategias**.
+* ¡Todo gracias a la experiencia acumulada y el entrenamiento iterativo!
+
+<div style="text-align:center;">
+<img src="https://cdn.jsdelivr.net/gh/ai4allorg/images@master/snake_learning_curve.png" alt="snake learning curve" width="400"/>
+</div>
+
+---
+
+## Preguntas y discusión
+
+* ¿Qué mejoras le harías al modelo?
+* ¿Cómo cambiaría el comportamiento si le damos más o menos memoria?
+* ¿Qué otros juegos simples pueden ser usados para enseñar IA?
+
+---
+
+## Recursos
+
+* [Repositorio original - IA Snake con PyTorch](https://github.com/python-engineer/snake-ai-pytorch)
+* [TensorFlow Playground](https://playground.tensorflow.org/)
+* [NN-SVG](https://alexlenail.me/NN-SVG/index.html)
+
+---
+
+## ¡Gracias!
+
+¿Listo para programar tu propio agente Snake?
+
+<div style="text-align:center;">
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Snake_game.gif" alt="Snake Game" width="200"/>
+</div>
+---
+

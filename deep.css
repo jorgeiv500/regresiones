@@ -1,0 +1,184 @@
+/*********************************************
+ * Set ROOT Information
+ *********************************************/
+
+/* Colores primarios y secundarios */
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #333333;
+  --background-color: #ffffff;
+  --border-color: #ddd;
+  --highlight-color: #f9f9f9;
+
+  --font-size-root: 30px;
+  --font-size-smaller: 0.8;
+
+  --font-size-h1: 2.2em;
+  --font-size-h2: 1.4em;
+  --font-size-h3: 1.1em;
+  --font-size-h4: 1em;
+  --font-size-table: 0.8em;
+  --font-size-code: 0.9em;
+  --font-size-output: 0.75em;
+
+  --cell-output-margin-top: 1rem;
+  --cell-output-max-height: 300px;
+  --cell-output-padding-right: 0.5rem;
+}
+
+/*********************************************
+ * Set FONT Information
+ *********************************************/
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
+
+body,
+.reveal body {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--background-color);
+  color: var(--secondary-color);
+  font-weight: 300;
+  font-size: 80%;
+}
+
+.reveal h1 {
+  font-size: var(--font-size-h1);
+  font-weight: 500;
+  line-height: 1;
+  margin: 20px 0 10px 0;
+}
+
+.reveal h2 {
+  font-size: var(--font-size-h2);
+  font-weight: 500;
+}
+
+.reveal h3 {
+  font-size: var(--font-size-h3);
+  font-weight: 500;
+}
+
+.reveal h4 {
+  font-size: var(--font-size-h4);
+  font-weight: 500;
+}
+
+/*********************************************
+ * Set COLUMN lay-out
+ *********************************************/
+.column {
+  float: left;
+  width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/*********************************************
+ * Set IMAGE settings
+ *********************************************/
+.reveal section img {
+  border: none;
+  background: none;
+}
+
+body.rise-enabled #logo {
+  width: 25%;
+}
+
+#logo {
+  width: 15%;
+}
+
+body.rise-enabled #col_img {
+  object-fit: cover;
+  width: 700px;
+  height: 700px;
+}
+
+#col_img {
+  object-fit: cover;
+  width: 350px;
+  height: 350px;
+}
+
+/*********************************************
+ * Set HEADER and FOOTER information
+ *********************************************/
+body.rise-enabled .header {
+  top: 5%;
+  width: 100%;
+}
+
+body.rise-enabled .footer {
+  font-size: 60%;
+  bottom: 25px;
+  position: fixed;
+  padding-bottom: 10px;
+  color: grey;
+}
+
+#image_caption {
+  font-size: small;
+}
+
+/*********************************************
+ * NAVIGATION CONTROLS
+ *********************************************/
+.reveal .controls div.navigate-left, 
+.reveal .controls div.navigate-left.enabled {
+  border-right-color: var(--primary-color); 
+}
+
+.reveal .controls div.navigate-right, 
+.reveal .controls div.navigate-right.enabled {
+  border-left-color: var(--primary-color); 
+}
+
+.reveal .controls div.navigate-up, 
+.reveal .controls div.navigate-up.enabled {
+  border-bottom-color: var(--primary-color); 
+}
+
+.reveal .controls div.navigate-down, 
+.reveal .controls div.navigate-down.enabled {
+  border-top-color: var(--primary-color); 
+}
+
+.reveal .controls div.navigate-left.enabled:hover {
+  border-right-color: var(--secondary-color); 
+}
+
+.reveal .controls div.navigate-right.enabled:hover {
+  border-left-color: var(--secondary-color); 
+}
+
+.reveal .controls div.navigate-up.enabled:hover {
+  border-bottom-color: var(--secondary-color); 
+}
+
+.reveal .controls div.navigate-down.enabled:hover {
+  border-top-color: var(--secondary-color); 
+}
+
+/*********************************************
+ * Set OUTPUT Information
+ *********************************************/
+.reveal .cell-output {
+  font-size: var(--font-size-output);
+  margin-top: var(--cell-output-margin-top);
+  max-height: var(--cell-output-max-height);
+  overflow-y: auto;
+  overflow-x: auto;
+  padding-right: var(--cell-output-padding-right);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--highlight-color);
+}
+
+.reveal .cell-output table {
+  font-size: var(--font-size-output);
+}

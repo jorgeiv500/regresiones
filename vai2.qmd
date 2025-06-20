@@ -1,0 +1,501 @@
+---
+title: "Crea tu primer videojuego"
+subtitle: "Creando Snake con Python y Pygame!"
+author: "Asistente AI"
+format: 
+  revealjs:
+    theme: custom.scss
+    slide-number: true
+    chalkboard: true
+    logo: "https://www.utadeo.edu.co/sites/tadeo/files/logoutadeo_1.jpg"
+    footer: "🎮 ¡Viernes de Código en Utadeo!"
+  
+---
+
+```{=html}
+<style>
+.reveal .slides {
+  text-align: left;
+}
+
+.center-slide h2 {
+    text-align: center;
+}
+
+.center-slide p {
+    text-align: center;
+}
+</style>
+```
+
+## ¡Hola, futuros programadores!💻 { .center-slide }
+
+<p>Hoy vamos a embarcarnos en una aventura de programación.</p>
+
+<p class="fragment">Crearemos el clásico juego **Snake** desde cero usando Python y una librería muy divertida llamada Pygame.</p>
+
+<p class="fragment">¿Listos para empezar a programar?</p>
+
+<p class="fragment">![](https://art.pixilart.com/76cecf6b86ae119.gif){width="200"}</p>
+---
+
+## ¿Qué es Python? {.smaller}
+
+::: {.columns}
+::: {.column width="60%"}
+*   **Un lenguaje de programación popular:** Usado por Google, Netflix, NASA y ¡muchos más!
+*   **Sintaxis amigable:** Se parece mucho al inglés, lo que lo hace ideal para principiantes.
+*   **Versátil:** Sirve para desarrollo web, ciencia de datos, inteligencia artificial y, por supuesto, ¡videojuegos!
+*   **Gran comunidad:** Millones de personas lo usan, así que siempre encontrarás ayuda y librerías (¡como Pygame!).
+:::
+
+::: {.column width="40%"}
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png){width="200"}
+:::
+:::
+
+---
+
+## ¿Y qué es Pygame? {.smaller}
+
+::: {.columns}
+::: {.column width="60%"}
+*   Es un "kit de herramientas" (una librería) para Python.
+*   Nos da funciones ya hechas para crear videojuegos en 2D.
+*   Con Pygame podemos:
+    *   Dibujar formas y mostrar imágenes.
+    *   Gestionar sonidos y música.
+    *   Detectar cuándo el jugador presiona una tecla o mueve el ratón.
+    *   Crear la ventana del juego y controlar los fotogramas por segundo (FPS).
+:::
+::: {.column width="40%"}
+![](https://www.pygame.org/docs/_images/pygame_tiny.png){width="300"}
+:::
+:::
+
+---
+
+## Nuestro Plan de Juego: Snake
+
+Dividiremos la creación del juego en 8 sencillos pasos:
+
+1.  **Configuración Inicial:** Importar librerías y definir constantes.
+2.  **La Ventana del Juego:** Crear la clase principal y la pantalla.
+3.  **El Bucle Principal:** El corazón que mantiene el juego en funcionamiento.
+4.  **Controlar la Serpiente:** Leer las teclas que presiona el jugador.
+5.  **Movimiento Continuo:** Hacer que la serpiente se mueva sola.
+6.  **¡A comer!:** Generar comida y hacer crecer la serpiente.
+7.  **¡Game Over!:** Detectar colisiones con la pared o consigo misma.
+8.  **Toques Finales:** Mostrar la puntuación.
+
+---
+
+## Paso 1: Configuración Inicial
+
+::: {.columns}
+::: {.column width="50%"}
+Primero, importamos las librerías necesarias y definimos algunas variables clave.
+
+-   `pygame`: La librería principal.
+-   `random`: Para colocar la comida en lugares aleatorios.
+-   `Enum` y `namedtuple`: Para organizar mejor nuestro código.
+-   **Constantes:** Definimos colores, el tamaño de los bloques y la velocidad del juego.
+:::
+
+::: {.column width="50%"}
+```python
+import pygame
+import random
+from enum import Enum
+from collections import namedtuple
+
+# Inicializar pygame
+pygame.init()
+
+# Definimos constantes
+Point = namedtuple('Point', 'x, y')
+WHITE = (255, 255, 255)
+RED = (200,0,0)
+BLACK = (0,0,0)
+BLOCK_SIZE = 20
+SPEED = 15
+```
+:::
+:::
+
+---
+
+## Paso 2: La Ventana del Juego
+
+::: {.columns}
+::: {.column width="50%"}
+Creamos una clase `SnakeGame` para organizar todo. El método `__init__` se ejecuta al crear el juego y prepara todo:
+
+-   **`display`**: Crea la ventana del juego con un ancho y alto.
+-   **`clock`**: Un reloj para controlar la velocidad del juego.
+-   **Estado inicial**: Definimos la dirección de partida, la posición de la cabeza y el cuerpo inicial de la serpiente.
+-   **Comida**: Llamamos a `_place_food()` para generar la primera manzana.
+:::
+
+::: {.column width="50%"}
+```python
+class SnakeGame:
+    def __init__(self, w=640, h=480):
+        self.w = w
+        self.h = h
+        # init display
+        self.display = pygame.display.set_mode((self.w, self.h))
+        pygame.display.set_caption('Snake')
+        self.clock = pygame.time.Clock()
+        
+        # init game state
+        self.direction = Direction.RIGHT
+        self.head = Point(self.w/2, self.h/2)
+        self.snake = [self.head, 
+                      Point(self.head.x-BLOCK_SIZE, self.head.y),
+                      Point(self.head.x-(2*BLOCK_SIZE), self.head.y)]
+        
+        self.score = 0
+        self.food = None
+        self._place_food()
+```
+:::
+:::
+
+---
+
+## Paso 3: El Bucle Principal y la UI
+
+::: {.columns}
+::: {.column width="50%"}
+El `play_step` es el corazón del juego. Se ejecuta una y otra vez.
+
+-   **`_update_ui`**: Esta función limpia la pantalla (`fill(BLACK)`), dibuja cada parte de la serpiente y la comida, y finalmente actualiza la pantalla (`flip()`) para que veamos los cambios.
+-   **Game Loop**: El bucle `while True` en la parte principal del código llama a `play_step()` continuamente.
+-   **Clock**: `self.clock.tick(SPEED)` asegura que el juego corra a una velocidad constante.
+:::
+
+::: {.column width="50%"}
+```python {code-line-numbers="1-10|18-26"}
+# Dentro de la clase SnakeGame:
+def _update_ui(self):
+    self.display.fill(BLACK)
+    for pt in self.snake:
+        pygame.draw.rect(self.display, (0,0,255), pygame.Rect(pt.x, pt.y, BLOCK_SIZE, BLOCK_SIZE))
+        pygame.draw.rect(self.display, (0,100,255), pygame.Rect(pt.x+4, pt.y+4, 12, 12))
+        
+    pygame.draw.rect(self.display, RED, pygame.Rect(self.food.x, self.food.y, BLOCK_SIZE, BLOCK_SIZE))
+    
+    # ... (código de puntuación vendrá después)
+    pygame.display.flip()
+
+# En play_step()
+def play_step(self):
+    # ... (mucha lógica irá aquí)
+    
+    # 5. update ui and clock
+    self._update_ui()
+    self.clock.tick(SPEED)
+    
+# Fuera de la clase
+if __name__ == '__main__':
+    game = SnakeGame()
+    while True:
+        game.play_step()
+
+```
+:::
+:::
+
+---
+
+## Paso 4: Controlar la Serpiente
+
+::: {.columns}
+::: {.column width="50%"}
+¡Hagamos que responda a nuestras órdenes!
+
+-   **Bucle de eventos**: `pygame.event.get()` nos da una lista de todo lo que el usuario ha hecho (mover ratón, pulsar teclas).
+-   **`KEYDOWN`**: Nos centramos en el evento de "tecla presionada".
+-   **Cambio de dirección**: Comprobamos qué tecla se pulsó (`K_LEFT`, `K_RIGHT`, etc.) y actualizamos la variable `self.direction`.
+:::
+
+::: {.column width="50%"}
+```python {code-line-numbers="1-11"}
+# Dentro de play_step()
+# 1. collect user input
+for event in pygame.event.get():
+    if event.type == pygame.QUIT:
+        pygame.quit()
+        quit()
+    if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_LEFT:
+            self.direction = Direction.LEFT
+        elif event.key == pygame.K_RIGHT:
+            self.direction = Direction.RIGHT
+        elif event.key == pygame.K_UP:
+            self.direction = Direction.UP
+        elif event.key == pygame.K_DOWN:
+            self.direction = Direction.DOWN
+```
+:::
+:::
+
+---
+
+## Paso 5: Movimiento Continuo
+
+::: {.columns}
+::: {.column width="50%"}
+La serpiente debe moverse sola en la dirección actual.
+
+-   **`_move()`**: Esta función calcula la nueva posición de la cabeza (`x`, `y`) basándose en la `direction` actual.
+-   **Actualizar la cabeza**: `self.head` se actualiza con la nueva `Point`.
+-   **Mover el cuerpo**: En `play_step`, insertamos la nueva cabeza al principio de la lista `self.snake`. Luego, si no hemos comido, eliminamos el último segmento (`self.snake.pop()`). ¡Esto crea la ilusión de movimiento!
+:::
+
+::: {.column width="50%"}
+```python {code-line-numbers="1-11|15-18,24"}
+# Dentro de la clase SnakeGame
+def _move(self, direction):
+    x = self.head.x
+    y = self.head.y
+    if direction == Direction.RIGHT: x += BLOCK_SIZE
+    elif direction == Direction.LEFT: x -= BLOCK_SIZE
+    elif direction == Direction.DOWN: y += BLOCK_SIZE
+    elif direction == Direction.UP: y -= BLOCK_SIZE
+        
+    self.head = Point(x, y)
+
+# Dentro de play_step()
+# 2. move
+self._move(self.direction) # update the head
+self.snake.insert(0, self.head)
+
+# ...
+
+# 4. place new food or just move
+if self.head == self.food:
+    # ...
+else:
+    self.snake.pop()
+```
+:::
+:::
+
+---
+
+## Paso 6: ¡A Comer!
+
+::: {.columns}
+::: {.column width="50%"}
+-   **`_place_food()`**: Genera coordenadas `x`, `y` aleatorias para la comida. Se asegura de que la comida no aparezca encima de la serpiente.
+-   **Detectar colisión con comida**: En `play_step`, comprobamos si la posición de la cabeza (`self.head`) es la misma que la de la comida (`self.food`).
+-   **Crecer**: Si coinciden, incrementamos la puntuación, generamos una nueva comida con `_place_food()` y ¡muy importante! **no** ejecutamos `self.snake.pop()`. Así, la serpiente gana un segmento.
+:::
+
+::: {.column width="50%"}
+```python {code-line-numbers="1-7|11-15"}
+# Dentro de la clase SnakeGame
+def _place_food(self):
+    x = random.randint(0, (self.w-BLOCK_SIZE )//BLOCK_SIZE )*BLOCK_SIZE 
+    y = random.randint(0, (self.h-BLOCK_SIZE )//BLOCK_SIZE )*BLOCK_SIZE
+    self.food = Point(x, y)
+    if self.food in self.snake:
+        self._place_food()
+
+# Dentro de play_step()
+# 4. place new food or just move
+if self.head == self.food:
+    self.score += 1
+    self._place_food()
+else:
+    self.snake.pop()
+```
+:::
+:::
+
+---
+
+## Paso 7: ¡Game Over!
+
+::: {.columns}
+::: {.column width="50%"}
+El juego debe terminar si la serpiente choca.
+
+-   **`_is_collision()`**: Esta función comprueba dos cosas:
+    1.  **Colisión con paredes**: Si la cabeza (`self.head`) está fuera de los límites de la pantalla.
+    2.  **Colisión consigo misma**: Si la cabeza (`self.head`) está en alguna parte del resto del cuerpo (`self.snake[1:]`).
+-   **Fin del juego**: En `play_step`, si `_is_collision()` devuelve `True`, activamos `game_over` y lo retornamos para romper el bucle principal.
+:::
+
+::: {.column width="50%"}
+```python {code-line-numbers="1-8|12-15"}
+# Dentro de la clase SnakeGame
+def _is_collision(self):
+    # hits boundary
+    if self.head.x > self.w - BLOCK_SIZE or self.head.x < 0 or self.head.y > self.h - BLOCK_SIZE or self.head.y < 0:
+        return True
+    # hits itself
+    if self.head in self.snake[1:]:
+        return True
+    return False
+
+# Dentro de play_step()
+# 3. check if game over
+game_over = False
+if self._is_collision():
+    game_over = True
+    return game_over, self.score
+```
+:::
+:::
+
+---
+
+## Paso 8: Toques Finales - Puntuación
+
+::: {.columns}
+::: {.column width="50%"}
+Un juego es más divertido con un objetivo. ¡Mostremos la puntuación!
+
+-   **Fuente**: Al inicio, cargamos una fuente tipográfica (`pygame.font.Font`).
+-   **Renderizar texto**: En `_update_ui`, creamos una imagen de texto con `font.render()`.
+-   **Mostrar texto**: Usamos `self.display.blit()` para "pegar" la imagen del texto en la pantalla en la esquina superior izquierda.
+-   **Resultado Final**: Al terminar el juego, imprimimos la puntuación final en la consola.
+:::
+
+::: {.column width="50%"}
+```python {code-line-numbers="1|9-11|16"}
+font = pygame.font.Font('arial.ttf', 25)
+
+# ...
+
+# Dentro de la clase SnakeGame
+# ...
+
+# Dentro de _update_ui()
+def _update_ui(self):
+    # ... (código de dibujo)
+    text = font.render("Score: " + str(self.score), True, WHITE)
+    self.display.blit(text, [0, 0])
+    pygame.display.flip()
+
+# En el bucle principal
+if game_over == True:
+    break
+print('Final Score', score)
+```
+:::
+:::
+
+---
+
+## ¡El Código Completo!
+
+::: {.r-stack}
+```python {max-height="600px"}
+import pygame
+import random
+from enum import Enum
+from collections import namedtuple
+
+pygame.init()
+font = pygame.font.Font('arial.ttf', 25)
+
+class Direction(Enum):
+    RIGHT = 1; LEFT = 2; UP = 3; DOWN = 4
+    
+Point = namedtuple('Point', 'x, y')
+WHITE = (255, 255, 255); RED = (200,0,0); BLUE1 = (0, 0, 255); BLUE2 = (0, 100, 255); BLACK = (0,0,0)
+BLOCK_SIZE = 20; SPEED = 20
+
+class SnakeGame:
+    def __init__(self, w=640, h=480):
+        self.w = w; self.h = h
+        self.display = pygame.display.set_mode((self.w, self.h))
+        pygame.display.set_caption('Snake')
+        self.clock = pygame.time.Clock()
+        self.direction = Direction.RIGHT
+        self.head = Point(self.w/2, self.h/2)
+        self.snake = [self.head, Point(self.head.x-BLOCK_SIZE, self.head.y), Point(self.head.x-(2*BLOCK_SIZE), self.head.y)]
+        self.score = 0; self.food = None; self._place_food()
+        
+    def _place_food(self):
+        x = random.randint(0, (self.w-BLOCK_SIZE )//BLOCK_SIZE )*BLOCK_SIZE 
+        y = random.randint(0, (self.h-BLOCK_SIZE )//BLOCK_SIZE )*BLOCK_SIZE
+        self.food = Point(x, y)
+        if self.food in self.snake: self._place_food()
+        
+    def play_step(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT: pygame.quit(); quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT: self.direction = Direction.LEFT
+                elif event.key == pygame.K_RIGHT: self.direction = Direction.RIGHT
+                elif event.key == pygame.K_UP: self.direction = Direction.UP
+                elif event.key == pygame.K_DOWN: self.direction = Direction.DOWN
+        self._move(self.direction); self.snake.insert(0, self.head)
+        game_over = False
+        if self._is_collision(): game_over = True; return game_over, self.score
+        if self.head == self.food: self.score += 1; self._place_food()
+        else: self.snake.pop()
+        self._update_ui(); self.clock.tick(SPEED); return game_over, self.score
+    
+    def _is_collision(self):
+        if self.head.x > self.w - BLOCK_SIZE or self.head.x < 0 or self.head.y > self.h - BLOCK_SIZE or self.head.y < 0: return True
+        if self.head in self.snake[1:]: return True
+        return False
+        
+    def _update_ui(self):
+        self.display.fill(BLACK)
+        for pt in self.snake:
+            pygame.draw.rect(self.display, BLUE1, pygame.Rect(pt.x, pt.y, BLOCK_SIZE, BLOCK_SIZE))
+            pygame.draw.rect(self.display, BLUE2, pygame.Rect(pt.x+4, pt.y+4, 12, 12))
+        pygame.draw.rect(self.display, RED, pygame.Rect(self.food.x, self.food.y, BLOCK_SIZE, BLOCK_SIZE))
+        text = font.render("Score: " + str(self.score), True, WHITE)
+        self.display.blit(text, [0, 0]); pygame.display.flip()
+        
+    def _move(self, direction):
+        x, y = self.head.x, self.head.y
+        if direction == Direction.RIGHT: x += BLOCK_SIZE
+        elif direction == Direction.LEFT: x -= BLOCK_SIZE
+        elif direction == Direction.DOWN: y += BLOCK_SIZE
+        elif direction == Direction.UP: y -= BLOCK_SIZE
+        self.head = Point(x, y)
+
+if __name__ == '__main__':
+    game = SnakeGame()
+    while True:
+        game_over, score = game.play_step()
+        if game_over == True: break
+    print('Final Score', score)
+    pygame.quit()
+```
+:::
+
+---
+
+## ¡Felicidades!
+
+<div class="center-slide">
+<h2>¡Has creado tu primer juego!</h2>
+<p class="fragment">Hemos aprendido sobre...</p>
+<ul>
+<li class="fragment">Conceptos básicos de <strong>Python</strong>.</li>
+<li class="fragment">Cómo usar <strong>Pygame</strong> para dibujar y manejar eventos.</li>
+<li class="fragment">La lógica de un <strong>bucle de juego</strong>.</li>
+<li class="fragment">Cómo programar el movimiento, las colisiones y la puntuación.</li>
+</ul>
+<p class="fragment"><strong>¡El cielo es el límite!</strong> ¿Qué harás ahora? ¿Añadir sonidos? ¿Niveles de dificultad? ¿Enemigos?</p>
+</div>
+
+---
+
+## Preguntas y Próximos Pasos
+
+<div class="center-slide">
+<h2>¿Alguna pregunta?</h2>
+<br>
+<h3>¡Gracias por programar conmigo!</h3>
+</div>
