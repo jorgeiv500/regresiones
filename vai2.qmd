@@ -1,7 +1,7 @@
 ---
 title: "Crea tu primer videojuego"
 subtitle: "Creando Snake con Python y Pygame!"
-author: "Asistente AI"
+author: "Jorge Ivan Romero"
 format: 
   revealjs:
     theme: custom.scss
