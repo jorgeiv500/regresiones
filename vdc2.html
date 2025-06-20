@@ -7,11 +7,11 @@
 <link href="vdc2_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="vdc2_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="vdc2_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="vdc2_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="vdc2_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.57">
 
-  <meta name="author" content="Generado por Asistente AI">
-  <title>Entrenamiento de una IA para Jugar Snake con Reinforcement Learning, PyTorch y Pygame</title>
+  <meta name="author" content="Jorge Iván Romero Gelvez">
+  <title>¿Cómo aprende una IA a jugar Snake?</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -29,71 +29,6 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-      }
-    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-    div.sourceCode
-      { color: #f8f8f2;  }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #f8f8f2; } /* Normal */
-    code span.al { color: #f07178; background-color: #2a0f15; font-weight: bold; } /* Alert */
-    code span.an { color: #d4d0ab; } /* Annotation */
-    code span.at { color: #00e0e0; } /* Attribute */
-    code span.bn { color: #d4d0ab; } /* BaseN */
-    code span.bu { color: #abe338; } /* BuiltIn */
-    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #abe338; } /* Char */
-    code span.cn { color: #ffd700; } /* Constant */
-    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
-    code span.cv { color: #ffd700; } /* CommentVar */
-    code span.do { color: #f8f8f2; } /* Documentation */
-    code span.dt { color: #ffa07a; } /* DataType */
-    code span.dv { color: #d4d0ab; } /* DecVal */
-    code span.er { color: #f07178; text-decoration: underline; } /* Error */
-    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
-    code span.fl { color: #d4d0ab; } /* Float */
-    code span.fu { color: #ffa07a; } /* Function */
-    code span.im { color: #abe338; } /* Import */
-    code span.in { color: #d4d0ab; } /* Information */
-    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
-    code span.op { color: #ffa07a; } /* Operator */
-    code span.ot { color: #00e0e0; } /* Other */
-    code span.pp { color: #dcc6e0; } /* Preprocessor */
-    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
-    code span.sc { color: #abe338; } /* SpecialChar */
-    code span.ss { color: #abe338; } /* SpecialString */
-    code span.st { color: #abe338; } /* String */
-    code span.va { color: #00e0e0; } /* Variable */
-    code span.vs { color: #abe338; } /* VerbatimString */
-    code span.wa { color: #dcc6e0; } /* Warning */
   </style>
   <link rel="stylesheet" href="vdc2_files/libs/revealjs/dist/theme/quarto.css">
   <link href="vdc2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -388,167 +323,195 @@
     }
   </style>
 </head>
-<body class="quarto-dark">
+<body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Entrenamiento de una IA para Jugar Snake con Reinforcement Learning, PyTorch y Pygame</h1>
+  <h1 class="title">¿Cómo aprende una IA a jugar Snake?</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Generado por Asistente AI 
+Jorge Iván Romero Gelvez 
 </div>
 </div>
 </div>
 
 </section>
-<section id="slide-1-introducción-al-proyecto" class="slide level2">
-<h2>Slide&nbsp;1 –&nbsp;Introducción al Proyecto</h2>
+<section>
+<section id="cómo-aprende-una-ia-a-jugar-snake" class="title-slide slide level1 center">
+<h1>🐍 ¿Cómo aprende una IA a jugar Snake?</h1>
+<br>
+<div style="text-align:center;">
+<p><img src="https://art.pixilart.com/76cecf6b86ae119.gif" alt="Snake Game" width="300"></p>
+</div>
+<p><br> &gt; El modelo de IA aprende <strong>jugando contra sí mismo</strong> y usando su experiencia para mejorar.</p>
+</section>
+<section id="qué-ve-la-ia" class="slide level2">
+<h2>¿Qué “ve” la IA? 🧐</h2>
+<p><strong>Estado (State):</strong><br>
+La IA recibe un vector de <strong>11 valores booleanos</strong> cada vez que toma una decisión.</p>
+<div class="fragment">
 <ul>
-<li><p><strong>Objetivo del Proyecto:</strong></p>
+<li>
+<b>Peligro</b>: ¿Hay obstáculo adelante, a la derecha o a la izquierda?
+</li>
+<li>
+<b>Dirección actual</b>: ¿Va hacia arriba, abajo, izquierda o derecha?
+</li>
+<li>
+<b>Comida</b>: ¿Dónde está la comida respecto a la cabeza de la serpiente?
+</li>
+</ul>
+</div>
+<div class="fragment" style="text-align:center;">
+<p><img src="https://www.researchgate.net/profile/Silvia-Ullo/publication/351884746/figure/fig1/AS:1067993664589824@1631640940747/Q-Learning-vs-Deep-Q-Learning.ppm" alt="snake state" width="400"></p>
+</div>
+</section>
+<section id="ejemplo-de-vector-de-estado" class="slide level2">
+<h2>Ejemplo de vector de estado</h2>
+<div style="font-size:1.2em;">
+<p>
+🟥 Peligro adelante
+</p>
+<p>
+🟩 Dirección actual: derecha
+</p>
+<p>
+🍏 Comida a la izquierda
+</p>
+</div>
+</section>
+<section id="cómo-decide-la-ia" class="slide level2">
+<h2>¿Cómo decide la IA? 🤔</h2>
+<p><strong>Acciones posibles:</strong></p>
 <ul>
-<li>Construir una IA que aprenda a jugar Snake con Reinforcement Learning.</li>
-<li>Todo desde cero: entorno, agente y red neuronal.</li>
-</ul></li>
-<li><p><strong>Tecnologías utilizadas:</strong></p>
+<li><span style="color:green;">Seguir recto</span> 🟢</li>
+<li><span style="color:orange;">Girar a la derecha</span> 🟠</li>
+<li><span style="color:blue;">Girar a la izquierda</span> 🔵</li>
+</ul>
+<div style="text-align:center;">
+<p><img src="https://www.researchgate.net/profile/Silvia-Ullo/publication/351884746/figure/fig4/AS:1067993668804609@1631640941629/Deep-Neural-Network-architecture.ppm" alt="acciones snake" width="720"></p>
+</div>
+<aside class="notes">
+La decisión es siempre relativa a la dirección actual para evitar giros de 180°.
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="cómo-sabe-si-lo-está-haciendo-bien" class="slide level2">
+<h2>¿Cómo sabe si lo está haciendo bien? 🏆</h2>
+<p><strong>Sistema de recompensas:</strong></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Evento</th>
+<th style="text-align: center;">Recompensa</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Come una comida</td>
+<td style="text-align: center;">+10</td>
+</tr>
+<tr class="even">
+<td>Muere (colisión)</td>
+<td style="text-align: center;">-10</td>
+</tr>
+<tr class="odd">
+<td>No progresa (demasiados turnos)</td>
+<td style="text-align: center;">-10</td>
+</tr>
+<tr class="even">
+<td>Otro paso (sin evento especial)</td>
+<td style="text-align: center;">0</td>
+</tr>
+</tbody>
+</table>
+<div style="text-align:center;">
+<p><img src="https://www.researchgate.net/profile/Silvia-Ullo/publication/351884746/figure/fig5/AS:1067993668780035@1631640941758/The-Snake-game-GUI.ppm" alt="snake food" width="150"></p>
+</div>
+</section>
+<section id="cómo-aprende" class="slide level2">
+<h2>¿Cómo aprende? 📚</h2>
 <ul>
-<li>Pygame, PyTorch y Python.</li>
-</ul></li>
-<li><p><strong>Resultados esperados:</strong></p>
+<li>Cada experiencia <code>(estado, acción, recompensa, nuevo_estado, fin_de_juego)</code> se <strong>almacena en una “memoria”</strong> (tipo <code>deque</code>).</li>
+<li>El modelo <strong>repite partidas y almacena hasta 100,000 experiencias</strong>.</li>
+</ul>
+<div class="fragment" style="text-align:center;">
+<p><img src="https://media1.tenor.com/m/7HUogy7rXs4AAAAC/feel-me-think-about-it.gif" alt="replay memory" width="400"></p>
+</div>
+</section>
+<section id="la-red-neuronal-linearqnet" class="slide level2">
+<h2>La red neuronal (LinearQNet)</h2>
 <ul>
-<li>Comportamiento aleatorio inicial.</li>
-<li>Mejora notable en ~80–100 juegos (~10 min).</li>
-<li>Entrena completamente en CPU.</li>
-</ul></li>
+<li><strong>Entradas:</strong> Los 11 valores del estado</li>
+<li><strong>Capas ocultas:</strong> (Por ejemplo, 2 capas de 256 neuronas)</li>
+<li><strong>Salidas:</strong> 3 acciones posibles (recto, derecha, izquierda)</li>
 </ul>
 </section>
-<section id="slide-2-fundamentos-del-rl" class="slide level2">
-<h2>Slide&nbsp;2 –&nbsp;Fundamentos del RL</h2>
+<section id="cómo-se-entrena-la-red" class="slide level2">
+<h2>¿Cómo se entrena la red? 🛠️</h2>
 <ul>
-<li><strong>¿Qué es el RL?</strong> Agente interactúa con un entorno para maximizar recompensas.</li>
-<li><strong>Componentes clave:</strong> agente, entorno, acción y recompensa.</li>
-<li><strong>Deep Q‑Learning (DQN):</strong> RL con red neuronal profunda.</li>
-<li><strong>Exploración vs.&nbsp;explotación:</strong> balance entre descubrir y usar conocimiento.</li>
+<li>Se seleccionan al azar lotes de experiencias de la memoria (“reproducción de experiencia”)</li>
+<li>La red ajusta sus pesos usando el <strong>Error Cuadrático Medio (MSE)</strong> y la ecuación de Bellman para actualizar los valores Q.</li>
+</ul>
+<div style="text-align:center;">
+<p><img src="train.png" alt="Red neuronal" width="800"></p>
+</div>
+</section>
+<section id="resultados-del-entrenamiento" class="slide level2">
+<h2>Resultados del entrenamiento 📈</h2>
+<ul>
+<li>La IA comienza moviéndose al azar.</li>
+<li>Poco a poco, sobrevive más, come más comida y <strong>aprende estrategias</strong>.</li>
+<li>¡Todo gracias a la experiencia acumulada y el entrenamiento iterativo!</li>
+</ul>
+<div style="text-align:center;">
+<p><img src="train.png" alt="snake learning curve" width="800"></p>
+</div>
+</section>
+<section id="preguntas-y-discusión" class="slide level2">
+<h2>Preguntas y discusión</h2>
+<ul>
+<li>¿Qué mejoras le harías al modelo?</li>
+<li>¿Cómo cambiaría el comportamiento si le damos más o menos memoria?</li>
+<li>¿Qué otros juegos simples pueden ser usados para enseñar IA?</li>
 </ul>
 </section>
-<section id="slide-3-juego-snake-snakegameai" class="slide level2">
-<h2>Slide&nbsp;3 –&nbsp;Juego Snake (SnakeGameAI)</h2>
+<section id="recursos" class="slide level2">
+<h2>Recursos</h2>
 <ul>
-<li><p>Clase principal: <code>SnakeGameAI</code></p></li>
-<li><p>Método <code>play_step(action)</code>:</p>
-<ul>
-<li>Mueve la serpiente, calcula reward, <code>game_over</code>, y <code>score</code>.</li>
-</ul></li>
-<li><p>Definición de recompensas:</p>
-<ul>
-<li><strong>+10</strong> al comer, <strong>–10</strong> al morir, <strong>0</strong> en otros movimientos.</li>
-<li>Penalización extra si la serpiente no progresa tras muchas iteraciones.</li>
-</ul></li>
-<li><p>Acciones codificadas como <code>[1,0,0]</code>, <code>[0,1,0]</code>, <code>[0,0,1]</code>.</p></li>
-<li><p>Método <code>reset()</code> para reiniciar el juego.</p></li>
+<li><a href="https://github.com/python-engineer/snake-ai-pytorch">Repositorio original - IA Snake con PyTorch</a></li>
+<li><a href="https://playground.tensorflow.org/">TensorFlow Playground</a></li>
+<li><a href="https://alexlenail.me/NN-SVG/index.html">NN-SVG</a></li>
 </ul>
 </section>
-<section id="slide-4-agente-ia" class="slide level2">
-<h2>Slide&nbsp;4 –&nbsp;Agente IA</h2>
-<ul>
-<li><p>Clase <code>Agent</code></p></li>
-<li><p>Atributos principales:</p>
-<ul>
-<li><code>epsilon</code>, <code>gamma</code>, <code>memory</code> (deque hasta 100 000), <code>batch_size</code>, learning rate.</li>
-</ul></li>
-<li><p><strong>Estado</strong> = vector de 11 booleanos (peligro, dirección, comida).</p></li>
-<li><p>Funciones:</p>
-<ul>
-<li><code>get_state()</code>, <code>remember()</code>, <code>get_action()</code>, <code>train_short_memory()</code>, <code>train_long_memory()</code>.</li>
-</ul></li>
-</ul>
+<section id="gracias" class="slide level2">
+<h2>¡Gracias!</h2>
+<p>¿Listo para programar tu propio agente Snake?</p>
+<div style="text-align:center;">
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Snake_game.gif" alt="Snake Game" width="200"></p>
+</div>
 </section>
-<section id="slide-5-arquitectura-de-la-red-neuronal" class="slide level2">
-<h2>Slide&nbsp;5 –&nbsp;Arquitectura de la red neuronal</h2>
-
-<img data-src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIGRhdGEtZDItdmVyc2lvbj0iMC43LjAiIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaW5ZTWluIG1lZXQiIHZpZXdCb3g9IjAgMCAyOTYgNTQwIj48c3ZnIGNsYXNzPSJkMi0zODk4MjI2MzczIGQyLXN2ZyIgd2lkdGg9IjI5NiIgaGVpZ2h0PSI1NDAiIHZpZXdCb3g9Ii04OSAtODkgMjk2IDU0MCI+PHJlY3QgeD0iLTg5LjAwMDAwMCIgeT0iLTg5LjAwMDAwMCIgd2lkdGg9IjI5Ni4wMDAwMDAiIGhlaWdodD0iNTQwLjAwMDAwMCIgcng9IjAuMDAwMDAwIiBmaWxsPSIjRkZGRkZGIiBjbGFzcz0iIGZpbGwtTjciIHN0cm9rZS13aWR0aD0iMCIgLz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWwouZDItMzg5ODIyNjM3MyAudGV4dC1ib2xkIHsKCWZvbnQtZmFtaWx5OiAiZDItMzg5ODIyNjM3My1mb250LWJvbGQiOwp9CkBmb250LWZhY2UgewoJZm9udC1mYW1pbHk6IGQyLTM4OTgyMjYzNzMtZm9udC1ib2xkOwoJc3JjOiB1cmwoImRhdGE6YXBwbGljYXRpb24vZm9udC13b2ZmO2Jhc2U2NCxkMDlHUmdBQkFBQUFBQWg4QUFvQUFBQUFEY2dBQWd1RkFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQlBVeTh5QUFBQTlBQUFBR0FBQUFCZ1h4SFhybU50WVhBQUFBRlVBQUFBVUFBQUFGZ0JIUUZPWjJ4NVpnQUFBYVFBQUFMRkFBQURVTmREbzBWb1pXRmtBQUFFYkFBQUFEWUFBQUEyRzM4ZTFHaG9aV0VBQUFTa0FBQUFKQUFBQUNRS2Z3WExhRzEwZUFBQUJNZ0FBQUF3QUFBQU1CVzBBZlJzYjJOaEFBQUUrQUFBQUJvQUFBQWFCbUFGZ20xaGVIQUFBQVVVQUFBQUlBQUFBQ0FBSkFEM2JtRnRaUUFBQlRRQUFBTW9BQUFJS2dqd1ZrRndiM04wQUFBSVhBQUFBQjBBQUFBZy85RUFNZ0FEQWlvQ3ZBQUZBQUFDaWdKWUFBQUFTd0tLQWxnQUFBRmVBRElCS1FBQUFnc0hBd01FQXdJQ0JHQUFBdmNBQUFBREFBQUFBQUFBQUFCQlJFSlBBQ0FBSVAvL0F1Ny9CZ0FBQTlnQkVTQUFBWjhBQUFBQUFmQUNsQUFBQUNBQUEzaWNOTXU5Q2NKUUFBYkFlei9xVXh6Tk1SUzBFUXZkUkVnUk11c1hDT1Q2UTlFVVhIVTNYQXhWOWZEeThVdHc5L1QyVGJKa3pwVC9OblpGMVhRSFJ5ZkRtUlVBQVAvL0FRQUEvLzk2Qnc1aWVKeGtrczFMSTJjY3gzL1BremlETWFpVHpFc1M4LzZZR1JOTkpKbk1URzJNWTJwOFNadWdVU3JZcWdGUHBiRUtOV0xxV1FwdDZhSEVRK21ocHhaYWFBK2xsMWJ3dkN6dXpXWDN0Q3o3SDRRbExIdUlNOHNrN3NyaTRibCtmdC9uOC8zQ0FLd0I0RDE4RGpZWWhCRndBUWNnTXhFbUprc1NvVFZaMDRoZzB5VEUwR3ZZWmZ6K214UzN4K1AyUlBqbjBHbXRoaXE3K1B4bS8vUEszdDZyV2k1bi9Qci9oZkVqT3JvQXdDQ1pIZFRGbCtDR01JQVFGWldzcXNvWlhwQVVtU0VTb1NndG8ycUtLSklveGJIOHkrM0RYQzBiLzhCTHRab091MjhKZXlTWGU1SWw2clR6aDIrcXgzTitUL25QbTRXMGp6Ulo3NVZyZUdHNXRBZ1l4czBPZW9HNjRJRVF3RUJVZkh1RTUxaUtqdkM4bk5FRWlyTEpXZXNLQ2kxLy9kSENmbTU1WjlxT2phZU9wYlNpcHNYZFgvNlZwcUtxYzY2eFhtM29lcjNvamcycWNtVExGMFFmeHBWcEFBQUVCZXREK0JKWXk0M00wYjBqSEVPWUhwaG1DaTNhLzBtbVdtb0Z3djRKRDc3OGE4czdXZDh4SHFHSU91RVZqSC9BTkVFRGdHZjRHb3ZnQUFBYWh1RDdPemJxM3JJRitSNjc2YkNISysvZ3FLMEhrKyt4K3g0d2pib3dBbVAzUEZCU1JsV3l0NW9Scng4V2k0ZTZmbEFzSHVqSlZDcVpTaWFkK2VQMWpVWSszOWhZUDg2ZlZPWUw1WEpodm1KeEMrWUs1bEVYM0JBRUVPN1NzUlJGb3FJa2NHNkxUYUkweC9OV3prQkordXlMMlpvYW52VU5ySXJxNW1TQ25mZ1AvNUgya2UrT1BtM3FZOTdWbjlENFV2bmI1SlZyMlBvN1kzYlFBVzZBMEV1dEtFVFJOSm1UT2NLeHZKeFJyZklRYks4V3k4enB5UWtKT0wwT3dhMDV2OXg4K0JWMWRuYjBJQkdqN0hYSzJlOW8xdXlnMTZodGViVFd4c2hNbjhIY3p1MUp0ZFFLaHYwaTMyb08yVUlmTytzN0tHczhWK0srQUZveFJoZGpVLzB1NERGcWc2M1hCVk5vb2JZeENzajhHOC9BQnI2R0lRQ210K1MraEZncUZZdWxVbmdtUVVqQ2V2QUdBQUQvL3dFQUFQLy9ETXV6ZWdBQUFBQUJBQUFBQWd1Rm9NUnhDVjhQUFBVQUFRUG9BQUFBQU5oZG9JUUFBQUFBM1dZdk52NDMvc1FJYlFQeEFBRUFBd0FDQUFBQUFBQUFBQUVBQUFQWS91OEFBQWlZL2pmK053aHRBQUVBQUFBQUFBQUFBQUFBQUFBQUFBQU1BcklBVUFJOUFDY0NCZ0FrQWpzQVFRRVVBRGNDUEFCQkFpc0FKQUk5QUVFQmZ3QVJBamdBUEFFVUFFRUFBUCt0QUFBQUxBQmVBSklBdEFEQUFPSUJEZ0UrQVdRQmhnR1NBYWdBQUFBQkFBQUFEQUNRQUF3QVl3QUhBQUVBQUFBQUFBQUFBQUFBQUFBQUJBQURlSnljbE05dUcxVVV4bjlPYk5NS3dRSkZWYnFKN29KRmtlallWRW5WTml1SDFJcEZGQWVQQzBKQ1NCUFArSTh5bmhsNUpnN2hDVmp6RnJ4RlZ6d0V6NEZZby9sODdOZ0YwU2FLa254Mzd2bnpuWE8rYzRFZC9tYWJTdlVoOEVjOU1WeGhyMzV1ZUlzSDlSUEQyN1RyVzRhclBLbjlhYmhHV0pzYnJ2TjVyV2Y0STk1V2Z6UDhnUDNxVDRZZnNsdHRHLzZZWjlVZHc1OXNPLzR5L0NuN3ZGM2dDcnpnVjhNVmRza01iN0hEajRhM2VZVEZyRlI1Uk5Od2pjL1lNMXhuRCtnem9TQm1Rc0lJeDVBSkk2NllFWkhqRXpGandwQ0lFRWVIRmpHRnZpWUVRbzdSZjM0TjhDbVlFU2ppbUFKSGpFOU1RTTdZSXY0aXI1UnpaUnpxTkxPN0ZnVmpBaTdrY1VsQWdpTmxSRXBDeEtYaUZCUmt2S0pCZzV5QitHWVU1SGprVElqeFNKa3hva0dYTnFmMEdUTWh4OUZXcEpLWlQ4cVFnbXNDNVhkbVVYWm1RRVJDYnF5dVNBakYwNGxmSk84T3B6aTZaTEpkajN5NkVlRkxITi9KdStTV3l2WXJQUDI2TldhYmVaZHNBdWJxWjZ5dXhMcTUxZ1RIdWkzenR2aFd1T0FWN2w3OTJXVHkvaDZGK2w4bzhnVlhtbitvU1NWaWt1RGNMaTE4S2NoM2ozRWM2ZHpCVjBlK3AwT2ZFN3E4b2E5eml4NDlXcHpScDhOcitYYnA0ZmlhTG1jY3k2TWp2TGhyU3pGbi9JRGpHenF5S1dOSDFwL0Z4Q0orSmpOMTUrSTRVeDFUTXZXOFpPNnAxa2dWM24zQzVRNmxHK3JJNVRQUUhwV1dUdk5MdEdjQkkxTkZKb1pUOVhLcGpkejZGNW9pcHFxbG5PM3RmYmtOYzl1OTVSYmZrR3FIUzdVdU9KV1RXekI2MzFTOWR6UnpyUitQZ0pDVUMxa01TSm5Tb09CR3ZNOEp1Q0xHY2F6dW5XaExDbG9ybnpMUGpWUVNNUldERG9uaXpNajBOekRkK01aOXNLRjdaMjlKS1ArUzZlV3FxdnRrY2VyVjdZemVxSHZMTzkrNkhLMU5vR0ZUVGRmVU5CRFh4TFFmYWFmVytmdnl6Zlc2cFR6bGlKU1k4Rjh2d0RNOG11eHp3Q0ZqWlJqb1ptNnZRMU12UkpPWEhLcjZTeUpaRGFYbnlDSWM0UEdjQXc1NHlmTjMrcmhrNG95TFczRlp6OTNpbUNPNkhINVFGUXY3TGtlOFhuMzcvNnkvaTJsVHRUaWVyazR2N2ozRkozZFE2eGZhczl2M3NxZUpsWk9ZVzdUYnJUZ2pZRnB5Y2J2ck5ibkhlUDhBQUFELy93RUFBUC8vOUxkUFVYaWNZbUJtQUlQLzV4aU1HTEFBQUFBQUFQLy9BUUFBLy84dkFRSURBQUFBIik7Cn1dXT48L3N0eWxlPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbLnNoYXBlIHsKICBzaGFwZS1yZW5kZXJpbmc6IGdlb21ldHJpY1ByZWNpc2lvbjsKICBzdHJva2UtbGluZWpvaW46IHJvdW5kOwp9Ci5jb25uZWN0aW9uIHsKICBzdHJva2UtbGluZWNhcDogcm91bmQ7CiAgc3Ryb2tlLWxpbmVqb2luOiByb3VuZDsKfQouYmxlbmQgewogIG1peC1ibGVuZC1tb2RlOiBtdWx0aXBseTsKICBvcGFjaXR5OiAwLjU7Cn0KCgkJLmQyLTM4OTgyMjYzNzMgLmZpbGwtTjF7ZmlsbDojMTcwMjA2O30KCQkuZDItMzg5ODIyNjM3MyAuZmlsbC1OMntmaWxsOiM1MzUxNTI7fQoJCS5kMi0zODk4MjI2MzczIC5maWxsLU4ze2ZpbGw6Izc4Nzc3Nzt9CgkJLmQyLTM4OTgyMjYzNzMgLmZpbGwtTjR7ZmlsbDojQ0NDQUNBO30KCQkuZDItMzg5ODIyNjM3MyAuZmlsbC1ONXtmaWxsOiNERkRDREM7fQoJCS5kMi0zODk4MjI2MzczIC5maWxsLU42e2ZpbGw6I0VDRUJFQjt9CgkJLmQyLTM4OTgyMjYzNzMgLmZpbGwtTjd7ZmlsbDojRkZGRkZGO30KCQkuZDItMzg5ODIyNjM3MyAuZmlsbC1CMXtmaWxsOiMzMTAyMUQ7fQoJCS5kMi0zODk4MjI2MzczIC5maWxsLUIye2ZpbGw6IzlCMUE0ODt9CgkJLmQyLTM4OTgyMjYzNzMgLmZpbGwtQjN7ZmlsbDojRDI1MTdGO30KCQkuZDItMzg5ODIyNjM3MyAuZmlsbC1CNHtmaWxsOiNFQTk5QjY7fQoJCS5kMi0zODk4MjI2MzczIC5maWxsLUI1e2ZpbGw6I0ZGREFFNzt9CgkJLmQyLTM4OTgyMjYzNzMgLmZpbGwtQjZ7ZmlsbDojRkNFREYyO30KCQkuZDItMzg5ODIyNjM3MyAuZmlsbC1BQTJ7ZmlsbDojRDM1RjBBO30KCQkuZDItMzg5ODIyNjM3MyAuZmlsbC1BQTR7ZmlsbDojRkFCQThBO30KCQkuZDItMzg5ODIyNjM3MyAuZmlsbC1BQTV7ZmlsbDojRkZFMEM3O30KCQkuZDItMzg5ODIyNjM3MyAuZmlsbC1BQjR7ZmlsbDojRkZFNzY3O30KCQkuZDItMzg5ODIyNjM3MyAuZmlsbC1BQjV7ZmlsbDojRkZGMkFBO30KCQkuZDItMzg5ODIyNjM3MyAuc3Ryb2tlLU4xe3N0cm9rZTojMTcwMjA2O30KCQkuZDItMzg5ODIyNjM3MyAuc3Ryb2tlLU4ye3N0cm9rZTojNTM1MTUyO30KCQkuZDItMzg5ODIyNjM3MyAuc3Ryb2tlLU4ze3N0cm9rZTojNzg3Nzc3O30KCQkuZDItMzg5ODIyNjM3MyAuc3Ryb2tlLU40e3N0cm9rZTojQ0NDQUNBO30KCQkuZDItMzg5ODIyNjM3MyAuc3Ryb2tlLU41e3N0cm9rZTojREZEQ0RDO30KCQkuZDItMzg5ODIyNjM3MyAuc3Ryb2tlLU42e3N0cm9rZTojRUNFQkVCO30KCQkuZDItMzg5ODIyNjM3MyAuc3Ryb2tlLU43e3N0cm9rZTojRkZGRkZGO30KCQkuZDItMzg5ODIyNjM3MyAuc3Ryb2tlLUIxe3N0cm9rZTojMzEwMjFEO30KCQkuZDItMzg5ODIyNjM3MyAuc3Ryb2tlLUIye3N0cm9rZTojOUIxQTQ4O30KCQkuZDItMzg5ODIyNjM3MyAuc3Ryb2tlLUIze3N0cm9rZTojRDI1MTdGO30KCQkuZDItMzg5ODIyNjM3MyAuc3Ryb2tlLUI0e3N0cm9rZTojRUE5OUI2O30KCQkuZDItMzg5ODIyNjM3MyAuc3Ryb2tlLUI1e3N0cm9rZTojRkZEQUU3O30KCQkuZDItMzg5ODIyNjM3MyAuc3Ryb2tlLUI2e3N0cm9rZTojRkNFREYyO30KCQkuZDItMzg5ODIyNjM3MyAuc3Ryb2tlLUFBMntzdHJva2U6I0QzNUYwQTt9CgkJLmQyLTM4OTgyMjYzNzMgLnN0cm9rZS1BQTR7c3Ryb2tlOiNGQUJBOEE7fQoJCS5kMi0zODk4MjI2MzczIC5zdHJva2UtQUE1e3N0cm9rZTojRkZFMEM3O30KCQkuZDItMzg5ODIyNjM3MyAuc3Ryb2tlLUFCNHtzdHJva2U6I0ZGRTc2Nzt9CgkJLmQyLTM4OTgyMjYzNzMgLnN0cm9rZS1BQjV7c3Ryb2tlOiNGRkYyQUE7fQoJCS5kMi0zODk4MjI2MzczIC5iYWNrZ3JvdW5kLWNvbG9yLU4xe2JhY2tncm91bmQtY29sb3I6IzE3MDIwNjt9CgkJLmQyLTM4OTgyMjYzNzMgLmJhY2tncm91bmQtY29sb3ItTjJ7YmFja2dyb3VuZC1jb2xvcjojNTM1MTUyO30KCQkuZDItMzg5ODIyNjM3MyAuYmFja2dyb3VuZC1jb2xvci1OM3tiYWNrZ3JvdW5kLWNvbG9yOiM3ODc3Nzc7fQoJCS5kMi0zODk4MjI2MzczIC5iYWNrZ3JvdW5kLWNvbG9yLU40e2JhY2tncm91bmQtY29sb3I6I0NDQ0FDQTt9CgkJLmQyLTM4OTgyMjYzNzMgLmJhY2tncm91bmQtY29sb3ItTjV7YmFja2dyb3VuZC1jb2xvcjojREZEQ0RDO30KCQkuZDItMzg5ODIyNjM3MyAuYmFja2dyb3VuZC1jb2xvci1ONntiYWNrZ3JvdW5kLWNvbG9yOiNFQ0VCRUI7fQoJCS5kMi0zODk4MjI2MzczIC5iYWNrZ3JvdW5kLWNvbG9yLU43e2JhY2tncm91bmQtY29sb3I6I0ZGRkZGRjt9CgkJLmQyLTM4OTgyMjYzNzMgLmJhY2tncm91bmQtY29sb3ItQjF7YmFja2dyb3VuZC1jb2xvcjojMzEwMjFEO30KCQkuZDItMzg5ODIyNjM3MyAuYmFja2dyb3VuZC1jb2xvci1CMntiYWNrZ3JvdW5kLWNvbG9yOiM5QjFBNDg7fQoJCS5kMi0zODk4MjI2MzczIC5iYWNrZ3JvdW5kLWNvbG9yLUIze2JhY2tncm91bmQtY29sb3I6I0QyNTE3Rjt9CgkJLmQyLTM4OTgyMjYzNzMgLmJhY2tncm91bmQtY29sb3ItQjR7YmFja2dyb3VuZC1jb2xvcjojRUE5OUI2O30KCQkuZDItMzg5ODIyNjM3MyAuYmFja2dyb3VuZC1jb2xvci1CNXtiYWNrZ3JvdW5kLWNvbG9yOiNGRkRBRTc7fQoJCS5kMi0zODk4MjI2MzczIC5iYWNrZ3JvdW5kLWNvbG9yLUI2e2JhY2tncm91bmQtY29sb3I6I0ZDRURGMjt9CgkJLmQyLTM4OTgyMjYzNzMgLmJhY2tncm91bmQtY29sb3ItQUEye2JhY2tncm91bmQtY29sb3I6I0QzNUYwQTt9CgkJLmQyLTM4OTgyMjYzNzMgLmJhY2tncm91bmQtY29sb3ItQUE0e2JhY2tncm91bmQtY29sb3I6I0ZBQkE4QTt9CgkJLmQyLTM4OTgyMjYzNzMgLmJhY2tncm91bmQtY29sb3ItQUE1e2JhY2tncm91bmQtY29sb3I6I0ZGRTBDNzt9CgkJLmQyLTM4OTgyMjYzNzMgLmJhY2tncm91bmQtY29sb3ItQUI0e2JhY2tncm91bmQtY29sb3I6I0ZGRTc2Nzt9CgkJLmQyLTM4OTgyMjYzNzMgLmJhY2tncm91bmQtY29sb3ItQUI1e2JhY2tncm91bmQtY29sb3I6I0ZGRjJBQTt9CgkJLmQyLTM4OTgyMjYzNzMgLmNvbG9yLU4xe2NvbG9yOiMxNzAyMDY7fQoJCS5kMi0zODk4MjI2MzczIC5jb2xvci1OMntjb2xvcjojNTM1MTUyO30KCQkuZDItMzg5ODIyNjM3MyAuY29sb3ItTjN7Y29sb3I6Izc4Nzc3Nzt9CgkJLmQyLTM4OTgyMjYzNzMgLmNvbG9yLU40e2NvbG9yOiNDQ0NBQ0E7fQoJCS5kMi0zODk4MjI2MzczIC5jb2xvci1ONXtjb2xvcjojREZEQ0RDO30KCQkuZDItMzg5ODIyNjM3MyAuY29sb3ItTjZ7Y29sb3I6I0VDRUJFQjt9CgkJLmQyLTM4OTgyMjYzNzMgLmNvbG9yLU43e2NvbG9yOiNGRkZGRkY7fQoJCS5kMi0zODk4MjI2MzczIC5jb2xvci1CMXtjb2xvcjojMzEwMjFEO30KCQkuZDItMzg5ODIyNjM3MyAuY29sb3ItQjJ7Y29sb3I6IzlCMUE0ODt9CgkJLmQyLTM4OTgyMjYzNzMgLmNvbG9yLUIze2NvbG9yOiNEMjUxN0Y7fQoJCS5kMi0zODk4MjI2MzczIC5jb2xvci1CNHtjb2xvcjojRUE5OUI2O30KCQkuZDItMzg5ODIyNjM3MyAuY29sb3ItQjV7Y29sb3I6I0ZGREFFNzt9CgkJLmQyLTM4OTgyMjYzNzMgLmNvbG9yLUI2e2NvbG9yOiNGQ0VERjI7fQoJCS5kMi0zODk4MjI2MzczIC5jb2xvci1BQTJ7Y29sb3I6I0QzNUYwQTt9CgkJLmQyLTM4OTgyMjYzNzMgLmNvbG9yLUFBNHtjb2xvcjojRkFCQThBO30KCQkuZDItMzg5ODIyNjM3MyAuY29sb3ItQUE1e2NvbG9yOiNGRkUwQzc7fQoJCS5kMi0zODk4MjI2MzczIC5jb2xvci1BQjR7Y29sb3I6I0ZGRTc2Nzt9CgkJLmQyLTM4OTgyMjYzNzMgLmNvbG9yLUFCNXtjb2xvcjojRkZGMkFBO30uYXBwZW5kaXggdGV4dC50ZXh0e2ZpbGw6IzE3MDIwNn0ubWR7LS1jb2xvci1mZy1kZWZhdWx0OiMxNzAyMDY7LS1jb2xvci1mZy1tdXRlZDojNTM1MTUyOy0tY29sb3ItZmctc3VidGxlOiM3ODc3Nzc7LS1jb2xvci1jYW52YXMtZGVmYXVsdDojRkZGRkZGOy0tY29sb3ItY2FudmFzLXN1YnRsZTojRUNFQkVCOy0tY29sb3ItYm9yZGVyLWRlZmF1bHQ6IzMxMDIxRDstLWNvbG9yLWJvcmRlci1tdXRlZDojOUIxQTQ4Oy0tY29sb3ItbmV1dHJhbC1tdXRlZDojRUNFQkVCOy0tY29sb3ItYWNjZW50LWZnOiM5QjFBNDg7LS1jb2xvci1hY2NlbnQtZW1waGFzaXM6IzlCMUE0ODstLWNvbG9yLWF0dGVudGlvbi1zdWJ0bGU6IzUzNTE1MjstLWNvbG9yLWRhbmdlci1mZzpyZWQ7fS5za2V0Y2gtb3ZlcmxheS1CMXtmaWxsOnVybCgjc3RyZWFrcy1kYXJrZXItZDItMzg5ODIyNjM3Myk7bWl4LWJsZW5kLW1vZGU6bGlnaHRlbn0uc2tldGNoLW92ZXJsYXktQjJ7ZmlsbDp1cmwoI3N0cmVha3MtZGFya2VyLWQyLTM4OTgyMjYzNzMpO21peC1ibGVuZC1tb2RlOmxpZ2h0ZW59LnNrZXRjaC1vdmVybGF5LUIze2ZpbGw6dXJsKCNzdHJlYWtzLWRhcmstZDItMzg5ODIyNjM3Myk7bWl4LWJsZW5kLW1vZGU6b3ZlcmxheX0uc2tldGNoLW92ZXJsYXktQjR7ZmlsbDp1cmwoI3N0cmVha3Mtbm9ybWFsLWQyLTM4OTgyMjYzNzMpO21peC1ibGVuZC1tb2RlOmNvbG9yLWJ1cm59LnNrZXRjaC1vdmVybGF5LUI1e2ZpbGw6dXJsKCNzdHJlYWtzLWJyaWdodC1kMi0zODk4MjI2MzczKTttaXgtYmxlbmQtbW9kZTpkYXJrZW59LnNrZXRjaC1vdmVybGF5LUI2e2ZpbGw6dXJsKCNzdHJlYWtzLWJyaWdodC1kMi0zODk4MjI2MzczKTttaXgtYmxlbmQtbW9kZTpkYXJrZW59LnNrZXRjaC1vdmVybGF5LUFBMntmaWxsOnVybCgjc3RyZWFrcy1kYXJrLWQyLTM4OTgyMjYzNzMpO21peC1ibGVuZC1tb2RlOm92ZXJsYXl9LnNrZXRjaC1vdmVybGF5LUFBNHtmaWxsOnVybCgjc3RyZWFrcy1ub3JtYWwtZDItMzg5ODIyNjM3Myk7bWl4LWJsZW5kLW1vZGU6Y29sb3ItYnVybn0uc2tldGNoLW92ZXJsYXktQUE1e2ZpbGw6dXJsKCNzdHJlYWtzLWJyaWdodC1kMi0zODk4MjI2MzczKTttaXgtYmxlbmQtbW9kZTpkYXJrZW59LnNrZXRjaC1vdmVybGF5LUFCNHtmaWxsOnVybCgjc3RyZWFrcy1ub3JtYWwtZDItMzg5ODIyNjM3Myk7bWl4LWJsZW5kLW1vZGU6Y29sb3ItYnVybn0uc2tldGNoLW92ZXJsYXktQUI1e2ZpbGw6dXJsKCNzdHJlYWtzLWJyaWdodC1kMi0zODk4MjI2MzczKTttaXgtYmxlbmQtbW9kZTpkYXJrZW59LnNrZXRjaC1vdmVybGF5LU4xe2ZpbGw6dXJsKCNzdHJlYWtzLWRhcmtlci1kMi0zODk4MjI2MzczKTttaXgtYmxlbmQtbW9kZTpsaWdodGVufS5za2V0Y2gtb3ZlcmxheS1OMntmaWxsOnVybCgjc3RyZWFrcy1kYXJrLWQyLTM4OTgyMjYzNzMpO21peC1ibGVuZC1tb2RlOm92ZXJsYXl9LnNrZXRjaC1vdmVybGF5LU4ze2ZpbGw6dXJsKCNzdHJlYWtzLWRhcmstZDItMzg5ODIyNjM3Myk7bWl4LWJsZW5kLW1vZGU6b3ZlcmxheX0uc2tldGNoLW92ZXJsYXktTjR7ZmlsbDp1cmwoI3N0cmVha3Mtbm9ybWFsLWQyLTM4OTgyMjYzNzMpO21peC1ibGVuZC1tb2RlOmNvbG9yLWJ1cm59LnNrZXRjaC1vdmVybGF5LU41e2ZpbGw6dXJsKCNzdHJlYWtzLW5vcm1hbC1kMi0zODk4MjI2MzczKTttaXgtYmxlbmQtbW9kZTpjb2xvci1idXJufS5za2V0Y2gtb3ZlcmxheS1ONntmaWxsOnVybCgjc3RyZWFrcy1icmlnaHQtZDItMzg5ODIyNjM3Myk7bWl4LWJsZW5kLW1vZGU6ZGFya2VufS5za2V0Y2gtb3ZlcmxheS1ON3tmaWxsOnVybCgjc3RyZWFrcy1icmlnaHQtZDItMzg5ODIyNjM3Myk7bWl4LWJsZW5kLW1vZGU6ZGFya2VufS5saWdodC1jb2Rle2Rpc3BsYXk6IGJsb2NrfS5kYXJrLWNvZGV7ZGlzcGxheTogbm9uZX1dXT48L3N0eWxlPjxnIGNsYXNzPSJhVzV3ZFhRPSI+PGcgY2xhc3M9InNoYXBlIiA+PHJlY3QgeD0iMTcuMDAwMDAwIiB5PSIxMi4wMDAwMDAiIHdpZHRoPSI4My4wMDAwMDAiIGhlaWdodD0iNjYuMDAwMDAwIiBzdHJva2U9IiMzMTAyMUQiIGZpbGw9IiNGQ0VERjIiIGNsYXNzPSIgc3Ryb2tlLUIxIGZpbGwtQjYiIHN0eWxlPSJzdHJva2Utd2lkdGg6MjsiIC8+PC9nPjx0ZXh0IHg9IjU4LjUwMDAwMCIgeT0iNTAuNTAwMDAwIiBmaWxsPSIjMTcwMjA2IiBjbGFzcz0idGV4dC1ib2xkIGZpbGwtTjEiIHN0eWxlPSJ0ZXh0LWFuY2hvcjptaWRkbGU7Zm9udC1zaXplOjE2cHgiPmlucHV0PC90ZXh0PjwvZz48ZyBjbGFzcz0iYUdsa1pHVnUiPjxnIGNsYXNzPSJzaGFwZSIgPjxyZWN0IHg9IjEyLjAwMDAwMCIgeT0iMTQ4LjAwMDAwMCIgd2lkdGg9Ijk0LjAwMDAwMCIgaGVpZ2h0PSI2Ni4wMDAwMDAiIHN0cm9rZT0iIzMxMDIxRCIgZmlsbD0iI0ZDRURGMiIgY2xhc3M9IiBzdHJva2UtQjEgZmlsbC1CNiIgc3R5bGU9InN0cm9rZS13aWR0aDoyOyIgLz48L2c+PHRleHQgeD0iNTkuMDAwMDAwIiB5PSIxODYuNTAwMDAwIiBmaWxsPSIjMTcwMjA2IiBjbGFzcz0idGV4dC1ib2xkIGZpbGwtTjEiIHN0eWxlPSJ0ZXh0LWFuY2hvcjptaWRkbGU7Zm9udC1zaXplOjE2cHgiPmhpZGRlbjwvdGV4dD48L2c+PGcgY2xhc3M9ImIzVjBjSFYwIj48ZyBjbGFzcz0ic2hhcGUiID48cmVjdCB4PSIxMi4wMDAwMDAiIHk9IjI4NC4wMDAwMDAiIHdpZHRoPSI5NC4wMDAwMDAiIGhlaWdodD0iNjYuMDAwMDAwIiBzdHJva2U9IiMzMTAyMUQiIGZpbGw9IiNGQ0VERjIiIGNsYXNzPSIgc3Ryb2tlLUIxIGZpbGwtQjYiIHN0eWxlPSJzdHJva2Utd2lkdGg6MjsiIC8+PC9nPjx0ZXh0IHg9IjU5LjAwMDAwMCIgeT0iMzIyLjUwMDAwMCIgZmlsbD0iIzE3MDIwNiIgY2xhc3M9InRleHQtYm9sZCBmaWxsLU4xIiBzdHlsZT0idGV4dC1hbmNob3I6bWlkZGxlO2ZvbnQtc2l6ZToxNnB4Ij5vdXRwdXQ8L3RleHQ+PC9nPjxnIGNsYXNzPSJLR2x1Y0hWMElDMG1aM1E3SUdocFpHUmxiaWxiTUYwPSI+PG1hcmtlciBpZD0ibWstZDItMzg5ODIyNjM3My0zNDg4Mzc4MTM0IiBtYXJrZXJXaWR0aD0iMTAuMDAwMDAwIiBtYXJrZXJIZWlnaHQ9IjEyLjAwMDAwMCIgcmVmWD0iNy4wMDAwMDAiIHJlZlk9IjYuMDAwMDAwIiB2aWV3Qm94PSIwLjAwMDAwMCAwLjAwMDAwMCAxMC4wMDAwMDAgMTIuMDAwMDAwIiBvcmllbnQ9ImF1dG8iIG1hcmtlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+IDxwb2x5Z29uIHBvaW50cz0iMC4wMDAwMDAsMC4wMDAwMDAgMTAuMDAwMDAwLDYuMDAwMDAwIDAuMDAwMDAwLDEyLjAwMDAwMCIgZmlsbD0iIzMxMDIxRCIgY2xhc3M9ImNvbm5lY3Rpb24gZmlsbC1CMSIgc3Ryb2tlLXdpZHRoPSIyIiAvPiA8L21hcmtlcj48cGF0aCBkPSJNIDU5LjAwMDAwMCA4MC4wMDAwMDAgTCA1OS4wMDAwMDAgMTQ0LjAwMDAwMCIgc3Ryb2tlPSIjMzEwMjFEIiBmaWxsPSJub25lIiBjbGFzcz0iY29ubmVjdGlvbiBzdHJva2UtQjEiIHN0eWxlPSJzdHJva2Utd2lkdGg6MjsiIG1hcmtlci1lbmQ9InVybCgjbWstZDItMzg5ODIyNjM3My0zNDg4Mzc4MTM0KSIgbWFzaz0idXJsKCNkMi0zODk4MjI2MzczKSIgLz48L2c+PGcgY2xhc3M9IktHaHBaR1JsYmlBdEptZDBPeUJ2ZFhSd2RYUXBXekJkIj48cGF0aCBkPSJNIDU5LjAwMDAwMCAyMTYuMDAwMDAwIEwgNTkuMDAwMDAwIDI4MC4wMDAwMDAiIHN0cm9rZT0iIzMxMDIxRCIgZmlsbD0ibm9uZSIgY2xhc3M9ImNvbm5lY3Rpb24gc3Ryb2tlLUIxIiBzdHlsZT0ic3Ryb2tlLXdpZHRoOjI7IiBtYXJrZXItZW5kPSJ1cmwoI21rLWQyLTM4OTgyMjYzNzMtMzQ4ODM3ODEzNCkiIG1hc2s9InVybCgjZDItMzg5ODIyNjM3MykiIC8+PC9nPjxtYXNrIGlkPSJkMi0zODk4MjI2MzczIiBtYXNrVW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4PSItODkiIHk9Ii04OSIgd2lkdGg9IjI5NiIgaGVpZ2h0PSI1NDAiPgo8cmVjdCB4PSItODkiIHk9Ii04OSIgd2lkdGg9IjI5NiIgaGVpZ2h0PSI1NDAiIGZpbGw9IndoaXRlIj48L3JlY3Q+CjxyZWN0IHg9IjM3LjUwMDAwMCIgeT0iMzQuNTAwMDAwIiB3aWR0aD0iNDIiIGhlaWdodD0iMjEiIGZpbGw9InJnYmEoMCwwLDAsMC43NSkiPjwvcmVjdD4KPHJlY3QgeD0iMzIuNTAwMDAwIiB5PSIxNzAuNTAwMDAwIiB3aWR0aD0iNTMiIGhlaWdodD0iMjEiIGZpbGw9InJnYmEoMCwwLDAsMC43NSkiPjwvcmVjdD4KPHJlY3QgeD0iMzIuNTAwMDAwIiB5PSIzMDYuNTAwMDAwIiB3aWR0aD0iNTMiIGhlaWdodD0iMjEiIGZpbGw9InJnYmEoMCwwLDAsMC43NSkiPjwvcmVjdD4KPC9tYXNrPjwvc3ZnPjwvc3ZnPgo=" style="width:60.0%" class="r-stretch"></section>
 <section class="slide level2">
 
-<h3 id="slide-5b-arquitectura-extendida-para-animación">Slide&nbsp;5b –&nbsp;Arquitectura extendida (para animación)</h3>
-
-<img data-src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIGRhdGEtZDItdmVyc2lvbj0iMC43LjAiIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaW5ZTWluIG1lZXQiIHZpZXdCb3g9IjAgMCAzMDQgNjc2Ij48c3ZnIGNsYXNzPSJkMi0xNTE5NzEzMzczIGQyLXN2ZyIgd2lkdGg9IjMwNCIgaGVpZ2h0PSI2NzYiIHZpZXdCb3g9Ii04OSAtODkgMzA0IDY3NiI+PHJlY3QgeD0iLTg5LjAwMDAwMCIgeT0iLTg5LjAwMDAwMCIgd2lkdGg9IjMwNC4wMDAwMDAiIGhlaWdodD0iNjc2LjAwMDAwMCIgcng9IjAuMDAwMDAwIiBmaWxsPSIjRkZGRkZGIiBjbGFzcz0iIGZpbGwtTjciIHN0cm9rZS13aWR0aD0iMCIgLz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWwouZDItMTUxOTcxMzM3MyAudGV4dC1ib2xkIHsKCWZvbnQtZmFtaWx5OiAiZDItMTUxOTcxMzM3My1mb250LWJvbGQiOwp9CkBmb250LWZhY2UgewoJZm9udC1mYW1pbHk6IGQyLTE1MTk3MTMzNzMtZm9udC1ib2xkOwoJc3JjOiB1cmwoImRhdGE6YXBwbGljYXRpb24vZm9udC13b2ZmO2Jhc2U2NCxkMDlHUmdBQkFBQUFBQWo4QUFvQUFBQUFEbWdBQWd1RkFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQlBVeTh5QUFBQTlBQUFBR0FBQUFCZ1h4SFhybU50WVhBQUFBRlVBQUFBV3dBQUFHUUJJZ0dwWjJ4NVpnQUFBYkFBQUFNd0FBQUQyR042bnZ0b1pXRmtBQUFFNEFBQUFEWUFBQUEyRzM4ZTFHaG9aV0VBQUFVWUFBQUFKQUFBQUNRS2Z3WE5hRzEwZUFBQUJUd0FBQUE0QUFBQU9CblVBbGhzYjJOaEFBQUZkQUFBQUI0QUFBQWVDRzRIWkcxaGVIQUFBQVdVQUFBQUlBQUFBQ0FBSmdEM2JtRnRaUUFBQmJRQUFBTW9BQUFJS2dqd1ZrRndiM04wQUFBSTNBQUFBQjBBQUFBZy85RUFNZ0FEQWlvQ3ZBQUZBQUFDaWdKWUFBQUFTd0tLQWxnQUFBRmVBRElCS1FBQUFnc0hBd01FQXdJQ0JHQUFBdmNBQUFBREFBQUFBQUFBQUFCQlJFSlBBQ0FBSVAvL0F1Ny9CZ0FBQTlnQkVTQUFBWjhBQUFBQUFmQUNsQUFBQUNBQUEzaWNSTXZORFVGQkFFYlJNMjhHNDZjWnFsRUFDUnV4b0JPSmhTaE1OWjlrTnU5dTd1cWdxQXAybXVONE4ya096cTd1bmduMlRpNXVIa2wrK2VhVGQxN0R6VzFzRlpPcVdWaGE2ZGI4QVFBQS8vOEJBQUQvLzJCMUVNSUFlSnhrazg5ckkyVVl4NS8zVFRyRFp1UHVUakkva215YXBubDNacHAwazVCNU16T3VhVG9ibTAxYlRXalQ2c0xhSDRHZTFOWUdiRXJpNm9LSFJYSEZnMlFQNHNHVGdvSWV4SXN1OUN5eTNsWVVCQkhCUDZCSUVRL3BqTHhKdEN4N21OdndlWjduOC8yK01BR3JBSGdIM3djZm5JT0xFQUlKZ0FyVGdrcDFuZkEydFcyaStHd2RDZndxRHJtZmZhcW4vZW0wUDVQOGFPcDJxNFVhMi9qKzZkNUdZMmZuNzFhcDVIN3kzUVAzQTNUd0FBQ0Q3cDJnQVQ2Q01DUUJsSlJtRmkyTEdyS2ltMVFnT3VFNDI3QnNVOU5JaXBORSthL05kcWxWVEQ4ZDVmcTlnRDlXd3hFOUZKNFZpWlVQdnY5RzgzQStIcWwvY2JwUWlKR2VHSDBZdXJDd3VId0RNRnp4VHRBZmFBQVJtQUtZU0duL0RaRWxrZU9uWlprYXRzSnhQbHBrVTlEVTR1dlBMdXlWRnJmeWZ1eitFcWdWVEt1Z2JYLzhqWDQxWlFYbk8ydk5qdVBzVnNQcU9ZdE8zNG9sMEROcE13OEFnS0RDRHNKSElESTNWT0tIUXlTQkNFTXdMMVQ2ZlB4NW83bmNuMHpHWnlMNDZNdGIwZG5kTGZkSE5HM05SQlgzYS9BOHNBSGdOL3dJYXhBRUFCNmVnbnRuYkRRWXN4WDZCTHNYOENjYi84UFJzWlBJUHNZZWVjQThHc0JGdVB5RUIwNDNMTE00MW94a3AxMnR0aDFudjFyZGQ3SzVYRGFYelFiTGgydnJuWEs1czc1MldPNDJybGZxOWNyMUJ1Tld2Q1Vzb3dHRUlRR2duRzBuY2h4SmFib2loUm1icEhoSmx0bWVrOHY2U3kvUHRhemtYR3hpUmJOdXptYkVtVy94NTRVWWVlL2d4WjV6T2JyeUlicFNxNytUZlJpNndHNFh2Qk8wanp1Z0RMYzJUV0xhTnBXb1JDUlJwb2JGd2tPd3VWS3RDN2U3WFRJWmpBYVVzQjE4OWVZUHIzRjM3eDU4bjFFNS95NFhIR1UwNTUyZ2Y5QXg4OGphSmxCaHhCREdkZnU1dWR4UEpPT2EzTytkOTAwOUY5emRRa1gzZHpNZG0wUkw3cVViNmxWQVVBTkF2K0kzV1VLVTFkUzBMSnNGWHJ2WExTNmw5cnBkMU40SXhNWFRRWGMwTXdHQS9zVHZRcHo5UDQ5SG1ubjl6RDFyQ3BYVTVwMWFJWjJ5STZ2NW5hcXpiWlkyaTVFNStlMFhHbmRleWVZTGVtekZvTVpHMld5M0xkL0VXK05Pd0Uvb0dIekRUZ2lWUGpwMkx3SHl2c0xYWUIwL2d2TUF3dkJGamNKUWN6bFZ6ZVh3dFF3aEdmYkJ2d0FBQVAvL0FRQUEvLy9vL2M3WkFBRUFBQUFDQzRWNzdHOXpYdzg4OVFBQkErZ0FBQUFBMkYyZ2hBQUFBQURkWmk4Mi9qZit4QWh0QS9FQUFRQURBQUlBQUFBQUFBQUFBUUFBQTlqKzd3QUFDSmorTi80M0NHMEFBUUFBQUFBQUFBQUFBQUFBQUFBQUFBNENzZ0JRQWowQUp3SUdBQ1FDT3dCQkFSUUFOd0k4QUVFQ0t3QWtBajBBUVFGL0FCRUNPQUE4QWhBQVJnSVFBQjRCRkFCQkFBRC9yUUFBQUN3QVhnQ1NBTFFBd0FEaUFRNEJQZ0ZrQVlZQm5nSEtBZFlCN0FBQUFBRUFBQUFPQUpBQURBQmpBQWNBQVFBQUFBQUFBQUFBQUFBQUFBQUVBQU40bkp5VXoyNGJWUlRHZjA1czB3ckJBa1ZWdW9udWdrV1I2TmhVU2RVMks0ZlVpa1VVQjQ4TFFrSklFOC80anpLZUdYa21EdUVKV1BNV3ZFVlhQQVRQZ1ZpaitYenMyQVhSSm9xU2ZIZnUrZk9kYzc1emdSMytacHRLOVNId1J6MHhYR0d2Zm01NGl3ZjFFOFBidE90YmhxczhxZjFwdUVaWW14dXU4M210Wi9najNsWi9NL3lBL2VwUGhoK3lXMjBiL3BobjFSM0RuMnc3L2pMOEtmdThYZUFLdk9CWHd4VjJ5UXh2c2NPUGhyZDVoTVdzVkhsRTAzQ056OWd6WEdjUDZET2hJR1pDd2dqSGtBa2pycGdSa2VNVE1XUENrSWdRUjRjV01ZVytKZ1JDanRGL2ZnM3dLWmdSS09LWUFrZU1UMHhBenRnaS9pS3ZsSE5sSE9vMHM3c1dCV01DTHVSeFNVQ0NJMlZFU2tMRXBlSVVGR1M4b2tHRG5JSDRaaFRrZU9STWlQRkltVEdpUVpjMnAvUVpNeUhIMFZha2twbFB5cENDYXdMbGQyWlJkbVpBUkVKdXJLNUlDTVhUaVY4azd3Nm5PTHBrc2wyUGZMb1I0VXNjMzhtNzVKYks5aXM4L2JvMVpwdDVsMndDNXVwbnJLN0V1cm5XQk1lNkxmTzIrRmE0NEJYdVh2M1paUEwrSG9YNlh5anlCVmVhZjZoSkpXS1M0Tnd1TFh3cHlIZVBjUnpwM01GWFI3Nm5RNThUdXJ5aHIzT0xIajFhbk5HbncydjVkdW5oK0pvdVp4ekxveU84dUd0TE1XZjhnT01iT3JJcFkwZlduOFhFSW40bU0zWG40amhUSFZNeTlieGs3cW5XU0JYZWZjTGxEcVViNnNqbE05QWVsWlpPODB1MFp3RWpVMFVtaGxQMWNxbU4zUG9YbWlLbXFxV2M3ZTE5dVExejI3M2xGdCtRYW9kTHRTNDRsWk5iTUhyZlZMMTNOSE90SDQrQWtKUUxXUXhJbWRLZzRFYTh6d200SXNaeHJPNmRhRXNLV2l1Zk1zK05WQkl4RllNT2llTE15UFEzTU4zNHhuMndvWHRuYjBrby81THA1YXFxKzJSeDZ0WHRqTjZvZThzNzM3b2NyVTJnWVZOTjE5UTBFTmZFdEI5cHA5YjUrL0xOOWJxbFBPV0lsSmp3WHkvQU16eWE3SFBBSVdObEdPaG1icTlEVXk5RWs1Y2NxdnBMSWxrTnBlZklJaHpnOFp3RERuako4M2Y2dUdUaWpJdGJjVm5QM2VLWUk3b2NmbEFWQy9zdVI3eGVmZnYvckwrTGFWTzFPSjZ1VGkvdVBjVW5kMURyRjlxejIvZXlwNG1WazVoYnROdXRPQ05nV25KeHUrczF1Y2Q0L3dBQUFQLy9BUUFBLy8vMHQwOVJlSnhpWUdZQWcvL25HSXdZc0FBQUFBQUEvLzhCQUFELy95OEJBZ01BQUFBPSIpOwp9XV0+PC9zdHlsZT48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWy5zaGFwZSB7CiAgc2hhcGUtcmVuZGVyaW5nOiBnZW9tZXRyaWNQcmVjaXNpb247CiAgc3Ryb2tlLWxpbmVqb2luOiByb3VuZDsKfQouY29ubmVjdGlvbiB7CiAgc3Ryb2tlLWxpbmVjYXA6IHJvdW5kOwogIHN0cm9rZS1saW5lam9pbjogcm91bmQ7Cn0KLmJsZW5kIHsKICBtaXgtYmxlbmQtbW9kZTogbXVsdGlwbHk7CiAgb3BhY2l0eTogMC41Owp9CgoJCS5kMi0xNTE5NzEzMzczIC5maWxsLU4xe2ZpbGw6IzE3MDIwNjt9CgkJLmQyLTE1MTk3MTMzNzMgLmZpbGwtTjJ7ZmlsbDojNTM1MTUyO30KCQkuZDItMTUxOTcxMzM3MyAuZmlsbC1OM3tmaWxsOiM3ODc3Nzc7fQoJCS5kMi0xNTE5NzEzMzczIC5maWxsLU40e2ZpbGw6I0NDQ0FDQTt9CgkJLmQyLTE1MTk3MTMzNzMgLmZpbGwtTjV7ZmlsbDojREZEQ0RDO30KCQkuZDItMTUxOTcxMzM3MyAuZmlsbC1ONntmaWxsOiNFQ0VCRUI7fQoJCS5kMi0xNTE5NzEzMzczIC5maWxsLU43e2ZpbGw6I0ZGRkZGRjt9CgkJLmQyLTE1MTk3MTMzNzMgLmZpbGwtQjF7ZmlsbDojMzEwMjFEO30KCQkuZDItMTUxOTcxMzM3MyAuZmlsbC1CMntmaWxsOiM5QjFBNDg7fQoJCS5kMi0xNTE5NzEzMzczIC5maWxsLUIze2ZpbGw6I0QyNTE3Rjt9CgkJLmQyLTE1MTk3MTMzNzMgLmZpbGwtQjR7ZmlsbDojRUE5OUI2O30KCQkuZDItMTUxOTcxMzM3MyAuZmlsbC1CNXtmaWxsOiNGRkRBRTc7fQoJCS5kMi0xNTE5NzEzMzczIC5maWxsLUI2e2ZpbGw6I0ZDRURGMjt9CgkJLmQyLTE1MTk3MTMzNzMgLmZpbGwtQUEye2ZpbGw6I0QzNUYwQTt9CgkJLmQyLTE1MTk3MTMzNzMgLmZpbGwtQUE0e2ZpbGw6I0ZBQkE4QTt9CgkJLmQyLTE1MTk3MTMzNzMgLmZpbGwtQUE1e2ZpbGw6I0ZGRTBDNzt9CgkJLmQyLTE1MTk3MTMzNzMgLmZpbGwtQUI0e2ZpbGw6I0ZGRTc2Nzt9CgkJLmQyLTE1MTk3MTMzNzMgLmZpbGwtQUI1e2ZpbGw6I0ZGRjJBQTt9CgkJLmQyLTE1MTk3MTMzNzMgLnN0cm9rZS1OMXtzdHJva2U6IzE3MDIwNjt9CgkJLmQyLTE1MTk3MTMzNzMgLnN0cm9rZS1OMntzdHJva2U6IzUzNTE1Mjt9CgkJLmQyLTE1MTk3MTMzNzMgLnN0cm9rZS1OM3tzdHJva2U6Izc4Nzc3Nzt9CgkJLmQyLTE1MTk3MTMzNzMgLnN0cm9rZS1ONHtzdHJva2U6I0NDQ0FDQTt9CgkJLmQyLTE1MTk3MTMzNzMgLnN0cm9rZS1ONXtzdHJva2U6I0RGRENEQzt9CgkJLmQyLTE1MTk3MTMzNzMgLnN0cm9rZS1ONntzdHJva2U6I0VDRUJFQjt9CgkJLmQyLTE1MTk3MTMzNzMgLnN0cm9rZS1ON3tzdHJva2U6I0ZGRkZGRjt9CgkJLmQyLTE1MTk3MTMzNzMgLnN0cm9rZS1CMXtzdHJva2U6IzMxMDIxRDt9CgkJLmQyLTE1MTk3MTMzNzMgLnN0cm9rZS1CMntzdHJva2U6IzlCMUE0ODt9CgkJLmQyLTE1MTk3MTMzNzMgLnN0cm9rZS1CM3tzdHJva2U6I0QyNTE3Rjt9CgkJLmQyLTE1MTk3MTMzNzMgLnN0cm9rZS1CNHtzdHJva2U6I0VBOTlCNjt9CgkJLmQyLTE1MTk3MTMzNzMgLnN0cm9rZS1CNXtzdHJva2U6I0ZGREFFNzt9CgkJLmQyLTE1MTk3MTMzNzMgLnN0cm9rZS1CNntzdHJva2U6I0ZDRURGMjt9CgkJLmQyLTE1MTk3MTMzNzMgLnN0cm9rZS1BQTJ7c3Ryb2tlOiNEMzVGMEE7fQoJCS5kMi0xNTE5NzEzMzczIC5zdHJva2UtQUE0e3N0cm9rZTojRkFCQThBO30KCQkuZDItMTUxOTcxMzM3MyAuc3Ryb2tlLUFBNXtzdHJva2U6I0ZGRTBDNzt9CgkJLmQyLTE1MTk3MTMzNzMgLnN0cm9rZS1BQjR7c3Ryb2tlOiNGRkU3Njc7fQoJCS5kMi0xNTE5NzEzMzczIC5zdHJva2UtQUI1e3N0cm9rZTojRkZGMkFBO30KCQkuZDItMTUxOTcxMzM3MyAuYmFja2dyb3VuZC1jb2xvci1OMXtiYWNrZ3JvdW5kLWNvbG9yOiMxNzAyMDY7fQoJCS5kMi0xNTE5NzEzMzczIC5iYWNrZ3JvdW5kLWNvbG9yLU4ye2JhY2tncm91bmQtY29sb3I6IzUzNTE1Mjt9CgkJLmQyLTE1MTk3MTMzNzMgLmJhY2tncm91bmQtY29sb3ItTjN7YmFja2dyb3VuZC1jb2xvcjojNzg3Nzc3O30KCQkuZDItMTUxOTcxMzM3MyAuYmFja2dyb3VuZC1jb2xvci1ONHtiYWNrZ3JvdW5kLWNvbG9yOiNDQ0NBQ0E7fQoJCS5kMi0xNTE5NzEzMzczIC5iYWNrZ3JvdW5kLWNvbG9yLU41e2JhY2tncm91bmQtY29sb3I6I0RGRENEQzt9CgkJLmQyLTE1MTk3MTMzNzMgLmJhY2tncm91bmQtY29sb3ItTjZ7YmFja2dyb3VuZC1jb2xvcjojRUNFQkVCO30KCQkuZDItMTUxOTcxMzM3MyAuYmFja2dyb3VuZC1jb2xvci1ON3tiYWNrZ3JvdW5kLWNvbG9yOiNGRkZGRkY7fQoJCS5kMi0xNTE5NzEzMzczIC5iYWNrZ3JvdW5kLWNvbG9yLUIxe2JhY2tncm91bmQtY29sb3I6IzMxMDIxRDt9CgkJLmQyLTE1MTk3MTMzNzMgLmJhY2tncm91bmQtY29sb3ItQjJ7YmFja2dyb3VuZC1jb2xvcjojOUIxQTQ4O30KCQkuZDItMTUxOTcxMzM3MyAuYmFja2dyb3VuZC1jb2xvci1CM3tiYWNrZ3JvdW5kLWNvbG9yOiNEMjUxN0Y7fQoJCS5kMi0xNTE5NzEzMzczIC5iYWNrZ3JvdW5kLWNvbG9yLUI0e2JhY2tncm91bmQtY29sb3I6I0VBOTlCNjt9CgkJLmQyLTE1MTk3MTMzNzMgLmJhY2tncm91bmQtY29sb3ItQjV7YmFja2dyb3VuZC1jb2xvcjojRkZEQUU3O30KCQkuZDItMTUxOTcxMzM3MyAuYmFja2dyb3VuZC1jb2xvci1CNntiYWNrZ3JvdW5kLWNvbG9yOiNGQ0VERjI7fQoJCS5kMi0xNTE5NzEzMzczIC5iYWNrZ3JvdW5kLWNvbG9yLUFBMntiYWNrZ3JvdW5kLWNvbG9yOiNEMzVGMEE7fQoJCS5kMi0xNTE5NzEzMzczIC5iYWNrZ3JvdW5kLWNvbG9yLUFBNHtiYWNrZ3JvdW5kLWNvbG9yOiNGQUJBOEE7fQoJCS5kMi0xNTE5NzEzMzczIC5iYWNrZ3JvdW5kLWNvbG9yLUFBNXtiYWNrZ3JvdW5kLWNvbG9yOiNGRkUwQzc7fQoJCS5kMi0xNTE5NzEzMzczIC5iYWNrZ3JvdW5kLWNvbG9yLUFCNHtiYWNrZ3JvdW5kLWNvbG9yOiNGRkU3Njc7fQoJCS5kMi0xNTE5NzEzMzczIC5iYWNrZ3JvdW5kLWNvbG9yLUFCNXtiYWNrZ3JvdW5kLWNvbG9yOiNGRkYyQUE7fQoJCS5kMi0xNTE5NzEzMzczIC5jb2xvci1OMXtjb2xvcjojMTcwMjA2O30KCQkuZDItMTUxOTcxMzM3MyAuY29sb3ItTjJ7Y29sb3I6IzUzNTE1Mjt9CgkJLmQyLTE1MTk3MTMzNzMgLmNvbG9yLU4ze2NvbG9yOiM3ODc3Nzc7fQoJCS5kMi0xNTE5NzEzMzczIC5jb2xvci1ONHtjb2xvcjojQ0NDQUNBO30KCQkuZDItMTUxOTcxMzM3MyAuY29sb3ItTjV7Y29sb3I6I0RGRENEQzt9CgkJLmQyLTE1MTk3MTMzNzMgLmNvbG9yLU42e2NvbG9yOiNFQ0VCRUI7fQoJCS5kMi0xNTE5NzEzMzczIC5jb2xvci1ON3tjb2xvcjojRkZGRkZGO30KCQkuZDItMTUxOTcxMzM3MyAuY29sb3ItQjF7Y29sb3I6IzMxMDIxRDt9CgkJLmQyLTE1MTk3MTMzNzMgLmNvbG9yLUIye2NvbG9yOiM5QjFBNDg7fQoJCS5kMi0xNTE5NzEzMzczIC5jb2xvci1CM3tjb2xvcjojRDI1MTdGO30KCQkuZDItMTUxOTcxMzM3MyAuY29sb3ItQjR7Y29sb3I6I0VBOTlCNjt9CgkJLmQyLTE1MTk3MTMzNzMgLmNvbG9yLUI1e2NvbG9yOiNGRkRBRTc7fQoJCS5kMi0xNTE5NzEzMzczIC5jb2xvci1CNntjb2xvcjojRkNFREYyO30KCQkuZDItMTUxOTcxMzM3MyAuY29sb3ItQUEye2NvbG9yOiNEMzVGMEE7fQoJCS5kMi0xNTE5NzEzMzczIC5jb2xvci1BQTR7Y29sb3I6I0ZBQkE4QTt9CgkJLmQyLTE1MTk3MTMzNzMgLmNvbG9yLUFBNXtjb2xvcjojRkZFMEM3O30KCQkuZDItMTUxOTcxMzM3MyAuY29sb3ItQUI0e2NvbG9yOiNGRkU3Njc7fQoJCS5kMi0xNTE5NzEzMzczIC5jb2xvci1BQjV7Y29sb3I6I0ZGRjJBQTt9LmFwcGVuZGl4IHRleHQudGV4dHtmaWxsOiMxNzAyMDZ9Lm1key0tY29sb3ItZmctZGVmYXVsdDojMTcwMjA2Oy0tY29sb3ItZmctbXV0ZWQ6IzUzNTE1MjstLWNvbG9yLWZnLXN1YnRsZTojNzg3Nzc3Oy0tY29sb3ItY2FudmFzLWRlZmF1bHQ6I0ZGRkZGRjstLWNvbG9yLWNhbnZhcy1zdWJ0bGU6I0VDRUJFQjstLWNvbG9yLWJvcmRlci1kZWZhdWx0OiMzMTAyMUQ7LS1jb2xvci1ib3JkZXItbXV0ZWQ6IzlCMUE0ODstLWNvbG9yLW5ldXRyYWwtbXV0ZWQ6I0VDRUJFQjstLWNvbG9yLWFjY2VudC1mZzojOUIxQTQ4Oy0tY29sb3ItYWNjZW50LWVtcGhhc2lzOiM5QjFBNDg7LS1jb2xvci1hdHRlbnRpb24tc3VidGxlOiM1MzUxNTI7LS1jb2xvci1kYW5nZXItZmc6cmVkO30uc2tldGNoLW92ZXJsYXktQjF7ZmlsbDp1cmwoI3N0cmVha3MtZGFya2VyLWQyLTE1MTk3MTMzNzMpO21peC1ibGVuZC1tb2RlOmxpZ2h0ZW59LnNrZXRjaC1vdmVybGF5LUIye2ZpbGw6dXJsKCNzdHJlYWtzLWRhcmtlci1kMi0xNTE5NzEzMzczKTttaXgtYmxlbmQtbW9kZTpsaWdodGVufS5za2V0Y2gtb3ZlcmxheS1CM3tmaWxsOnVybCgjc3RyZWFrcy1kYXJrLWQyLTE1MTk3MTMzNzMpO21peC1ibGVuZC1tb2RlOm92ZXJsYXl9LnNrZXRjaC1vdmVybGF5LUI0e2ZpbGw6dXJsKCNzdHJlYWtzLW5vcm1hbC1kMi0xNTE5NzEzMzczKTttaXgtYmxlbmQtbW9kZTpjb2xvci1idXJufS5za2V0Y2gtb3ZlcmxheS1CNXtmaWxsOnVybCgjc3RyZWFrcy1icmlnaHQtZDItMTUxOTcxMzM3Myk7bWl4LWJsZW5kLW1vZGU6ZGFya2VufS5za2V0Y2gtb3ZlcmxheS1CNntmaWxsOnVybCgjc3RyZWFrcy1icmlnaHQtZDItMTUxOTcxMzM3Myk7bWl4LWJsZW5kLW1vZGU6ZGFya2VufS5za2V0Y2gtb3ZlcmxheS1BQTJ7ZmlsbDp1cmwoI3N0cmVha3MtZGFyay1kMi0xNTE5NzEzMzczKTttaXgtYmxlbmQtbW9kZTpvdmVybGF5fS5za2V0Y2gtb3ZlcmxheS1BQTR7ZmlsbDp1cmwoI3N0cmVha3Mtbm9ybWFsLWQyLTE1MTk3MTMzNzMpO21peC1ibGVuZC1tb2RlOmNvbG9yLWJ1cm59LnNrZXRjaC1vdmVybGF5LUFBNXtmaWxsOnVybCgjc3RyZWFrcy1icmlnaHQtZDItMTUxOTcxMzM3Myk7bWl4LWJsZW5kLW1vZGU6ZGFya2VufS5za2V0Y2gtb3ZlcmxheS1BQjR7ZmlsbDp1cmwoI3N0cmVha3Mtbm9ybWFsLWQyLTE1MTk3MTMzNzMpO21peC1ibGVuZC1tb2RlOmNvbG9yLWJ1cm59LnNrZXRjaC1vdmVybGF5LUFCNXtmaWxsOnVybCgjc3RyZWFrcy1icmlnaHQtZDItMTUxOTcxMzM3Myk7bWl4LWJsZW5kLW1vZGU6ZGFya2VufS5za2V0Y2gtb3ZlcmxheS1OMXtmaWxsOnVybCgjc3RyZWFrcy1kYXJrZXItZDItMTUxOTcxMzM3Myk7bWl4LWJsZW5kLW1vZGU6bGlnaHRlbn0uc2tldGNoLW92ZXJsYXktTjJ7ZmlsbDp1cmwoI3N0cmVha3MtZGFyay1kMi0xNTE5NzEzMzczKTttaXgtYmxlbmQtbW9kZTpvdmVybGF5fS5za2V0Y2gtb3ZlcmxheS1OM3tmaWxsOnVybCgjc3RyZWFrcy1kYXJrLWQyLTE1MTk3MTMzNzMpO21peC1ibGVuZC1tb2RlOm92ZXJsYXl9LnNrZXRjaC1vdmVybGF5LU40e2ZpbGw6dXJsKCNzdHJlYWtzLW5vcm1hbC1kMi0xNTE5NzEzMzczKTttaXgtYmxlbmQtbW9kZTpjb2xvci1idXJufS5za2V0Y2gtb3ZlcmxheS1ONXtmaWxsOnVybCgjc3RyZWFrcy1ub3JtYWwtZDItMTUxOTcxMzM3Myk7bWl4LWJsZW5kLW1vZGU6Y29sb3ItYnVybn0uc2tldGNoLW92ZXJsYXktTjZ7ZmlsbDp1cmwoI3N0cmVha3MtYnJpZ2h0LWQyLTE1MTk3MTMzNzMpO21peC1ibGVuZC1tb2RlOmRhcmtlbn0uc2tldGNoLW92ZXJsYXktTjd7ZmlsbDp1cmwoI3N0cmVha3MtYnJpZ2h0LWQyLTE1MTk3MTMzNzMpO21peC1ibGVuZC1tb2RlOmRhcmtlbn0ubGlnaHQtY29kZXtkaXNwbGF5OiBibG9ja30uZGFyay1jb2Rle2Rpc3BsYXk6IG5vbmV9XV0+PC9zdHlsZT48ZyBjbGFzcz0iYVc1d2RYUT0iPjxnIGNsYXNzPSJzaGFwZSIgPjxyZWN0IHg9IjIxLjAwMDAwMCIgeT0iMTIuMDAwMDAwIiB3aWR0aD0iODMuMDAwMDAwIiBoZWlnaHQ9IjY2LjAwMDAwMCIgc3Ryb2tlPSIjMzEwMjFEIiBmaWxsPSIjRkNFREYyIiBjbGFzcz0iIHN0cm9rZS1CMSBmaWxsLUI2IiBzdHlsZT0ic3Ryb2tlLXdpZHRoOjI7IiAvPjwvZz48dGV4dCB4PSI2Mi41MDAwMDAiIHk9IjUwLjUwMDAwMCIgZmlsbD0iIzE3MDIwNiIgY2xhc3M9InRleHQtYm9sZCBmaWxsLU4xIiBzdHlsZT0idGV4dC1hbmNob3I6bWlkZGxlO2ZvbnQtc2l6ZToxNnB4Ij5pbnB1dDwvdGV4dD48L2c+PGcgY2xhc3M9ImFHbGtaR1Z1TVE9PSI+PGcgY2xhc3M9InNoYXBlIiA+PHJlY3QgeD0iMTIuMDAwMDAwIiB5PSIxNDguMDAwMDAwIiB3aWR0aD0iMTAyLjAwMDAwMCIgaGVpZ2h0PSI2Ni4wMDAwMDAiIHN0cm9rZT0iIzMxMDIxRCIgZmlsbD0iI0ZDRURGMiIgY2xhc3M9IiBzdHJva2UtQjEgZmlsbC1CNiIgc3R5bGU9InN0cm9rZS13aWR0aDoyOyIgLz48L2c+PHRleHQgeD0iNjMuMDAwMDAwIiB5PSIxODYuNTAwMDAwIiBmaWxsPSIjMTcwMjA2IiBjbGFzcz0idGV4dC1ib2xkIGZpbGwtTjEiIHN0eWxlPSJ0ZXh0LWFuY2hvcjptaWRkbGU7Zm9udC1zaXplOjE2cHgiPmhpZGRlbjE8L3RleHQ+PC9nPjxnIGNsYXNzPSJhR2xrWkdWdU1nPT0iPjxnIGNsYXNzPSJzaGFwZSIgPjxyZWN0IHg9IjEyLjAwMDAwMCIgeT0iMjg0LjAwMDAwMCIgd2lkdGg9IjEwMi4wMDAwMDAiIGhlaWdodD0iNjYuMDAwMDAwIiBzdHJva2U9IiMzMTAyMUQiIGZpbGw9IiNGQ0VERjIiIGNsYXNzPSIgc3Ryb2tlLUIxIGZpbGwtQjYiIHN0eWxlPSJzdHJva2Utd2lkdGg6MjsiIC8+PC9nPjx0ZXh0IHg9IjYzLjAwMDAwMCIgeT0iMzIyLjUwMDAwMCIgZmlsbD0iIzE3MDIwNiIgY2xhc3M9InRleHQtYm9sZCBmaWxsLU4xIiBzdHlsZT0idGV4dC1hbmNob3I6bWlkZGxlO2ZvbnQtc2l6ZToxNnB4Ij5oaWRkZW4yPC90ZXh0PjwvZz48ZyBjbGFzcz0iYjNWMGNIVjAiPjxnIGNsYXNzPSJzaGFwZSIgPjxyZWN0IHg9IjE2LjAwMDAwMCIgeT0iNDIwLjAwMDAwMCIgd2lkdGg9Ijk0LjAwMDAwMCIgaGVpZ2h0PSI2Ni4wMDAwMDAiIHN0cm9rZT0iIzMxMDIxRCIgZmlsbD0iI0ZDRURGMiIgY2xhc3M9IiBzdHJva2UtQjEgZmlsbC1CNiIgc3R5bGU9InN0cm9rZS13aWR0aDoyOyIgLz48L2c+PHRleHQgeD0iNjMuMDAwMDAwIiB5PSI0NTguNTAwMDAwIiBmaWxsPSIjMTcwMjA2IiBjbGFzcz0idGV4dC1ib2xkIGZpbGwtTjEiIHN0eWxlPSJ0ZXh0LWFuY2hvcjptaWRkbGU7Zm9udC1zaXplOjE2cHgiPm91dHB1dDwvdGV4dD48L2c+PGcgY2xhc3M9IktHbHVjSFYwSUMwbVozUTdJR2hwWkdSbGJqRXBXekJkIj48bWFya2VyIGlkPSJtay1kMi0xNTE5NzEzMzczLTM0ODgzNzgxMzQiIG1hcmtlcldpZHRoPSIxMC4wMDAwMDAiIG1hcmtlckhlaWdodD0iMTIuMDAwMDAwIiByZWZYPSI3LjAwMDAwMCIgcmVmWT0iNi4wMDAwMDAiIHZpZXdCb3g9IjAuMDAwMDAwIDAuMDAwMDAwIDEwLjAwMDAwMCAxMi4wMDAwMDAiIG9yaWVudD0iYXV0byIgbWFya2VyVW5pdHM9InVzZXJTcGFjZU9uVXNlIj4gPHBvbHlnb24gcG9pbnRzPSIwLjAwMDAwMCwwLjAwMDAwMCAxMC4wMDAwMDAsNi4wMDAwMDAgMC4wMDAwMDAsMTIuMDAwMDAwIiBmaWxsPSIjMzEwMjFEIiBjbGFzcz0iY29ubmVjdGlvbiBmaWxsLUIxIiBzdHJva2Utd2lkdGg9IjIiIC8+IDwvbWFya2VyPjxwYXRoIGQ9Ik0gNjMuMDAwMDAwIDgwLjAwMDAwMCBMIDYzLjAwMDAwMCAxNDQuMDAwMDAwIiBzdHJva2U9IiMzMTAyMUQiIGZpbGw9Im5vbmUiIGNsYXNzPSJjb25uZWN0aW9uIHN0cm9rZS1CMSIgc3R5bGU9InN0cm9rZS13aWR0aDoyOyIgbWFya2VyLWVuZD0idXJsKCNtay1kMi0xNTE5NzEzMzczLTM0ODgzNzgxMzQpIiBtYXNrPSJ1cmwoI2QyLTE1MTk3MTMzNzMpIiAvPjwvZz48ZyBjbGFzcz0iS0docFpHUmxiakVnTFNabmREc2dhR2xrWkdWdU1pbGJNRjA9Ij48cGF0aCBkPSJNIDYzLjAwMDAwMCAyMTYuMDAwMDAwIEwgNjMuMDAwMDAwIDI4MC4wMDAwMDAiIHN0cm9rZT0iIzMxMDIxRCIgZmlsbD0ibm9uZSIgY2xhc3M9ImNvbm5lY3Rpb24gc3Ryb2tlLUIxIiBzdHlsZT0ic3Ryb2tlLXdpZHRoOjI7IiBtYXJrZXItZW5kPSJ1cmwoI21rLWQyLTE1MTk3MTMzNzMtMzQ4ODM3ODEzNCkiIG1hc2s9InVybCgjZDItMTUxOTcxMzM3MykiIC8+PC9nPjxnIGNsYXNzPSJLR2hwWkdSbGJqSWdMU1puZERzZ2IzVjBjSFYwS1Zzd1hRPT0iPjxwYXRoIGQ9Ik0gNjMuMDAwMDAwIDM1Mi4wMDAwMDAgTCA2My4wMDAwMDAgNDE2LjAwMDAwMCIgc3Ryb2tlPSIjMzEwMjFEIiBmaWxsPSJub25lIiBjbGFzcz0iY29ubmVjdGlvbiBzdHJva2UtQjEiIHN0eWxlPSJzdHJva2Utd2lkdGg6MjsiIG1hcmtlci1lbmQ9InVybCgjbWstZDItMTUxOTcxMzM3My0zNDg4Mzc4MTM0KSIgbWFzaz0idXJsKCNkMi0xNTE5NzEzMzczKSIgLz48L2c+PG1hc2sgaWQ9ImQyLTE1MTk3MTMzNzMiIG1hc2tVbml0cz0idXNlclNwYWNlT25Vc2UiIHg9Ii04OSIgeT0iLTg5IiB3aWR0aD0iMzA0IiBoZWlnaHQ9IjY3NiI+CjxyZWN0IHg9Ii04OSIgeT0iLTg5IiB3aWR0aD0iMzA0IiBoZWlnaHQ9IjY3NiIgZmlsbD0id2hpdGUiPjwvcmVjdD4KPHJlY3QgeD0iNDEuNTAwMDAwIiB5PSIzNC41MDAwMDAiIHdpZHRoPSI0MiIgaGVpZ2h0PSIyMSIgZmlsbD0icmdiYSgwLDAsMCwwLjc1KSI+PC9yZWN0Pgo8cmVjdCB4PSIzMi41MDAwMDAiIHk9IjE3MC41MDAwMDAiIHdpZHRoPSI2MSIgaGVpZ2h0PSIyMSIgZmlsbD0icmdiYSgwLDAsMCwwLjc1KSI+PC9yZWN0Pgo8cmVjdCB4PSIzMi41MDAwMDAiIHk9IjMwNi41MDAwMDAiIHdpZHRoPSI2MSIgaGVpZ2h0PSIyMSIgZmlsbD0icmdiYSgwLDAsMCwwLjc1KSI+PC9yZWN0Pgo8cmVjdCB4PSIzNi41MDAwMDAiIHk9IjQ0Mi41MDAwMDAiIHdpZHRoPSI1MyIgaGVpZ2h0PSIyMSIgZmlsbD0icmdiYSgwLDAsMCwwLjc1KSI+PC9yZWN0Pgo8L21hc2s+PC9zdmc+PC9zdmc+Cg==" style="width:60.0%" class="r-stretch"><blockquote>
-<p>Con <code>data-id="nn-arch"</code> y <code>auto-animate</code>, Reveal.js transicionará de la RR simple a la extendida de forma suave.</p>
-</blockquote>
-</section>
-<section id="slide-6-detalles-del-modelo" class="slide level2">
-<h2>Slide&nbsp;6 –&nbsp;Detalles del modelo</h2>
-<ul>
-<li><p>Clase <code>Linear_QNet(nn.Module)</code>:</p>
-<ul>
-<li>11 → 256 → 3 nodos.</li>
-<li><code>forward()</code> con ReLU y sin softmax al final.</li>
-<li><code>save()</code> guarda en <code>.pth</code>.</li>
-</ul></li>
-<li><p>Clase <code>QTrainer</code>:</p>
-<ul>
-<li>Optimizer = Adam, Loss = MSE.</li>
-<li><code>train_step()</code> aplica la ecuación de Bellman y actualiza pesos.</li>
-</ul></li>
-</ul>
-</section>
-<section id="slide-7-proceso-de-entrenamiento" class="slide level2">
-<h2>Slide&nbsp;7 –&nbsp;Proceso de Entrenamiento</h2>
-<ol type="1">
-<li><code>state_old = get_state()</code></li>
-<li><code>action = agent.get_action(state_old)</code></li>
-<li><code>reward, done, score = game.play_step(action)</code></li>
-<li><code>state_new = get_state()</code></li>
-<li><code>agent.train_short_memory(...)</code></li>
-<li><code>agent.remember(...)</code></li>
-<li>Si <code>done</code>: reiniciar, entrenar corto y largo, graficar, guardar modelo</li>
-</ol>
-</section>
-<section id="slide-8-resultados-y-próximos-pasos" class="slide level2">
-<h2>Slide&nbsp;8 –&nbsp;Resultados y próximos pasos</h2>
-<ul>
-<li><p>La puntuación media mejora gradual y consistente.</p></li>
-<li><p>La serpiente evita paredes y busca la comida.</p></li>
-<li><p>Se puede acelerar entrenando con frames más rápidos.</p></li>
-<li><p><strong>Mejoras posibles:</strong></p>
-<ul>
-<li>Usar CNN para procesar sensores visuales.</li>
-<li>Técnicas avanzadas (Double, Dueling Q‑Network).</li>
-<li>Modificar recompensas y exploración para evitar bucles.</li>
-</ul></li>
-</ul>
-</section>
-<section id="fin-preguntas" class="slide level2">
-<h2>🏁 ¡Fin! ¿Preguntas?</h2>
-</section>
-<section class="slide level2">
-
-<pre><code>
-### ✅ Instrucciones:
-
-1. Guarda este contenido en `snake_rl_presentation.qmd`.
-2. Instala `d2` y asegúrate de estar en tu `$PATH`.
-3. Ejecuta:
-
-```bash
-quarto render snake_rl_presentation.qmd --to revealjs</code></pre>
-<p>o</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href=""></a><span class="ex">quarto</span> preview snake_rl_presentation.qmd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="4" type="1">
-<li>Abre la salida HTML en tu navegador. Verás los diagramas que se transforman suavemente entre dos estado gracias a <code>auto-animate</code> y <code>data-id</code>.</li>
-</ol>
-<p>Si quieres incluir gráficas o imágenes reales (como la curva de aprendizaje), añade bloques:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href=""></a><span class="al">![](ruta/curva.png)</span>{width=60%}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>con <code>data-id</code> igual si quieres animarlas también.</p>
-<p>¡Con esto tienes una presentación funcional, animada, y lista para explicar tu proyecto de IA en Snake! 🎯</p>
 <div class="quarto-auto-generated-content">
-<p><img src="https://www.pygame.org/docs/_images/pygame_logo.png" class="slide-logo"></p>
+<p><img src="https://www.utadeo.edu.co/sites/tadeo/files/logoutadeo_1.jpg" class="slide-logo"></p>
 <div class="footer footer-default">
-
+<p>🎮 ¡Viernes de Código en Utadeo!</p>
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
@@ -577,8 +540,8 @@ quarto render snake_rl_presentation.qmd --to revealjs</code></pre>
 'controlsAuto': true,
 'previewLinksAuto': false,
 'pdfSeparateFragments': false,
-'autoAnimateEasing': "ease-in-out",
-'autoAnimateDuration': 0.8,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
@@ -707,7 +670,7 @@ quarto render snake_rl_presentation.qmd --to revealjs</code></pre>
         previewLinks: false,
 
         // Transition style (none/fade/slide/convex/concave/zoom)
-        transition: 'slide',
+        transition: 'fade',
 
         // Transition speed (default/fast/slow)
         transitionSpeed: 'default',

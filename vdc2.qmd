@@ -6,28 +6,19 @@ format:
     theme: custom.scss
     transition: fade
     slide-number: true
-    logo: logo-utadeo.png # Cambia por tu logo institucional si lo tienes
     toc: false
     chalkboard: true
-    embed-resources: true
-    css: styles.css # Personaliza con tu estilo si lo deseas
+    logo: "https://www.utadeo.edu.co/sites/tadeo/files/logoutadeo_1.jpg"
+    footer: "🎮 ¡Viernes de Código en Utadeo!"
 ---
 
 # 🐍 ¿Cómo aprende una IA a jugar Snake?
 <br>
 <div style="text-align:center;">
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Snake_game.gif" alt="Snake Game" width="300"/>
+<img src="https://art.pixilart.com/76cecf6b86ae119.gif" alt="Snake Game" width="300"/>
 </div>
 <br>
 > El modelo de IA aprende **jugando contra sí mismo** y usando su experiencia para mejorar.
-
----
-
-## ¿Por qué usar Snake para enseñar IA?
-
-- Es simple de entender y programar
-- Tiene un entorno claro de **acción–reacción**
-- Permite experimentar fácilmente con **aprendizaje por refuerzo**
 
 ---
 
@@ -44,18 +35,19 @@ La IA recibe un vector de **11 valores booleanos** cada vez que toma una decisi�
 </ul>
 </div>
 
-<div style="text-align:center;">
-<img src="https://raw.githubusercontent.com/alexlenail/NN-SVG/master/snake-vision-diagram.svg" alt="snake state" width="400"/>
+<div class="fragment" style="text-align:center;">
+<img src="https://www.researchgate.net/profile/Silvia-Ullo/publication/351884746/figure/fig1/AS:1067993664589824@1631640940747/Q-Learning-vs-Deep-Q-Learning.ppm" alt="snake state" width="400"/>
 </div>
 
 ---
 
 ## Ejemplo de vector de estado
 
-```python
+```{python}
+#| eval: false
 estado = [0, 1, 0,   0, 1, 0, 0,   1, 0, 0, 0]
 #   peligro     dirección     comida
-````
+```
 
 <div style="font-size:1.2em;">
 <p>🟥 Peligro adelante</p>
@@ -74,7 +66,7 @@ estado = [0, 1, 0,   0, 1, 0, 0,   1, 0, 0, 0]
 * <span style="color:blue;">Girar a la izquierda</span> 🔵
 
 <div style="text-align:center;">
-<img src="https://cdn.jsdelivr.net/gh/ai4allorg/images@master/snake_turns.png" alt="acciones snake" width="320"/>
+<img src="https://www.researchgate.net/profile/Silvia-Ullo/publication/351884746/figure/fig4/AS:1067993668804609@1631640941629/Deep-Neural-Network-architecture.ppm" alt="acciones snake" width="720"/>
 </div>
 
 <aside class="notes">
@@ -95,8 +87,8 @@ La decisión es siempre relativa a la dirección actual para evitar giros de 180
 | Otro paso (sin evento especial) |      0     |
 
 <div style="text-align:center;">
-<img src="https://cdn.jsdelivr.net/gh/ai4allorg/images@master/snake_food.gif" alt="snake food" width="150"/>
-<img src="https://cdn.jsdelivr.net/gh/ai4allorg/images@master/snake_crash.gif" alt="snake crash" width="150"/>
+<img src="https://www.researchgate.net/profile/Silvia-Ullo/publication/351884746/figure/fig5/AS:1067993668780035@1631640941758/The-Snake-game-GUI.ppm" alt="snake food" width="150"/>
+
 </div>
 
 ---
@@ -107,8 +99,8 @@ La decisión es siempre relativa a la dirección actual para evitar giros de 180
   se **almacena en una "memoria"** (tipo `deque`).
 * El modelo **repite partidas y almacena hasta 100,000 experiencias**.
 
-<div style="text-align:center;">
-<img src="https://cdn.jsdelivr.net/gh/ai4allorg/images@master/replay_memory.svg" alt="replay memory" width="400"/>
+<div class="fragment" style="text-align:center;">
+<img src="https://media1.tenor.com/m/7HUogy7rXs4AAAAC/feel-me-think-about-it.gif" alt="replay memory" width="400"/>
 </div>
 
 ---
@@ -119,7 +111,8 @@ La decisión es siempre relativa a la dirección actual para evitar giros de 180
 * **Capas ocultas:** (Por ejemplo, 2 capas de 256 neuronas)
 * **Salidas:** 3 acciones posibles (recto, derecha, izquierda)
 
-```python
+```{python}
+#| eval: false
 class LinearQNet(nn.Module):
     def __init__(self):
         super().__init__()
@@ -140,7 +133,7 @@ class LinearQNet(nn.Module):
 * La red ajusta sus pesos usando el **Error Cuadrático Medio (MSE)** y la ecuación de Bellman para actualizar los valores Q.
 
 <div style="text-align:center;">
-<img src="https://raw.githubusercontent.com/alexlenail/NN-SVG/master/mlp-snake.svg" alt="Red neuronal" width="400"/>
+<img src="train.png" alt="Red neuronal" width="800"/>
 </div>
 
 ---
@@ -152,7 +145,7 @@ class LinearQNet(nn.Module):
 * ¡Todo gracias a la experiencia acumulada y el entrenamiento iterativo!
 
 <div style="text-align:center;">
-<img src="https://cdn.jsdelivr.net/gh/ai4allorg/images@master/snake_learning_curve.png" alt="snake learning curve" width="400"/>
+<img src="train.png" alt="snake learning curve" width="800"/>
 </div>
 
 ---
@@ -181,4 +174,3 @@ class LinearQNet(nn.Module):
 <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Snake_game.gif" alt="Snake Game" width="200"/>
 </div>
 ---
-
