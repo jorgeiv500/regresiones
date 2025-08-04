@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Agentes Inteligentes</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+  <div class="max-w-5xl mx-auto px-6 py-10">
+    <h1 class="text-4xl font-bold text-center mb-10">🤖 Agentes Inteligentes</h1>
+
+    <!-- ¿Qué es un Agente? -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold mb-4">¿Qué es un agente?</h2>
+      <p class="mb-4">Un <strong>agente</strong> percibe su entorno mediante sensores y actúa sobre él usando actuadores.</p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-sm">
+        <div class="p-4 bg-white rounded shadow">
+          <p class="font-bold">Robot Aspiradora</p>
+          <p>Sensores de polvo, motores</p>
+        </div>
+        <div class="p-4 bg-white rounded shadow">
+          <p class="font-bold">Termostato</p>
+          <p>Sensor de temperatura → calefacción</p>
+        </div>
+        <div class="p-4 bg-white rounded shadow">
+          <p class="font-bold">Asistente Virtual</p>
+          <p>Entrada de voz → acciones</p>
+        </div>
+        <div class="p-4 bg-white rounded shadow">
+          <p class="font-bold">Agente de Juego</p>
+          <p>Perceptos visuales → movimiento</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Función del agente -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold mb-4">🧠 Función del agente</h2>
+      <p>Es una función matemática que toma los perceptos y produce una acción: <code>f(perceptos*) → acción</code>.</p>
+    </section>
+
+    <!-- Programa del agente -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold mb-4">💻 Programa del agente</h2>
+      <p>Es el código que implementa la función del agente. Ejemplo:</p>
+      <pre class="bg-gray-200 p-4 rounded text-sm overflow-auto">
+def programa_del_agente(percepto):
+    if percepto == "temperatura_baja":
+        return "encender_calefacción"
+      </pre>
+    </section>
+
+    <!-- Tipos de Agentes -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold mb-4">🏗️ Tipos de agentes</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+        <div class="bg-blue-100 p-4 rounded shadow">
+          <p class="font-bold">Reactivo Simple</p>
+          <p>Actúa según el percepto actual</p>
+        </div>
+        <div class="bg-green-100 p-4 rounded shadow">
+          <p class="font-bold">Con Estado</p>
+          <p>Recuerda información pasada</p>
+        </div>
+        <div class="bg-yellow-100 p-4 rounded shadow">
+          <p class="font-bold">Basado en Objetivos</p>
+          <p>Planifica para alcanzar una meta</p>
+        </div>
+        <div class="bg-red-100 p-4 rounded shadow">
+          <p class="font-bold">Basado en Utilidad</p>
+          <p>Elige la acción más valiosa</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Actividad -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold mb-4">🧩 Actividad Interactiva</h2>
+      <p class="mb-4">Clasifica los siguientes ejemplos según el tipo de agente:</p>
+      <ul class="list-disc list-inside space-y-2">
+        <li>Un dispensador automático de jabón</li>
+        <li>Google Maps calculando una ruta</li>
+        <li>Un asistente virtual que aprende de ti</li>
+        <li>Un robot que gira al detectar una pared</li>
+      </ul>
+      <p class="mt-4 font-medium">Discútelo con tu grupo antes de compartir en clase.</p>
+    </section>
+  </div>
+</body>
+</html>

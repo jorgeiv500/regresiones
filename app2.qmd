@@ -1,0 +1,127 @@
+---
+title: "Crea una app web con IA"
+subtitle: "🔍 Introduccion practiva a la integración web-IA con firebase studio / vercel "
+author: "Jorge Ivan Romero Gelvez"
+format:
+  revealjs:
+    theme: custom.scss
+    transition: fade
+    chalkboard: true
+    logo: Utadeo70-fondoblanco.png
+    slideNumber: true
+    controls: true
+---
+
+## 🎙️ Bienvenidos a Vibe Coding
+
+- **Vibe Coding**: Crea apps y websites con lenguaje natural,.
+- **Objetivo**: desarrollar en tiempo real un asistente de precálculo potenciado con IA.
+- ¡Prepara tu entorno y disfruta del flujo! 🚀
+
+---
+
+## 🛠️ Herramientas de IA para el Desarrollo
+
+- **OpenAI ChatGPT / AI Studio**: prototipado de prompts y generación de componentes.
+- **GitHub Copilot / Codeium**: autocompletado y sugerencias de código.
+- **Google vertex / Gemini /notebooklm**: investigación y búsquedas contextuales.
+- **Whisper**: transcripción de audio en vivo.
+
+---
+
+## 📋 Agenda
+
+1. Introducción a Vibe Coding & IA Tools
+2. Firebase Studio con contenido real
+3. **Live Coding: Paso a Paso**
+   - Setup Next.js + Tailwind
+   - Configuración de IA (OpenAI SDK)
+   - Rutas API y Threads
+   - Interfaz de Chat (Markdown + KaTeX)
+4. Despliegue en Vercel
+5. Preguntas y próximos pasos
+
+---
+
+## 1️⃣ Setup Inicial
+
+```bash
+npx create-next-app@latest precalculo-assistant-app \
+  --typescript --app --eslint --tailwind --src-dir
+cd precalculo-assistant-app
+npm install openai react-markdown remark-gfm remark-math rehype-katex katex react-icons
+``` 
+
+- Selecciona **TypeScript**, **ESLint**, **Tailwind**, **App Router**, **src directory**.
+
+---
+
+## 2️⃣ Configuración de IA
+
+1. Crea `.env.local` con:
+```bash
+OPENAI_API_KEY=sk-...
+OPENAI_ASSISTANT_ID=asst_...
+``` 
+2. `src/lib/openai.ts`:
+```ts
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+import OpenAI from 'openai';
+export const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+```
+
+---
+
+## 3️⃣ Rutas API & Threads
+
+**Archivo:** `src/app/api/chat/route.ts`
+
+```ts
+import { openai } from '../../../lib/openai';
+import { NextResponse } from 'next/server';
+
+export async function POST(req: Request) {
+  const { mensaje } = await req.json();
+  const thread = await openai.beta.threads.create();
+  await openai.beta.threads.messages.create(thread.id, { role: 'user', content: mensaje });
+  const run = await openai.beta.threads.runs.create(thread.id, { assistant_id: process.env.OPENAI_ASSISTANT_ID! });
+  let status;
+  do {
+    await new Promise(r => setTimeout(r, 1000));
+    status = await openai.beta.threads.runs.retrieve(thread.id, run.id);
+  } while (status.status !== 'completed');
+  const msgs = await openai.beta.threads.messages.list(thread.id);
+  const resp = msgs.data.find(m => m.role === 'assistant');
+  return NextResponse.json({ respuesta: resp?.content[0].text.value });
+}
+```
+
+---
+
+## 4️⃣ Interfaz de Chat
+
+**`src/app/page.tsx`**:
+- Tema oscuro con acento verde Utadeo (#009745)
+- Burbujas de usuario/asistente
+- Render Markdown, tablas y LaTeX
+
+```tsx
+// Ver la versión completa de `page.tsx` incluida en la sesión anterior
+```
+
+---
+
+## 5️⃣ Despliegue en Vercel
+
+1. Crea repo en GitHub.
+2. Conecta en Vercel.
+3. Configura variables: `OPENAI_API_KEY`, `OPENAI_ASSISTANT_ID`.
+4. ¡Push y go live! 🎉
+
+---
+
+## ❓ Preguntas y Próximos Pasos
+
+- Mejoras: autenticación, persistencia con Firebase, tests E2E.
+- Explora plugins de Tailwind y componentes UI.
+- ¡Gracias por vivir esta experiencia de Vibe Coding! 🚀

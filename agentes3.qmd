@@ -1,0 +1,208 @@
+---
+title: "Agentes Inteligentes"
+format: pptx
+editor: visual
+---
+
+# 🤖 Agentes Inteligentes
+
+## ¿Qué es un agente?
+
+Un **agente** percibe su entorno mediante sensores y actúa sobre él usando actuadores.
+
+::::::: columns
+::: column
+**Robot Aspiradora**\
+Sensores de polvo, proximidad, batería → Motores, ruedas
+:::
+
+::: column
+**Termostato**\
+Sensor de temperatura → Encender/Apagar calefacción
+:::
+
+::: column
+**Asistente Virtual**\
+Entrada de voz → Respuesta hablada o acción
+:::
+
+::: column
+**Agente en videojuegos**\
+Observa el entorno → Decide movimiento, disparo, salto
+:::
+:::::::
+
+------------------------------------------------------------------------
+
+## 🧠 Función del agente
+
+Una función matemática que toma como entrada la secuencia de perceptos y devuelve una acción:
+
+\[ f(\text{perceptos}\^\*) \rightarrow \text{acción} \]
+
+🔹 Esta función es teórica y describe el comportamiento ideal.\
+🔹 En la práctica, se implementa con un programa de agente.
+
+------------------------------------------------------------------------
+
+## 💻 Programa del agente
+
+El programa del agente implementa esa función. Por ejemplo:
+
+``` python
+def programa_del_agente(percepto):
+    if percepto == "temperatura_baja":
+        return "encender_calefacción"
+    elif percepto == "temperatura_alta":
+        return "apagar_calefacción"
+```
+
+📌 Este programa es una aproximación computacional a la función del agente.
+
+------------------------------------------------------------------------
+
+## 🏗️ Arquitecturas de agentes
+
+Las arquitecturas definen cómo se organiza internamente el agente:
+
+-   🟥 **Reactivo simple**: responde directamente a los estímulos
+-   🟨 **Con estado interno**: guarda memoria
+-   🟦 **Basado en objetivos**: tiene una meta y planifica
+-   🟩 **Basado en utilidad**: elige la mejor acción según un valor
+
+------------------------------------------------------------------------
+
+## 🔁 Agente Reactivo Simple
+
+-   No usa memoria ni planificación
+-   Basado en reglas "si... entonces..."
+
+📌 Ejemplo:
+
+``` python
+if sensor == "obstáculo":
+    girar()
+```
+
+🧠 Solo responde al percepto actual.
+
+------------------------------------------------------------------------
+
+## 🔁 Agente Reactivo con Estado
+
+-   Guarda parte de la historia pasada
+-   Mejora decisiones con base en experiencias anteriores
+
+📌 Ejemplo:
+
+``` python
+if percepto == "zona_limpia" and memoria["zona"]:
+    buscar_nueva_zona()
+```
+
+🔍 Útil en robots que deben recorrer áreas completas sin repetir.
+
+------------------------------------------------------------------------
+
+## 🎯 Agente Basado en Objetivos
+
+-   Tiene una meta clara
+-   Evalúa acciones que contribuyen a lograrla
+
+📌 Ejemplo:
+
+``` python
+meta = "llegar al punto B"
+ruta = planificar_ruta(punto_actual, meta)
+ejecutar(ruta)
+```
+
+🗺️ GPS, sistemas de planificación, búsqueda de caminos
+
+------------------------------------------------------------------------
+
+## 📈 Agente Basado en Utilidad
+
+-   Evalúa todas las posibles acciones con una función de utilidad
+-   Escoge la acción que maximiza el beneficio esperado
+
+📌 Ejemplo:
+
+``` python
+acciones = [ruta1, ruta2, ruta3]
+mejor = max(acciones, key=utilidad)
+ejecutar(mejor)
+```
+
+🚗 Usado en coches autónomos o decisiones económicas
+
+------------------------------------------------------------------------
+
+## 📊 Comparación entre arquitecturas
+
+| Característica             | Reactivo Simple | Con Estado | Objetivo | Utilidad |
+|---------------|---------------|---------------|---------------|---------------|
+| Reacción inmediata         | ✅              | ✅         | ❌       | ❌       |
+| Usa memoria                | ❌              | ✅         | ✅       | ✅       |
+| Tiene metas                | ❌              | ❌         | ✅       | ✅       |
+| Evalúa diferentes opciones | ❌              | ❌         | ✅       | ✅       |
+| Maximiza beneficio         | ❌              | ❌         | ❌       | ✅       |
+
+------------------------------------------------------------------------
+
+## 🧪 Ejemplos y Clasificación
+
+1.  **Sensor de luz que enciende una lámpara** → Reactivo simple
+2.  **Robot que recuerda qué zonas limpió** → Con estado
+3.  **Waze planificando ruta** → Basado en objetivos
+4.  **Coche autónomo que elige entre seguridad y rapidez** → Basado en utilidad
+
+------------------------------------------------------------------------
+
+## 🧩 Actividad Interactiva
+
+Clasifica los siguientes agentes según su tipo:
+
+1.  Un dispensador automático de jabón\
+2.  Google Maps calculando una ruta\
+3.  Un asistente virtual que aprende de ti\
+4.  Un robot que gira al detectar una pared
+
+**Tipos:** Reactivo simple, Con estado, Basado en objetivos, Basado en utilidad
+
+💬 Discútelo con tu grupo antes de compartir en clase.
+
+------------------------------------------------------------------------
+
+## 📚 Aplicaciones prácticas
+
+-   🗣️ Asistentes virtuales (Alexa, Siri)
+-   🧹 Robots aspiradores (Roomba)
+-   🚗 Vehículos autónomos (Tesla)
+-   🤖 NPCs en videojuegos
+-   📈 Sistemas de recomendación
+
+------------------------------------------------------------------------
+
+## ✅ Conclusión
+
+-   Todos los agentes perciben su entorno y actúan en él.
+-   La diferencia está en su complejidad y capacidad de decisión.
+-   Agentes más avanzados pueden planear, aprender y adaptarse.
+-   ¡Comprender esto es clave para diseñar sistemas inteligentes!
+
+------------------------------------------------------------------------
+
+## 🙋 Preguntas para Reflexión
+
+-   ¿Qué tipo de agente es más útil para entornos cambiantes?
+-   ¿Podemos combinar arquitecturas?
+-   ¿Qué desafíos hay al construir un agente inteligente?
+
+------------------------------------------------------------------------
+
+## 🛠️ Proyecto sugerido
+
+🎓 Crea tu propio agente en Python: - Simula un entorno con obstáculos - Implementa un agente que navegue usando lógica reactiva - Mejora el agente para que aprenda o planee su ruta
+
+💡 ¡Experimenta con las distintas arquitecturas!

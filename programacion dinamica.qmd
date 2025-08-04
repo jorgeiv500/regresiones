@@ -1,0 +1,78 @@
+---
+title: "📘 Programación Dinámica"
+subtitle: "🔢 Fundamentos y Aplicaciones"
+author: "👨‍🏫 Jorge Iván Romero Gelvez"
+lang: es
+format:
+  revealjs:
+    theme: default
+    slide-number: true
+    highlight-style: dracula
+    code-line-numbers: true
+    chalkboard: true
+    toc: true
+    toc-title: "Contenido"
+    toc-depth: 1
+    incremental: true
+    scrollable: true
+execute:
+  echo: false
+---
+
+## 🎯 ¿Qué es la Programación Dinámica?
+
+> Método de optimización para problemas con estructura de **decisión secuencial**.
+
+- Propuesta por **Richard Bellman** en los años 50.
+- Resuelve problemas grandes dividiéndolos en subproblemas más pequeños.
+- Se basa en el **principio de optimalidad**:
+<p><small>
+"Una política es óptima si, sea cual sea el estado inicial y la primera decisión, las decisiones subsiguientes forman una política óptima respecto al estado resultante de la primera decisión."
+</small></p> 
+
+---
+
+##  Características de la programación dinámica
+-  Dado el estado actual, una política optima para las etapas restantes es independiente de la política adoptada en etapas anteriores. Se tiene en cuenta solo el estado actual y no como se llego ahí. Este es el principio de optimalidad para programación dinámica.
+-  El procedimiento de solución se inicia al encontrar la política optima para la ultima etapa.
+-  Se dispone de una relación recursiva que identifica la política optima para la etapa n , dada la política optima para la etapa $\mathrm{n}+1$
+
+---
+
+## Características de la programación dinámica 2
+
+La forma precisa de la relación recursiva difiere de un problema a otro, pero se usara una notación análoga al problema de diligencia:
+$\mathrm{N}=$ numero de etapas
+
+- $n=$ etiqueta para la etapa actual ( $n=1,2, \ldots \ldots . \mathrm{N}$ )
+- $S n=$ estado actual para la etapa $n$
+- $X n=$ variable de decisión para la etapa $n$
+- $X^*=$ valor optimo de $X n$
+
+---
+
+## 📐 Estructura General
+
+- Un problema de programación dinámica típicamente se representa como:
+    $$
+    f_n *\left(s_n\right)=f_n\left(s_n, x_n *\right)
+    $$
+
+
+$f_n\left(s_n, x_n\right)=$ contribucióna la función objetivo de las etapas $\mathrm{n}, \mathrm{n}+1, \ldots . . \mathrm{N}$, si el
+Sistema se encuentra en el estado $s_n$ en la etapa n , la decisión inmediata es $x_n$ Y en adelante se tomaran decisiones optimas
+
+
+##  Características de la programación dinámica
+
+La relacion recursiva siempre tendra la forma
+
+$$
+f_n *\left(s_n\right)=\max _{\mathrm{X} \mathrm{O}}\left\{f_n\left(s_n, x_n\right)\right\} \circ f_n *\left(s_n\right)=\min _{\mathrm{X} \mathrm{o}}\left\{f_n\left(s_n, x_n\right)\right\}
+$$
+
+Cuando se usa esta relación recursiva, el procedimiento de solución comienza al final y se mueve hacia atrás etapa por etapa.
+
+
+---
+
