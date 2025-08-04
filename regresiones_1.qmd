@@ -252,11 +252,22 @@ $$\hat{y} = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_n x_n$$
 
 ```{python}
 from sklearn.linear_model import LinearRegression
+<<<<<<< HEAD
+from sklearn.metrics import r2_score, mean_squared_error
+# Modelo para entrenamiento
+from sklearn.linear_model import LinearRegression
 
 # Entrenar el modelo con datos de entrenamiento
 model = LinearRegression()
 model.fit(X_train, y_train)
 
+=======
+
+# Entrenar el modelo con datos de entrenamiento
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 ```
 
 ---
@@ -360,8 +371,11 @@ Observamos que variables como `RM` (habitaciones promedio) tienen fuerte impacto
 ```{python}
 #| echo: false
 #| code-overflow: wrap
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -376,4 +390,11 @@ plt.ylabel("Valor del Coeficiente")
 plt.grid(True)
 plt.tight_layout()
 plt.show()
+<<<<<<< HEAD
+
 ```
+
+Esta gráfica muestra claramente las discrepancias en los coeficientes entre ambos conjuntos, reforzando el diagnóstico de sobreajuste.
+=======
+```
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480

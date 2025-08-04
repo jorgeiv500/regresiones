@@ -1,0 +1,577 @@
+---
+title: "📉 Regularización con Ridge, Lasso y Validación Cruzada"
+subtitle: "🔬 Continuación del análisis: Dataset Boston Housing"
+author: "👨‍🏫 Jorge Iván Romero Gelvez"
+institute: "🏛️ Universidad Jorge Tadeo Lozano"
+date: "📅 Abril 2025"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    highlight-style: dracula
+    code-line-numbers: true
+    code-annotations: hover
+    mermaid:
+      theme: forest
+    transition: fade
+    chalkboard: true
+    logo: Utadeo70-fondoblanco.png
+    toc: true
+    toc-title: "Contenido"
+    toc-depth: 1
+    incremental: true
+    scrollable: true
+execute:
+  warning: false
+  message: false
+  echo: true
+  freeze: false
+jupyter: python3
+---
+
+# Introducción al Deep Learning
+
+![Deep Learning](https://miro.medium.com/max/1400/1*3i2uKqjlAj0G9EoqJEpskg.png)
+
+---
+
+## Objetivos de la Clase
+
+- **Comprender** los fundamentos del Deep Learning.
+- **Explorar** arquitecturas de redes neuronales.
+- **Aplicar** técnicas de entrenamiento y optimización.
+- **Relacionar** conceptos estadísticos con Deep Learning.
+- **Desarrollar** habilidades prácticas mediante ejemplos de código.
+
+---
+
+# Agenda
+
+1. **Introducción al Deep Learning** (15 mins)
+2. **Fundamentos Matemáticos** (30 mins)
+3. **Arquitecturas de Redes Neuronales** (45 mins)
+4. **Entrenamiento y Optimización** (45 mins)
+5. **Aplicaciones y Casos de Uso** (30 mins)
+6. **Conclusiones y Preguntas** (15 mins)
+
+---
+
+## 1. Introducción al Deep Learning
+
+### ¿Qué es el Deep Learning?
+
+- Subcampo del **aprendizaje automático** (Machine Learning).
+- Utiliza **redes neuronales profundas**.
+- Inspirado en el **cerebro humano**.
+- Capacidad para **aprender representaciones jerárquicas** de datos.
+
+### Historia y Evolución
+
+- **Perceptrón** (1950s): Primer modelo de neurona artificial.
+- **Redes Multicapa (MLP)** (1980s): Introducción de capas ocultas.
+- **Resurgimiento** con el auge de **Big Data** y **GPUs** (2010s).
+- **Transformers** y **modelos preentrenados** (2020s).
+
+### Aplicaciones Actuales
+
+- **Visión por Computadora**
+- **Procesamiento de Lenguaje Natural (NLP)**
+- **Reconocimiento de Voz**
+- **Juegos y Robótica**
+- **Medicina y Diagnóstico**
+
+---
+
+## 2. Fundamentos Matemáticos
+
+### Álgebra Lineal
+
+- **Vectores y Matrices**
+  - Representación de datos y parámetros.
+- **Productos Matriciales**
+  - Operaciones fundamentales en redes neuronales.
+- **Descomposición en Valores Singulares (SVD)**
+  - Reducción de dimensionalidad y análisis de datos.
+
+### Cálculo
+
+- **Derivadas y Gradientes**
+  - Cálculo de la tasa de cambio.
+- **Regla de la Cadena**
+  - Cálculo de derivadas de funciones compuestas.
+- **Optimización Convexa**
+  - Técnicas para encontrar mínimos globales.
+
+### Probabilidad y Estadística
+
+- **Distribuciones de Probabilidad**
+  - Modelado de incertidumbre.
+- **Máxima Verosimilitud**
+  - Estimación de parámetros.
+- **Regularización**
+  - Prevención del sobreajuste.
+
+---
+
+## 3. Arquitecturas de Redes Neuronales
+
+### Perceptrón y Redes Multicapa (MLP)
+
+- **Neuronas Artificiales**
+  - Unidad básica de procesamiento.
+- **Funciones de Activación**
+  - Introducción de no linealidad (ReLU, Sigmoid, Tanh).
+- **Arquitectura Feedforward**
+  - Conexiones unidireccionales entre capas.
+
+### Redes Convolucionales (CNN)
+
+- **Convoluciones y Pooling**
+  - Extracción de características espaciales.
+- **Arquitectura de CNN**
+  - Capas convolucionales, de pooling y completamente conectadas.
+- **Aplicaciones en Visión por Computadora**
+
+```{.python}
+import tensorflow as tf
+from tensorflow.keras import layers, models
+
+model = models.Sequential([
+    layers.Conv2D(32, (3, 3), activation='relu', input_shape=(64, 64, 3)),
+    layers.MaxPooling2D((2, 2)),
+    layers.Conv2D(64, (3, 3), activation='relu'),
+    layers.MaxPooling2D((2, 2)),
+    layers.Flatten(),
+    layers.Dense(64, activation='relu'),
+    layers.Dense(10, activation='softmax')
+])
+
+model.summary()
+```
+
+### Redes Recurrentes (RNN) y LSTM
+
+- **Arquitectura de RNN**
+  - Manejo de secuencias y dependencias temporales.
+- **Problemas de Desvanecimiento del Gradiente**
+  - Dificultades en el aprendizaje de dependencias a largo plazo.
+- **LSTM y GRU**
+  - Soluciones para capturar dependencias a largo plazo.
+
+### Transformers
+
+- **Mecanismo de Atención**
+  - Captura relaciones globales en los datos.
+- **Arquitectura de Transformers**
+  - Encoders y Decoders.
+- **Aplicaciones en NLP**
+  - Traducción automática, generación de texto, etc.
+
+---
+
+## 4. Entrenamiento y Optimización
+
+### Función de Pérdida
+
+- **Definición y Ejemplos**
+  - Medida de la discrepancia entre predicción y realidad.
+- **Cross-Entropy, MSE**
+  - Usadas en clasificación y regresión, respectivamente.
+
+### Algoritmos de Optimización
+
+- **Gradiente Descendente Estocástico (SGD)**
+  - Actualización iterativa de parámetros.
+- **Adam, RMSProp**
+  - Optimización adaptativa de tasas de aprendizaje.
+
+### Regularización
+
+- **Dropout**
+  - Prevención del sobreajuste mediante desconexión aleatoria de neuronas.
+- **Batch Normalization**
+  - Aceleración del entrenamiento y mejora de la estabilidad.
+- **L2 Regularization**
+  - Penalización de pesos grandes.
+
+### Técnicas Avanzadas
+
+- **Aprendizaje por Transferencia**
+  - Reutilización de modelos preentrenados.
+- **Data Augmentation**
+  - Generación de datos sintéticos para mejorar la generalización.
+- **Early Stopping**
+  - Parada temprana del entrenamiento para prevenir el sobreajuste.
+
+---
+
+## 5. Aplicaciones y Casos de Uso
+
+### Visión por Computadora
+
+- **Clasificación de Imágenes**
+  - Identificación de objetos en imágenes.
+- **Detección de Objetos**
+  - Localización y clasificación de múltiples objetos.
+- **Segmentación Semántica**
+  - Asignación de etiquetas a cada píxel de una imagen.
+
+### Procesamiento de Lenguaje Natural (NLP)
+
+- **Modelos de Lenguaje**
+  - Predicción de palabras y generación de texto.
+- **Traducción Automática**
+  - Traducción entre diferentes idiomas.
+- **Análisis de Sentimientos**
+  - Determinación de la polaridad de textos.
+
+### Otros Campos
+
+- **Generación de Contenido (GANs)**
+  - Creación de imágenes, videos y audio sintéticos.
+- **Sistemas de Recomendación**
+  - Personalización de contenido para usuarios.
+- **Diagnóstico Médico**
+  - Identificación de enfermedades a partir de imágenes y datos clínicos.
+
+---
+
+## 6. Conclusiones y Preguntas
+
+### Resumen de Puntos Clave
+
+- **Importancia** del Deep Learning en la IA moderna.
+- **Principales arquitecturas** y sus aplicaciones.
+- **Técnicas de entrenamiento** efectivas.
+- **Integración** de conceptos estadísticos y matemáticos.
+
+### Futuro del Deep Learning
+
+- **Investigación** en redes más eficientes.
+- **Ética y responsabilidad** en el uso de IA.
+- **Integración** con otras tecnologías emergentes.
+
+### Espacio para Preguntas
+
+- **¿Tienes alguna duda?**
+- **¿Hay algún tema que quieras profundizar?**
+
+---
+
+# Recursos Adicionales
+
+- **Libros:**
+  - *Deep Learning* by Ian Goodfellow, Yoshua Bengio, and Aaron Courville
+  - *An Introduction to Statistical Learning* by Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani
+
+- **Cursos en Línea:**
+  - Coursera: Deep Learning Specialization
+  - fast.ai: Practical Deep Learning for Coders
+
+- **Herramientas:**
+  - TensorFlow
+  - PyTorch
+  - Keras
+
+- **Páginas Web:**
+  - [arXiv](https://arxiv.org/)
+  - [Kaggle](https://www.kaggle.com/)
+  - [TensorFlow Documentation](https://www.tensorflow.org/)
+
+---
+
+# ¡Gracias!
+
+![Gracias](https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Thank_you.svg/1024px-Thank_you.svg.png)
+
+---
+
+# Detalles Adicionales
+
+## Introducción al Deep Learning (15 mins)
+
+- **Breve historia y definición.**
+- **Comparación** con el aprendizaje automático tradicional.
+- **Impacto** en la industria y la investigación.
+
+## Fundamentos Matemáticos (30 mins)
+
+- **Álgebra Lineal:** Importancia en la representación de datos y operaciones de redes neuronales.
+- **Cálculo:** Optimización de funciones de pérdida mediante gradientes.
+- **Probabilidad y Estadística:** Manejo de incertidumbre y generalización.
+
+## Arquitecturas de Redes Neuronales (45 mins)
+
+- **Perceptrón y MLP:** Base de las redes neuronales profundas.
+- **CNN:** Detalles de capas convolucionales, aplicaciones en imágenes.
+- **RNN y LSTM:** Manejo de secuencias, aplicaciones en texto y voz.
+- **Transformers:** Última tendencia en NLP y más allá.
+
+## Entrenamiento y Optimización (45 mins)
+
+- **Funciones de pérdida:** Según el problema a resolver.
+- **Algoritmos de optimización:** Comparación y selección.
+- **Regularización:** Técnicas para prevenir el sobreajuste.
+- **Estrategias avanzadas:** Mejora del rendimiento del modelo.
+
+## Aplicaciones y Casos de Uso (30 mins)
+
+- **Ejemplos concretos** de aplicaciones en distintos campos.
+- **Análisis de casos de estudio exitosos.**
+- **Desafíos actuales y futuros** en la aplicación de Deep Learning.
+
+## Conclusiones y Preguntas (15 mins)
+
+- **Recapitulación** de los temas tratados.
+- **Reflexión** sobre el estado actual y futuro del Deep Learning.
+- **Espacio abierto** para resolver dudas y discutir temas de interés.
+
+---
+
+# Notas para el Instructor
+
+- **Tiempo por sección:** Ajusta el ritmo según la interacción de los participantes.
+- **Interactividad:** Incluye preguntas rápidas o pequeños ejercicios para mantener la atención.
+- **Ejemplos Prácticos:** Incorpora más código o demostraciones en vivo si el tiempo lo permite.
+- **Recursos Visuales:** Utiliza diagramas y gráficos para explicar arquitecturas y conceptos complejos.
+- **Referencias:** Anima a los estudiantes a consultar los libros mencionados para profundizar.
+
+---
+
+# Código de Ejemplo Adicional
+
+## Entrenamiento de una Red Neuronal Simple con Keras
+
+```{.python}
+import tensorflow as tf
+from tensorflow.keras import datasets, layers, models
+
+# Cargar y preprocesar datos
+(train_images, train_labels), (test_images, test_labels) = datasets.cifar10.load_data()
+train_images, test_images = train_images / 255.0, test_images / 255.0
+
+# Definir la arquitectura del modelo
+model = models.Sequential([
+    layers.Conv2D(32, (3,3), activation='relu', input_shape=(32, 32, 3)),
+    layers.MaxPooling2D((2, 2)),
+    layers.Conv2D(64, (3,3), activation='relu'),
+    layers.MaxPooling2D((2, 2)),
+    layers.Flatten(),
+    layers.Dense(64, activation='relu'),
+    layers.Dense(10, activation='softmax')
+])
+
+# Compilar el modelo
+model.compile(optimizer='adam',
+              loss='sparse_categorical_crossentropy',
+              metrics=['accuracy'])
+
+# Entrenar el modelo
+model.fit(train_images, train_labels, epochs=10, 
+          validation_data=(test_images, test_labels))
+
+# Evaluar el modelo
+test_loss, test_acc = model.evaluate(test_images, test_labels, verbose=2)
+print(f'\nPrecisión en el conjunto de prueba: {test_acc}')
+```
+
+## Visualización de Resultados
+
+```{.python}
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Predecir etiquetas
+predictions = model.predict(test_images)
+
+# Función para graficar la imagen y la predicción
+def plot_image(i, predictions_array, true_label, img):
+    true_label, img = true_label[i][0], img[i]
+    plt.grid(False)
+    plt.xticks([])
+    plt.yticks([])
+
+    plt.imshow(img, cmap=plt.cm.binary)
+
+    predicted_label = np.argmax(predictions_array)
+    if predicted_label == true_label:
+        color = 'blue'
+    else:
+        color = 'red'
+
+    plt.xlabel(f"{class_names[predicted_label]} ({100*np.max(predictions_array):2.0f}%)", color=color)
+
+# Asumiendo que tienes una lista de nombres de clases
+class_names = ['Avión', 'Automóvil', 'Pájaro', 'Gato', 'Ciervo',
+               'Perro', 'Rana', 'Caballo', 'Barco', 'Camión']
+
+# Graficar las primeras 5 imágenes de prueba
+plt.figure(figsize=(10,10))
+for i in range(5):
+    plt.subplot(1,5,i+1)
+    plot_image(i, predictions[i], test_labels, test_images)
+plt.show()
+```
+
+---
+
+# Referencias
+
+- **Goodfellow, Ian**, Yoshua Bengio, and Aaron Courville. *Deep Learning*. MIT Press, 2016.
+- **James, Gareth**, Daniela Witten, Trevor Hastie, and Robert Tibshirani. *An Introduction to Statistical Learning*. Springer, 2023.
+- **Bishop, Christopher M.** *Pattern Recognition and Machine Learning*. Springer, 2006.
+- **Haykin, Simon.** *Neural Networks and Learning Machines*. Pearson, 2009.
+- **LeCun, Yann**, Yoshua Bengio, and Geoffrey Hinton. "Deep Learning." *Nature*, 2015.
+
+---
+
+# Contacto
+
+- **Jorge Romero**
+- **Universidad Jorge Tadeo Lozano**
+- **Correo Electrónico:** jorge.romero@tadeo.edu.co
+- **LinkedIn:** [linkedin.com/in/jorgeromero](https://www.linkedin.com/in/jorgeromero)
+- **GitHub:** [github.com/jorgeromero](https://github.com/jorgeromero)
+
+---
+
+# Agradecimientos
+
+- A los autores de *Deep Learning* y *Introduction to Statistical Learning* por sus contribuciones al campo.
+- A la comunidad de código abierto por proporcionar herramientas poderosas como TensorFlow y PyTorch.
+- A mis estudiantes y colegas de la Universidad Jorge Tadeo Lozano por su continuo apoyo y colaboración.
+
+---
+
+# Evaluación
+
+Por favor, toma unos minutos para completar la evaluación de esta clase. Tu retroalimentación es invaluable para mejorar futuras sesiones.
+
+- **¿Qué te ha parecido la clase?** (Excelente, Bueno, Regular, Malo)
+- **¿Qué temas te gustaría que se profundicen más?**
+- **Comentarios adicionales:**
+
+---
+
+# Próximos Pasos
+
+- **Explora** los recursos adicionales proporcionados.
+- **Práctica** con proyectos personales utilizando las herramientas vistas.
+- **Participa** en comunidades y foros para mantenerte actualizado.
+- **Continúa** tu aprendizaje con cursos avanzados y especializaciones.
+
+---
+
+# ¡Buena Suerte!
+
+![Buena Suerte](https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif)
+
+--
+# Introducción al Deep Learning
+
+* El Deep Learning es un subcampo del Machine Learning que utiliza redes neuronales profundas para aprender representaciones jerárquicas de los datos.
+* Se inspira en el funcionamiento del cerebro humano.
+* Es particularmente útil en tareas de clasificación, regresión, visión por computadora y procesamiento de lenguaje natural.
+
+## Objetivos de la Presentación
+
+* Comprender los principios básicos del Deep Learning.
+* Implementar un modelo de clasificación para el conjunto de datos **Breast Cancer** usando **TensorFlow** y **Scikit-Learn**.
+* Comparar los resultados obtenidos en términos de precisión, sensibilidad y especificidad.
+
+---
+
+# Fundamentos Matemáticos
+
+## Definición del Problema
+
+* El objetivo es clasificar muestras de tejido en "Maligno" o "Benigno".
+* El conjunto de datos de **Breast Cancer** contiene características derivadas de imágenes digitales de biopsias.
+* Cada muestra tiene 30 atributos numéricos.
+
+## Notación Matemática
+
+* Sea \$X \in \mathbb{R}^{n \times m}\$ el conjunto de datos, donde \$n\$ es el número de muestras y \$m\$ es el número de atributos.
+* La predicción del modelo se denota como \$\hat{y} = f(X)\$, donde \$f\$ es la función de clasificación.
+
+---
+
+# Implementación en TensorFlow
+
+```{python}
+#| code-line-numbers: "|6|9"
+# Importar librerías necesarias
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import train_test_split
+
+# Cargar datos
+data = load_breast_cancer()
+X, y = data.data, data.target
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Definición del modelo
+model = Sequential([
+    Dense(16, activation='relu', input_shape=(30,)),
+    Dense(8, activation='relu'),
+    Dense(1, activation='sigmoid')
+])
+
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+
+# Entrenamiento
+model.fit(X_train, y_train, epochs=20, batch_size=32, validation_split=0.2)
+```
+
+---
+
+# Implementación en Scikit-Learn
+
+```{python}
+#| code-line-numbers: "|3|8"
+# Importar librerías necesarias
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import classification_report
+
+# Definición y entrenamiento del modelo
+clf = LogisticRegression(max_iter=1000)
+clf.fit(X_train, y_train)
+
+# Evaluación
+y_pred = clf.predict(X_test)
+print(classification_report(y_test, y_pred))
+```
+
+---
+
+# Comparación de Resultados
+
+* **TensorFlow**:
+
+  * Entrenamiento con redes neuronales profundas.
+  * Optimización con `adam` y función de pérdida `binary_crossentropy`.
+  * Mejora progresiva en cada época.
+
+* **Scikit-Learn**:
+
+  * Modelo tradicional de regresión logística.
+  * Optimización con descenso de gradiente.
+  * Rápida convergencia.
+
+---
+
+# Conclusiones
+
+* El modelo de TensorFlow muestra un aprendizaje más profundo y capacidad de generalización.
+* Scikit-Learn es más rápido de entrenar, pero tiene limitaciones en cuanto a la complejidad de los patrones que puede capturar.
+* Ambas técnicas son válidas y su uso depende del contexto del problema y los recursos disponibles.
+
+---
+
+# Preguntas y Discusión
+
+* ¿Qué situaciones consideras más adecuadas para usar TensorFlow sobre Scikit-Learn?
+* ¿Cómo podría mejorarse esta implementación?
+* ¿Te gustaría explorar una red convolucional (CNN) para este mismo conjunto de datos?

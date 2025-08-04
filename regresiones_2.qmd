@@ -1,6 +1,11 @@
 ---
+<<<<<<< HEAD
+title: "📉 Regularización con Ridge, Lasso y Validación Cruzada"
+subtitle: "🔬 Continuación del análisis: Dataset Boston Housing"
+=======
 title: "📉 Ridge, Lasso y Validación Cruzada"
 subtitle: "🔧 Mitigando el sobreajuste en el dataset Boston Housing"
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 author: "👨‍🏫 Jorge Iván Romero Gelvez"
 institute: "🏛️ Universidad Jorge Tadeo Lozano"
 date: "📅 Abril 2025"
@@ -11,25 +16,116 @@ format:
     highlight-style: dracula
     code-line-numbers: true
     code-annotations: hover
+<<<<<<< HEAD
+    mermaid:
+      theme: forest
     transition: fade
+    chalkboard: true
+    logo: Utadeo70-fondoblanco.png
+=======
+    transition: fade
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
     toc: true
     toc-title: "Contenido"
     toc-depth: 1
     incremental: true
     scrollable: true
 execute:
+<<<<<<< HEAD
+  warning: false
+  message: false
+  echo: true
+=======
   echo: true
   warning: false
   message: false
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
   freeze: false
 jupyter: python3
 ---
 
+<<<<<<< HEAD
+## 📥 Carga del Dataset
+=======
 ## ⚙️ Preparación del entorno
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 
 ```{python}
 import pandas as pd
 import numpy as np
+<<<<<<< HEAD
+
+# Cargar los datos desde la URL
+url = "http://lib.stat.cmu.edu/datasets/boston"
+raw_df = pd.read_csv(url, sep="\s+", skiprows=22, header=None)
+
+# Combinar las filas pares e impares en un único arreglo de datos
+data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
+target = raw_df.values[1::2, 2]
+
+# Nombres de columnas
+columns = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM',
+           'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT', 'MEDV']
+
+# Crear el DataFrame final
+boston_df = pd.DataFrame(np.column_stack([data, target]), columns=columns)
+
+# División de datos
+X = boston_df.drop(columns=['MEDV'])
+y = boston_df['MEDV']
+
+n = len(boston_df)
+n_train = int(n * 0.8)
+
+X_train = X.iloc[:n_train]
+y_train = y.iloc[:n_train]
+
+X_test = X.iloc[n_train:]
+y_test = y.iloc[n_train:]
+```
+
+## 🎯 Objetivo de la Regularización
+
+- ⚠️ El modelo lineal puede sobreajustar
+- 🧰 Regularización reduce varianza penalizando la complejidad
+- 🔎 Evaluaremos **Ridge**, **Lasso** y su desempeño con **validación cruzada**
+
+> **¿Cómo se controla el sobreajuste?**
+
+---
+
+## 🔎 Regresión Ridge (L2)
+
+### 🧮 Función de costo:
+
+$$
+\min_\beta \left( \sum_{i=1}^{n}(y_i - X_i \beta)^2 + \lambda \sum_{j=1}^{p} \beta_j^2 \right)
+$$
+
+- 🎯 Penaliza coeficientes grandes
+- ✅ Reduce la varianza
+- ❗ Mantiene todas las variables
+
+---
+
+## 🔧 Entrenamiento Ridge
+
+```{python}
+from sklearn.linear_model import Ridge
+from sklearn.model_selection import cross_val_score
+
+ridge = Ridge(alpha=1.0)
+ridge.fit(X_train, y_train)
+y_pred_ridge = ridge.predict(X_test)
+```
+
+---
+
+## 📊 Evaluación Ridge
+
+```{python}
+from sklearn.metrics import mean_squared_error, r2_score
+=======
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.linear_model import Ridge, Lasso
 from sklearn.metrics import r2_score, mean_squared_error
@@ -72,15 +168,57 @@ $$
 ridge = Ridge(alpha=1.0)
 ridge.fit(X_train, y_train)
 y_pred_ridge = ridge.predict(X_test)
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 
 r2_ridge = r2_score(y_test, y_pred_ridge)
 rmse_ridge = np.sqrt(mean_squared_error(y_test, y_pred_ridge))
 
+<<<<<<< HEAD
+print("R² Ridge:", r2_ridge)
+print("RMSE Ridge:", rmse_ridge)
+=======
 r2_ridge, rmse_ridge
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 ```
 
 ---
 
+<<<<<<< HEAD
+## 🧹 Regresión Lasso (L1)
+
+### 🧮 Función de costo:
+
+$$
+\min_\beta \left( \sum_{i=1}^{n}(y_i - X_i \beta)^2 + \lambda \sum_{j=1}^{p} |\beta_j| \right)
+$$
+
+- 🎯 Penaliza coeficientes absolutos
+- 🗑️ Elimina variables irrelevantes
+- 🧠 Modelo más simple e interpretable
+
+---
+
+## 🔧 Entrenamiento Lasso
+
+```{python}
+from sklearn.linear_model import Lasso
+
+lasso = Lasso(alpha=0.1)
+lasso.fit(X_train, y_train)
+y_pred_lasso = lasso.predict(X_test)
+```
+
+---
+
+## 📊 Evaluación Lasso
+
+```{python}
+r2_lasso = r2_score(y_test, y_pred_lasso)
+rmse_lasso = np.sqrt(mean_squared_error(y_test, y_pred_lasso))
+
+print("R² Lasso:", r2_lasso)
+print("RMSE Lasso:", rmse_lasso)
+=======
 ## 🧹 Regresión Lasso
 
 La regresión Lasso añade penalización L1:
@@ -106,10 +244,21 @@ r2_lasso = r2_score(y_test, y_pred_lasso)
 rmse_lasso = np.sqrt(mean_squared_error(y_test, y_pred_lasso))
 
 r2_lasso, rmse_lasso
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 ```
 
 ---
 
+<<<<<<< HEAD
+## 🔁 Validación cruzada Ridge y Lasso
+
+```{python}
+ridge_scores = cross_val_score(Ridge(alpha=1.0), X, y, cv=10, scoring='r2')
+lasso_scores = cross_val_score(Lasso(alpha=0.1), X, y, cv=10, scoring='r2')
+
+print("Promedio R² Ridge CV:", ridge_scores.mean())
+print("Promedio R² Lasso CV:", lasso_scores.mean())
+=======
 ## 🔁 Validación Cruzada
 
 Comparamos la capacidad de generalización de Ridge y Lasso usando 10-fold cross-validation:
@@ -119,27 +268,52 @@ ridge_cv = cross_val_score(Ridge(alpha=1.0), X, y, cv=10, scoring='r2')
 lasso_cv = cross_val_score(Lasso(alpha=0.1), X, y, cv=10, scoring='r2')
 
 ridge_cv.mean(), lasso_cv.mean()
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 ```
 
 ---
 
+<<<<<<< HEAD
+## 📈 Comparación de Coeficientes
+
+```{python}
+import matplotlib.pyplot as plt
+
+=======
 ## 📊 Comparación de coeficientes
 
 ```{python}
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 plt.figure(figsize=(12,6))
 plt.bar(X.columns, ridge.coef_, alpha=0.7, label="Ridge")
 plt.bar(X.columns, lasso.coef_, alpha=0.7, label="Lasso")
 plt.xticks(rotation=45)
 plt.title("Coeficientes: Ridge vs Lasso")
+<<<<<<< HEAD
+plt.ylabel("Valor")
+plt.legend()
+plt.tight_layout()
+=======
 plt.ylabel("Valor del Coeficiente")
 plt.legend()
 plt.tight_layout()
 plt.grid(True)
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 plt.show()
 ```
 
 ---
 
+<<<<<<< HEAD
+## ✅ Conclusiones
+
+- 🔬 **Ridge** estabiliza el modelo pero conserva todas las variables
+- 🧹 **Lasso** selecciona automáticamente, útil para modelos interpretables
+- 🔄 **Validación cruzada** permite estimar desempeño real
+- 🧠 La regularización mejora la generalización
+
+> *El equilibrio ideal entre sesgo y varianza requiere análisis matemático y visual.*
+=======
 ## 📌 Conclusión final de los resultados obtenidos
 
 ```{python}
@@ -266,4 +440,5 @@ $
 
 ---
 
+>>>>>>> a8e37dc9e7a77afe4260647f8c1343e86a5e0480
 
