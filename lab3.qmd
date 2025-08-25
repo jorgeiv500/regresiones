@@ -1,0 +1,193 @@
+---
+title: "📝 Laboratorio: Regresión Logística Binaria para Diagnóstico de Neumonía"
+author: "👨‍🏫 Jorge Iván Romero Gelvez"
+institute: "🏛️ Universidad Jorge Tadeo Lozano"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    highlight-style: dracula
+    code-line-numbers: true
+    code-annotations: hover
+    transition: fade
+    chalkboard: true
+    toc: true
+    toc-title: "Contenido"
+    toc-depth: 1
+    incremental: true
+    scrollable: true
+execute:
+  echo: true
+  warning: false
+  message: false
+  freeze: false
+jupyter: python3
+---
+
+# 📝 Laboratorio
+
+## Regresión Logística Binaria para Diagnóstico de Neumonía
+
+Este laboratorio implementa una **regresión logística binaria** para predecir si un paciente tiene neumonía a partir de imágenes de rayos X.
+
+---
+
+# 📌 Evaluación
+
+- **Peso del laboratorio:** 33% de la nota final  
+- **Distribución:**  
+  - Ejercicio 1: Carga y preprocesamiento de datos (11%)  
+  - Ejercicio 2: Entrenamiento del modelo (11%)  
+  - Ejercicio 3: Evaluación del modelo (11%)  
+
+---
+
+# 📖 Contenido
+
+1. Librerías  
+2. Regresión logística binaria con imágenes  
+   - Enunciado del problema  
+   - Dataset  
+   - Preprocesamiento  
+   - Entrenamiento  
+   - Evaluación  
+
+---
+
+## 1 - Librerías
+
+```python
+import os
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score
+from sklearn.preprocessing import StandardScaler
+from tensorflow.keras.preprocessing.image import load_img, img_to_array
+````
+
+---
+
+## 2.1 - Enunciado del problema
+
+👉 Predecir si un paciente tiene **neumonía (PNEUMONIA)** o está **sano (NORMAL)** a partir de imágenes de rayos X de tórax.
+
+---
+
+## 2.2 - Dataset
+
+Dataset: [Chest X-Ray Images (Pneumonia)](https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia).
+
+Ubicar la carpeta `chest_xray` en el mismo directorio.
+
+```python
+base_dir = "chest_xray/train"
+categories = ["NORMAL", "PNEUMONIA"]
+
+def load_images(folder, label, img_size=(64, 64)):
+    images, labels = [], []
+    for filename in os.listdir(folder):
+        path = os.path.join(folder, filename)
+        img = load_img(path, target_size=img_size, color_mode="grayscale")
+        img_array = img_to_array(img).flatten()
+        images.append(img_array)
+        labels.append(label)
+    return images, labels
+
+X, y = [], []
+for idx, cat in enumerate(categories):
+    imgs, labels = load_images(os.path.join(base_dir, cat), idx)
+    X.extend(imgs)
+    y.extend(labels)
+
+X = np.array(X)
+y = np.array(y)
+
+print(f"Imágenes cargadas: {X.shape}, Etiquetas: {np.unique(y, return_counts=True)}")
+```
+
+✅ Resultado esperado:
+
+```
+Imágenes cargadas: (5216, 4096), Etiquetas: (array([0, 1]), array([1341, 3875]))
+```
+
+---
+
+## 2.3 - Preprocesamiento
+
+```python
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X_scaled, y, test_size=0.2, random_state=42, stratify=y
+)
+
+print("Datos de entrenamiento:", X_train.shape)
+```
+
+---
+
+## 2.4 - Entrenamiento del modelo
+
+### Ejercicio 2 (11%)
+
+```python
+model = LogisticRegression(max_iter=1000)
+model.fit(X_train, y_train)
+
+print("Entrenamiento completado.")
+```
+
+---
+
+## 2.5 - Evaluación del modelo
+
+### Ejercicio 3 (11%)
+
+```python
+y_pred = model.predict(X_test)
+
+print("Matriz de confusión:")
+print(confusion_matrix(y_test, y_pred))
+
+print("\nReporte de clasificación:")
+print(classification_report(y_test, y_pred))
+
+print("AUC:", roc_auc_score(y_test, model.predict_proba(X_test)[:,1]))
+```
+
+✅ Resultados esperados (aprox.):
+
+```
+Matriz de confusión:
+[[240  28]
+ [ 15 756]]
+
+AUC: ~0.95
+```
+
+---
+
+# 📊 Rúbrica de Evaluación
+
+### Ejercicio 1 — Carga y preprocesamiento (11%)
+
+* Excelente: carga adecuada, normalización, codificación correcta.
+* Aceptable: errores menores en estructura.
+* Deficiente: fallos en carga o codificación.
+
+### Ejercicio 2 — Entrenamiento del modelo (11%)
+
+* Excelente: entrenamiento sin errores, convergencia clara.
+* Aceptable: warnings o convergencia dudosa.
+* Deficiente: errores en ajuste del modelo.
+
+### Ejercicio 3 — Evaluación del modelo (11%)
+
+* Excelente: métricas precisas, análisis claro.
+* Aceptable: interpretación incompleta.
+* Deficiente: falta de análisis o métricas erróneas.
+
