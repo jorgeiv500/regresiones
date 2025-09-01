@@ -41,9 +41,7 @@ execute:
   message: false
   freeze: false
 jupyter: python3
----gosto  message: false
-  freeze: false
-jupyter: python3
+
 ---
 
 # 📝 Laboratorio 1
